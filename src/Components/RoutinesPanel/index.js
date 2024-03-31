@@ -1,0 +1,55 @@
+import './RoutinesPanel.css'
+import { useContext,useState,useEffect } from 'react'
+import {GeneralContext} from '../../GeneralContext'
+
+function RoutinesPanel(){
+    const {
+        routines,exercises,getRandom,selectedRoutine,setSelectedRoutine
+    } = useContext(GeneralContext)
+    const [selectedImage,setSelectedImage] = useState(null)
+    const routineExercises = selectedRoutine?.exercises?.map(rtExercise=>{
+        return(
+            exercises.find(exercise=>exercise.name === rtExercise)
+        )
+    })
+    useEffect(()=>{
+        if(routineExercises){
+            setSelectedImage(routineExercises[0])
+        }
+    },[routineExercises?routineExercises[0]:[]])
+    
+
+    return(
+        <div className='panel-container'>
+            <div className='routines-list'>
+                <h3>Featured Routines</h3>
+                <li>
+                    {routines?.map((routine,index)=>{
+                        if(index<=4){
+                            return <ul key={routine.name}
+                            onClick={()=>setSelectedRoutine(routine)}>🏋️‍♂️ {routine.name}</ul>
+                        }           
+                    })
+                    }
+                </li>     
+            </div>
+            <div className="exercises-slider">
+                {selectedImage && (
+                    <>
+                        <div className='title-container'><h3>{selectedImage.name}</h3></div>
+                        <img src={selectedImage.imgPath}></img>
+                    </>
+                )}
+                <div className='controller'>
+                    {routineExercises?.map(exercise=>{
+                        return <div className='slider-button' key={exercise.name}
+                        onClick={()=>setSelectedImage(exercise)}></div>
+                    })}
+                </div>
+            </div>
+            <div className='exercise-description'></div>
+        </div>
+    )
+}
+
+export {RoutinesPanel}

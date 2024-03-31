@@ -1,6 +1,9 @@
 import React from 'react';
 
 function useLocalStorage(){
+    const [routines,setRoutines] = React.useState([]);
+    const [exercises,setExercises] = React.useState([]);
+
     const saveItem = (itemName,item)=>{
         console.log('item before: '+item)
         const stringifiedItem = JSON.stringify(item)
@@ -9,11 +12,19 @@ function useLocalStorage(){
     }
     const getItem = (itemName)=>{
         const item = localStorage.getItem(itemName)
-        JSON.parse(item)
-        console.log(item)
+        // console.log(item)
+        return(JSON.parse(item))
     }
+    React.useEffect(()=>{
+        setRoutines(getItem('routines'))
+    },[])
+    React.useEffect(()=>{
+        setExercises(getItem('exercises'))
+    },[])
+
+
     return {
-        saveItem, getItem
+        saveItem, getItem,routines,exercises
     }
 }
 
