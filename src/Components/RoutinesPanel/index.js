@@ -42,12 +42,17 @@ function RoutinesPanel(){
                 )}
                 <div className='controller'>
                     {routineExercises?.map(exercise=>{
-                        return <div className='slider-button' key={exercise.name}
+                        return <div className={
+                            selectedImage && selectedImage.name === exercise.name ? 'slider-button slider-button--active':'slider-button'
+                        } key={exercise.name}
                         onClick={()=>setSelectedImage(exercise)}></div>
                     })}
                 </div>
             </div>
-            <div className='exercise-description'></div>
+            <div className='exercise-description'>
+                <h3>Description</h3>
+                <p>{selectedRoutine && selectedRoutine.description}</p>
+            </div>
         </div>
     )
 }
