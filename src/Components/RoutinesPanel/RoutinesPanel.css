@@ -70,6 +70,7 @@
     margin: 0 4px;
     border-radius: 4px;
     border: 2px solid rgb(54, 74, 91);
+    cursor: pointer;
 }
 .exercises-slider .controller .slider-button--active{
     background-color: brown;

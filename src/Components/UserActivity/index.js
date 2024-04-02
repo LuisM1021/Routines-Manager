@@ -1,8 +1,10 @@
-
+import './UserActivity.css'
 
 function UserActivity(){
     return(
-        <p>User activity</p>
+        <div className='user-activity-container'>
+            
+        </div>
     )
 }
 
