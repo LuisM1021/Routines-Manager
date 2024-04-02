@@ -6,7 +6,6 @@
     flex-direction: column;
     border-radius: 32px;
     border: 4px solid rgb(12, 12, 63);
-    margin-left: 24px;
 }
 .user-routines-container h2{
     text-align: center;

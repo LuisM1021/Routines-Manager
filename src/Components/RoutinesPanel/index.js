@@ -3,10 +3,12 @@ import { useContext,useState,useEffect } from 'react'
 import {GeneralContext} from '../../GeneralContext'
 
 function RoutinesPanel(){
+    // getRandom falta de usar
     const {
-        routines,exercises,getRandom,selectedRoutine,setSelectedRoutine
+        routines,exercises,selectedRoutine,setSelectedRoutine
     } = useContext(GeneralContext)
     const [selectedImage,setSelectedImage] = useState(null)
+
     const routineExercises = selectedRoutine?.exercises?.map(rtExercise=>{
         return(
             exercises.find(exercise=>exercise.name === rtExercise)
@@ -16,7 +18,7 @@ function RoutinesPanel(){
         if(routineExercises){
             setSelectedImage(routineExercises[0])
         }
-    },[routineExercises?routineExercises[0]:[]])
+    },[routineExercises?routineExercises[0]:null])
     
 
     return(
@@ -28,7 +30,7 @@ function RoutinesPanel(){
                         if(index<=4){
                             return <ul key={routine.name}
                             onClick={()=>setSelectedRoutine(routine)}>🏋️‍♂️ {routine.name}</ul>
-                        }           
+                        }  else return         
                     })
                     }
                 </li>     
@@ -37,7 +39,7 @@ function RoutinesPanel(){
                 {selectedImage && (
                     <>
                         <div className='title-container'><h3>{selectedImage.name}</h3></div>
-                        <img src={selectedImage.imgPath}></img>
+                        <img src={selectedImage.imgPath} alt='selectedIMG'></img>
                     </>
                 )}
                 <div className='controller'>
