@@ -60,3 +60,41 @@ const routines = [
     {name: 'default routine 10',description:'Default description 10 Default description 10 Default description 10 Default description 10 ',exercises:['Plank','Running','Deadlifts'],series:[3,1,3],reps:[1,1,10],time:[['0H','0M','30S'],['0H','30M','0S'],['0H','0M','0S']]},
     {name: 'default routine 11',description:'Default description 11 Default description 11 Default description 11 Default description 11 ',exercises:['Deadlifts','Plank','Crunches'],series:[3,3,3],reps:[8,1,10],time:[['0H','0M','0S'],['0H','0M','40S'],['0H','0M','0S']]},
     ]
+
+        Ejercicios actualizado
+    {
+        name:'Walking',
+        description:' Search for a wide place to walk and do it at a constant rhytm moving your arms following your steps to generate a complete motion of your body',
+
+        categoria: 'cardio, velocidad, fuerza, '
+        muscularGroup: 'chest, full-body, legs, arms, etc'
+
+        benefits:{
+            category: ['more strenght', 'more endurance', 'general health', etc'],
+            benefit: ['Improves cardiovascular health','Reduces stress and anxiety','Increases energy levels'],
+        }
+        
+        requireWeightsOrEquipment: 'optional','yes','no'
+        weight or equip: {
+            category: bell, disk, machine, bycicle, etc,
+            name: 'two bells',
+            weightSuggested: '25lb'
+        }
+        suggestedSeries:1,
+        suggestedReps:1,
+        suggestedTime:['0H','30M','0S'],
+        imgPath:'https://th.bing.com/th/id/OIG4.bmGx810MKzvLKd40rlg.?w=1024&h=1024&rs=1&pid=ImgDetMain'
+    }
+
+    Rutinas actualizadas
+    {
+        name: 'default routine 1',
+        description:'Default description 1 Default description 1 Default description 1 Default description 1 ',
+        category: 'Gym, bodyweight, hiit, cardio-only, mixed, etc'
+        requireWeightsOrEquipment: 'optional','yes','no'
+        exercises:['Squats','Running','Crunches'],
+        series:[3,1,3],
+        reps:[8,1,10],
+        time:[['0H','0M','0S'],['0H','0M','0S'],['0H','25M','0S']]
+        }
+

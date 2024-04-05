@@ -1,5 +1,6 @@
 import React from 'react'
 import { Home } from '../Pages/Home';
+import { Routines } from '../Pages/Routines';
 import { Navbar } from "../Components/Navbar"
 import { Layout } from '../Components/Layout';
 import './App.css';
@@ -11,7 +12,7 @@ function AppUI(){
         <div className="App">
             <Navbar/>
             <Layout>
-                <Home/>
+                <Routines/>
             </Layout>
             
         </div>
