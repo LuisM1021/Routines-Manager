@@ -13,8 +13,7 @@ function AppUI(){
             <Navbar/>
             <Layout>
                 <Routines/>
-            </Layout>
-            
+            </Layout> 
         </div>
     );
 }

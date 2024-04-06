@@ -1,4 +1,5 @@
 import React from 'react';
+import {getTimer,initializeStorage} from '../Utils'
 
 function useLocalStorage(){
     const [routines,setRoutines] = React.useState([]);
@@ -16,9 +17,14 @@ function useLocalStorage(){
         return(JSON.parse(item))
     }
     React.useEffect(()=>{
-        setRoutines(getItem('routines'))
+        initializeStorage()
+        const getRoutines = getItem('routines')
+        const routinesWithTimer = getTimer(getRoutines)
+        setRoutines(routinesWithTimer)
+
     },[])
     React.useEffect(()=>{
+        initializeStorage()
         setExercises(getItem('exercises'))
     },[])
 
