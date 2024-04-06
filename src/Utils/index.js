@@ -44,8 +44,8 @@ function calculateTimer(routine){
             }
         }
     })
-    timer.totalTime = calculateTotalTime(timer.steps)
     timer.steps.pop()
+    timer.totalTime = calculateTotalTime(timer.steps)
     return timer
 }
 /**
@@ -54,7 +54,7 @@ function calculateTimer(routine){
  * @param {Array} steps contain each step of the routine 
  * @returns total time
  */
-function calculateTotalTime(steps){
+export function calculateTotalTime(steps){
     let hrs= 0,min = 0,sec = 0
     steps.forEach(step => {
         hrs += step.time[0]

@@ -3,6 +3,8 @@ import './Routines.css'
 import {GeneralContext} from '../../GeneralContext'
 import {RoutineCard} from '../../Components/RoutineCard'
 
+import { calculateTotalTime } from '../../Utils'
+
 function Routines(){
     const {
         routines
@@ -20,11 +22,16 @@ function Routines(){
                         <button>Require equipment</button>
                     </div>
                 </div>
-                {routines?.map(routine=>{
-                    return <RoutineCard
-                    key={routine.name}
-                    name={routine.name}/>
-                })}
+                <div className='routine-cards'>
+                    {routines?.map(routine=>{
+                        return <RoutineCard
+                        key={routine.name}
+                        name={routine.name}
+                        description={routine.description}
+                        totalTime={routine.timer.totalTime}
+                        requireEquipment={routine.equipment}/>
+                    })}
+                </div>
             </div>
             <div className='user-routines'>
                 <h1>My Routines</h1>

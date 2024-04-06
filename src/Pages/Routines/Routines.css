@@ -9,7 +9,7 @@
 .search-routine{
     width: 80%;
     height: 400px;
-    background-color: rgb(95, 203, 136);
+    background-color: rgb(20, 82, 44);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,4 +50,12 @@
     border: 2px solid darkblue;
     font-weight: 600;
     cursor: pointer;
+}
+.routine-cards{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    overflow: auto;
+    gap: 4px;
 }

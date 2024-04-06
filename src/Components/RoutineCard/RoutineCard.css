@@ -1,0 +1,21 @@
+.card-container{
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(95, 203, 136);
+    border: 2px solid rgb(86, 19, 19);
+    border-radius: 16px;
+    padding: 0 16px;
+    cursor: pointer;
+}
+.card-container h3{
+    margin: 6px 0;
+    text-align: center;
+    color: rgb(174, 92, 34);
+}
+.card-container p:nth-child(2){
+    margin:0;
+    font-size: small;
+    text-align: center;
+}
