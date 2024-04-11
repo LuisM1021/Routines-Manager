@@ -1,13 +1,14 @@
 .card-container{
-    height: 200px;
+    height: 150px;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: rgb(95, 203, 136);
     border: 2px solid rgb(86, 19, 19);
     border-radius: 16px;
-    padding: 0 16px;
+    padding: 8px 16px;
     cursor: pointer;
+    justify-content: space-between;
 }
 .card-container h3{
     margin: 6px 0;
@@ -19,3 +20,14 @@
     font-size: small;
     text-align: center;
 }
+.detail-container p{
+    margin:0;
+    font-size: small;
+    text-align: center;
+    font-weight: bold;
+}
+.detail-container p span{
+    margin-left:4px;
+    color: aqua;
+}
+

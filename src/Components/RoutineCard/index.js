@@ -21,10 +21,12 @@ function RoutineCard({name,description,totalTime,requireEquipment}){
         <div className='card-container'>
             <h3>{name}</h3>
             <p>{description}</p>
-            <p>Time: 
-                {showTime()}
-            </p>
-            <p>Equipment: <span>{requireEquipment}</span></p>
+            <div className='detail-container'>
+                <p>Time: 
+                    {showTime()}
+                </p>
+                <p>Equipment: <span>{requireEquipment}</span></p>
+            </div>
         </div>
     )
 }

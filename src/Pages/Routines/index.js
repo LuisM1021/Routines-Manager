@@ -2,13 +2,19 @@ import { useContext } from 'react'
 import './Routines.css'
 import {GeneralContext} from '../../GeneralContext'
 import {RoutineCard} from '../../Components/RoutineCard'
+import {ChevronDoubleUpIcon} from '@heroicons/react/24/outline'
 
-import { calculateTotalTime } from '../../Utils'
 
 function Routines(){
     const {
         routines
     } = useContext(GeneralContext)
+    const scrollToTopRoutineCards=(event)=>{
+        document.getElementById('scrollRoutineCards').scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
+    }
     return(
         <div className='routines-container'>
             <div className='search-routine'>
@@ -22,7 +28,7 @@ function Routines(){
                         <button>Require equipment</button>
                     </div>
                 </div>
-                <div className='routine-cards'>
+                <div className='routine-cards' id='scrollRoutineCards'>
                     {routines?.map(routine=>{
                         return <RoutineCard
                         key={routine.name}
@@ -31,6 +37,7 @@ function Routines(){
                         totalTime={routine.timer.totalTime}
                         requireEquipment={routine.equipment}/>
                     })}
+                <div className='scroll-up-container' onClick={()=>scrollToTopRoutineCards()}><ChevronDoubleUpIcon className='scroll-up-icon'/></div>
                 </div>
             </div>
             <div className='user-routines'>
