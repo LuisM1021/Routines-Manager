@@ -3,11 +3,11 @@ import './Routines.css'
 import {GeneralContext} from '../../GeneralContext'
 import {RoutineCard} from '../../Components/RoutineCard'
 import {ChevronDoubleUpIcon} from '@heroicons/react/24/outline'
-
+import { RoutineDetails } from '../../Components/RoutineDetails'
 
 function Routines(){
     const {
-        routines
+        routines,showRoutineDetails
     } = useContext(GeneralContext)
     const scrollToTopRoutineCards=(event)=>{
         document.getElementById('scrollRoutineCards').scrollTo({
@@ -17,6 +17,7 @@ function Routines(){
     }
     return(
         <div className='routines-container'>
+            {showRoutineDetails && <RoutineDetails/>}
             <div className='search-routine'>
                 <h1>Search Routine</h1>
                 <div className='filter-bar'>
@@ -32,10 +33,7 @@ function Routines(){
                     {routines?.map(routine=>{
                         return <RoutineCard
                         key={routine.name}
-                        name={routine.name}
-                        description={routine.description}
-                        totalTime={routine.timer.totalTime}
-                        requireEquipment={routine.equipment}/>
+                        routine={routine}/>
                     })}
                 <div className='scroll-up-container' onClick={()=>scrollToTopRoutineCards()}><ChevronDoubleUpIcon className='scroll-up-icon'/></div>
                 </div>

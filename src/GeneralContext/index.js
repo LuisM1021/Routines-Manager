@@ -14,10 +14,14 @@ function GeneralProvider({children}){
     const getRandom =(min,max)=>{
         return Math.floor(Math.random()*(max-min))+min
     }
-
+    //Routines: Show routine details
+    const [showRoutineDetails,setShowRoutineDetails] = React.useState(false)
+    //Routines: Save selected routine data
+    const [selectedRoutineDetails,setSelectedRoutineDetails] = React.useState({})
     return (
         <GeneralContext.Provider value={{
-            saveItem,getItem,routines,exercises,getRandom,selectedRoutine,setSelectedRoutine
+            saveItem,getItem,routines,exercises,getRandom,selectedRoutine,setSelectedRoutine,
+            showRoutineDetails,setShowRoutineDetails,selectedRoutineDetails,setSelectedRoutineDetails
         }}>
             {children}
         </GeneralContext.Provider>
