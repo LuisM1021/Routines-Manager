@@ -1,7 +1,7 @@
 import './RoutineDetails.css'
 import { GeneralContext } from '../../GeneralContext'
 import { useContext,useState } from 'react'
-import { ArrowRightCircleIcon,ArrowLeftCircleIcon } from '@heroicons/react/16/solid'
+import { ArrowRightCircleIcon,ArrowLeftCircleIcon,PencilSquareIcon,PlusCircleIcon } from '@heroicons/react/24/outline'
 function RoutineDetails(){
     const {
         setShowRoutineDetails,
@@ -64,6 +64,8 @@ function RoutineDetails(){
         <div className='background' onClick={(event)=>hideRoutineDetails(event)}>
             <div className='routine-details-container'>
                 <h2>{routine.name}</h2>
+                <PlusCircleIcon className='plus-circle-icon'/>
+                <PencilSquareIcon className='pencil-square-icon'/>
                 <p className='description'>{routine.description}</p>
                 <div className='category-time'>
                     <p>Category: {routine.category}</p>

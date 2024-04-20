@@ -19,6 +19,28 @@
     align-items: center;
     justify-content: space-between;
     padding: 16px 24px;
+    position: relative;
+}
+.plus-circle-icon{
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    cursor: pointer;
+}
+.pencil-square-icon{
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 12px;
+    right: 40px;
+    cursor: pointer;
+}
+.plus-circle-icon:hover,
+.pencil-square-icon:hover{
+    width: 28px;
+    height: 28px;
 }
 .routine-details-container h2{
     color: aquamarine;
