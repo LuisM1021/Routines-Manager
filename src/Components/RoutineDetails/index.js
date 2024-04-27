@@ -13,7 +13,6 @@ function RoutineDetails(){
             setShowRoutineDetails(false)
         }
     }
-    console.log(routine)
     //Storing the index of the current exercise
     const [currentExercise,setCurrentExercise] = useState(0)
     const getExercisePath = ()=>{

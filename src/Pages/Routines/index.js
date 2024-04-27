@@ -7,28 +7,53 @@ import { RoutineDetails } from '../../Components/RoutineDetails'
 
 function Routines(){
     const {
-        routines,showRoutineDetails
+        showRoutineDetails,setSearchByName,setFilterBy,filterBy,filteredRoutines,availableCategories
     } = useContext(GeneralContext)
-    const [filter,setFilter] = useState(null)
-    const [searchByName,setSearchByName] = useState(null)
     const scrollToTopRoutineCards=()=>{
         document.getElementById('scrollRoutineCards').scrollTo({
             top: 0,
             behavior: 'smooth'
         })
     }
-    const renderFilter = () => {
-        switch(filter){
-            case 'name':
+    const [filterToRender,setFilterToRender]  = useState(null)
+    const [filterActive,setFilterActive] = useState([false,false,false,false])
+    const [checkedCategory,setCheckedCategory] = useState([])
+    const handleSelectedCategory = (category) => {
+        const searchCategory = checkedCategory.find(cat => cat === category)
+        if(searchCategory){
+            //Removing the selected category
+            setCheckedCategory((checkedCategory) => checkedCategory.filter((cat => cat!=category)))
+        }else{
+            setCheckedCategory((checkedCategory) => ([...checkedCategory,category]))   
+        }
+    }
+    const displaySelectedState = (category) => {
+        if(checkedCategory.find(cat => cat === category)){
+            return 'active-category'
+        }else return ''
+    }
+    const renderFilter = () => { 
+        switch(filterToRender){
+            case'name':
                 return (
-                    <input className='name-filter' type='text' placeholder='default routine' onChange={(event)=>setSearchByName(event.target.value)}/>
-                )
-                
+                    <input className='name-filter' type='text' placeholder='default routine' onChange={(event)=>handleChange(event)}/>
+                ) 
             case 'time':
                 return (<p>filter time</p>)
                 
             case 'category':
-                return (<p>filter category</p>)
+                return (
+                    <ul className='categories-filter'>
+                        {availableCategories?.map((category,index) => (
+                            <li 
+                             className='category-item'
+                             key={index}
+                             onClick={()=>handleSelectedCategory(category)}>
+                                <span className={`category-checkbox ${displaySelectedState(category)}`}></span><span className='category-name'>{category}</span>
+                            </li>
+                        ))}
+                    </ul>
+                )
                 
             case 'equipment':
                 return (<p>filter equipment</p>)
@@ -36,26 +61,57 @@ function Routines(){
                 return(<></>)
         }
     }
+    const handleChange = (event) => {
+        setSearchByName(event.target.value)
+    }
     const renderRoutines = () =>{
-        if(filter && searchByName){
-            const filteredRoutines = routines?.filter(routine => routine.name.includes(searchByName))
-            return (
-                <>
-                    {filteredRoutines?.map(routine => {
-                        return <RoutineCard key={routine.name} routine={routine}/>
-                    })}
-                </>
-            )
-            
-        }else{
-            return (
-                <>
-                    {routines?.map(routine=>{
-                        return (<RoutineCard key={routine.name} routine={routine}/>)
-                    })}
-                </>
-            )
+        return (
+            <>
+                {filteredRoutines?.map(routine=>{
+                    return (<RoutineCard key={routine.name} routine={routine}/>)
+                })}
+            </>
+        )
+    }
+    const handleClick = (indicator) => {
+        const currentFilterBy = [...filterBy]
+        switch(indicator){
+            case 0:
+                currentFilterBy[indicator] = 'name' 
+                setFilterToRender('name')
+                setFilterActive((filterActive)=>{
+                    filterActive[0] = true
+                    return filterActive
+                })
+            break
+            case 1:
+                currentFilterBy[indicator] = 'time' 
+                setFilterToRender('time')
+                setFilterActive((filterActive)=>{
+                    filterActive[1] = true
+                    return filterActive
+                })
+            break
+            case 2:
+                currentFilterBy[indicator] = 'category' 
+                setFilterToRender('category')
+                setFilterActive((filterActive)=>{
+                    filterActive[2] = true
+                    return filterActive
+                })
+            break
+            case 3:
+                currentFilterBy[indicator] = 'equipment' 
+                setFilterToRender('equipment')
+                setFilterActive((filterActive)=>{
+                    filterActive[3] = true
+                    return filterActive
+                })
+            break
         }
+       
+        setFilterBy(currentFilterBy)
+        // filterRoutines()
     }
     return(
         <div className='routines-container'>
@@ -66,10 +122,10 @@ function Routines(){
                     <div className='filters-container'>
                         <p>Filter</p>
                         <div className='filters'>
-                            <button onClick={()=>setFilter('name')}>Name</button>
-                            <button onClick={()=>setFilter('time')}>Time</button>
-                            <button onClick={()=>setFilter('category')}>Category</button>
-                            <button onClick={()=>setFilter('equipment')}>Require equipment</button>
+                            <button className={`filter-button ${filterActive[0] && 'active'}`} onClick={()=>handleClick(0)}>Name</button>
+                            <button className={`filter-button ${filterActive[1] && 'active'}`} onClick={()=>handleClick(1)}>Time</button>
+                            <button className={`filter-button ${filterActive[2] && 'active'}`} onClick={()=>handleClick(2)}>Category</button>
+                            <button className={`filter-button ${filterActive[3] && 'active'}`} onClick={()=>handleClick(3)}>Require equipment</button>
                         </div>
                     </div>
                     <div className='filter-container'>
@@ -89,3 +145,4 @@ function Routines(){
 }
 
 export {Routines}
+

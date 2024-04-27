@@ -114,3 +114,13 @@ export function initializeStorage(){
         localStorage.setItem('exercises',JSON.stringify(exercises))
     }
 }
+
+export function loadAvailableCategories(routines){
+    let foundedCategories = []
+    routines?.forEach(routine => {
+        const findCategory = foundedCategories.find(foundedCat => foundedCat === routine.category)
+        if(!findCategory) foundedCategories.push(routine.category)
+    })
+    console.log(foundedCategories)
+    return foundedCategories
+}
