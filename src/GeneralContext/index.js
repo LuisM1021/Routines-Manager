@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import { useLocalStorage } from './useLocalStorage';
-import { loadAvailableCategories } from '../Utils';
+import { loadAvailableCategories,loadEquipmentOptions,filterRoutinesByTimeRange } from '../Utils';
 
 const GeneralContext = React.createContext()
 
@@ -23,48 +23,74 @@ function GeneralProvider({children}){
     //Available categories according to the list of routines
     const [availableCategories,setAvailableCategories] = useState(null)
 
+    //Equipment options according to the list of routines
+    const [equipmentOptions,setEquipmentOptions] = useState(null)
+
     //Filtered routines 
     const [filteredRoutines,setFilteredRoutines] = useState([])
-    console.log('original: ',filteredRoutines)
 
     useEffect(()=>{
         setFilteredRoutines(routines)
     },[routines])
 
     useEffect(()=>{
-        setAvailableCategories(loadAvailableCategories(filteredRoutines))
-    },[filteredRoutines])
+        setAvailableCategories(loadAvailableCategories(routines))
+        setEquipmentOptions(loadEquipmentOptions(routines))
+    },[routines])
 
     //filter by 
     const [filterBy,setFilterBy] = useState([null,null,null,null])
 
     //Filter by name 
-    const [searchByName,setSearchByName] = useState(null)
+    const [searchByName,setSearchByName] = useState('')
 
+    //Values of the time filter
+    const [minSec,setMinSec] = useState('00')
+    const [minMinutes,setMinMinutes] = useState('00')
+    const [minHrs,setMinHrs] = useState('00')
+    const [maxSec,setMaxSec] = useState('00')
+    const [maxMin,setMaxMin] = useState('00')
+    const [maxHrs,setMaxHrs] = useState('00')
+
+    //Filter by category
+    const [searchByCategory,setSearchByCategory] = useState([])
+
+    //Filter by equipment
+    const [searchByEquipment,setSearchByEquipment] = useState([])
+
+    const [executeFilters,setExecuteFilters] = useState(false)
     //Logic to filter routines
     useEffect(()=>{
-        let routinesToSet = []
-        //Filter by name
-        console.log("evaluar",searchByName)
-        console.log("filtered routines a evaluar: ",filteredRoutines)
-        if(filteredRoutines.length === 0) routinesToSet = routines
-        else routinesToSet = filteredRoutines
-        //TODO: ARREGLAR EL FILTRO DE NOMBRES E IMPLEMENTAR LOS DEMAS FILTROS
+        let routinesToSet = routines
         if(filterBy[0]==='name'){
             routinesToSet = routinesToSet?.filter(routine => routine.name.includes(searchByName))
             if (routinesToSet?.length ===0 && searchByName === '') routinesToSet = routines
         }
         if(filterBy[1]==='time'){
-
+            routinesToSet = filterRoutinesByTimeRange(routinesToSet,minHrs,minMinutes,minSec,maxHrs,maxMin,maxSec)
         }
         if(filterBy[2]==='category'){
-            // routinesToSet = routinesToSet.filter(routine => routine.category === )
+            console.log("dentro: ",searchByCategory)
+            if(searchByCategory.length>0){
+                routinesToSet = routinesToSet.filter(routine => {
+                    if(searchByCategory.find(cat => cat === routine.category)){
+                        return routine
+                    }
+                })
+            }
         }
         if(filterBy[3]==='equipment'){
-
+            if(searchByEquipment.length>0){
+                routinesToSet = routinesToSet.filter(routine => {
+                    if(searchByEquipment.find(equip => equip === routine.equipment)){
+                        return routine
+                    }
+                })
+            }
         }
         setFilteredRoutines(routinesToSet)
-    },[searchByName])
+        setExecuteFilters(false)
+    },[searchByName,executeFilters])
     return (
         <GeneralContext.Provider value={{
             saveItem,
@@ -83,7 +109,23 @@ function GeneralProvider({children}){
             searchByName,
             setFilterBy,
             filterBy,
-            availableCategories
+            availableCategories,
+            setSearchByCategory,
+            setExecuteFilters,
+            equipmentOptions,
+            setSearchByEquipment,
+            setMinHrs,
+            minHrs,
+            setMinMinutes,
+            minMinutes,
+            setMinSec,
+            minSec,
+            setMaxHrs,
+            maxHrs,
+            setMaxMin,
+            maxMin,
+            setMaxSec,
+            maxSec
         }}>
             {children}
         </GeneralContext.Provider>
