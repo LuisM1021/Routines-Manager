@@ -27,7 +27,8 @@ function FilterBar(){
         setMaxMin,
         setMaxSec,
         availableCategories,
-        equipmentOptions
+        equipmentOptions,
+        resetFilters
 
     } = useContext(GeneralContext)
 
@@ -44,6 +45,9 @@ function FilterBar(){
     const [categoryFilterActive,setCategoryFilterActive] = useState(false)
     const [equipmentFilterActive,setEquipmentFilterActive] = useState(false)
     
+    //To display the filter options when clicking filter button
+    const [displayFilters,setDisplayFilters] = useState(false)
+
     const handleClick = (indicator) => {
         const currentFilterBy = [...filterBy]
         switch(indicator){
@@ -369,7 +373,7 @@ function FilterBar(){
         switch(filterToRender){
             case'name':
                 return (
-                    <input className='name-filter'
+                    <input className='name-filter slide-animation'
                     type='text' 
                     placeholder='default routine' 
                     value={(searchByName!==null || searchByName!=='')&&searchByName} 
@@ -377,7 +381,7 @@ function FilterBar(){
                 ) 
             case 'time':
                 return (
-                    <div className='times-container'>
+                    <div className='times-container slide-animation'>
                         <div className='min-times-container'>
                             <div className='inputs-container'>
                                 <input className='time-range' name='min-hrs' value={minHrs} type='range' min='0' max='23' step='1' onChange={(event)=>rangeSetTimeInFilters(event,'MIN_HRS')}/>
@@ -411,7 +415,7 @@ function FilterBar(){
                 
             case 'category':
                 return (
-                    <ul className='categories-filter'>
+                    <ul className='categories-filter slide-animation'>
                         {availableCategories?.map((category,index) => (
                             <li 
                              className='category-item'
@@ -425,7 +429,7 @@ function FilterBar(){
                 
             case 'equipment':
                 return (
-                    <ul className='equipment-filter'>
+                    <ul className='equipment-filter slide-animation'>
                         {equipmentOptions?.map((equipment,index) => (
                             <li 
                              className='equipment-item'
@@ -440,22 +444,39 @@ function FilterBar(){
                 return(<></>)
         }
     }
-
+    const toggleFilterOptions = () => {
+        if(displayFilters){
+            resetFilters()
+            setFilterToRender(null)
+            setCheckedCategory([])
+            setCheckedEquipment([])
+            setCategoryFilterActive(false)
+            setEquipmentFilterActive(false)
+            setTimeFilterActive(false)
+            setDisplayFilters(false)
+        }else{
+            setDisplayFilters(true)
+        }
+    }
     return (
         <div className='filter-bar'>
             <div className='filters-container'>
-                <p>Filter</p>
-                <div className='filters'>
-                    <button className={`filter-button ${filterBy[0]==='name' && 'active'}`} onClick={()=>handleClick(0)}>Name</button>
-                    <button className={`filter-button ${filterBy[1]==='time' && 'active'}`} onClick={()=>handleClick(1)}>Time</button>
-                    <button className={`filter-button ${filterBy[2]==='category' && 'active'}`} onClick={()=>handleClick(2)}>Category</button>
-                    <button className={`filter-button ${filterBy[3]==='equipment' && 'active'}`} onClick={()=>handleClick(3)}>Require equipment</button>
+                <p onClick={()=>toggleFilterOptions()}>Filter</p>
+                {displayFilters && 
+                    <div className='filters slide-animation'>
+                        <button className={`filter-button ${filterBy[0]==='name' && 'active'}`} onClick={()=>handleClick(0)}>Name</button>
+                        <button className={`filter-button ${filterBy[1]==='time' && 'active'}`} onClick={()=>handleClick(1)}>Time</button>
+                        <button className={`filter-button ${filterBy[2]==='category' && 'active'}`} onClick={()=>handleClick(2)}>Category</button>
+                        <button className={`filter-button ${filterBy[3]==='equipment' && 'active'}`} onClick={()=>handleClick(3)}>Require equipment</button>
+                    </div>  
+                }
+            {displayFilters && (filterToRender==='time'||filterToRender==='category'||filterToRender==='equipment') ? <MagnifyingGlassIcon onClick={()=>executeFilters()} className='search-icon slide-animation'/>:<></>}
+            </div>
+            {displayFilters &&
+                <div className='filter-container'>
+                    {renderFilter()}
                 </div>
-                {filterToRender==='time'||filterToRender==='category'||filterToRender==='equipment' ? <MagnifyingGlassIcon onClick={()=>executeFilters()} className='search-icon'/>:<></>}
-            </div>
-            <div className='filter-container'>
-                {renderFilter()}
-            </div>
+            }
         </div>
     )
 }

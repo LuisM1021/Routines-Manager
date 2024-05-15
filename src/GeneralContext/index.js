@@ -59,6 +59,20 @@ function GeneralProvider({children}){
     const [searchByEquipment,setSearchByEquipment] = useState([])
 
     const [executeFilters,setExecuteFilters] = useState(false)
+
+    const resetFilters = () => {
+        setFilterBy([null,null,null,null])
+        setSearchByName('')
+        setMinHrs('00')
+        setMinMinutes('00')
+        setMinSec('00')
+        setMaxHrs('00')
+        setMaxMin('00')
+        setMaxSec('00')
+        setSearchByCategory([])
+        setSearchByEquipment([])
+        setExecuteFilters(true)
+    }
     //Logic to filter routines
     useEffect(()=>{
         let routinesToSet = routines
@@ -126,7 +140,8 @@ function GeneralProvider({children}){
             setMaxMin,
             maxMin,
             setMaxSec,
-            maxSec
+            maxSec,
+            resetFilters
         }}>
             {children}
         </GeneralContext.Provider>

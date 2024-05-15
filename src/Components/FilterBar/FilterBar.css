@@ -37,6 +37,20 @@
     font-weight: 600;
     cursor: pointer;
 }
+/* FILTER BUTTON ANIMATION  */
+.slide-animation{
+    animation-name: slide;
+    animation-duration: 500ms;
+}
+@keyframes slide{
+    from {
+        transform: translateY(-8px);
+    }
+    
+    to {
+        transform: translateY(0);
+    }
+}
 .filter-bar .filters .active{
     background-color: aqua;
 }
