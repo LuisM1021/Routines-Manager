@@ -70,7 +70,6 @@ function GeneralProvider({children}){
             routinesToSet = filterRoutinesByTimeRange(routinesToSet,minHrs,minMinutes,minSec,maxHrs,maxMin,maxSec)
         }
         if(filterBy[2]==='category'){
-            console.log("dentro: ",searchByCategory)
             if(searchByCategory.length>0){
                 routinesToSet = routinesToSet.filter(routine => {
                     if(searchByCategory.find(cat => cat === routine.category)){
@@ -111,9 +110,11 @@ function GeneralProvider({children}){
             filterBy,
             availableCategories,
             setSearchByCategory,
+            searchByCategory,
             setExecuteFilters,
             equipmentOptions,
             setSearchByEquipment,
+            searchByEquipment,
             setMinHrs,
             minHrs,
             setMinMinutes,

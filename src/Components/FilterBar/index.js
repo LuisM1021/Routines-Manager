@@ -9,7 +9,9 @@ function FilterBar(){
         setFilterBy,
         setSearchByName,
         setSearchByCategory,
+        searchByCategory,
         setSearchByEquipment,
+        searchByEquipment,
         setExecuteFilters,
         searchByName,
         minHrs,
@@ -31,13 +33,17 @@ function FilterBar(){
 
     //Indicates the current selected filter
     const [filterToRender,setFilterToRender]  = useState(null)
-
+    console.log(filterToRender)
     //Categories that are selected to be filtered
     const [checkedCategory,setCheckedCategory] = useState([])
 
     //Categories that are selected to be filtered
     const [checkedEquipment,setCheckedEquipment] = useState([])
 
+    const [timeFilterActive,setTimeFilterActive] = useState(false)
+    const [categoryFilterActive,setCategoryFilterActive] = useState(false)
+    const [equipmentFilterActive,setEquipmentFilterActive] = useState(false)
+    
     const handleClick = (indicator) => {
         const currentFilterBy = [...filterBy]
         switch(indicator){
@@ -49,27 +55,86 @@ function FilterBar(){
                 }else{
                     currentFilterBy[indicator] = 'name' 
                     setFilterToRender('name')
+                    if(!timeFilterActive){
+                        currentFilterBy[1] = null
+                        setMinHrs('00')
+                        setMinMinutes('00')
+                        setMinSec('00')
+                        setMaxHrs('00')
+                        setMaxMin('00')
+                        setMaxSec('00')
+                    } 
+                    if(!categoryFilterActive){
+                        currentFilterBy[2] = null
+                        setCheckedCategory([])
+                    } 
+                    if(!equipmentFilterActive){
+                        currentFilterBy[3] = null
+                        setCheckedEquipment([])
+                    } 
                 }
             break
             case 1:
                 if(filterToRender === 'time'){
                     currentFilterBy[indicator] = null 
                     setFilterToRender(null) 
-                    setExecuteFilters(true)               
+                    setMinHrs('00')
+                    setMinMinutes('00')
+                    setMinSec('00')
+                    setMaxHrs('00')
+                    setMaxMin('00')
+                    setMaxSec('00')
+                    setTimeFilterActive(false)
+                    setExecuteFilters(true)
                 }else{
                     currentFilterBy[indicator] = 'time' 
                     setFilterToRender('time')
+                    if(!timeFilterActive){
+                        setMinHrs('00')
+                        setMinMinutes('00')
+                        setMinSec('00')
+                        setMaxHrs('00')
+                        setMaxMin('00')
+                        setMaxSec('00')
+                    }
+                    if(searchByName==='') currentFilterBy[0] = null
+                    if(!categoryFilterActive){
+                        currentFilterBy[2] = null
+                        setCheckedCategory([])
+                    } 
+                    if(!equipmentFilterActive){
+                        currentFilterBy[3] = null
+                        setCheckedEquipment([])
+                    } 
                 }
             break
             case 2:
                 if(filterToRender === 'category'){
+                    console.log('apagado')
                     currentFilterBy[indicator] = null 
                     setFilterToRender(null)  
                     setSearchByCategory([])
-                    setExecuteFilters(true)              
+                    setCategoryFilterActive(false)
+                    setExecuteFilters(true)
                 }else{
                     currentFilterBy[indicator] = 'category' 
                     setFilterToRender('category')
+                    if(!categoryFilterActive) setCheckedCategory([])
+                    else setCheckedCategory(searchByCategory)
+                    if(searchByName==='') currentFilterBy[0] = null
+                    if(!timeFilterActive){
+                        currentFilterBy[1] = null
+                        setMinHrs('00')
+                        setMinMinutes('00')
+                        setMinSec('00')
+                        setMaxHrs('00')
+                        setMaxMin('00')
+                        setMaxSec('00')
+                    } 
+                    if(!equipmentFilterActive){
+                        currentFilterBy[3] = null
+                        setCheckedEquipment([])
+                    } 
                 }
             break
             case 3:
@@ -77,16 +142,43 @@ function FilterBar(){
                     currentFilterBy[indicator] = null 
                     setFilterToRender(null)
                     setSearchByEquipment([])  
-                    setExecuteFilters(true)              
+                    setEquipmentFilterActive(false)
+                    setExecuteFilters(true)  
                 }else{
                     currentFilterBy[indicator] = 'equipment' 
                     setFilterToRender('equipment')
+                    if(!equipmentFilterActive) setCheckedEquipment([])
+                    else setCheckedEquipment(searchByEquipment)
+                    if(searchByName==='') currentFilterBy[0] = null
+                    if(!timeFilterActive){
+                        currentFilterBy[1] = null
+                        setMinHrs('00')
+                        setMinMinutes('00')
+                        setMinSec('00')
+                        setMaxHrs('00')
+                        setMaxMin('00')
+                        setMaxSec('00')
+                    } 
+                    if(!categoryFilterActive){
+                        currentFilterBy[2] = null
+                        setCheckedCategory([])
+                    } 
                 }
             break
         }
         setFilterBy(currentFilterBy)
     }
-    const executeFilters = () => {
+    const executeFilters = () => { 
+        if(checkedCategory.length === 0){
+            setCategoryFilterActive(false)
+        }else {
+            setCategoryFilterActive(true)
+        }
+
+        if (checkedEquipment.length === 0) setEquipmentFilterActive(false)
+        else setEquipmentFilterActive(true)
+        if(minHrs === '00' && minMinutes === '00' && minSec === '00' && maxHrs === '00' && maxMin === '00' && maxSec === '00') setTimeFilterActive(false)
+        else setTimeFilterActive(true)
         setSearchByCategory(checkedCategory)
         setSearchByEquipment(checkedEquipment)
         setExecuteFilters(true)
@@ -163,10 +255,8 @@ function FilterBar(){
         }
         else if(parseInt(data)>=0 && parseInt(data)<=59){
             data = data
-            console.log('data es data')
         } 
         else {
-            console.log('data es null')
             data = null
         }
         let newTime

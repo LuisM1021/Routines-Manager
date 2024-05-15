@@ -10,7 +10,6 @@ function Routines(){
         showRoutineDetails,
         filteredRoutines
     } = useContext(GeneralContext)
-
     const scrollToTopRoutineCards=()=>{
         document.getElementById('scrollRoutineCards').scrollTo({
             top: 0,
