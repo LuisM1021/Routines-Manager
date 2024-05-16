@@ -34,7 +34,7 @@ function FilterBar(){
 
     //Indicates the current selected filter
     const [filterToRender,setFilterToRender]  = useState(null)
-    console.log(filterToRender)
+
     //Categories that are selected to be filtered
     const [checkedCategory,setCheckedCategory] = useState([])
 
@@ -254,8 +254,14 @@ function FilterBar(){
         }
     }
     const textSetTimeInFilters = (data,timerSetted) => {
+        console.log('data: ',data)
+        console.log('type: ',typeof(data))
+        console.log('length: ',data.length)
         if(data === '00'){
             data = null
+        }
+        else if(data.length === 2){
+            data = data
         }
         else if(parseInt(data)>=0 && parseInt(data)<=59){
             data = data
@@ -300,7 +306,8 @@ function FilterBar(){
                     }
                     break
                 case 'MAX_HRS':
-                    if(data) newTime = `${maxHrs[1]}${data}`
+                    if(data && data.length === 2) newTime = data
+                    else if(data) newTime = `${maxHrs[1]}${data}`
                     if(newTime>23) newTime = '23'
                     setMaxHrs(newTime)
                     if(newTime<=minHrs){
@@ -314,7 +321,8 @@ function FilterBar(){
                     }
                     break
                 case 'MAX_MIN':
-                    if(data) newTime = `${maxMin[1]}${data}`
+                    if(data && data.length === 2) newTime = data
+                    else if(data) newTime = `${maxMin[1]}${data}`
                     if(newTime>59) newTime = '59'
                     setMaxMin(newTime)
                     if(maxHrs === minHrs && newTime<=minMinutes){
@@ -325,7 +333,8 @@ function FilterBar(){
                     }
                     break
                 case 'MAX_SEC':
-                    if(data) newTime = `${maxSec[1]}${data}`
+                    if(data && data.length === 2) newTime = data
+                    else if(data) newTime = `${maxSec[1]}${data}`
                     if(newTime>59) newTime = '59'
                     setMaxSec(newTime)
                     if(maxHrs === minHrs && maxMin === minMinutes && newTime<minSec){
@@ -403,11 +412,11 @@ function FilterBar(){
                                 <input className='time-range' name='max-seg' value={maxSec} type='range' min='0' max='59' step='1' onChange={(event)=>rangeSetTimeInFilters(event,'MAX_SEC')}/>
                             </div>
                             <p className='time-value-container'>
-                                <input className='time-value' onClick={()=>textSetTimeInFilters('00','MAX_HRS')} value={`${maxHrs}`} onChange={(event)=>textSetTimeInFilters(event.nativeEvent.data,'MAX_HRS')}/>
+                                <input className='time-value' onClick={()=>textSetTimeInFilters(minHrs,'MAX_HRS')} value={`${maxHrs}`} onChange={(event)=>textSetTimeInFilters(event.nativeEvent.data,'MAX_HRS')}/>
                                 <span>:</span>
-                                <input className='time-value' onClick={()=>textSetTimeInFilters('00','MAX_MIN')} value={`${maxMin}`} onChange={(event)=>textSetTimeInFilters(event.nativeEvent.data,'MAX_MIN')}/>
+                                <input className='time-value' onClick={()=>textSetTimeInFilters(minMinutes,'MAX_MIN')} value={`${maxMin}`} onChange={(event)=>textSetTimeInFilters(event.nativeEvent.data,'MAX_MIN')}/>
                                 <span>:</span>
-                                <input className='time-value' onClick={()=>textSetTimeInFilters('00','MAX_SEC')} value={`${maxSec}`} onChange={(event)=>textSetTimeInFilters(event.nativeEvent.data,'MAX_SEC')}/>
+                                <input className='time-value' onClick={()=>textSetTimeInFilters(minSec,'MAX_SEC')} value={`${maxSec}`} onChange={(event)=>textSetTimeInFilters(event.nativeEvent.data,'MAX_SEC')}/>
                             </p>
                         </div>
                     </div>
