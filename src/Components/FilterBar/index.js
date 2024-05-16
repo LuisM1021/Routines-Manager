@@ -114,7 +114,6 @@ function FilterBar(){
             break
             case 2:
                 if(filterToRender === 'category'){
-                    console.log('apagado')
                     currentFilterBy[indicator] = null 
                     setFilterToRender(null)  
                     setSearchByCategory([])

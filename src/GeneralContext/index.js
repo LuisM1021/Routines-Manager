@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import { useLocalStorage } from './useLocalStorage';
 import { loadAvailableCategories,loadEquipmentOptions,filterRoutinesByTimeRange } from '../Utils';
+import Fuse from 'fuse.js';
 
 const GeneralContext = React.createContext()
 
@@ -74,10 +75,30 @@ function GeneralProvider({children}){
         setExecuteFilters(true)
     }
     //Logic to filter routines
+    const fuseOptions = {
+        // isCaseSensitive: false,
+        includeScore: true,
+        // shouldSort: true,
+        // includeMatches: false,
+        // findAllMatches: false,
+        // minMatchCharLength: 1,
+        // location: 0,
+        // threshold: 0.6,
+        // distance: 100,
+        // useExtendedSearch: false,
+        // ignoreLocation: false,
+        // ignoreFieldNorm: false,
+        // fieldNormWeight: 1,
+        keys: [
+            "name",
+        ]
+    }
     useEffect(()=>{
         let routinesToSet = routines
         if(filterBy[0]==='name'){
-            routinesToSet = routinesToSet?.filter(routine => routine.name.includes(searchByName))
+            const fuse = new Fuse(routinesToSet,fuseOptions)
+            const filtrationResults = fuse.search(searchByName)
+            routinesToSet = filtrationResults.map(result => (result.item))
             if (routinesToSet?.length ===0 && searchByName === '') routinesToSet = routines
         }
         if(filterBy[1]==='time'){
