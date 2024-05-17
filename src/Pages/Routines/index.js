@@ -5,6 +5,7 @@ import {RoutineCard} from '../../Components/RoutineCard'
 import {ChevronDoubleUpIcon} from '@heroicons/react/24/outline'
 import { RoutineDetails } from '../../Components/RoutineDetails'
 import { FilterBar } from '../../Components/FilterBar'
+import { Layout } from '../../Components/Layout'
 function Routines(){
     const {
         showRoutineDetails,
@@ -31,20 +32,22 @@ function Routines(){
     }
  
     return(
-        <div className='routines-container'>
-            {showRoutineDetails && <RoutineDetails/>}
-            <div className='search-routine'>
-                <h1>Search Routine</h1>
-            <FilterBar/>  
-                <div className='routine-cards' id='scrollRoutineCards'>
-                    {renderRoutines()}
-                <div className='scroll-up-container' onClick={()=>scrollToTopRoutineCards()}><ChevronDoubleUpIcon className='scroll-up-icon'/></div>
+        <Layout>
+            <div className='routines-container'>
+                {showRoutineDetails && <RoutineDetails/>}
+                <div className='search-routine'>
+                    <h1>Search Routine</h1>
+                <FilterBar/>  
+                    <div className='routine-cards' id='scrollRoutineCards'>
+                        {renderRoutines()}
+                    <div className='scroll-up-container' onClick={()=>scrollToTopRoutineCards()}><ChevronDoubleUpIcon className='scroll-up-icon'/></div>
+                    </div>
+                </div>
+                <div className='user-routines'>
+                    <h1>My Routines</h1>
                 </div>
             </div>
-            <div className='user-routines'>
-                <h1>My Routines</h1>
-            </div>
-        </div>
+        </Layout>
     )
 }
 
