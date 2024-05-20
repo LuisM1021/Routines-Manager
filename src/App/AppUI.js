@@ -19,9 +19,7 @@ function AppUI(){
     return(
         <BrowserRouter>
             <AppRoutes/>
-            <div className="App">
-                <Navbar/>
-            </div>
+            <Navbar/>
         </BrowserRouter>
     );
 }
