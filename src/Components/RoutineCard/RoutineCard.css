@@ -14,11 +14,16 @@
     margin: 6px 0;
     text-align: center;
     color: rgb(174, 92, 34);
+    height: 28%;
 }
 .card-container p:nth-child(2){
     margin:0;
     font-size: small;
     text-align: center;
+    height: 52%;
+}
+.detail-container{
+    height: 20%;
 }
 .detail-container p{
     margin:0;
@@ -31,3 +36,22 @@
     color: aqua;
 }
 
+@media all and (min-width:800px) and (max-width: 1024px){
+    .card-container{
+        padding: 8px 4px;
+    }
+    .card-container h3{
+        margin: 0;
+        font-size: medium;
+        line-height: 1.1;
+    }
+    .card-container p:nth-child(2){
+        margin: 0;
+        font-size: small;
+        text-align: center;
+        overflow: scroll;
+    }
+    .user-routines{
+        height: 300px;
+    }
+}

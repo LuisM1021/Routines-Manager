@@ -57,3 +57,20 @@
     color: rgb(158, 247, 186);
     cursor: pointer;
 }
+
+@media all and (min-width:800px) and (max-width:1024px){
+    .user-activity-container{
+        width: 350px;
+    }
+    .activity-container figure{
+        width: auto;
+        height: auto;
+        background-color: transparent;
+        border: none;
+    }
+    .user-data-container p{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+}

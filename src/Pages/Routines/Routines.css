@@ -50,3 +50,13 @@
 .scroll-up-icon{
     color: aliceblue;
 }
+
+@media all and (min-width:800px) and (max-width: 1024px){
+    .routines-container{
+        height: 100%;
+        gap: 72px;
+    }
+    .user-routines{
+        height: 300px;
+    }
+}

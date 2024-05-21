@@ -36,7 +36,7 @@ function UserActivity(){
                     </PieChart>
                 </figure>
                 <div className='user-data-container'>
-                    <p>Current streak <span>3</span></p>
+                    <p>Current streak: <span>3</span></p>
                     <p>Favorite routine: <span>Routine 3</span></p>
                     <p>Favorite exercise: <span>Crunches</span></p>
                 </div>

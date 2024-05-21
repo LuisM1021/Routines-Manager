@@ -11,7 +11,15 @@
 .user-content{
     display: flex;
     width: 100%;
-    justify-content: center;
-    gap: 100px;
+    justify-content: space-between;
+    max-width: 850px;
     margin-top: 32px;
+    gap: 32px;
+}
+
+@media all and (min-width:800px)and (max-width:1024px){
+    .user-content{
+        justify-content: center;
+        gap: 32px;
+    }
 }

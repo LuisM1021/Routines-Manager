@@ -1,9 +1,15 @@
 .layout{
-    display: grid;
-    place-items: center;
-    height: 100%;
+    /* display: grid;
+    place-items: center; */
+    height: calc(100vh - 48px);
     padding: 24px;
     position: relative;
     margin-left: 200px;
     overflow: hidden;
+}
+
+@media all and (min-width:800px)and (max-width:1024px){
+    .layout{
+        width: calc(100vw - 248px);
+    }
 }

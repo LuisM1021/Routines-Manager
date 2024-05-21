@@ -57,3 +57,15 @@
 .add-routine-container .plus-icon-container:hover{
     background-color: aliceblue;
 }
+
+@media all and (min-width:800px) and (max-width:1024px){
+    .user-routines-container{
+        width: 200px;
+    }
+    .user-routines-container ul{
+        text-align: center;
+    }
+    .user-routines-container ul li{
+        margin-left: 0;
+    }
+}
