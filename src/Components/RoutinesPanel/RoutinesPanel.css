@@ -11,11 +11,19 @@
     width: 33%;
     height: 100%;
     list-style: none;
-    overflow-y: auto;
 }
 .routines-list h3{
+    margin: 0;
+    margin-top: 16px;
     text-align: center;
     color: rgb(171, 171, 211);
+    height: calc(25% - 16px);
+}
+.routines-list li{
+    margin-top: 8px;
+    height: calc(75% - 8px);
+    overflow-y: auto;
+    border-bottom-left-radius: 32px;
 }
 .routines-list li ul{
     margin: 8px 0;
@@ -45,10 +53,19 @@
     justify-content: center;
 }
 .exercises-slider div h3{
+    display: flex;
+    align-items: center;
     margin: 0;
     font-weight: 900;
     font-size: x-large;
     color: rgb(193, 189, 197);
+    height: auto;
+    min-height: 40px;
+    max-height: 60px;
+    padding: 2px;
+    overflow-y: auto;
+    text-align: center;
+    line-height: 1.2;
 }
 .exercises-slider img {
     width: 100%;
@@ -78,14 +95,34 @@
 .exercise-description{
     width: 33%;
     height: 100%;
-    overflow-y: auto;
 }
 .exercise-description h3{
+    margin: 0;
+    margin-top: 16px;
     text-align: center;
     color: rgb(171, 171, 211);
+    height: calc(25% - 16px);
 }
 .exercise-description p{
+    width: calc(100% - 16px);
+    padding:0 8px;
     text-align: justify;
-    margin: 0 12px;
+    margin: 0;
     color: rgb(218, 193, 241);
+    height: calc(75%);
+    border-bottom-right-radius: 32px;
+    overflow-y: auto;
 }
+
+/* .exercise-description p::-webkit-scrollbar{
+    width: 12px;
+    border: 2px solid black;
+    border-radius: 8px;
+}
+.exercise-description p::-webkit-scrollbar-track{
+    background-color:  #5091e6;
+    border-bottom-right-radius: 200px;
+}
+.exercise-description p::-webkit-scrollbar-thumb{
+    background-color: black;
+} */

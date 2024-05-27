@@ -5,7 +5,7 @@
     padding: 24px;
     position: relative;
     margin-left: 200px;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 @media all and (min-width:800px)and (max-width:1024px){

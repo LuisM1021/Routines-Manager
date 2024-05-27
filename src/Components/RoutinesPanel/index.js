@@ -3,7 +3,7 @@ import { useContext,useState,useEffect } from 'react'
 import {GeneralContext} from '../../GeneralContext'
 
 function RoutinesPanel(){
-    // getRandom falta de usar
+    //TODO: getRandom falta de usar
     const {
         routines,exercises,selectedRoutine,setSelectedRoutine
     } = useContext(GeneralContext)
