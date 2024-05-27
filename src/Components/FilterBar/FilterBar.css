@@ -12,9 +12,7 @@
 .search-icon{
     width: 20px;
     height: 20px;
-    position: absolute;
-    bottom: -32px;
-    left: 12px;
+    margin-left: 12px;
     cursor: pointer;
 }
 .filter-bar p{
@@ -22,6 +20,12 @@
     font-weight: bold;
     cursor: pointer;
     margin: 0;
+}
+.filter-options-container{
+    width: 100%;
+    margin-top: 8px;
+    display: flex;
+    height: auto;
 }
 .filter-bar .filters{
     margin-left: 32px;
@@ -57,9 +61,7 @@
 .filter-container{
     width: 300px;
     height: 32px;
-    position: absolute;
-    bottom: -36px;
-    left: 72px;
+    margin-left: 52px;
 }
 .name-filter{
     background-color: rgb(204, 247, 218);

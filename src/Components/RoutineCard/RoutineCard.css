@@ -9,6 +9,7 @@
     padding: 8px 16px;
     cursor: pointer;
     justify-content: space-between;
+    overflow: hidden;
 }
 .card-container h3{
     margin: 6px 0;
@@ -16,11 +17,12 @@
     color: rgb(174, 92, 34);
     height: 28%;
 }
-.card-container p:nth-child(2){
+.card-container .routine-description{
     margin:0;
     font-size: small;
     text-align: center;
     height: 52%;
+    overflow: auto;
 }
 .detail-container{
     height: 20%;
@@ -45,7 +47,7 @@
         font-size: medium;
         line-height: 1.1;
     }
-    .card-container p:nth-child(2){
+    .card-container .routine-description{
         margin: 0;
         font-size: small;
         text-align: center;

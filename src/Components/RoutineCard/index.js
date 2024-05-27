@@ -29,7 +29,7 @@ function RoutineCard({routine}){
     return(
         <div className='card-container' onClick={()=>handleSelectRoutine()}>
             <h3>{routine.name}</h3>
-            <p>{routine.description}</p>
+            <p className='routine-description'>{routine.description}</p>
             <div className='detail-container'>
                 <p>Time: 
                     {showTime()}

@@ -478,11 +478,15 @@ function FilterBar(){
                         <button className={`filter-button ${filterBy[3]==='equipment' && 'active'}`} onClick={()=>handleClick(3)}>Require equipment</button>
                     </div>  
                 }
-            {displayFilters && (filterToRender==='time'||filterToRender==='category'||filterToRender==='equipment') ? <MagnifyingGlassIcon onClick={()=>executeFilters()} className='search-icon slide-animation'/>:<></>}
             </div>
-            {displayFilters &&
-                <div className='filter-container'>
-                    {renderFilter()}
+            {(displayFilters && filterToRender) &&
+                <div className='filter-options-container'>
+                    {displayFilters && (filterToRender==='time'||filterToRender==='category'||filterToRender==='equipment') ? <MagnifyingGlassIcon onClick={()=>executeFilters()} className='search-icon slide-animation'/>:<></>}
+                    {displayFilters &&
+                        <div className='filter-container'>
+                            {renderFilter()}
+                        </div>
+                    }
                 </div>
             }
         </div>
