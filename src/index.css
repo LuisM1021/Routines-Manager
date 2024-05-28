@@ -1,3 +1,14 @@
+:root{
+  --dark-brown: #2E2D02;
+  --apple-green: #B0B725;
+  --apple-green-inactive: #b0b725a8;
+  --burnt-orange: #B3551B;
+  --flame: #E37916;
+  --cerulean: #1D6C86;
+  --cerulean-opacity: #1d6c86c5;
+  --black: #141414;
+  --white: #d8cece;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Poppins', 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,7 +16,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(190, 227, 236);
+  background: linear-gradient(var(--cerulean),var(--dark-brown));
 }
 
 code {
