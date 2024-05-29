@@ -253,13 +253,10 @@ function FilterBar(){
         }
     }
     const textSetTimeInFilters = (data,timerSetted) => {
-        console.log('data: ',data)
-        console.log('type: ',typeof(data))
-        console.log('length: ',data.length)
         if(data === '00'){
             data = null
         }
-        else if(data.length === 2){
+        else if(data && data.length === 2){
             data = data
         }
         else if(parseInt(data)>=0 && parseInt(data)<=59){
