@@ -3,8 +3,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(95, 203, 136);
-    border: 2px solid rgb(86, 19, 19);
+    background-color: var(--cerulean);
+    border: 2px solid var(--dark-brown);
     border-radius: 16px;
     padding: 8px 16px;
     cursor: pointer;
@@ -14,15 +14,26 @@
 .card-container h3{
     margin: 6px 0;
     text-align: center;
-    color: rgb(174, 92, 34);
+    color: var(--dark-brown);
     height: 28%;
 }
 .card-container .routine-description{
     margin:0;
-    font-size: small;
+    font-size: 0.9rem;
     text-align: center;
     height: 52%;
     overflow: auto;
+    color: var(--apple-green);
+}
+.card-container .routine-description::-webkit-scrollbar{
+    width: 12px;
+}
+.card-container .routine-description::-webkit-scrollbar-track{
+    background-color:  var(--cerulean);
+}
+.card-container .routine-description::-webkit-scrollbar-thumb{
+    background: linear-gradient(var(--dark-brown),var(--burnt-orange));
+    border-radius: 10px;
 }
 .detail-container{
     height: 20%;
@@ -32,10 +43,11 @@
     font-size: small;
     text-align: center;
     font-weight: bold;
+    color: var(--dark-brown);
 }
 .detail-container p span{
     margin-left:4px;
-    color: aqua;
+    color:var(--white);
 }
 
 @media all and (min-width:800px) and (max-width: 1024px){

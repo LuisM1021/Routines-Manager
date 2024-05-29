@@ -429,7 +429,7 @@ function FilterBar(){
                              className='category-item'
                              key={index}
                              onClick={()=>handleSelectedCategory(category)}>
-                                <span className={`category-checkbox ${displaySelectedCategory(category)}`}></span><span className='equipment-name'>{category}</span>
+                                <span className={`category-checkbox ${displaySelectedCategory(category)}`}></span><span className='category-name'>{category}</span>
                             </li>
                         ))}
                     </ul>
@@ -469,7 +469,7 @@ function FilterBar(){
     return (
         <div className='filter-bar'>
             <div className='filters-container'>
-                <p onClick={()=>toggleFilterOptions()}>Filter</p>
+                <p className='filter-title' onClick={()=>toggleFilterOptions()}>Filter</p>
                 {displayFilters && 
                     <div className='filters slide-animation'>
                         <button className={`filter-button ${filterBy[0]==='name' && 'active'}`} onClick={()=>handleClick(0)}>Name</button>

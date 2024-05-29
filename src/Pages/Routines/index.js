@@ -36,7 +36,7 @@ function Routines(){
             <div className='routines-container'>
                 {showRoutineDetails && <RoutineDetails/>}
                 <div className='search-routine'>
-                    <h1>Search Routine</h1>
+                    <h1 className='title'>Search Routine</h1>
                 <FilterBar/>  
                     <div className='routine-cards' id='scrollRoutineCards'>
                         {renderRoutines()}

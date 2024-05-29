@@ -45,17 +45,17 @@ function RoutineDetails(){
         }
         else if(time[0]>0){
             return(
-                <span>Time: {time[0]}h {time[1]}m {time[2]}s</span>
+                <span className='title-2'>{time[0]}h {time[1]}m {time[2]}s</span>
             )
         }
         else if(time[0]===0 && time[1]>0){
             return(
-                <span>Time: {time[1]}m {time[2]}s</span>
+                <span className='title-2'>{time[1]}m {time[2]}s</span>
             )
         }
         else if(time[0]===0 && time[1]===0){
             return(
-                <span>Time: {time[2]}s</span>
+                <span className='title-2'>{time[2]}s</span>
             )
         }
     }
@@ -67,10 +67,10 @@ function RoutineDetails(){
                 <PencilSquareIcon className='pencil-square-icon'/>
                 <p className='description'>{routine.description}</p>
                 <div className='category-time'>
-                    <p>Category: {routine.category}</p>
-                    <p>{showTime(routine.timer.totalTime)}</p>
+                    <p>Category:<span className='title-2'> {routine.category}</span></p>
+                    <p>Time: {showTime(routine.timer.totalTime)}</p>
                 </div>
-                <p>Require equipment: {routine.equipment}</p>
+                <p>Require equipment: <span className='title-2'> {routine.equipment}</span></p>
                 <div className='exercises-panel'>
                     <div className='exercises-info'>
                         <h2>{routine.exercises[currentExercise]}</h2>

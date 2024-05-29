@@ -9,17 +9,20 @@
     display: flex;
     position: relative;
 }
+.filter-title{
+    color: var(--dark-brown);
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0;
+}
+.filter-title:hover{
+    color: var(--flame);
+}
 .search-icon{
     width: 20px;
     height: 20px;
     margin-left: 12px;
     cursor: pointer;
-}
-.filter-bar p{
-    color: darkblue;
-    font-weight: bold;
-    cursor: pointer;
-    margin: 0;
 }
 .filter-options-container{
     width: 100%;
@@ -33,11 +36,11 @@
     gap: 4px;
 }
 .filter-bar .filters .filter-button{
-    background-color: skyblue;
-    color: darkblue;
+    background-color: var(--flame);
+    color: var(--dark-brown);
     border-radius: 12px;
     padding: 2px 8px;
-    border: 2px solid darkblue;
+    border: 2px solid var(--dark-brown);
     font-weight: 600;
     cursor: pointer;
 }
@@ -56,7 +59,7 @@
     }
 }
 .filter-bar .filters .active{
-    background-color: aqua;
+    background-color: var(--apple-green);
 }
 .filter-container{
     width: 300px;
@@ -64,10 +67,15 @@
     margin-left: 52px;
 }
 .name-filter{
-    background-color: rgb(204, 247, 218);
+    background-color: var(--apple-green);
     border: none;
+    margin-left: 20px;
     border-radius: 4px;
-    color: darkblue;
+    padding: 2px;
+    color: var(--dark-brown);
+    &::placeholder{
+        color: var(--dark-brown);
+    }
 }
 /* TIME FILTERS */
 .times-container{
@@ -77,7 +85,7 @@
 .inputs-container{
     display: flex;
 }
-.times-container .time-range{
+.time-range{
     width: 48px;
 }
 .min-times-container{
@@ -92,10 +100,12 @@
 }
 .time-value-container{
     display: flex;
-    align-items: flex-end;
+    align-items: baseline;
+    margin: 0;
 }
 .time-value{
-    background-color: rgb(20, 82, 44);
+    background-color: var(--white);
+    color: var(--cerulean);
     width: 16px;
     border: none;
 }
@@ -117,13 +127,14 @@
 .category-item .category-checkbox{
     width: 12px;
     height: 12px;
-    background-color: blueviolet;
+    background-color: var(--burnt-orange);
+    cursor: pointer;
 }
 .category-item .active-category{
-    background-color: red;
+    background-color: var(--apple-green);
 }
 .category-item .category-name{
-
+    color: var(--dark-brown);
 }
 .equipment-filter{
     display: grid;
@@ -143,11 +154,11 @@
 .equipment-item .equipment-checkbox{
     width: 12px;
     height: 12px;
-    background-color: blueviolet;
+    background-color: var(--burnt-orange);
 }
 .equipment-item .active-equipment{
-    background-color: red;
+    background-color: var(--apple-green);
 }
 .equipment-item .equipment-name{
-
+    color: var(--dark-brown);
 }

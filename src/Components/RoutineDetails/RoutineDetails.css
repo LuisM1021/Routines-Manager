@@ -2,7 +2,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: rgba(37, 77, 77,0.5);
+    background-color: var(--black-opacity);
     z-index: 1;
     top: 0;
     display: grid;
@@ -11,7 +11,7 @@
 .routine-details-container{
     width: 475px;
     height: 500px;
-    background-color: rgb(105, 105, 222);
+    background-color: var(--burnt-orange);
     border-radius: 24px;
     z-index: 2;
     display: flex;
@@ -28,6 +28,7 @@
     top: 12px;
     right: 12px;
     cursor: pointer;
+    color: var(--black);
 }
 .pencil-square-icon{
     width: 24px;
@@ -36,6 +37,7 @@
     top: 12px;
     right: 40px;
     cursor: pointer;
+    color: var(--black);
 }
 .plus-circle-icon:hover,
 .pencil-square-icon:hover{
@@ -43,26 +45,30 @@
     height: 28px;
 }
 .routine-details-container h2{
-    color: aquamarine;
+    color: var(--apple-green);
     margin: 0 0 8px 0;
 
 }
 .routine-details-container p{
     text-align: justify;
     font-weight: 500;
+    color: var(--black);
 }
 .routine-details-container .description{
-    font-weight: 100;
+    font-weight:200;
 }
 .routine-details-container .category-time{
     width: 100%;
     display: flex;
     justify-content: space-around;
 }
+.routine-details-container .title-2{
+    color: var(--white);
+}
 .exercises-panel{
     width: 100%;
     height: 200px;
-    background-color: rgb(172, 237, 237);
+    background-color: var(--apple-green);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -77,7 +83,7 @@
 }
 .exercises-info h2{
     text-align: center;
-    color: blueviolet;
+    color: var(--dark-brown);
     margin-top: 4px;
 }
 .exercises-info p{
@@ -95,7 +101,7 @@
 .exercise-image img{
     width: 80%;
     height: 80%;
-    border: 3px solid blue;
+    border: 3px solid var(--cerulean);
     border-radius: 16px;
 }
 .exercise-image .left-arrow{
@@ -106,6 +112,7 @@
     width: 25px;
     height: 25px;
     cursor: pointer;
+    color: var(--flame);
 }
 .exercise-image .right-arrow{
     position: absolute;
@@ -115,4 +122,5 @@
     width: 25px;
     height: 25px;
     cursor: pointer;
+    color: var(--flame);
 }
