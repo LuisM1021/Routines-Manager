@@ -134,8 +134,6 @@ export function loadEquipmentOptions(routines){
 }
 
 export function filterRoutinesByTimeRange (routines,minHrs,minMinutes,minSec,maxHrs,maxMin,maxSec){
-    //La rutina tiene 01:25:48 de tiempo 
-    //el rango es min: 01:20:00 a max:02:18:45
     minHrs = parseInt(minHrs)
     minMinutes = parseInt(minMinutes)
     minSec = parseInt(minSec)
@@ -143,12 +141,13 @@ export function filterRoutinesByTimeRange (routines,minHrs,minMinutes,minSec,max
     maxMin = parseInt(maxMin)
     maxSec = parseInt(maxSec)
     if(minHrs===0 && minMinutes===0 && minSec ===0 && maxHrs===0 && maxMin===0 && maxSec===0) return routines
-    //Conversión a segundos
+    //Transforming to seconds
     let minTotalSecs = (minHrs*60*60) + (minMinutes*60) + minSec
     let maxTotalSecs = (maxHrs*60*60) + (maxMin*60) + maxSec
     const filteredRoutines = routines.filter(routine => {
         let routineTotalSecs = (routine.timer.totalTime[0]*60*60) + (routine.timer.totalTime[1]*60) + routine.timer.totalTime[2]
         if(routineTotalSecs>=minTotalSecs && routineTotalSecs<=maxTotalSecs) return routine
+        else return null
     })
     return filteredRoutines
 }
