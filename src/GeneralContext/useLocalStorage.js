@@ -13,6 +13,7 @@ function useLocalStorage(){
         const item = localStorage.getItem(itemName)
         return(JSON.parse(item))
     }
+    //Initialize routines and add their timers
     React.useEffect(()=>{
         initializeStorage()
         const getRoutines = getItem('routines')

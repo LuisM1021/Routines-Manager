@@ -6,12 +6,20 @@ import Fuse from 'fuse.js';
 const GeneralContext = React.createContext()
 
 function GeneralProvider({children}){
-    //Taking the functions of the useLocalStorage custom hook
+
     const{
-        saveItem,getItem,routines,exercises
+        saveItem,
+        getItem,
+        routines,
+        exercises
     } = useLocalStorage();
+
+    //Selected routine in the featured routines panel
     const [selectedRoutine,setSelectedRoutine] = React.useState(null)
+
     React.useEffect(()=>setSelectedRoutine(routines[0]),[routines[0]])
+    // console.log('ff:',selectedRoutine)
+
     //Random number function 
     const getRandom =(min,max)=>{
         return Math.floor(Math.random()*(max-min))+min
@@ -109,7 +117,7 @@ function GeneralProvider({children}){
                 routinesToSet = routinesToSet.filter(routine => {
                     if(searchByCategory.find(cat => cat === routine.category)){
                         return routine
-                    }
+                    }else return null
                 })
             }
         }
@@ -118,7 +126,7 @@ function GeneralProvider({children}){
                 routinesToSet = routinesToSet.filter(routine => {
                     if(searchByEquipment.find(equip => equip === routine.equipment)){
                         return routine
-                    }
+                    }else return false
                 })
             }
         }
