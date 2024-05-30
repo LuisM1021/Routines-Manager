@@ -1,4 +1,4 @@
-.user-routines-container{
+.user-routines-panel{
     width: 300px;
     height: calc(300px - 8px);
     background-color: var(--white);
@@ -7,35 +7,35 @@
     border-radius: 32px;
     border: 4px solid var(--burnt-orange);
 }
-.user-routines-container h2{
+.user-routines-panel .title-2{
     height: 20%;
     text-align: center;
     margin: 4px 0 8px 0;
     color: var(--dark-brown);
 }
-.user-routines-container ul{
+.user-routines-panel .user-routines-container{
     list-style: none;
     margin: 0 0 6px 0;
     padding: 0;
     height: 60%;
     overflow: auto;
 }
-.user-routines-container ul li{
+.user-routines-panel .user-routines-container .user-routine{
     margin-left: 16px;
     margin-bottom: 4px;
     color: var(--cerulean);
     cursor: pointer;
 }
-.user-routines-container ul li:hover{
+.user-routines-panel .user-routines-container .user-routine:hover{
     color: var(--dark-brown);
 }
-.user-routines-container .add-routine-container{
+.user-routines-panel .add-routine-container{
     display: flex;
     align-items: center;
     align-self: center;
     height: 20%;
 }
-.add-routine-container p{
+.add-routine-container .add-routine{
     margin: 0 8px 0 0;
     color: var(--dark-brown);
     font-weight: bold;
@@ -63,13 +63,13 @@
 }
 
 @media all and (min-width:800px) and (max-width:1024px){
-    .user-routines-container{
+    .user-routines-panel{
         width: 200px;
     }
-    .user-routines-container ul{
+    .user-routines-panel .user-routines-container{
         text-align: center;
     }
-    .user-routines-container ul li{
+    .user-routines-panel .user-routines-container .user-routine{
         margin-left: 0;
     }
 }
