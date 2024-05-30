@@ -7,29 +7,29 @@
     display: flex;
     flex-direction: column;
 }
-.user-activity-container h2{
+.user-activity-container .title-2{
     text-align: center;
     margin: 4px 0 0 0;
     color: var(--dark-brown);
 }
-.activity-container{
+.user-activity-container .activity-container{
     display: flex;
     width: 100%;
     justify-content: space-around;
     height: 100%;
 }
-.activity-container figure{
+.user-activity-container .activity-container .activity-chart-container{
     display: flex;
     align-items: center;
     justify-content: center;
     align-self: center;
 }
-.activity-container figure p{
+.user-activity-container .activity-container .activity-chart-container .activity-chart-title{
     margin: 0;
     font-weight: 600;
     color: var(--white);
 }
-.activity-container figure{
+.user-activity-container .activity-container .activity-chart-container{
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -39,20 +39,20 @@
     border-radius: 32px;
     border: 4px solid var(--dark-brown);
 }
-.user-data-container{
+.user-activity-container .user-data-container{
     display: flex; 
     flex-direction: column;
     height: 100%;
     gap: 16px;
     margin-top: 24px;
 }
-.user-data-container p{
+.user-activity-container .user-data-container .user-data{
     margin: 0;
     color: var(--cerulean);
     font-weight: 500;
     
 }
-.user-data-container p span:hover{
+.user-activity-container .user-data-container .user-data .data-value:hover{
     color: var(--dark-brown);
     cursor: pointer;
 }
@@ -61,13 +61,16 @@
     .user-activity-container{
         width: 350px;
     }
-    .activity-container figure{
+    .user-activity-container .activity-container .activity-chart-container{
         width: auto;
         height: auto;
         background-color: transparent;
         border: none;
     }
-    .user-data-container p{
+    .user-activity-container .activity-container .activity-chart-container .activity-chart-title{
+        display: none;
+    }
+    .user-activity-container .user-data-container .user-data{
         display: flex;
         flex-direction: column;
         text-align: center;

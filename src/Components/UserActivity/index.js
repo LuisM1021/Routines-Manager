@@ -1,5 +1,5 @@
-import './UserActivity.css'
 import {PieChart,Pie,Tooltip} from 'recharts'
+import './UserActivity.css'
 
 function UserActivity(){
     const data01 = [
@@ -18,10 +18,10 @@ function UserActivity(){
         ];
     return(
         <div className='user-activity-container'>
-            <h2>Activity</h2>
+            <h2 className='title-2'>Activity</h2>
             <div className='activity-container'>
-                <figure>
-                    <p>Last routines</p>
+                <figure className='activity-chart-container'>
+                    <p className='activity-chart-title'>Last routines</p>
                     <PieChart width={150} height={150}>
                         <Pie 
                         data={data01} 
@@ -36,9 +36,9 @@ function UserActivity(){
                     </PieChart>
                 </figure>
                 <div className='user-data-container'>
-                    <p>Current streak: <span>3</span></p>
-                    <p>Favorite routine: <span>Routine 3</span></p>
-                    <p>Favorite exercise: <span>Crunches</span></p>
+                    <p className='user-data'>Current streak: <span className='data-value'>3</span></p>
+                    <p className='user-data'>Favorite routine: <span className='data-value'>Routine 3</span></p>
+                    <p className='user-data'>Favorite exercise: <span className='data-value'>Crunches</span></p>
                 </div>
             </div>
         </div>
