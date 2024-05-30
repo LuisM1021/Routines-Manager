@@ -1,9 +1,8 @@
 import React from 'react'
 import {useRoutes,BrowserRouter} from 'react-router-dom'
-import { Home } from '../Pages/Home';
-import { Routines } from '../Pages/Routines';
+import { Home } from '../Pages/Home'
+import { Routines } from '../Pages/Routines'
 import { Navbar } from "../Components/Navbar"
-import './App.css';
 
 const AppRoutes = () => {
     const routes = useRoutes([
