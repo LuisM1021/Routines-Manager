@@ -21,7 +21,7 @@
     background: linear-gradient(var(--apple-green),var(--cerulean));
     border-radius: 10px;
 }
-.Navbar-container img{
+.Navbar-container .logo{
     width: 160px;
     height: 160px;
     align-self: center;
@@ -30,28 +30,28 @@
     margin-bottom: 16px;
     border: 4px solid var(--dark-brown);
 }
-.redirect{
+.Navbar-container .redirect{
     text-decoration: none;
 }
-.Navbar-container div{
+.Navbar-container .redirect .page-container{
     width: 100%;
     height: 64px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.Navbar-container div p{
+.Navbar-container .redirect .page-container .page{
     font-size: large;
     font-weight: 600;
     color: var(--dark-brown);
     cursor: pointer;
     margin: 0;
 }
-.Navbar-container div:hover>p{
+.Navbar-container .redirect .page-container:hover>p{
     color:  var(--apple-green);
     font-size: x-large;
 }
-.Navbar-container div:hover{
+.Navbar-container .redirect .page-container:hover{
     background-color: var(--burnt-orange);
     border-top: 2px solid var(--dark-brown);
     border-bottom: 2px solid var(--dark-brown);
