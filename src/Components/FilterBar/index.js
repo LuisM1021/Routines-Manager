@@ -38,17 +38,22 @@ function FilterBar(){
     //Categories that are selected to be filtered
     const [checkedCategory,setCheckedCategory] = useState([])
 
-    //Categories that are selected to be filtered
+    //Equipment options that are selected to be filtered
     const [checkedEquipment,setCheckedEquipment] = useState([])
 
+    //Indicates if timeFilter is currently being applied
     const [timeFilterActive,setTimeFilterActive] = useState(false)
+
+    //Indicates if categoryFilter is currently being applied
     const [categoryFilterActive,setCategoryFilterActive] = useState(false)
+
+    //Indicates if equipmentFilter is currently being applied
     const [equipmentFilterActive,setEquipmentFilterActive] = useState(false)
     
     //To display the filter options when clicking filter button
     const [displayFilters,setDisplayFilters] = useState(false)
 
-    const handleClick = (indicator) => {
+    const selectFilter = (indicator) => {
         const currentFilterBy = [...filterBy]
         switch(indicator){
             case 0:
@@ -101,7 +106,9 @@ function FilterBar(){
                         setMaxMin('00')
                         setMaxSec('00')
                     }
-                    if(searchByName==='') currentFilterBy[0] = null
+                    if(searchByName===''){
+                        currentFilterBy[0] = null
+                    } 
                     if(!categoryFilterActive){
                         currentFilterBy[2] = null
                         setCheckedCategory([])
@@ -122,8 +129,12 @@ function FilterBar(){
                 }else{
                     currentFilterBy[indicator] = 'category' 
                     setFilterToRender('category')
-                    if(!categoryFilterActive) setCheckedCategory([])
-                    else setCheckedCategory(searchByCategory)
+                    if(!categoryFilterActive){
+                        setCheckedCategory([])
+                    } 
+                    else{
+                        setCheckedCategory(searchByCategory)
+                    }
                     if(searchByName==='') currentFilterBy[0] = null
                     if(!timeFilterActive){
                         currentFilterBy[1] = null
@@ -150,9 +161,15 @@ function FilterBar(){
                 }else{
                     currentFilterBy[indicator] = 'equipment' 
                     setFilterToRender('equipment')
-                    if(!equipmentFilterActive) setCheckedEquipment([])
-                    else setCheckedEquipment(searchByEquipment)
-                    if(searchByName==='') currentFilterBy[0] = null
+                    if(!equipmentFilterActive){
+                        setCheckedEquipment([])
+                    } 
+                    else{
+                        setCheckedEquipment(searchByEquipment)
+                    } 
+                    if(searchByName===''){
+                        currentFilterBy[0] = null   
+                    } currentFilterBy[0] = null
                     if(!timeFilterActive){
                         currentFilterBy[1] = null
                         setMinHrs('00')
@@ -168,6 +185,7 @@ function FilterBar(){
                     } 
                 }
             break
+            default: break;
         }
         setFilterBy(currentFilterBy)
     }
@@ -178,21 +196,30 @@ function FilterBar(){
             setCategoryFilterActive(true)
         }
 
-        if (checkedEquipment.length === 0) setEquipmentFilterActive(false)
-        else setEquipmentFilterActive(true)
-        if(minHrs === '00' && minMinutes === '00' && minSec === '00' && maxHrs === '00' && maxMin === '00' && maxSec === '00') setTimeFilterActive(false)
-        else setTimeFilterActive(true)
+        if (checkedEquipment.length === 0){
+            setEquipmentFilterActive(false)   
+        }else{
+            setEquipmentFilterActive(true)
+        } 
+        if(minHrs === '00' && minMinutes === '00' && minSec === '00' && maxHrs === '00' && maxMin === '00' && maxSec === '00'){
+            setTimeFilterActive(false)
+        }
+        else{
+            setTimeFilterActive(true)
+        } 
         setSearchByCategory(checkedCategory)
         setSearchByEquipment(checkedEquipment)
         setExecuteFilters(true)
     }
-    const handleChange = (event) => {
+    const changeName = (event) => {
         setSearchByName(event.target.value)
     }
 
     const rangeSetTimeInFilters = (event,timerSetted) => {
         let value = event.target.value
-        if(value<=9) value = '0'+value
+        if(value<=9){
+            value = '0'+value
+        } 
         switch(timerSetted){
             case 'MIN_HRS':
                 setMinHrs(value) 
@@ -257,20 +284,26 @@ function FilterBar(){
             data = null
         }
         else if(data && data.length === 2){
-            data = data
+            //no action
         }
         else if(parseInt(data)>=0 && parseInt(data)<=59){
-            data = data
+            //no action
         } 
         else {
             data = null
         }
         let newTime
-        if(data === null) newTime = '00'
+        if(data === null){
+            newTime = '00'
+        } 
         switch(timerSetted){
             case 'MIN_HRS':
-                    if(data) newTime = `${minHrs[1]}${data}`
-                    if(newTime>23) newTime = '23'
+                    if(data){
+                        newTime = `${minHrs[1]}${data}`
+                    } 
+                    if(newTime>23){
+                        newTime = '23'
+                    }
                     setMinHrs(newTime)
                     if(newTime>=maxHrs){
                         setMaxHrs(newTime)
@@ -283,8 +316,12 @@ function FilterBar(){
                     }
                     break
                 case 'MIN_MINUTES':
-                    if(data) newTime = `${minMinutes[1]}${data}`
-                    if(newTime>59) newTime = '59'
+                    if(data){
+                        newTime = `${minMinutes[1]}${data}`
+                    } 
+                    if(newTime>59){
+                        newTime = '59'
+                    }
                     setMinMinutes(newTime)
                     if(minHrs === maxHrs && newTime>=maxMin){
                         setMaxMin(newTime)
@@ -294,16 +331,24 @@ function FilterBar(){
                     }
                     break
                 case 'MIN_SEC':
-                    if(data) newTime = `${minSec[1]}${data}`
-                    if(newTime>59) newTime = '59'
+                    if(data){
+                        newTime = `${minSec[1]}${data}`
+                    } 
+                    if(newTime>59){
+                        newTime = '59'
+                    } 
                     setMinSec(newTime)
                     if(minHrs === maxHrs && minMinutes === maxMin && newTime>maxSec){
                         setMaxSec(newTime)
                     }
                     break
                 case 'MAX_HRS':
-                    if(data && data.length === 2) newTime = data
-                    else if(data) newTime = `${maxHrs[1]}${data}`
+                    if(data && data.length === 2){
+                        newTime = data
+                    } 
+                    else if(data){
+                        newTime = `${maxHrs[1]}${data}`
+                    } 
                     if(newTime>23) newTime = '23'
                     setMaxHrs(newTime)
                     if(newTime<=minHrs){
@@ -317,8 +362,12 @@ function FilterBar(){
                     }
                     break
                 case 'MAX_MIN':
-                    if(data && data.length === 2) newTime = data
-                    else if(data) newTime = `${maxMin[1]}${data}`
+                    if(data && data.length === 2){
+                        newTime = data
+                    } 
+                    else if(data){
+                        newTime = `${maxMin[1]}${data}`
+                    } 
                     if(newTime>59) newTime = '59'
                     setMaxMin(newTime)
                     if(maxHrs === minHrs && newTime<=minMinutes){
@@ -329,9 +378,15 @@ function FilterBar(){
                     }
                     break
                 case 'MAX_SEC':
-                    if(data && data.length === 2) newTime = data
-                    else if(data) newTime = `${maxSec[1]}${data}`
-                    if(newTime>59) newTime = '59'
+                    if(data && data.length === 2){
+                        newTime = data
+                    } 
+                    else if(data){
+                        newTime = `${maxSec[1]}${data}`
+                    } 
+                    if(newTime>59){
+                        newTime = '59'
+                    } 
                     setMaxSec(newTime)
                     if(maxHrs === minHrs && maxMin === minMinutes && newTime<minSec){
                         setMinSec(newTime)
@@ -346,7 +401,7 @@ function FilterBar(){
         const searchCategory = checkedCategory.find(cat => cat === category)
         if(searchCategory){
             //Removing the selected category
-            setCheckedCategory((checkedCategory) => checkedCategory.filter((cat => cat!=category)))
+            setCheckedCategory((checkedCategory) => checkedCategory.filter((cat => cat!==category)))
         }else{
             setCheckedCategory((checkedCategory) => ([...checkedCategory,category]))   
         }
@@ -362,7 +417,7 @@ function FilterBar(){
         const searchEquipment = checkedEquipment.find(equip => equip === equipment)
         if(searchEquipment){
             //Removing the selected category
-            setCheckedEquipment((checkedEquipment) => checkedEquipment.filter((equip => equip!=equipment)))
+            setCheckedEquipment((checkedEquipment) => checkedEquipment.filter((equip => equip!==equipment)))
         }else{
             setCheckedEquipment((checkedEquipment) => ([...checkedEquipment,equipment]))   
         }
@@ -382,37 +437,109 @@ function FilterBar(){
                     type='text' 
                     placeholder='default routine' 
                     value={(searchByName!==null || searchByName!=='')&&searchByName} 
-                    onChange={(event)=>handleChange(event)}/>
+                    onChange={(event)=>changeName(event)}/>
                 ) 
             case 'time':
                 return (
                     <div className='times-container slide-animation'>
                         <div className='min-times-container'>
                             <div className='inputs-container'>
-                                <input className='time-range' name='min-hrs' value={minHrs} type='range' min='0' max='23' step='1' onChange={(event)=>rangeSetTimeInFilters(event,'MIN_HRS')}/>
-                                <input className='time-range' name='min-min' value={minMinutes} type='range' min='0' max='59' step='1' onChange={(event)=>rangeSetTimeInFilters(event,'MIN_MINUTES')}/>
-                                <input className='time-range' name='min-seg' value={minSec} type='range' min='0' max='59' step='1' onChange={(event)=>rangeSetTimeInFilters(event,'MIN_SEC')}/>
+                                <input
+                                className='time-range'
+                                name='min-hrs' 
+                                value={minHrs} 
+                                type='range' 
+                                min='0' 
+                                max='23' 
+                                step='1' 
+                                onChange={(event)=>rangeSetTimeInFilters(event,'MIN_HRS')}/>
+                                <input 
+                                className='time-range' 
+                                name='min-min' 
+                                value={minMinutes} 
+                                type='range' 
+                                min='0' 
+                                max='59' 
+                                step='1' 
+                                onChange={(event)=>rangeSetTimeInFilters(event,'MIN_MINUTES')}/>
+                                <input 
+                                className='time-range' 
+                                name='min-seg' 
+                                value={minSec} 
+                                type='range' 
+                                min='0' 
+                                max='59' 
+                                step='1' 
+                                onChange={(event)=>rangeSetTimeInFilters(event,'MIN_SEC')}/>
                             </div>
                             <p className='time-value-container'>
-                                <input className='time-value' onClick={()=>textSetTimeInFilters('00','MIN_HRS')} value={`${minHrs}`} onChange={(event)=>textSetTimeInFilters(event.nativeEvent.data,'MIN_HRS')}/>
+                                <input 
+                                className='time-value' 
+                                onClick={()=>textSetTimeInFilters('00','MIN_HRS')} 
+                                value={`${minHrs}`} 
+                                onChange={(event)=>textSetTimeInFilters(event.nativeEvent.data,'MIN_HRS')}/>
                                 <span>:</span>
-                                <input className='time-value' onClick={()=>textSetTimeInFilters('00','MIN_MINUTES')} value={`${minMinutes}`} onChange={(event)=>textSetTimeInFilters(event.nativeEvent.data,'MIN_MINUTES')}/>
+                                <input 
+                                className='time-value' 
+                                onClick={()=>textSetTimeInFilters('00','MIN_MINUTES')} 
+                                value={`${minMinutes}`} 
+                                onChange={(event)=>textSetTimeInFilters(event.nativeEvent.data,'MIN_MINUTES')}/>
                                 <span>:</span>
-                                <input className='time-value' onClick={()=>textSetTimeInFilters('00','MIN_SEC')} value={`${minSec}`} onChange={(event)=>textSetTimeInFilters(event.nativeEvent.data,'MIN_SEC')}/>
+                                <input 
+                                className='time-value' 
+                                onClick={()=>textSetTimeInFilters('00','MIN_SEC')} 
+                                value={`${minSec}`} 
+                                onChange={(event)=>textSetTimeInFilters(event.nativeEvent.data,'MIN_SEC')}/>
                             </p>
                         </div>
                         <div className='max-times-container'>
                             <div className='inputs-container'>
-                                <input className='time-range' name='max-hrs' value={maxHrs} type='range' min='0' max='23' step='1' onChange={(event)=>rangeSetTimeInFilters(event,'MAX_HRS')}/>
-                                <input className='time-range' name='max-min' value={maxMin} type='range' min='0' max='59' step='1' onChange={(event)=>rangeSetTimeInFilters(event,'MAX_MIN')}/>
-                                <input className='time-range' name='max-seg' value={maxSec} type='range' min='0' max='59' step='1' onChange={(event)=>rangeSetTimeInFilters(event,'MAX_SEC')}/>
+                                <input 
+                                className='time-range' 
+                                name='max-hrs' 
+                                value={maxHrs} 
+                                type='range' 
+                                min='0' 
+                                max='23' 
+                                step='1' 
+                                onChange={(event)=>rangeSetTimeInFilters(event,'MAX_HRS')}/>
+                                <input 
+                                className='time-range' 
+                                name='max-min' 
+                                value={maxMin} 
+                                type='range' 
+                                min='0' 
+                                max='59' 
+                                step='1' 
+                                onChange={(event)=>rangeSetTimeInFilters(event,'MAX_MIN')}/>
+                                <input 
+                                className='time-range' 
+                                name='max-seg' 
+                                value={maxSec} 
+                                type='range' 
+                                min='0' 
+                                max='59' 
+                                step='1' 
+                                onChange={(event)=>rangeSetTimeInFilters(event,'MAX_SEC')}/>
                             </div>
                             <p className='time-value-container'>
-                                <input className='time-value' onClick={()=>textSetTimeInFilters(minHrs,'MAX_HRS')} value={`${maxHrs}`} onChange={(event)=>textSetTimeInFilters(event.nativeEvent.data,'MAX_HRS')}/>
+                                <input 
+                                className='time-value' 
+                                onClick={()=>textSetTimeInFilters(minHrs,'MAX_HRS')} 
+                                value={`${maxHrs}`} 
+                                onChange={(event)=>textSetTimeInFilters(event.nativeEvent.data,'MAX_HRS')}/>
                                 <span>:</span>
-                                <input className='time-value' onClick={()=>textSetTimeInFilters(minMinutes,'MAX_MIN')} value={`${maxMin}`} onChange={(event)=>textSetTimeInFilters(event.nativeEvent.data,'MAX_MIN')}/>
+                                <input 
+                                className='time-value' 
+                                onClick={()=>textSetTimeInFilters(minMinutes,'MAX_MIN')} 
+                                value={`${maxMin}`} 
+                                onChange={(event)=>textSetTimeInFilters(event.nativeEvent.data,'MAX_MIN')}/>
                                 <span>:</span>
-                                <input className='time-value' onClick={()=>textSetTimeInFilters(minSec,'MAX_SEC')} value={`${maxSec}`} onChange={(event)=>textSetTimeInFilters(event.nativeEvent.data,'MAX_SEC')}/>
+                                <input 
+                                className='time-value' 
+                                onClick={()=>textSetTimeInFilters(minSec,'MAX_SEC')} 
+                                value={`${maxSec}`} 
+                                onChange={(event)=>textSetTimeInFilters(event.nativeEvent.data,'MAX_SEC')}/>
                             </p>
                         </div>
                     </div>
@@ -423,10 +550,13 @@ function FilterBar(){
                     <ul className='categories-filter slide-animation'>
                         {availableCategories?.map((category,index) => (
                             <li 
-                             className='category-item'
-                             key={index}
-                             onClick={()=>handleSelectedCategory(category)}>
-                                <span className={`category-checkbox ${displaySelectedCategory(category)}`}></span><span className='category-name'>{category}</span>
+                            className='category-item'
+                            key={index}
+                            onClick={()=>handleSelectedCategory(category)}>
+                                <span className={`category-checkbox ${displaySelectedCategory(category)}`}></span>
+                                <span className='category-name'>
+                                    {category}
+                                </span>
                             </li>
                         ))}
                     </ul>
@@ -440,7 +570,10 @@ function FilterBar(){
                              className='equipment-item'
                              key={index}
                              onClick={()=>handleSelectedEquipment(equipment)}>
-                                <span className={`equipment-checkbox ${displaySelectedEquipment(equipment)}`}></span><span className='category-name'>{equipment}</span>
+                                <span className={`equipment-checkbox ${displaySelectedEquipment(equipment)}`}></span>
+                                <span className='category-name'>
+                                    {equipment}
+                                </span>
                             </li>
                         ))}
                     </ul>
@@ -466,19 +599,44 @@ function FilterBar(){
     return (
         <div className='filter-bar'>
             <div className='filters-container'>
-                <p className='filter-title' onClick={()=>toggleFilterOptions()}>Filter</p>
+                <p 
+                className='filter-title' 
+                onClick={()=>toggleFilterOptions()}>
+                    Filter
+                </p>
                 {displayFilters && 
                     <div className='filters slide-animation'>
-                        <button className={`filter-button ${filterBy[0]==='name' && 'active'}`} onClick={()=>handleClick(0)}>Name</button>
-                        <button className={`filter-button ${filterBy[1]==='time' && 'active'}`} onClick={()=>handleClick(1)}>Time</button>
-                        <button className={`filter-button ${filterBy[2]==='category' && 'active'}`} onClick={()=>handleClick(2)}>Category</button>
-                        <button className={`filter-button ${filterBy[3]==='equipment' && 'active'}`} onClick={()=>handleClick(3)}>Require equipment</button>
+                        <button 
+                        className={`filter-button ${filterBy[0]==='name' && 'active'}`} 
+                        onClick={()=>selectFilter(0)}>
+                            Name
+                        </button>
+                        <button 
+                        className={`filter-button ${filterBy[1]==='time' && 'active'}`} 
+                        onClick={()=>selectFilter(1)}>
+                            Time
+                        </button>
+                        <button 
+                        className={`filter-button ${filterBy[2]==='category' && 'active'}`} 
+                        onClick={()=>selectFilter(2)}>
+                            Category
+                        </button>
+                        <button 
+                        className={`filter-button ${filterBy[3]==='equipment' && 'active'}`} 
+                        onClick={()=>selectFilter(3)}>
+                            Require equipment
+                        </button>
                     </div>  
                 }
             </div>
             {(displayFilters && filterToRender) &&
                 <div className='filter-options-container'>
-                    {displayFilters && (filterToRender==='time'||filterToRender==='category'||filterToRender==='equipment') ? <MagnifyingGlassIcon onClick={()=>executeFilters()} className='search-icon slide-animation'/>:<></>}
+                    {displayFilters && (filterToRender==='time'||filterToRender==='category'||filterToRender==='equipment') ? 
+                    <MagnifyingGlassIcon 
+                    onClick={()=>executeFilters()} 
+                    className='search-icon slide-animation'/>
+                    :
+                    <></>}
                     {displayFilters &&
                         <div className='filter-container'>
                             {renderFilter()}

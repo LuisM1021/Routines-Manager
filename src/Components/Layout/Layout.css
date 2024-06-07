@@ -1,6 +1,4 @@
 .layout{
-    /* display: grid;
-    place-items: center; */
     height: calc(100vh - 48px);
     padding: 24px;
     position: relative;
