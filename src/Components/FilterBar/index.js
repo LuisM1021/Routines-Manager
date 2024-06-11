@@ -571,7 +571,7 @@ function FilterBar(){
                              key={index}
                              onClick={()=>handleSelectedEquipment(equipment)}>
                                 <span className={`equipment-checkbox ${displaySelectedEquipment(equipment)}`}></span>
-                                <span className='category-name'>
+                                <span className='equipment-name'>
                                     {equipment}
                                 </span>
                             </li>
