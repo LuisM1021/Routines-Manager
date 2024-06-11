@@ -2,25 +2,30 @@ import './RoutineDetails.css'
 import { GeneralContext } from '../../GeneralContext'
 import { useContext,useState } from 'react'
 import { ArrowRightCircleIcon,ArrowLeftCircleIcon,PencilSquareIcon,PlusCircleIcon } from '@heroicons/react/24/outline'
+
 function RoutineDetails(){
     const {
         setShowRoutineDetails,
         selectedRoutineDetails: routine,
         exercises
     } = useContext(GeneralContext)
+
+    //Storing the index of the current exercise
+    const [currentExercise,setCurrentExercise] = useState(0)
+
     const hideRoutineDetails=(event)=>{
         if(event.target.className ==='background'){
             setShowRoutineDetails(false)
         }
     }
-    //Storing the index of the current exercise
-    const [currentExercise,setCurrentExercise] = useState(0)
+
     const getExercisePath = ()=>{
         let path
         const exercise = exercises?.filter(exercise=>exercise.name === routine.exercises[currentExercise])
         path = exercise[0].imgPath
         return path
     }
+
     const changeExercise = (direction) => {
         const lengthOfRoutineExercises = routine.exercises.length
         if(direction === 'left'){
@@ -62,28 +67,77 @@ function RoutineDetails(){
     return(
         <div className='background' onClick={(event)=>hideRoutineDetails(event)}>
             <div className='routine-details-container'>
-                <h2>{routine.name}</h2>
+                <h2 className='routine-name'>
+                    {routine.name}
+                </h2>
                 <PlusCircleIcon className='plus-circle-icon'/>
                 <PencilSquareIcon className='pencil-square-icon'/>
-                <p className='description'>{routine.description}</p>
+                <p className='description'>
+                    {routine.description}
+                </p>
                 <div className='category-time'>
-                    <p>Category:<span className='title-2'> {routine.category}</span></p>
-                    <p>Time: {showTime(routine.timer.totalTime)}</p>
+                    <p className='category-info'>
+                        <span>
+                            Category:
+                        </span>
+                        <span>
+                             {routine.category}
+                        </span>
+                    </p>
+                    <p className='time-info'>
+                        <span>
+                            Time:
+                        </span>
+                            {showTime(routine.timer.totalTime)}
+                    </p>
                 </div>
-                <p>Require equipment: <span className='title-2'> {routine.equipment}</span></p>
+                <p className='require-equipment'>
+                    <span>
+                        Require equipment:
+                    </span>
+                    <span>
+                        {routine.equipment}
+                    </span>
+                </p>
                 <div className='exercises-panel'>
                     <div className='exercises-info'>
-                        <h2>{routine.exercises[currentExercise]}</h2>
-                        <p>Series: {routine.series[currentExercise]}</p>
-                        <p>Reps: {routine.reps[currentExercise]}</p>
-                        <p>{showTime(routine.time[currentExercise])}</p>
+                        <h2>
+                            {routine.exercises[currentExercise]}
+                        </h2>
+                        <p>
+                            <span>
+                                Series:
+                            </span>
+                            <span>
+                                {routine.series[currentExercise]}
+                            </span>
+                        </p>
+                        <p>
+                            <span>
+                                Reps:
+                            </span>
+                            <span>
+                                {routine.reps[currentExercise]}
+                            </span>
+                        </p>
+                        <p>
+                            {showTime(routine.time[currentExercise])}
+                        </p>
                     </div>
-                    <figure className='exercise-image'>
-                        <ArrowLeftCircleIcon className='left-arrow'
-                        onClick={()=>changeExercise('left')}/>
-                        <ArrowRightCircleIcon className='right-arrow'
-                        onClick={()=>changeExercise('right')}/>
-                        <img src={getExercisePath()} alt={routine.exercises[currentExercise]}></img>
+                    <figure className='exercise-image-container'>
+                        <ArrowLeftCircleIcon
+                         className='left-arrow'
+                         onClick={()=>changeExercise('left')}
+                        />
+                        <ArrowRightCircleIcon
+                         className='right-arrow'
+                         onClick={()=>changeExercise('right')}
+                        />
+                        <img 
+                         className='exercise-image'
+                         src={getExercisePath()} 
+                         alt={routine.exercises[currentExercise]}
+                        />
                     </figure>
                 </div>
             </div>

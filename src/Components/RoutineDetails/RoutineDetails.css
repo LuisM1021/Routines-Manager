@@ -8,7 +8,7 @@
     display: grid;
     place-items: center;
 }
-.routine-details-container{
+.background .routine-details-container{
     width: 475px;
     height: 500px;
     background-color: var(--burnt-orange);
@@ -20,8 +20,12 @@
     justify-content: space-between;
     padding: 16px 24px;
     position: relative;
+    }
+.background .routine-details-container .routine-name{
+    color: var(--apple-green);
+    margin: 0 0 8px 0;
 }
-.plus-circle-icon{
+.background .routine-details-container .plus-circle-icon{
     width: 24px;
     height: 24px;
     position: absolute;
@@ -30,7 +34,7 @@
     cursor: pointer;
     color: var(--black);
 }
-.pencil-square-icon{
+.background .routine-details-container .pencil-square-icon{
     width: 24px;
     height: 24px;
     position: absolute;
@@ -39,33 +43,50 @@
     cursor: pointer;
     color: var(--black);
 }
-.plus-circle-icon:hover,
-.pencil-square-icon:hover{
+.background .routine-details-container .plus-circle-icon:hover,
+.background .routine-details-container .pencil-square-icon:hover{
     width: 28px;
     height: 28px;
 }
-.routine-details-container h2{
-    color: var(--apple-green);
-    margin: 0 0 8px 0;
-
-}
-.routine-details-container p{
-    text-align: justify;
-    font-weight: 500;
-    color: var(--black);
-}
-.routine-details-container .description{
+.background .routine-details-container .description{
     font-weight:200;
 }
-.routine-details-container .category-time{
+.background .routine-details-container .category-time{
     width: 100%;
     display: flex;
     justify-content: space-around;
 }
-.routine-details-container .title-2{
+.background .routine-details-container .category-time .category-info{
+    display: flex;
+    gap: 4px;
+}
+.background .routine-details-container .category-time .category-info span:nth-child(1){
+    color: var(--black);
+}
+.background .routine-details-container .category-time .category-info span:nth-child(2){
     color: var(--white);
 }
-.exercises-panel{
+.background .routine-details-container .category-time .time-info{
+    display: flex;
+    gap: 4px;
+}
+.background .routine-details-container .category-time .time-info span:nth-child(1){
+    color: var(--black);
+}
+.background .routine-details-container .category-time .time-info span:nth-child(2){
+    color: var(--white);
+}
+.background .routine-details-container .require-equipment{
+    display: flex;
+    gap: 4px;
+}
+.background .routine-details-container .require-equipment span:nth-child(1){
+    color: var(--black);
+}
+.background .routine-details-container .require-equipment span:nth-child(2){
+    color: var(--white);
+}
+.background .routine-details-container .exercises-panel{
     width: 100%;
     height: 200px;
     background-color: var(--apple-green);
@@ -74,22 +95,38 @@
     justify-content: space-between;
     border-radius: 16px;
 }
-.exercises-info{
+.background .routine-details-container .exercises-panel .exercises-info{
     width: 50%;
     height: 200px;
     display: flex;
     flex-direction: column;
     margin-left: 8px;
 }
-.exercises-info h2{
+.background .routine-details-container .exercises-panel .exercises-info h2:nth-child(1){
     text-align: center;
     color: var(--dark-brown);
     margin-top: 4px;
 }
-.exercises-info p{
+.background .routine-details-container .exercises-panel .exercises-info p{
     margin: 4px 0;
 }
-.exercise-image{
+.background .routine-details-container .exercises-panel .exercises-info p:nth-child(2),
+.background .routine-details-container .exercises-panel .exercises-info p:nth-child(3){
+    display: flex;
+    gap: 4px;
+}
+.background .routine-details-container .exercises-panel .exercises-info p:nth-child(2) span:nth-child(1),
+.background .routine-details-container .exercises-panel .exercises-info p:nth-child(3) span:nth-child(1){
+    color: var(--dark-brown);
+}
+.background .routine-details-container .exercises-panel .exercises-info p:nth-child(2) span:nth-child(2),
+.background .routine-details-container .exercises-panel .exercises-info p:nth-child(3) span:nth-child(2){
+    color: var(--cerulean);
+}
+.background .routine-details-container .exercises-panel .exercises-info p:nth-child(4){
+    color: var(--cerulean);
+}
+.background .routine-details-container .exercises-panel .exercise-image-container{
     width: 50%;
     height: 100%;
     display: flex;
@@ -98,13 +135,7 @@
     justify-content: center;
     align-items: center;
 }
-.exercise-image img{
-    width: 80%;
-    height: 80%;
-    border: 3px solid var(--cerulean);
-    border-radius: 16px;
-}
-.exercise-image .left-arrow{
+.background .routine-details-container .exercises-panel .exercise-image-container .left-arrow{
     position: absolute;
     left: 20px;
     top: 50%;
@@ -114,7 +145,7 @@
     cursor: pointer;
     color: var(--flame);
 }
-.exercise-image .right-arrow{
+.background .routine-details-container .exercises-panel .exercise-image-container .right-arrow{
     position: absolute;
     right: 20px;
     top: 50%;
@@ -123,4 +154,10 @@
     height: 25px;
     cursor: pointer;
     color: var(--flame);
+}
+.background .routine-details-container .exercises-panel .exercise-image-container .exercise-image{
+    width: 80%;
+    height: 80%;
+    border: 3px solid var(--cerulean);
+    border-radius: 16px;
 }
