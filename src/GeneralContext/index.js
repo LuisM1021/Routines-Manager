@@ -1,9 +1,9 @@
-import React, { useState,useEffect } from 'react';
+import { useState,useEffect,createContext } from 'react';
 import { useLocalStorage } from './useLocalStorage';
 import { loadAvailableCategories,loadEquipmentOptions,filterRoutinesByTimeRange } from '../Utils';
 import Fuse from 'fuse.js';
 
-const GeneralContext = React.createContext()
+const GeneralContext = createContext()
 
 function GeneralProvider({children}){
 
@@ -15,19 +15,13 @@ function GeneralProvider({children}){
     } = useLocalStorage();
 
     //Selected routine in the featured routines panel
-    const [selectedRoutine,setSelectedRoutine] = React.useState(null)
+    const [selectedRoutine,setSelectedRoutine] = useState(null)
 
-    React.useEffect(()=>setSelectedRoutine(routines[0]),[routines[0]])
-    // console.log('ff:',selectedRoutine)
-
-    //Random number function 
-    const getRandom =(min,max)=>{
-        return Math.floor(Math.random()*(max-min))+min
-    }
     //Routines: Show routine details
-    const [showRoutineDetails,setShowRoutineDetails] = React.useState(false)
+    const [showRoutineDetails,setShowRoutineDetails] = useState(false)
+    
     //Routines: Save selected routine data
-    const [selectedRoutineDetails,setSelectedRoutineDetails] = React.useState({})
+    const [selectedRoutineDetails,setSelectedRoutineDetails] = useState({})
     
     //Available categories according to the list of routines
     const [availableCategories,setAvailableCategories] = useState(null)
@@ -37,15 +31,6 @@ function GeneralProvider({children}){
 
     //Filtered routines 
     const [filteredRoutines,setFilteredRoutines] = useState([])
-
-    useEffect(()=>{
-        setFilteredRoutines(routines)
-    },[routines])
-
-    useEffect(()=>{
-        setAvailableCategories(loadAvailableCategories(routines))
-        setEquipmentOptions(loadEquipmentOptions(routines))
-    },[routines])
 
     //filter by 
     const [filterBy,setFilterBy] = useState([null,null,null,null])
@@ -69,45 +54,34 @@ function GeneralProvider({children}){
 
     const [executeFilters,setExecuteFilters] = useState(false)
 
-    const resetFilters = () => {
-        setFilterBy([null,null,null,null])
-        setSearchByName('')
-        setMinHrs('00')
-        setMinMinutes('00')
-        setMinSec('00')
-        setMaxHrs('00')
-        setMaxMin('00')
-        setMaxSec('00')
-        setSearchByCategory([])
-        setSearchByEquipment([])
-        setExecuteFilters(true)
-    }
-    //Logic to filter routines
     const fuseOptions = {
-        // isCaseSensitive: false,
         includeScore: true,
-        // shouldSort: true,
-        // includeMatches: false,
-        // findAllMatches: false,
-        // minMatchCharLength: 1,
-        // location: 0,
-        // threshold: 0.6,
-        // distance: 100,
-        // useExtendedSearch: false,
-        // ignoreLocation: false,
-        // ignoreFieldNorm: false,
-        // fieldNormWeight: 1,
         keys: [
             "name",
         ]
     }
+
+    useEffect(()=>setSelectedRoutine(routines[0]),[routines])
+
     useEffect(()=>{
+        setFilteredRoutines(routines)
+    },[routines])
+
+    useEffect(()=>{
+        setAvailableCategories(loadAvailableCategories(routines))
+        setEquipmentOptions(loadEquipmentOptions(routines))
+    },[routines])
+
+    //Logic to filter routines
+    const filterRoutines = ()=>{
         let routinesToSet = routines
         if(filterBy[0]==='name'){
             const fuse = new Fuse(routinesToSet,fuseOptions)
             const filtrationResults = fuse.search(searchByName)
             routinesToSet = filtrationResults.map(result => (result.item))
-            if (routinesToSet?.length ===0 && searchByName === '') routinesToSet = routines
+            if (routinesToSet?.length ===0 && searchByName === ''){
+                routinesToSet = routines
+            } 
         }
         if(filterBy[1]==='time'){
             routinesToSet = filterRoutinesByTimeRange(routinesToSet,minHrs,minMinutes,minSec,maxHrs,maxMin,maxSec)
@@ -132,7 +106,30 @@ function GeneralProvider({children}){
         }
         setFilteredRoutines(routinesToSet)
         setExecuteFilters(false)
-    },[searchByName,executeFilters])
+    }
+    useEffect(()=>{
+        filterRoutines()
+    },[searchByName, executeFilters]) // eslint-disable-line react-hooks/exhaustive-deps
+
+    const resetFilters = () => {
+        setFilterBy([null,null,null,null])
+        setSearchByName('')
+        setMinHrs('00')
+        setMinMinutes('00')
+        setMinSec('00')
+        setMaxHrs('00')
+        setMaxMin('00')
+        setMaxSec('00')
+        setSearchByCategory([])
+        setSearchByEquipment([])
+        setExecuteFilters(true)
+    }
+    
+    //Random number function 
+    const getRandom =(min,max)=>{
+        return Math.floor(Math.random()*(max-min))+min
+    }
+
     return (
         <GeneralContext.Provider value={{
             saveItem,
@@ -170,7 +167,7 @@ function GeneralProvider({children}){
             maxMin,
             setMaxSec,
             maxSec,
-            resetFilters
+            resetFilters,
         }}>
             {children}
         </GeneralContext.Provider>

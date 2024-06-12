@@ -45,8 +45,7 @@ function FilterBarLogic(){
         setMaxHrs,
         setMaxMin,
         setMaxSec,
-        resetFilters
-
+        resetFilters,
     } = useContext(GeneralContext)
    
     const toggleFilterOptions = () => {
