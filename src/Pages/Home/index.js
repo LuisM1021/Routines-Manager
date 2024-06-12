@@ -3,6 +3,7 @@ import { UserActivity } from '../../Components/UserActivity'
 import {UserRoutines} from '../../Components/UserRoutines'
 import {Layout} from '../../Components/Layout'
 import './Home.css'
+
 function Home(){
     return(
         <Layout>
