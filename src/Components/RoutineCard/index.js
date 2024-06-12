@@ -1,10 +1,13 @@
-import './RoutineCard.css'
 import { useContext } from 'react'
 import { GeneralContext } from '../../GeneralContext'
+import './RoutineCard.css'
+
 function RoutineCard({routine}){
     const {
-        setShowRoutineDetails,setSelectedRoutineDetails
+        setShowRoutineDetails,
+        setSelectedRoutineDetails
     } = useContext(GeneralContext)
+
     const showTime= ()=>{
         if(routine.timer.totalTime[0]>0 && routine.timer.totalTime[1]>0){
             return(
@@ -28,13 +31,27 @@ function RoutineCard({routine}){
     }
     return(
         <div className='card-container' onClick={()=>handleSelectRoutine()}>
-            <h3>{routine.name}</h3>
-            <p className='routine-description'>{routine.description}</p>
+            <h3 className='card-title'>
+                {routine.name}
+            </h3>
+            <p className='routine-description'>
+                {routine.description}
+            </p>
             <div className='detail-container'>
-                <p>Time: 
-                    {showTime()}
+                <p className='time'>
+                    <span>
+                        Time: 
+                    </span>
+                    {showTime()}  
                 </p>
-                <p>Equipment: <span>{routine.equipment}</span></p>
+                <p className='equipment'>
+                    <span>
+                        Equipment:
+                    </span>
+                    <span>
+                        {routine.equipment}
+                    </span>
+                </p>
             </div>
         </div>
     )

@@ -11,7 +11,7 @@
     justify-content: space-between;
     overflow: hidden;
 }
-.card-container h3{
+.card-container .card-title{
     margin: 6px 0;
     text-align: center;
     color: var(--dark-brown);
@@ -35,26 +35,43 @@
     background: linear-gradient(var(--dark-brown),var(--burnt-orange));
     border-radius: 10px;
 }
-.detail-container{
+.card-container .detail-container{
     height: 20%;
 }
-.detail-container p{
+.card-container .detail-container .time{
     margin:0;
     font-size: small;
-    text-align: center;
-    font-weight: bold;
+    font-weight: bold; 
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+}
+.card-container .detail-container .time span:nth-child(1){
     color: var(--dark-brown);
 }
-.detail-container p span{
-    margin-left:4px;
-    color:var(--white);
+.card-container .detail-container .time span:nth-child(2){
+    color: var(--white);
+}
+.card-container .detail-container .equipment{
+    margin:0;
+    font-size: small;
+    font-weight: bold; 
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+}
+.card-container .detail-container .equipment span:nth-child(1){
+    color: var(--dark-brown);
+}
+.card-container .detail-container .equipment span:nth-child(2){
+    color: var(--white);
 }
 
 @media all and (min-width:800px) and (max-width: 1024px){
     .card-container{
         padding: 8px 4px;
     }
-    .card-container h3{
+    .card-container .card-title{
         margin: 0;
         font-size: medium;
         line-height: 1.1;
@@ -63,9 +80,6 @@
         margin: 0;
         font-size: small;
         text-align: center;
-        overflow: scroll;
-    }
-    .user-routines{
-        height: 300px;
+        overflow: auto;
     }
 }
