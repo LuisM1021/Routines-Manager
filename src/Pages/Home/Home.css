@@ -19,9 +19,24 @@
     gap: 32px;
 }
 
-@media all and (min-width:800px)and (max-width:1024px){
+@media all and (min-width:750px)and (max-width:1024px){
     .content .user-content{
         justify-content: center;
         gap: 32px;
+    }
+}
+@media all and (max-width: 600px){
+    .content .user-content {
+        margin-top: 16px;
+        gap: 16px;
+        padding: 0 0 16px 0;
+    }
+    .content .title{
+        margin: 0 0 8px 0;
+        text-align: center;
+    }
+    .content .user-content{
+        flex-direction: column-reverse;
+        align-self: center;
     }
 }

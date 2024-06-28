@@ -1,16 +1,22 @@
 import { useContext } from 'react'
 import {GeneralContext} from '../../GeneralContext'
+import { NavLink } from 'react-router-dom'
+
+
 import {RoutineCard} from '../../Components/RoutineCard'
-import {ChevronDoubleUpIcon} from '@heroicons/react/24/outline'
+import {ChevronDoubleUpIcon, PlusCircleIcon} from '@heroicons/react/24/outline'
 import { RoutineDetails } from '../../Components/RoutineDetails'
+import { UserRoutineCard } from '../../Components/UserRoutineCard'
 import { FilterBar } from '../../Components/FilterBar'
 import { Layout } from '../../Components/Layout'
 import './Routines.css'
 
+
 function Routines(){
     const {
         showRoutineDetails,
-        filteredRoutines
+        filteredRoutines,
+        userRoutines,
     } = useContext(GeneralContext)
 
     const scrollToTopRoutineCards=()=>{
@@ -35,8 +41,8 @@ function Routines(){
  
     return(
         <Layout>
+            {showRoutineDetails && <RoutineDetails/>}
             <div className='routines-container'>
-                {showRoutineDetails && <RoutineDetails/>}
                 <div className='search-routine'>
                     <h1 className='title'>
                         Search Routine
@@ -55,6 +61,17 @@ function Routines(){
                     <h1 className='title'>
                         My Routines
                     </h1>
+                    <NavLink to='/create-routine'>
+                        <PlusCircleIcon className='plus-circle-icon'/>
+                    </NavLink>
+                    <div className='user-routines-container'>
+                        {userRoutines.map((routine =>(
+                            <UserRoutineCard
+                             key={routine.name}
+                             routine={routine}/>
+                            )
+                        ))}
+                    </div>
                 </div>
             </div>
         </Layout>

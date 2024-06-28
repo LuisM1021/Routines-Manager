@@ -11,8 +11,8 @@ function Home(){
                 <h1 className='title'>ROUTINE MANAGER</h1>
                 <RoutinesPanel/>
                 <div className='user-content'>
-                <UserRoutines/>
-                <UserActivity/>
+                    <UserRoutines/>
+                    <UserActivity/>
                 </div>
             </div>
         </Layout>

@@ -179,3 +179,59 @@
         transform: translateY(0);
     }
 }
+
+@media all and (min-width: 450px) and (max-width:650px){
+    .filter-bar{
+        width: calc(100% - 16px);
+        margin-left: 16px;
+    }
+    .filter-bar .filters-container .filters{
+        margin-left: 12px;
+    }
+    .filter-bar .filters-container .filters .filter-button{
+        font-size: 0.8rem;
+    }
+    .filter-bar .filter-options-container .filter-container{
+        margin-left: 28px;
+    }
+}
+@media all and (max-width: 449px){
+    .filter-bar{
+        width: calc(100% - 16px);
+        margin-left: 16px;
+    }
+    .filter-bar .filters-container{
+        flex-direction: column;
+        gap: 4px;
+    }
+    .filter-bar .filters-container .filter-title{
+        margin-left: 12px;
+        position: relative;
+    }
+    .filter-bar .filters-container .filters{
+        margin-left: 12px;
+    }
+    .filter-bar .filters-container .filters .filter-button{
+        font-size: 0.8rem;
+    }
+    .filter-bar .filter-options-container .search-icon{
+        position: absolute;
+        top: 4px;
+        left: 46px;
+    }
+    .filter-bar .filter-options-container .filter-container{
+        margin-left: 28px;
+    }
+    .filter-bar .filter-options-container .filter-container .name-filter{
+        margin-left: 0px;
+    }
+    .filter-bar .filter-options-container .filter-container .times-container{
+        justify-content: center;
+    }
+}
+@media all and (max-width: 419px){
+    .filter-bar{
+        width: 100%;
+        margin-left: 0;
+    }
+}

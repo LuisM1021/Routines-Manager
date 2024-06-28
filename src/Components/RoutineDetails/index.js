@@ -1,13 +1,14 @@
 import './RoutineDetails.css'
 import { GeneralContext } from '../../GeneralContext'
 import { useContext,useState } from 'react'
-import { ArrowRightCircleIcon,ArrowLeftCircleIcon,PencilSquareIcon,PlusCircleIcon } from '@heroicons/react/24/outline'
+import { ArrowRightCircleIcon,ArrowLeftCircleIcon,PlusCircleIcon } from '@heroicons/react/24/outline'
 
 function RoutineDetails(){
     const {
         setShowRoutineDetails,
         selectedRoutineDetails: routine,
-        exercises
+        exercises,
+        addToUserRoutines
     } = useContext(GeneralContext)
 
     //Storing the index of the current exercise
@@ -70,8 +71,16 @@ function RoutineDetails(){
                 <h2 className='routine-name'>
                     {routine.name}
                 </h2>
-                <PlusCircleIcon className='plus-circle-icon'/>
-                <PencilSquareIcon className='pencil-square-icon'/>
+                <div className='add-routine-container'>
+                    <figure 
+                     className='plus-circle-icon'
+                     onClick={()=>addToUserRoutines(routine)}>
+                        <PlusCircleIcon/>
+                    </figure>
+                    <p className='add-routine-label'>
+                        <span>Add to my routines</span>
+                    </p>
+                </div>
                 <p className='description'>
                     {routine.description}
                 </p>

@@ -1,10 +1,11 @@
 .background{
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     background-color: var(--black-opacity);
     z-index: 1;
     top: 0;
+    left: 200px;
     display: grid;
     place-items: center;
 }
@@ -20,33 +21,46 @@
     justify-content: space-between;
     padding: 16px 24px;
     position: relative;
+    margin-left: -200px;
     }
 .background .routine-details-container .routine-name{
     color: var(--apple-green);
     margin: 0 0 8px 0;
 }
-.background .routine-details-container .plus-circle-icon{
-    width: 24px;
-    height: 24px;
+.background .routine-details-container .add-routine-container{
     position: absolute;
     top: 12px;
     right: 12px;
     cursor: pointer;
-    color: var(--black);
 }
-.background .routine-details-container .pencil-square-icon{
-    width: 24px;
-    height: 24px;
-    position: absolute;
-    top: 12px;
-    right: 40px;
-    cursor: pointer;
-    color: var(--black);
-}
-.background .routine-details-container .plus-circle-icon:hover,
-.background .routine-details-container .pencil-square-icon:hover{
+.background .routine-details-container .add-routine-container .plus-circle-icon{
     width: 28px;
     height: 28px;
+    color: var(--dark-brown);
+    margin: 0;
+}
+.background .routine-details-container .add-routine-container .plus-circle-icon:hover{
+    width: 32px;
+    height: 32px;
+    color: var(--apple-green);
+}
+.background .routine-details-container .add-routine-container .plus-circle-icon:hover + .add-routine-label{
+    display: flex;
+}
+.background .routine-details-container .add-routine-container .add-routine-label{
+    width: 130px;
+    height: 30px;
+    background-color: var(--apple-green);
+    border: 1px solid var(--black);
+    border-radius: 12px;
+    position: absolute;
+    font-size: small;
+    margin: 0;
+    top: -16px;
+    left: 32px;
+    display: none;
+    align-items: center;
+    justify-content: center;
 }
 .background .routine-details-container .description{
     font-weight:200;
@@ -160,4 +174,57 @@
     height: 80%;
     border: 3px solid var(--cerulean);
     border-radius: 16px;
+}
+@media all and (max-width: 750px){
+    .background{
+        left: 0;
+    }
+    .background .routine-details-container{
+        margin-left: 0;
+    }
+}
+@media all and (min-width: 500px) and (max-width: 800px){
+    .background .routine-details-container{
+        width: 400px;
+        height: 450px;
+    }
+}
+@media all and (min-width: 420px) and (max-width: 499px){
+    .background .routine-details-container{
+        width: 350px;
+        height: 400px;
+    }
+    .background .routine-details-container .category-time .category-info{
+        margin: 0;
+    }
+    .background .routine-details-container .category-time .time-info{
+        margin: 0;
+    }
+    .background .routine-details-container .require-equipment{
+        margin: 0;
+    }
+}
+@media all and (max-width: 419px){
+    .background{
+        min-width: 350px;
+    }
+    .background .routine-details-container{
+        width: 275px;
+        height: 350px;
+    }
+    .background .routine-details-container .category-time .category-info{
+        margin: 0;
+    }
+    .background .routine-details-container .category-time .time-info{
+        margin: 0;
+    }
+    .background .routine-details-container .require-equipment{
+        margin: 0;
+    }
+    .background .routine-details-container .exercises-panel{
+        height: 150px;
+    }
+    .background .routine-details-container .exercises-panel .exercises-info{
+        height: 150px;
+    }
 }

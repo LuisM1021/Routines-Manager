@@ -22,7 +22,9 @@ function UserActivity(){
             <div className='activity-container'>
                 <figure className='activity-chart-container'>
                     <p className='activity-chart-title'>Last routines</p>
-                    <PieChart width={150} height={150}>
+                    <PieChart 
+                     className='pie-chart'
+                     width={150} height={150}>
                         <Pie 
                         data={data01} 
                         dataKey="value" 

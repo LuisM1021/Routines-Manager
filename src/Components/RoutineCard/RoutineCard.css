@@ -67,7 +67,7 @@
     color: var(--white);
 }
 
-@media all and (min-width:800px) and (max-width: 1024px){
+@media all and (max-width: 1024px){
     .card-container{
         padding: 8px 4px;
     }
@@ -81,5 +81,14 @@
         font-size: small;
         text-align: center;
         overflow: auto;
+    }
+}
+@media all and (max-width: 400px){
+    .card-container .detail-container{
+        display: flex;
+        align-items: flex-end;
+    }
+    .card-container .detail-container .equipment{
+        display: none;
     }
 }

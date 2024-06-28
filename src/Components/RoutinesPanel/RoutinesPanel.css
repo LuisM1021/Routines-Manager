@@ -3,57 +3,60 @@
     height: 248px;
     background-color: var(--white);
     max-width: 600px;
+    min-height: 200px;
     display: flex;
     border-radius: 32px;
     border: 4px solid var(--burnt-orange);
+    overflow: hidden;
 }
-.routines-list{
+.panel-container .routines-list{
     width: 33%;
     height: 100%;
     list-style: none;
 }
-.routines-list .title-2{
+.panel-container .routines-list .title-2{
     margin: 0;
     margin-top: 16px;
     text-align: center;
     color: var(--dark-brown);
     height: calc(25% - 16px);
 }
-.routines-list .featured-routines-container{
+.panel-container .routines-list .featured-routines-container{
     margin-top: 8px;
     height: calc(75% - 8px);
     overflow-y: auto;
     border-bottom-left-radius: 32px;
 }
 /* SCROLLBAR  */
-.routines-list .featured-routines-container::-webkit-scrollbar{
+.panel-container .routines-list .featured-routines-container::-webkit-scrollbar{
     width: 12px;
 }
-.routines-list .featured-routines-container::-webkit-scrollbar-track{
+.panel-container .routines-list .featured-routines-container::-webkit-scrollbar-track{
     background-color:  var(--white);
 }
-.routines-list .featured-routines-container::-webkit-scrollbar-thumb{
+.panel-container .routines-list .featured-routines-container::-webkit-scrollbar-thumb{
     background: linear-gradient(var(--apple-green),var(--cerulean));
     border-radius: 10px;
 }
-.routines-list .featured-routines-container .featured-routine{
+.panel-container .routines-list .featured-routines-container .featured-routine{
     margin: 8px 0;
     padding: 0 8px;
     color: var(--cerulean);
     text-align: justify;
     cursor: pointer;
+    display: flex;
 }
 .routines-list .featured-routines-container .featured-routine:hover{
     color: var(--dark-brown);
 }
-.exercises-slider{
+.panel-container .exercises-slider{
     width: 44%;
     height: 100%;
     position: relative;
     border-left: 4px solid var(--burnt-orange);
     border-right: 4px solid var(--burnt-orange);
 }
-.exercises-slider .title-container{
+.panel-container .exercises-slider .title-container{
     position: absolute;
     top: 8px;
     width: 100%;
@@ -62,34 +65,32 @@
     display: flex;
     justify-content: center;
 }
-.exercises-slider .title-container .title-3{
+.panel-container .exercises-slider .title-container .title-3{
     display: flex;
     align-items: center;
     margin: 0;
     font-weight: 900;
     font-size: x-large;
     color: var(--white);
-    height: auto;
-    min-height: 40px;
-    max-height: 60px;
+    height: 40px;
     padding: 2px;
     overflow-y: auto;
     text-align: center;
     line-height: 1.2;
 }
-.exercises-slider .exercise-img{
+.panel-container .exercises-slider .exercise-img{
     width: 100%;
     height: 100%;
     position:absolute;
 }
-.exercises-slider .controller{
+.panel-container .exercises-slider .controller{
     position: absolute;
     display: flex;
     bottom: 12px;
     width: 100%;
     justify-content: center;
 }
-.exercises-slider .controller .slider-button{
+.panel-container .exercises-slider .controller .slider-button{
     width: 20px;
     height: 12px;
     background-color:var(--apple-green);
@@ -99,21 +100,21 @@
     border: 2px solid var(--dark-brown);
     cursor: pointer;
 }
-.exercises-slider .controller .slider-button--active{
+.panel-container .exercises-slider .controller .slider-button--active{
     background-color: var(--flame);
 }
-.exercise-description{
+.panel-container .exercise-description{
     width: 33%;
     height: 100%;
 }
-.exercise-description .title-2{
+.panel-container .exercise-description .title-2{
     margin: 0;
     margin-top: 16px;
     text-align: center;
     color: var(--dark-brown);
     height: calc(25% - 16px);
 }
-.exercise-description .description{
+.panel-container .exercise-description .description{
     width: calc(100% - 16px);
     padding:0 8px;
     text-align: justify;
@@ -123,13 +124,88 @@
     border-bottom-right-radius: 32px;
     overflow-y: auto;
 }
-.exercise-description .description::-webkit-scrollbar{
+.panel-container .exercise-description .description::-webkit-scrollbar{
     width: 12px;
 }
-.exercise-description .description::-webkit-scrollbar-track{
+.panel-container .exercise-description .description::-webkit-scrollbar-track{
     background-color:  var(--white);
 }
-.exercise-description .description::-webkit-scrollbar-thumb{
+.panel-container .exercise-description .description::-webkit-scrollbar-thumb{
     background: linear-gradient(var(--apple-green),var(--cerulean));
     border-radius: 10px;
+}
+
+.grid{
+    width: 300px;
+    height: 300px;
+    background-color: yellow;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    position: absolute;
+    z-index: 20;
+}
+.a{
+    grid-column: 1 / 3;
+    grid-row: 1;
+    background-color: orange;
+}
+.b{
+    grid-column: 1;
+    grid-row: 2;
+    background-color: sienna;
+}
+.c{
+    grid-column: 2;
+    grid-row: 2;
+    background-color: greenyellow;
+}
+
+@media all and (max-width: 550px){
+    .panel-container{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        width: 100%;
+        height: 300px;
+        min-height: 300px;
+        min-width: 350px;
+    }
+    .panel-container .routines-list{
+        grid-column: 1 / 3;
+        grid-row: 1;
+        height: 146px;
+        width: 100%;
+        border-bottom: 4px solid var(--burnt-orange);
+    }
+    .panel-container .routines-list .title-2{
+        margin: 4px 0 12px 0;
+    }
+    .panel-container .routines-list .featured-routines-container{
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+    .panel-container .routines-list .featured-routines-container .featured-routine{
+        margin: 4px 0;
+    }
+    .panel-container .exercises-slider{
+        grid-column: 1;
+        grid-row: 2;
+        height: 150px;
+        width: 100%;
+        border-left: none;
+    }
+    .panel-container .exercises-slider .title-container .title-3{
+        font-size: large;
+        height: 32px;
+    }
+    .panel-container .exercise-description{
+        grid-column: 2;
+        grid-row: 2;
+        height: 150px;
+        width: 100%;
+    }
+    .panel-container .exercise-description .title-2{
+        margin: 4px 0 8px 0;
+    }
 }

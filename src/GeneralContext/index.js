@@ -2,6 +2,7 @@ import { useState,useEffect,createContext } from 'react';
 import { useLocalStorage } from './useLocalStorage';
 import { loadAvailableCategories,loadEquipmentOptions,filterRoutinesByTimeRange } from '../Utils';
 import Fuse from 'fuse.js';
+import moment from 'moment'
 
 const GeneralContext = createContext()
 
@@ -11,7 +12,9 @@ function GeneralProvider({children}){
         saveItem,
         getItem,
         routines,
-        exercises
+        exercises,
+        userRoutines,
+        setUserRoutines
     } = useLocalStorage();
 
     //Selected routine in the featured routines panel
@@ -54,6 +57,12 @@ function GeneralProvider({children}){
 
     const [executeFilters,setExecuteFilters] = useState(false)
 
+    //Manage the navbar for short screens
+    const [displayNavbar, setDisplayNavbar] = useState(false)
+
+    //Manage the navbar for short screens
+    const [displayExerciseDetail, setDisplayExerciseDetail] = useState(false)
+    
     const fuseOptions = {
         includeScore: true,
         keys: [
@@ -130,6 +139,18 @@ function GeneralProvider({children}){
         return Math.floor(Math.random()*(max-min))+min
     }
 
+    const addToUserRoutines = (routine) => {
+        const now = moment()
+        const routineWithLastUsedTime = {
+            ...routine,
+            lastUse: now.format('YYYY-MM-DD HH:mm:ss')
+        }
+        const addedUserRoutines = getItem('userRoutines')
+        addedUserRoutines.push(routineWithLastUsedTime)
+        saveItem('userRoutines',addedUserRoutines)
+        setUserRoutines(addedUserRoutines)
+    }
+
     return (
         <GeneralContext.Provider value={{
             saveItem,
@@ -168,6 +189,12 @@ function GeneralProvider({children}){
             setMaxSec,
             maxSec,
             resetFilters,
+            displayNavbar,
+            setDisplayNavbar,
+            addToUserRoutines,
+            userRoutines,
+            displayExerciseDetail,
+            setDisplayExerciseDetail
         }}>
             {children}
         </GeneralContext.Provider>

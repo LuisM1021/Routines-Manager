@@ -9,6 +9,8 @@
   --black: #141414;
   --black-opacity: #254d4d80;
   --white: #d8cece;
+  --red-inactive: #ee7e7e;
+  --red: #ff0000;
 }
 body {
   margin: 0;
