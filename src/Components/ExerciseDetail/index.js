@@ -51,7 +51,7 @@ function ExerciseDetail(){
                     {exercise.muscularGroup}
                 </span>
             </p>
-            <div className='exercise-aside__benefits'>
+            <div className='exercise-aside__benefits-cont'>
                 <button className={`exercise-aside__open-benefits ${showBenefits && 'exercise-aside__open-benefits--active'}`}
                 onClick={()=>showBenefits ? setshowBenefits(false) : setshowBenefits(true) }>
                     <span className='exercise-aside__benefits'>Benefits</span>
@@ -98,28 +98,18 @@ function ExerciseDetail(){
                         <ChevronDownIcon className='exercise-aside__equipment-arrow-down'/>
                     </button>
                     {showEquipment && 
-                        <p>
-                            <span>{exercise.equipment.name}</span>
-                            <span>{exercise.equipment.suggestedWeight}</span>
-                        </p>
+                        <div>
+                            <p className='exercise-aside__equipment-cont'>
+                                <span className='exercise-aside__equipment-text-label'>Equipment: </span>
+                                <span className='exercise-aside__equipment-name'>{exercise.equipment.name}</span>
+                            </p>
+                            <p className='exercise-aside__equipment-weight-cont'>
+                                <span className='exercise-aside__equipment-weight-label'>Suggested weight: </span>
+                                <span className='exercise-aside__equipment-weight'>{exercise.equipment.suggestedWeight}</span>
+                            </p>
+                        </div>
                     }
                 </div>
-                {/* <p className='exercise-aside__equipment'>
-                    <span className='exercise-aside__equipment-label'>
-                        Equipment:
-                    </span>
-                    <span className='exercise-aside__equipment-name'>
-                        {exercise.equipment.name}
-                    </span>
-                </p>
-                <p className='exercise-aside__suggested-weight'>
-                    <span className='exercise-aside__suggested-weight-label'>
-                        Suggested weight:
-                    </span>
-                    <span className='exercise-aside__suggested-weight-name'>
-                        {exercise.equipment.suggestedWeight}
-                    </span>
-                </p> */}
             </>
             }
         </aside>

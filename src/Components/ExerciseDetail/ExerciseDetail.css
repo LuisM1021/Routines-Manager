@@ -1,7 +1,7 @@
 .exercise-aside{
     width: 200px;
     height: 100%;
-    background-color: aliceblue;
+    background-color: var(--white);
     position: fixed;
     left: 0;
     top: 0;
@@ -11,23 +11,33 @@
     align-items: center;
     padding: 8px;
     overflow: auto;
+    border-right: 4px solid var(--dark-brown);
+    border-top: 4px solid var(--dark-brown);
+    border-bottom: 4px solid var(--dark-brown);
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 .exercise-aside__title{
     margin-bottom: 8px;
+    color: var(--flame);
 }
 .exercise-aside__img{
     width: 160px;
     height: 160px;
     object-fit: cover;
     margin-bottom: 8px;
+    border: 2px solid var(--dark-brown);
+    border-radius: 8px;
 }
 .exercise-aside__description-label{
     align-self: flex-start;
     margin-bottom: 4px;
+    color: var(--cerulean);
 }
 .exercise-aside__description{
     text-align: justify;
     margin-bottom: 8px;
+    color: var(--black);
 }
 .exercise-aside__category{
     display: flex;
@@ -36,23 +46,30 @@
 }
 .exercise-aside__category-label{
     margin-right: 8px;
+    font-weight: bold;
+    color: var(--cerulean);
 }
 .exercise-aside__category-name{
-
+    color: var(--black);
 }
 .exercise-aside__muscular-group{
     display: flex;
     width: 100%;
     flex-wrap: wrap;
+    margin-bottom: 8px;
 }
 .exercise-aside__muscular-group-label{
     margin-right: 8px;
+    font-weight: bold;
+    color: var(--cerulean);
 }
 .exercise-aside__muscular-group-name{
     margin-bottom: 8px;
+    color: var(--black);
 }
-.exercise-aside__benefits{
+.exercise-aside__benefits-cont{
     width: 100%;
+    margin-bottom: 8px;
 }
 .exercise-aside__open-benefits{
     width: 100px;
@@ -61,20 +78,30 @@
     padding: 4px;
     border-radius: 8px;
     margin-bottom: 4px;
+    background-color: var(--apple-green-inactive);
 }
 .exercise-aside__open-benefits--active{
-    background-color: rgb(122, 224, 122);
+    background-color: var(--apple-green);
+}
+.exercise-aside__benefits{
+    width: 100%;
+    font-weight: bold;
+    color: var(--cerulean);
 }
 .exercise-aside__benefits-arrow-down{
     width: 16px;
+    color: var(--black);
 }
 .exercise-aside__benefits-list{
     width: 100%;
     padding-left: 20px;
     margin-bottom: 8px;
+    list-style: circle;
 }
 .exercise-aside__benefit-item{
-
+    color: var(--black);
+    text-align: justify;
+    margin-bottom: 4px;
 }
 .exercise-aside__suggested-reps{
     display: flex;
@@ -83,9 +110,11 @@
 }
 .exercise-aside__suggested-reps-label{
     margin-right: 8px;
+    font-weight: bold;
+    color: var(--cerulean);
 }
 .exercise-aside__suggested-reps-name{
-
+    color: var(--black);
 }
 .exercise-aside__suggested-series{
     display: flex;
@@ -94,9 +123,11 @@
 }
 .exercise-aside__suggested-series-label{
     margin-right: 8px;
+    font-weight: bold;
+    color: var(--cerulean);
 }
 .exercise-aside__suggested-series-name{
-
+    color: var(--black);
 }
 .exercise-aside__suggested-time{
     display: flex;
@@ -105,12 +136,15 @@
 }
 .exercise-aside__suggested-time-label{
     margin-right: 8px;
+    font-weight: bold;
+    color: var(--cerulean);
 }
 .exercise-aside__suggested-time-name{
-
+    color: var(--black);
 }
 .exercise-aside__equipment{
     width: 100%;
+    margin-top: 8px;
 }
 .exercise-aside__open-equipment{
     width: 100px;
@@ -119,34 +153,43 @@
     padding: 4px;
     border-radius: 8px;
     margin-bottom: 4px;
+    background-color: var(--apple-green-inactive);
 }
 .exercise-aside__open-equipment--active{
-    background-color: rgb(122, 224, 122);
+    background-color: var(--apple-green);
+}
+.exercise-aside__equipment-label{
+    width: calc(100% - 16px);
+    color: var(--cerulean);
+    font-weight: bold;
 }
 .exercise-aside__equipment-arrow-down{
     width: 16px;
 }
-
-
-
-/* .exercise-aside__equipment{
+.exercise-aside__equipment-cont{
+    width: 100%;
     display: flex;
-    gap: 4px;
+    flex-wrap: wrap;
 }
-.exercise-aside__equipment-label{
-
-} */
-
-/* .exercise-aside__equipment-name{
-
+.exercise-aside__equipment-text-label{
+    margin-right: 8px;
+    color: var(--cerulean);
+    font-weight: bold;
 }
-.exercise-aside__suggested-weight{
+.exercise-aside__equipment-name{
+    color: var(--black);
+}
+.exercise-aside__equipment-weight-cont{
+    width: 100%;
     display: flex;
-    gap: 4px;
+    flex-wrap: wrap;
 }
-.exercise-aside__suggested-weight-label{
+.exercise-aside__equipment-weight-label{
+    margin-right: 8px;
+    color: var(--cerulean);
+    font-weight: bold;
+}
+.exercise-aside__equipment-weight{
+    color: var(--black);
 
 }
-.exercise-aside__suggested-weight-name{
-
-} */
