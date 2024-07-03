@@ -12,9 +12,85 @@
     padding: 16px;
 }
 .exercise-aside__title{
-
+    
 }
 .exercise-aside__img{
-    width: 40px;
-    height: 40px;
+    width: 160px;
+    height: 160px;
+}
+.exercise-aside__description-label{
+
+}
+.exercise-aside__description{
+    text-align: justify;
+}
+.exercise-aside__category{
+    display: flex;
+    gap: 4px;
+}
+.exercise-aside__category-label{
+
+}
+.exercise-aside__category-name{
+
+}
+.exercise-aside__muscular-group{
+    display: flex;
+    gap: 4px;
+}
+.exercise-aside__muscular-group-label{
+
+}
+.exercise-aside__muscular-group-name{
+
+}
+.exercise-aside__suggested-reps{
+    display: flex;
+    gap: 4px;
+}
+.exercise-aside__suggested-reps-label{
+
+}
+.exercise-aside__suggested-reps-name{
+
+}
+.exercise-aside__suggested-series{
+    display: flex;
+    gap: 4px;
+}
+.exercise-aside__suggested-series-label{
+
+}
+.exercise-aside__suggested-series-name{
+
+}
+.exercise-aside__suggested-time{
+    display: flex;
+    gap: 4px;
+}
+.exercise-aside__suggested-time-label{
+
+}
+.exercise-aside__suggested-time-name{
+
+}
+.exercise-aside__equipment{
+    display: flex;
+    gap: 4px;
+}
+.exercise-aside__equipment-label{
+
+}
+.exercise-aside__equipment-name{
+
+}
+.exercise-aside__suggested-weight{
+    display: flex;
+    gap: 4px;
+}
+.exercise-aside__suggested-weight-label{
+
+}
+.exercise-aside__suggested-weight-name{
+
 }
