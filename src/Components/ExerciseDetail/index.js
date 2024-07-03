@@ -10,8 +10,8 @@ function ExerciseDetail(){
     return(
         <aside className='exercise-aside'>
             <h1 className='exercise-aside__title'>{exercise.name}</h1>
-            <figure className='exercise-aside__img'>
-                <img src={exercise.imgPath} alt={exercise.name}/>
+            <figure className='exercise-aside__img-container'>
+                <img className='exercise-aside__img' src={exercise.imgPath} alt={exercise.name}/>
             </figure>
             <h2 className='exercise-aside__description-label'>Description</h2>
             <p className='exercise-aside__description'>{exercise.description}</p>
