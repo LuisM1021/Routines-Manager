@@ -22,7 +22,7 @@
 }
 .routines-container .search-routine .routine-cards{
     margin-top: 16px;
-    width: calc(100% - 32px);
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr;
@@ -89,7 +89,7 @@
     gap: 16px;
     padding: 0 16px 16px 16px;
     overflow: auto;
-    width: calc(100% - 32px);
+    width: 100%;
     place-items: center;
 }
 /* SCROLLBAR  */

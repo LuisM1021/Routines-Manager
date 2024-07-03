@@ -1,5 +1,6 @@
 .layout{
-    height: calc(100vh - 48px);
+    height: 100vh;
+    width: calc(100vw - 200px);
     padding: 24px;
     margin-left: 200px;
     overflow: auto;
@@ -26,12 +27,13 @@
 }
 @media all and (min-width:750px)and (max-width:1024px){
     .layout{
-        width: calc(100vw - 248px);
+        width: calc(100vw - 200px);
     }
 }
 @media all and (max-width: 749px){
     .layout{
         margin: 0;
+        width: 100vw;
     }
     .layout .open-menu-container{
         display: flex;

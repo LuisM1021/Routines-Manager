@@ -18,7 +18,7 @@
 .user-card-container .last-use{
     display: flex;
     gap: 8px;
-    width: calc(100% - 16px);
+    width: 100%;
     padding: 0 8px;
     margin: 0;
 }
@@ -65,6 +65,7 @@
 @media all and (max-width: 1024px){
     .user-card-container .routine-title{
         font-size: medium;
+        text-align: center;
     }
 }
 @media all and (min-width: 864px) and (max-width: 975px){
