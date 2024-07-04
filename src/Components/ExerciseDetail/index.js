@@ -1,6 +1,6 @@
 import { GeneralContext } from "../../GeneralContext";
 import { useContext, useState } from "react";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { ChevronDownIcon, XCircleIcon } from "@heroicons/react/24/outline";
 
 import './ExerciseDetail.css'
 
@@ -29,6 +29,8 @@ function ExerciseDetail(){
     }
     return(
         <aside className='exercise-aside'>
+            <XCircleIcon className='exercise-aside__close'
+             onClick={()=>context.setDisplayExerciseDetail(false)}/>
             <h1 className='exercise-aside__title'>{exercise.name}</h1>
             <figure className='exercise-aside__img-container'>
                 <img className='exercise-aside__img' src={exercise.imgPath} alt={exercise.name}/>

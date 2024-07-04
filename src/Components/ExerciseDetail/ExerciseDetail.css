@@ -17,6 +17,12 @@
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
 }
+.exercise-aside__close{
+    position: absolute;
+    width: 32px;
+    right: 4px;
+    top: 4px;
+}
 .exercise-aside__title{
     margin-bottom: 8px;
     color: var(--flame);
