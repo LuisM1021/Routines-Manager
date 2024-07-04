@@ -1,41 +1,45 @@
 .create-routine{
     width: 100%;
-    height: 100%;
+    height: 675px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .create-routine__title{
     margin-bottom: 16px;
+    height: 50px;
     color: var(--flame);
-    font-size: 2.3rem;
+    font-size: 2.5rem;
 }
 .create-routine__routine{
     width: 100%;
-    height: 100vh;
+    height: 609px;
     display: flex;
-    flex-direction: column;
-    gap: 12px;
 }
 .create-routine__detail{
-    width: 100%;
-    height: 350px;
+    width: 40%;
+    height: 609px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    padding: 16px 16px 0 16px;
+    gap: 16px;
 }
 .create-routine__name{
     width: 100%;
     display: flex;
+    height: 32px;
 }
 .create-routine__name-label{
+    width: 15%;
+    min-width: 72px;
     color: var(--apple-green);
     font-weight: bold;
     font-size: large;
-    margin-right: 8px;
 }
 .create-routine__name-input{
+    width: 85%;
     padding: 0 8px;
     background-color: var(--dark-brown);
     color: var(--white);
@@ -43,7 +47,6 @@
     outline: none;
     border-radius: 4px;
     border: none;
-    flex-grow: 1;
     
     &::placeholder{
         color: var(--white);
@@ -55,14 +58,14 @@
 }
 .create-routine__description{
     width: 100%;
+    height: 203px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
 }
 .create-routine__description-label{
     color: var(--apple-green);
     font-weight: bold;
     font-size: large;
-    margin-right: 8px;
 }
 .create-routine__description-input{
     height: 128px;
@@ -75,7 +78,6 @@
     outline: none;
     border-radius: 4px;
     border: none;
-    flex-grow: 1;
 
     &::placeholder{
         color: var(--white);
@@ -87,24 +89,26 @@
 }
 .create-routine__exercises-card{
     width: 100%;
+    height: 360px;
     background-color: var(--black);
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 16px;
+    padding: 8px 0;
     border-radius: 8px;
-    overflow: hidden;
-    padding-bottom: 4px;
 }
 .create_routine__exercises-title{
     color: var(--flame);
     font-size: 1.8rem;
+    height: 20%;
 }
 .create_routine__exercises-list{
     list-style: none;
     width: 100%;
+    height: 70%;
     overflow: auto;
     padding-left: 16px;
-    margin-bottom: 8px;
     &::-webkit-scrollbar{
         width: 14px;
     }
@@ -154,8 +158,9 @@
     }
 }
 .create-routine__new-routine{
+    height: 10%;
     display: flex;
-    align-items: flex-end;
+    align-items: end;
 }
 .create-routine__add{
     width: 36px;
@@ -167,14 +172,15 @@
     }
 }
 .create-routine__right-panel{
-    width: 100%;
+    width: 60%;
+    height: 609px;
+    padding: 0 12px;
 }
 .create-routine__navigate{
     list-style: none;
     display: flex;
     height: 36px;
     gap: 8px;
-    margin-bottom: 8px;
 }
 .create-routine__nav-item{
     padding: 6px 16px;
@@ -195,39 +201,46 @@
     align-items: center;
     width: 100%;
     gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: 8px;
+    height: 64px;
 }
 .create-routine__search-exercise-input{
     padding: 8px;
     outline: none;
-    width: 100%;
+    width: 50%;
     background-color: var(--white);
     border: none;
     border-radius: 4px;
     color: var(--cerulean);
     font-weight: bold;
+    margin-right: 32px;
 }
 .create_routine__category-label{
+    width: 15%;
     font-weight: bold;
     color: var(--white);
+    text-align: end;
 }
 .create_routine__category-input{
     padding: 8px;
     outline: none;
+    width: 35%;
     background-color: var(--white);
     border: none;
     border-radius: 4px;
     color: var(--cerulean);
     font-weight: bold;
-    flex-grow: 1;
+    max-width: 164px;
 }
 .create-routine__exercises{
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 12px;
+    height: 509px;
+    overflow: auto;
+    place-items: center;
+
     &::-webkit-scrollbar{
         width: 14px;
     }
@@ -239,4 +252,4 @@
         background: linear-gradient(var(--cerulean),var(--burnt-orange));
         border-radius: 10px;    
     }
-} 
+}

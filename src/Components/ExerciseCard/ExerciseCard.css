@@ -1,14 +1,10 @@
-.exercise-card *{
-    padding: 0;
-    box-sizing: border-box;
-    margin: 0;
-}
 .exercise-card{
-    width: 200px;
-    height: 160px;
+    width: 140px;
+    max-width: 240px;
     border-radius: 12px;
     overflow: hidden;
     background-color: var(--apple-green);
+    flex-grow: 1;
 }
 .exercise-card__img{
     height: 100%;
