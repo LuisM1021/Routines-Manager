@@ -3,6 +3,8 @@ import { MagnifyingGlassIcon, TrashIcon, Bars2Icon, PlusCircleIcon } from "@hero
 import { ExerciseCard } from "../../Components/ExerciseCard";
 import { ExerciseDetail } from "../../Components/ExerciseDetail";
 import './CreateRoutine.css';
+import './tablet.css'
+import './desktop.css'
 
 import { GeneralContext } from "../../GeneralContext";
 import { useContext, useState } from "react";

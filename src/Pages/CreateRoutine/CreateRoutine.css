@@ -4,11 +4,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-width: 312px;
 }
 .create-routine__title{
     margin-bottom: 16px;
     color: var(--flame);
     font-size: 2.3rem;
+    text-align: center;
 }
 .create-routine__routine{
     width: 100%;
@@ -16,6 +18,7 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    max-width: 478px;
 }
 .create-routine__detail{
     width: 100%;
@@ -28,22 +31,26 @@
 .create-routine__name{
     width: 100%;
     display: flex;
+    justify-content: center;
 }
 .create-routine__name-label{
     color: var(--apple-green);
     font-weight: bold;
     font-size: large;
     margin-right: 8px;
+    min-width: 120px;
+    text-align: center;
 }
 .create-routine__name-input{
     padding: 0 8px;
+    width: 100%;
     background-color: var(--dark-brown);
     color: var(--white);
     font-weight: bold;
     outline: none;
     border-radius: 4px;
     border: none;
-    flex-grow: 1;
+    max-width: 350px;
     
     &::placeholder{
         color: var(--white);
@@ -57,12 +64,15 @@
     width: 100%;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 .create-routine__description-label{
     color: var(--apple-green);
     font-weight: bold;
     font-size: large;
     margin-right: 8px;
+    width: 120px;
 }
 .create-routine__description-input{
     height: 128px;
@@ -76,6 +86,7 @@
     border-radius: 4px;
     border: none;
     flex-grow: 1;
+    max-width: 350px;
 
     &::placeholder{
         color: var(--white);
@@ -94,6 +105,7 @@
     border-radius: 8px;
     overflow: hidden;
     padding-bottom: 4px;
+    max-width: 478px;
 }
 .create_routine__exercises-title{
     color: var(--flame);
@@ -197,6 +209,7 @@
     gap: 12px;
     flex-wrap: wrap;
     margin-bottom: 8px;
+    justify-content: center;
 }
 .create-routine__search-exercise-input{
     padding: 8px;
@@ -207,6 +220,7 @@
     border-radius: 4px;
     color: var(--cerulean);
     font-weight: bold;
+    max-width: 400px;
 }
 .create_routine__category-label{
     font-weight: bold;
@@ -221,6 +235,7 @@
     color: var(--cerulean);
     font-weight: bold;
     flex-grow: 1;
+    max-width: 312px;
 }
 .create-routine__exercises{
     width: 100%;
@@ -228,6 +243,8 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 12px;
+    padding-bottom: 8px;
+
     &::-webkit-scrollbar{
         width: 14px;
     }

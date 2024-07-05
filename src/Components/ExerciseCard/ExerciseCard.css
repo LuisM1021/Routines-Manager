@@ -1,10 +1,10 @@
 .exercise-card{
-    width: 140px;
     max-width: 240px;
+    min-width: 120px;
     border-radius: 12px;
     overflow: hidden;
     background-color: var(--apple-green);
-    flex-grow: 1;
+    flex: 1 1 140px;
 }
 .exercise-card__img{
     height: 100%;
@@ -19,7 +19,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
+    text-align: center;
 }
 .exercise-card__image{
     width: 100%;

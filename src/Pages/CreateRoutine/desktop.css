@@ -1,255 +1,45 @@
-.create-routine{
-    width: 100%;
-    height: 675px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.create-routine__title{
-    margin-bottom: 16px;
-    height: 50px;
-    color: var(--flame);
-    font-size: 2.5rem;
-}
-.create-routine__routine{
-    width: 100%;
-    height: 609px;
-    display: flex;
-}
-.create-routine__detail{
-    width: 40%;
-    height: 609px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 16px 16px 0 16px;
-    gap: 16px;
-}
-.create-routine__name{
-    width: 100%;
-    display: flex;
-    height: 32px;
-}
-.create-routine__name-label{
-    width: 15%;
-    min-width: 72px;
-    color: var(--apple-green);
-    font-weight: bold;
-    font-size: large;
-}
-.create-routine__name-input{
-    width: 85%;
-    padding: 0 8px;
-    background-color: var(--dark-brown);
-    color: var(--white);
-    font-weight: bold;
-    outline: none;
-    border-radius: 4px;
-    border: none;
-    
-    &::placeholder{
-        color: var(--white);
-        opacity: 0.8;
+@media (min-width: 1024px){
+    .create-routine__routine{
+        flex-direction: row;
+        height: 600px;
+        max-width: 1100px;
     }
-    &:focus{
-        border: 1px solid var(--apple-green);
+    .create-routine__detail{
+        display: flex;
+        flex-direction: column;
+        height: 600px;
+        max-width: 400px;
+    }
+    .create-routine__name{
+        flex-direction: row;
+    }
+    .create-routine__name-label{
+        min-width: 70px;
+    }
+    .create-routine__description{
+        max-height: 156px;
+        margin-bottom: 72px;
+    }
+    .create-routine__description-label{
+        align-self: flex-start;
+    }
+    .create-routine__description-input{
+        max-width: 100%;
+    }
+    .create-routine__right-panel{
+        display: flex;
+        flex-direction: column;
+    }
+    .create-routine__filter-bar{
+        flex-wrap: wrap;
+    }
+    .create-routine__exercises{
+        overflow: auto;
+        padding: 12px;
     }
 }
-.create-routine__description{
-    width: 100%;
-    height: 203px;
-    display: flex;
-    flex-direction: column;
-}
-.create-routine__description-label{
-    color: var(--apple-green);
-    font-weight: bold;
-    font-size: large;
-}
-.create-routine__description-input{
-    height: 128px;
-    resize: none;
-    outline: none;
-    padding: 8px;
-    background-color: var(--dark-brown);
-    color: var(--white);
-    font-weight: bold;
-    outline: none;
-    border-radius: 4px;
-    border: none;
-
-    &::placeholder{
-        color: var(--white);
-        opacity: 0.8;
-    }
-    &:focus{
-        border: 1px solid var(--apple-green);
-    }
-}
-.create-routine__exercises-card{
-    width: 100%;
-    height: 360px;
-    background-color: var(--black);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    padding: 8px 0;
-    border-radius: 8px;
-}
-.create_routine__exercises-title{
-    color: var(--flame);
-    font-size: 1.8rem;
-    height: 20%;
-}
-.create_routine__exercises-list{
-    list-style: none;
-    width: 100%;
-    height: 70%;
-    overflow: auto;
-    padding-left: 16px;
-    &::-webkit-scrollbar{
-        width: 14px;
-    }
-    &::-webkit-scrollbar-track{
-        background-color: var(--black-opacity);
-        border-radius: 10px;
-    }
-    &::-webkit-scrollbar-thumb{
-        background: linear-gradient(var(--cerulean),var(--burnt-orange));
-        border-radius: 10px;    
-    }
-}
-.create_routine__item{
-    display: grid;
-    grid-template: 1fr / 10% 80% 10%;
-    width: 100%;
-    align-items: center;
-    padding: 4px 0;
-
-    &:hover{
-        background-color: var(--black-opacity);
-    }
-}
-.create_routine__bars{
-    width: 24px;
-    height: 24px;
-    color: var(--white);
-}
-.create-routine__item-name{
-    padding: 0 8px;
-    color: var(--white);
-}
-.create-routine__trash{
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-}
-.create-routine__delete{
-    width: 16px;
-    height: 16px;
-    color: var(--red-inactive);
-    cursor: pointer;
-    &:hover{
-        color: var(--red);
-    }
-}
-.create-routine__new-routine{
-    height: 10%;
-    display: flex;
-    align-items: end;
-}
-.create-routine__add{
-    width: 36px;
-    height: 36px;
-    color: var(--apple-green-inactive);
-    cursor: pointer;
-    &:hover{
-        color: var(--apple-green);
-    }
-}
-.create-routine__right-panel{
-    width: 60%;
-    height: 609px;
-    padding: 0 12px;
-}
-.create-routine__navigate{
-    list-style: none;
-    display: flex;
-    height: 36px;
-    gap: 8px;
-}
-.create-routine__nav-item{
-    padding: 6px 16px;
-    border-radius: 16px;
-    color: var(--white);
-    font-weight: bold;
-    cursor: pointer;
-    &:nth-child(odd){
-        background-color: var(--black);
-    }
-    &:nth-child(even){
-        background-color: var(--white);
-        color: var(--black);
-    }
-}
-.create-routine__filter-bar{
-    display: flex;
-    align-items: center;
-    width: 100%;
-    gap: 12px;
-    height: 64px;
-}
-.create-routine__search-exercise-input{
-    padding: 8px;
-    outline: none;
-    width: 50%;
-    background-color: var(--white);
-    border: none;
-    border-radius: 4px;
-    color: var(--cerulean);
-    font-weight: bold;
-    margin-right: 32px;
-}
-.create_routine__category-label{
-    width: 15%;
-    font-weight: bold;
-    color: var(--white);
-    text-align: end;
-}
-.create_routine__category-input{
-    padding: 8px;
-    outline: none;
-    width: 35%;
-    background-color: var(--white);
-    border: none;
-    border-radius: 4px;
-    color: var(--cerulean);
-    font-weight: bold;
-    max-width: 164px;
-}
-.create-routine__exercises{
-    width: 100%;
-    display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    height: 509px;
-    overflow: auto;
-    place-items: center;
-
-    &::-webkit-scrollbar{
-        width: 14px;
-    }
-    &::-webkit-scrollbar-track{
-        background-color: var(--black-opacity);
-        border-radius: 10px;
-    }
-    &::-webkit-scrollbar-thumb{
-        background: linear-gradient(var(--cerulean),var(--burnt-orange));
-        border-radius: 10px;    
+@media (min-width: 1100px){
+    .create-routine__filter-bar{
+        flex-wrap: nowrap;
     }
 }
