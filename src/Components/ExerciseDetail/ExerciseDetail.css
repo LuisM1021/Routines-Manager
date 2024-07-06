@@ -199,3 +199,8 @@
     color: var(--black);
 
 }
+@media (min-width: 750px){
+    .exercise-aside{
+        left: 200px;
+    }
+}
