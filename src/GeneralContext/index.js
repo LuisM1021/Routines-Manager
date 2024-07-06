@@ -206,7 +206,7 @@ function GeneralProvider({children}){
             showEquipment,
             setShowEquipment,
             exercisesList,
-            setExercisesList
+            setExercisesList,
         }}>
             {children}
         </GeneralContext.Provider>

@@ -16,7 +16,26 @@ function CreateRoutine(){
     const removeFromExercisesList = (exercise) => {
         context.setExercisesList((exercises)=>(exercises.filter(item => item.name !== exercise)))
     }
-
+    const addNewExercise = () => {
+        const index = context.exercisesList.length + 1
+        const newExercise = {
+            name: `New exercise ${index}`,
+        }
+        context.setExercisesList((exercises)=>([...exercises, newExercise]))
+    }
+    const customizeExercise = (newName, preName, id) => {
+        if(newName.length>0){
+            const newExercisesList = [...context.exercisesList]
+            newExercisesList.forEach(item => {
+                if(item.name === preName){
+                    item.name = newName
+                }
+            })
+            context.setExercisesList(newExercisesList)
+        }else{
+            document.getElementById(id).value = preName
+        }   
+    }
     return(
         <Layout>
             <main className='create-routine'>
@@ -35,11 +54,16 @@ function CreateRoutine(){
                         <div className='create-routine__exercises-card'>
                             <h2 className='create_routine__exercises-title'>Exercises</h2>
                             <ul className='create_routine__exercises-list'>
+                                {/* {console.log(context.exercisesList)} */}
                                 {(context.exercisesList.length>0) &&
                                     context.exercisesList.map(exercise =>(
                                         <li key={exercise.name} className='create_routine__item' draggable={true}>
                                             <Bars2Icon className='create_routine__bars'/>
-                                            <span className='create-routine__item-name'>{exercise.name}</span>
+                                            {/* <span className='create-routine__item-name'>{exercise.name}</span> */}
+                                            <input id={exercise.name} className='create-routine__item-name' type='text' placeholder={exercise.name} defaultValue={exercise.name}
+                                             onBlur={(event)=>customizeExercise(event.target.value, event.target.placeholder, event.target.id)}
+                                             onFocus={(event)=>event.target.value = exercise.name}
+                                             />
                                             <figure className='create-routine__trash'>
                                                 <TrashIcon className='create-routine__delete'
                                                  onClick={()=>removeFromExercisesList(exercise.name)}/>
@@ -49,7 +73,8 @@ function CreateRoutine(){
                                 }
                             </ul>
                             <figure className='create-routine__new-routine'>
-                                <PlusCircleIcon className='create-routine__add'/>
+                                <PlusCircleIcon className='create-routine__add'
+                                 onClick={()=>addNewExercise()}/>
                             </figure>
                         </div>
                     </section>

@@ -12,6 +12,9 @@
   --red-inactive: #ee7e7e;
   --red: #ff0000;
 }
+/* html{
+  font-size: 62.5%;
+} */
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Poppins', 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

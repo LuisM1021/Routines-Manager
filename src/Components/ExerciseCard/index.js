@@ -15,8 +15,10 @@ function ExerciseCard({ exercise }){
     }
     const addToList = () => {
         const isInExercisesList = context.exercisesList.some(item => item.name === exercise.name)
-        if(!isInExercisesList)
-        context.setExercisesList((exercises)=>([...exercises, exercise]))
+        if(!isInExercisesList){
+            const addedExercise = {...exercise}
+            context.setExercisesList((exercises)=>([...exercises, addedExercise]))
+        }
     }
     return(
         <div 
