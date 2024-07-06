@@ -1,5 +1,5 @@
 import { Layout } from "../../Components/Layout"
-import { MagnifyingGlassIcon, TrashIcon, Bars2Icon, PlusCircleIcon } from "@heroicons/react/24/outline"
+import {  TrashIcon, Bars2Icon, PlusCircleIcon } from "@heroicons/react/24/outline"
 import { ExerciseCard } from "../../Components/ExerciseCard";
 import { ExerciseDetail } from "../../Components/ExerciseDetail";
 import './CreateRoutine.css';
@@ -12,11 +12,11 @@ import { useContext, useState } from "react";
 function CreateRoutine(){
     const context = useContext(GeneralContext);
     const [panelRendered, setPanelRendered] = useState('exercises')
-    // const renderPanel = () => {
-    //     if(panelRendered === 'exercises'){
 
-    //     }
-    // }
+    const removeFromExercisesList = (exercise) => {
+        context.setExercisesList((exercises)=>(exercises.filter(item => item.name !== exercise)))
+    }
+
     return(
         <Layout>
             <main className='create-routine'>
@@ -35,84 +35,18 @@ function CreateRoutine(){
                         <div className='create-routine__exercises-card'>
                             <h2 className='create_routine__exercises-title'>Exercises</h2>
                             <ul className='create_routine__exercises-list'>
-                                <li className='create_routine__item' draggable={true}>
-                                    <Bars2Icon className='create_routine__bars'/>
-                                    <span className='create-routine__item-name'>exercise 1</span>
-                                    <figure className='create-routine__trash'>
-                                        <TrashIcon className='create-routine__delete'/>
-                                    </figure>
-                                </li>
-                                <li className='create_routine__item' draggable={true}>
-                                    <Bars2Icon className='create_routine__bars'/>
-                                    <span className='create-routine__item-name'>exercise 1</span>
-                                    <figure className='create-routine__trash'>
-                                        <TrashIcon className='create-routine__delete'/>
-                                    </figure>
-                                </li>
-                                <li className='create_routine__item' draggable={true}>
-                                    <Bars2Icon className='create_routine__bars'/>
-                                    <span className='create-routine__item-name'>exercise 1</span>
-                                    <figure className='create-routine__trash'>
-                                        <TrashIcon className='create-routine__delete'/>
-                                    </figure>
-                                </li>
-                                <li className='create_routine__item' draggable={true}>
-                                    <Bars2Icon className='create_routine__bars'/>
-                                    <span className='create-routine__item-name'>exercise 1</span>
-                                    <figure className='create-routine__trash'>
-                                        <TrashIcon className='create-routine__delete'/>
-                                    </figure>
-                                </li>
-                                <li className='create_routine__item' draggable={true}>
-                                    <Bars2Icon className='create_routine__bars'/>
-                                    <span className='create-routine__item-name'>exercise 1</span>
-                                    <figure className='create-routine__trash'>
-                                        <TrashIcon className='create-routine__delete'/>
-                                    </figure>
-                                </li>
-                                <li className='create_routine__item' draggable={true}>
-                                    <Bars2Icon className='create_routine__bars'/>
-                                    <span className='create-routine__item-name'>exercise 1</span>
-                                    <figure className='create-routine__trash'>
-                                        <TrashIcon className='create-routine__delete'/>
-                                    </figure>
-                                </li>
-                                <li className='create_routine__item' draggable={true}>
-                                    <Bars2Icon className='create_routine__bars'/>
-                                    <span className='create-routine__item-name'>exercise 1</span>
-                                    <figure className='create-routine__trash'>
-                                        <TrashIcon className='create-routine__delete'/>
-                                    </figure>
-                                </li>
-                                <li className='create_routine__item' draggable={true}>
-                                    <Bars2Icon className='create_routine__bars'/>
-                                    <span className='create-routine__item-name'>exercise 1</span>
-                                    <figure className='create-routine__trash'>
-                                        <TrashIcon className='create-routine__delete'/>
-                                    </figure>
-                                </li>
-                                <li className='create_routine__item' draggable={true}>
-                                    <Bars2Icon className='create_routine__bars'/>
-                                    <span className='create-routine__item-name'>exercise 1</span>
-                                    <figure className='create-routine__trash'>
-                                        <TrashIcon className='create-routine__delete'/>
-                                    </figure>
-                                </li>
-                                <li className='create_routine__item' draggable={true}>
-                                    <Bars2Icon className='create_routine__bars'/>
-                                    <span className='create-routine__item-name'>exercise 1</span>
-                                    <figure className='create-routine__trash'>
-                                        <TrashIcon className='create-routine__delete'/>
-                                    </figure>
-                                </li>
-                                <li className='create_routine__item' draggable={true}>
-                                    <Bars2Icon className='create_routine__bars'/>
-                                    <span className='create-routine__item-name'>exercise 1</span>
-                                    <figure className='create-routine__trash'>
-                                        <TrashIcon className='create-routine__delete'/>
-                                    </figure>
-                                </li>
-                                
+                                {(context.exercisesList.length>0) &&
+                                    context.exercisesList.map(exercise =>(
+                                        <li key={exercise.name} className='create_routine__item' draggable={true}>
+                                            <Bars2Icon className='create_routine__bars'/>
+                                            <span className='create-routine__item-name'>{exercise.name}</span>
+                                            <figure className='create-routine__trash'>
+                                                <TrashIcon className='create-routine__delete'
+                                                 onClick={()=>removeFromExercisesList(exercise.name)}/>
+                                            </figure>
+                                        </li>
+                                    ))
+                                }
                             </ul>
                             <figure className='create-routine__new-routine'>
                                 <PlusCircleIcon className='create-routine__add'/>
@@ -133,7 +67,6 @@ function CreateRoutine(){
                         {panelRendered === 'exercises' ?
                             <>
                                 <div className='create-routine__filter-bar'>
-                                    {/* <MagnifyingGlassIcon className='create-routine__search-exercise'/> */}
                                     <input className='create-routine__search-exercise-input' type='text' placeholder='Search exercise'/>
                                     <span className='create_routine__category-label'>Category </span>
                                     <input className='create_routine__category-input' list='categories'/>

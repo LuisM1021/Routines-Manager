@@ -5,6 +5,21 @@
     overflow: hidden;
     background-color: var(--apple-green);
     flex: 1 1 140px;
+    position: relative;
+}
+.exercise-card__add{
+    position: absolute;
+    right: 8px;
+    top: 4px;
+    width: 24px;
+    
+}
+.exercise-card__added{
+    position: absolute;
+    right: 8px;
+    top: 4px;
+    width: 24px;
+
 }
 .exercise-card__img{
     height: 100%;

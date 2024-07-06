@@ -1,5 +1,5 @@
 import { GeneralContext } from "../../GeneralContext";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ChevronDownIcon, XCircleIcon } from "@heroicons/react/24/outline";
 
 import './ExerciseDetail.css'
@@ -8,8 +8,6 @@ function ExerciseDetail(){
     const context = useContext(GeneralContext)
     const exercise = context.displayExerciseDetail
     console.log(exercise)
-    const [showBenefits, setshowBenefits] = useState(false)
-    const [showEquipment, setshowEquipment] = useState(false)
     const showTime= (exercise)=>{
         if(exercise.suggestedTime[0]>0 && exercise.suggestedTime[1]>0){
             return(
@@ -54,12 +52,12 @@ function ExerciseDetail(){
                 </span>
             </p>
             <div className='exercise-aside__benefits-cont'>
-                <button className={`exercise-aside__open-benefits ${showBenefits && 'exercise-aside__open-benefits--active'}`}
-                onClick={()=>showBenefits ? setshowBenefits(false) : setshowBenefits(true) }>
+                <button className={`exercise-aside__open-benefits ${context.showBenefits && 'exercise-aside__open-benefits--active'}`}
+                onClick={()=>context.showBenefits ? context.setShowBenefits(false) : context.setShowBenefits(true) }>
                     <span className='exercise-aside__benefits'>Benefits</span>
                     <ChevronDownIcon className='exercise-aside__benefits-arrow-down'/>
                 </button>
-                {showBenefits && 
+                {context.showBenefits && 
                     <ul className='exercise-aside__benefits-list'>
                         {exercise.benefits.benefit.map((item,index) => 
                             <li className='exercise-aside__benefit-item' key={index}>{item}</li>
@@ -94,12 +92,12 @@ function ExerciseDetail(){
             {exercise.requireEquipment !== 'No' &&
              <>   
                 <div className='exercise-aside__equipment'>
-                    <button className={`exercise-aside__open-equipment ${showEquipment && 'exercise-aside__open-equipment--active'}`}
-                    onClick={()=>showEquipment ? setshowEquipment(false) : setshowEquipment(true) }>
+                    <button className={`exercise-aside__open-equipment ${context.showEquipment && 'exercise-aside__open-equipment--active'}`}
+                    onClick={()=>context.showEquipment ? context.setShowEquipment(false) : context.setShowEquipment(true) }>
                         <span className='exercise-aside__equipment-label'>Equipment</span>
                         <ChevronDownIcon className='exercise-aside__equipment-arrow-down'/>
                     </button>
-                    {showEquipment && 
+                    {context.showEquipment && 
                         <div>
                             <p className='exercise-aside__equipment-cont'>
                                 <span className='exercise-aside__equipment-text-label'>Equipment: </span>

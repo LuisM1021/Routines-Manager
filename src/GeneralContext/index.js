@@ -63,6 +63,12 @@ function GeneralProvider({children}){
     //Manage the navbar for short screens
     const [displayExerciseDetail, setDisplayExerciseDetail] = useState(false)
     
+    const [showBenefits, setShowBenefits] = useState(false)
+    const [showEquipment, setShowEquipment] = useState(false)
+
+    //List of exercises when creating a routine
+    const [exercisesList, setExercisesList] = useState([])
+
     const fuseOptions = {
         includeScore: true,
         keys: [
@@ -194,7 +200,13 @@ function GeneralProvider({children}){
             addToUserRoutines,
             userRoutines,
             displayExerciseDetail,
-            setDisplayExerciseDetail
+            setDisplayExerciseDetail,
+            showBenefits,
+            setShowBenefits,
+            showEquipment,
+            setShowEquipment,
+            exercisesList,
+            setExercisesList
         }}>
             {children}
         </GeneralContext.Provider>

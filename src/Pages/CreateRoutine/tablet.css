@@ -20,6 +20,7 @@
         grid-column: 1 / 2;
         height: 100%;
         flex-direction: column;
+        flex-wrap: nowrap;
     }
     .create-routine__description-input{
         width: 100%;
