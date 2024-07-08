@@ -19,7 +19,7 @@
     right: 8px;
     top: 4px;
     width: 24px;
-
+    color: green;
 }
 .exercise-card__img{
     height: 100%;
@@ -35,6 +35,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    padding: 12px 32px;
 }
 .exercise-card__image{
     width: 100%;
