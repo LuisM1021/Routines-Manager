@@ -135,6 +135,7 @@
     align-items: center;
     padding: 4px 0;
     padding-left: 16px;
+    cursor: move;
     &:hover{
         background-color: var(--black-opacity);
     }

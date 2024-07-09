@@ -12,6 +12,8 @@ import { useContext, useState } from "react";
 function CreateRoutine(){
     const context = useContext(GeneralContext);
     const [panelRendered, setPanelRendered] = useState('exercises')
+    const [draggedExercise, setDraggedExercise] = useState(-1)
+    const [draggedOverExercise, setDraggedOverExercise] = useState(-1)
 
     const removeFromExercisesList = (exercise) => {
         context.setExercisesList((exercises)=>(exercises.filter(item => item.name !== exercise)))
@@ -36,6 +38,25 @@ function CreateRoutine(){
             document.getElementById(id).value = preName
         }   
     }
+    const handleDragEnd = (e, draggedExercise, draggedOverExercise) =>{
+        e.preventDefault()
+        const draggedItem = context.exercisesList[draggedExercise]
+        const draggedOverItem = context.exercisesList[draggedOverExercise]
+        const exercisesListClone = [...context.exercisesList]
+
+        exercisesListClone[draggedExercise] = draggedOverItem
+        exercisesListClone[draggedOverExercise] = draggedItem
+        context.setExercisesList(exercisesListClone)
+    }
+    const handleDragOver = (e, index) => {
+        e.preventDefault()
+        setDraggedOverExercise(index)
+        e.dataTransfer.dropEffect = 'move'
+    }
+    const handleDragStart = (e, index) => {
+        setDraggedExercise(index)
+        e.dataTransfer.effectAllowed = 'move'
+    }
     return(
         <Layout>
             <main className='create-routine'>
@@ -54,12 +75,14 @@ function CreateRoutine(){
                         <div className='create-routine__exercises-card'>
                             <h2 className='create_routine__exercises-title'>Exercises</h2>
                             <ul className='create_routine__exercises-list'>
-                                {/* {console.log(context.exercisesList)} */}
                                 {(context.exercisesList.length>0) &&
-                                    context.exercisesList.map(exercise =>(
-                                        <li key={exercise.name} className='create_routine__item' draggable={true}>
+                                    context.exercisesList.map((exercise, index) =>(
+                                        <li key={exercise.name} className='create_routine__item' draggable
+                                         onDragStart={(e)=>handleDragStart(e, index)}
+                                         onDragOver={(e)=>handleDragOver(e,index)}
+                                         onDragEnd={(e)=>handleDragEnd(e, draggedExercise, draggedOverExercise)}
+                                         >
                                             <Bars2Icon className='create_routine__bars'/>
-                                            {/* <span className='create-routine__item-name'>{exercise.name}</span> */}
                                             <input id={exercise.name} className='create-routine__item-name' type='text' placeholder={exercise.name} defaultValue={exercise.name}
                                              onBlur={(event)=>customizeExercise(event.target.value, event.target.placeholder, event.target.id)}
                                              onFocus={(event)=>event.target.value = exercise.name}
