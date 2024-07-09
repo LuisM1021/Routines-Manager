@@ -2,6 +2,7 @@ import { Layout } from "../../Components/Layout"
 import {  TrashIcon, Bars2Icon, PlusCircleIcon } from "@heroicons/react/24/outline"
 import { ExerciseCard } from "../../Components/ExerciseCard";
 import { ExerciseDetail } from "../../Components/ExerciseDetail";
+import { Timer } from "../../Components/Timer";
 import './CreateRoutine.css';
 import './tablet.css'
 import './desktop.css'
@@ -135,7 +136,7 @@ function CreateRoutine(){
                             </>
                         :
                             <>
-                                Pending timer
+                                <Timer/>
                             </>
                         }
                         

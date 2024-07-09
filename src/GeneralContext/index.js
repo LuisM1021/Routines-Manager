@@ -68,7 +68,6 @@ function GeneralProvider({children}){
 
     //List of exercises when creating a routine
     const [exercisesList, setExercisesList] = useState([])
-
     const fuseOptions = {
         includeScore: true,
         keys: [

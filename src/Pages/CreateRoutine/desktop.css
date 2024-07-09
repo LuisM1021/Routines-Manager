@@ -9,6 +9,7 @@
         flex-direction: column;
         height: 600px;
         max-width: 400px;
+        padding-bottom: 12px;
     }
     .create-routine__name{
         flex-direction: row;
@@ -29,6 +30,7 @@
     .create-routine__right-panel{
         display: flex;
         flex-direction: column;
+        padding-bottom: 12px;
     }
     .create-routine__filter-bar{
         flex-wrap: wrap;
