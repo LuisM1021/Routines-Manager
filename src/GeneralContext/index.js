@@ -139,6 +139,28 @@ function GeneralProvider({children}){
         setExecuteFilters(true)
     }
     
+    //Logic to filter exercises
+    const [filteredExercises, setFilteredExercises] = useState([])
+    const [searchExerciseByName, setSearchExerciseByName] = useState('')
+    const [searchExerciseByCategory, setSearchExerciseByCategory] = useState('')
+
+    useEffect(()=>{
+        setFilteredExercises([...exercises])
+    },[exercises])
+
+    useEffect(()=>{
+        let filterResult = [...exercises]
+        if(searchExerciseByName !== ''){
+            const fuse = new Fuse(exercises, fuseOptions)
+            const search = fuse.search(searchExerciseByName).map(res => res.item)
+            filterResult = search
+        }
+        if(searchExerciseByCategory !== ''){
+            filterResult = filterResult.filter(exercise => exercise.category === searchExerciseByCategory)
+        }
+        setFilteredExercises(filterResult)
+    },[searchExerciseByName, searchExerciseByCategory, exercises])
+    
     //Random number function 
     const getRandom =(min,max)=>{
         return Math.floor(Math.random()*(max-min))+min
@@ -206,6 +228,9 @@ function GeneralProvider({children}){
             setShowEquipment,
             exercisesList,
             setExercisesList,
+            filteredExercises,
+            setSearchExerciseByName,
+            setSearchExerciseByCategory
         }}>
             {children}
         </GeneralContext.Provider>

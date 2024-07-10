@@ -9,6 +9,7 @@ import './desktop.css'
 
 import { GeneralContext } from "../../GeneralContext";
 import { useContext, useState } from "react";
+import { render } from "@testing-library/react";
 
 function CreateRoutine(){
     const context = useContext(GeneralContext);
@@ -58,6 +59,27 @@ function CreateRoutine(){
         setDraggedExercise(index)
         e.dataTransfer.effectAllowed = 'move'
     }
+
+    const renderCategories = () => {
+        const availableCategories = context.exercises.reduce((categories, item) => {
+            if(!categories.includes(item.category)){
+                categories.push(item.category)
+            }
+            return categories
+        },[])
+
+        return (
+            <>
+                {availableCategories.map(cat => (
+                    <option 
+                     key={cat}
+                     value={cat}/>
+                ))}
+            </>
+        )
+
+    }
+
     return(
         <Layout>
             <main className='create-routine'>
@@ -116,18 +138,20 @@ function CreateRoutine(){
                         {panelRendered === 'exercises' ?
                             <>
                                 <div className='create-routine__filter-bar'>
-                                    <input className='create-routine__search-exercise-input' type='text' placeholder='Search exercise'/>
+                                    <input className='create-routine__search-exercise-input' 
+                                     type='text' 
+                                     placeholder='Search exercise'
+                                     onChange={(event)=>context.setSearchExerciseByName(event.target.value)}/>
                                     <span className='create_routine__category-label'>Category </span>
-                                    <input className='create_routine__category-input' list='categories'/>
+                                    <input className='create_routine__category-input'
+                                     list='categories'
+                                     onChange={(event)=>context.setSearchExerciseByCategory(event.target.value)}/>
                                     <datalist id='categories'>
-                                        <option value={'Category 1'}/>
-                                        <option value={'Category 14'}/>
-                                        <option value={'Category 3'}/>
-                                        <option value={'Category 2'}/>
+                                        {renderCategories()}
                                     </datalist>
                                 </div>
                                 <div className='create-routine__exercises'>
-                                        {context.exercises.map(exercise => (
+                                        {context.filteredExercises.map(exercise => (
                                             <ExerciseCard className='create-routine__exercise' 
                                             key={exercise.name}
                                             exercise={exercise}/>
