@@ -189,5 +189,6 @@
 @media (min-width: 1024px){
     .timer{
         height: 100%;
+        margin: 0;
     }
 }

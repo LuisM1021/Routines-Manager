@@ -35,6 +35,9 @@
     .create-routine__filter-bar{
         flex-wrap: wrap;
     }
+    .create-routine__exercises-card{
+        max-height: 350px;
+    }
     .create-routine__exercises{
         overflow: auto;
         padding: 12px;
