@@ -22,7 +22,6 @@
 }
 .create-routine__detail{
     width: 100%;
-    height: 350px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -98,6 +97,8 @@
 }
 .create-routine__exercises-card{
     width: 100%;
+    min-height: 120px;
+    max-height: 275px;
     background-color: var(--black);
     display: flex;
     flex-direction: column;
@@ -188,6 +189,8 @@
 }
 .create-routine__right-panel{
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 .create-routine__navigate{
     list-style: none;

@@ -1,8 +1,11 @@
 .timer{
     width: 100%;
-    height: 400px;
-    background-color: aliceblue;
+    max-width: 550px;
+    align-self: center;
+    background-color: var(--white);
     padding: 8px;
+    margin-bottom: 24px;
+    border-radius: 12px;
 }
 .timer__buttons{
     width: 100%;
@@ -13,22 +16,38 @@
 .timer__button{
     padding: 4px 8px;
     border-radius: 64px;
+    border: 2px solid var(--burnt-orange);
+    background-color: var(--flame);
+    font-weight: bold;
+    color: var(--white);
 }
 .timer__table{
     width: 100%;
+    margin-top: 8px;
     display: grid;
     grid-template: 32px 1fr 40px / 1fr;
-    background-color: green;
+    overflow: auto;
+    border: 2px solid var(--apple-green);
+    margin-bottom: 8px;
+    position: relative;
 }
 .timer__headers{
     width: 100%;
     height: 100%;
     display: flex;
+    font-size: 18px;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: var(--white);
+    border-bottom: 2px solid var(--apple-green);
 }
 .timer__exercise-title{
     width: 70%;
     text-align: center;
-    background-color: rgb(247, 247, 165);
+    border-right: 1px solid var(--apple-green);
+    color: var(--cerulean);
 }
 .timer__time-header{
     display: flex;
@@ -37,39 +56,59 @@
     align-items: center;
     gap: 8px;
 }
+.timer__time-title{
+    color: var(--cerulean);
+}
 .timer__format-time{
     width: 24px;
     display: flex;
     cursor: pointer;
+    color: var(--flame);
 }
 .timer__steps{
     width: 100%;
     height: 100%;
     list-style: none;
-    /* display: flex; */
 }
 .timer__step{
     width: 100%;
     height: 32px;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid var(--apple-green);
 }
-.timer__step-number{
-    width: 8%;
-    height: 28px;
-    border-radius: 50%;
+.timer__step:last-child{
+    border: none;
+}
+.timer__step-number-cont{
+    width: calc(8% - 4px);
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: aquamarine;
+    margin-left: 4px;
+    text-align: center;
+}
+.timer__step-number{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--black);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: bold;
 }
 .timer__exercise{
     width: 62%;
+    height: 100%;
     text-align: center;
+    border-right: 1px solid var(--apple-green);
+    color: var(--dark-brown);
 }
 .timer__exercise-duration{
     width: 30%;
     text-align: center;
+    color: var(--dark-brown);
 }
 .timer__add-step{
     width: 100%;
@@ -78,8 +117,77 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
+    font-size: 14px;
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    background-color: var(--white);
+    border-top: 2px solid var(--apple-green);
+}
+.timer__add-msg{
+    font-weight: bold;
+    color: var(--cerulean);
+    text-align: center;
 }
 .timer__add{
     width: 24px;
     display: flex;
+    color: var(--flame);
+}
+.timer__options{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.timer__laps{
+    display: flex;
+    gap: 8px;
+    font-weight: bold;
+}
+.timer__laps-number{
+    background-color: var(--burnt-orange);
+    color: var(--white);
+    text-align: center;
+    border-radius: 8px;
+    padding: 0 8px;
+}
+.timer__total{
+    display: flex;
+    gap: 8px;
+    font-weight: bold;
+}
+.timer__total-time{
+    background-color: var(--burnt-orange);
+    color: var(--white);
+    text-align: center;
+    border-radius: 8px;
+    padding: 0 8px;
+}
+.timer__footer-buttons{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.timer__edit{
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    background-color: var(--black);
+    color: var(--white);
+}
+.timer__save{
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    background-color: var(--black);
+    color: var(--white);
+}
+@media (min-width: 1024px){
+    .timer{
+        height: 100%;
+    }
 }

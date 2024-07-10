@@ -30,12 +30,23 @@ function Timer(){
                 </div>
                 <ul className='timer__steps'>
                     <li className='timer__step'>
-                        <span className='timer__step-number'>1</span>
+                        <p className='timer__step-number-cont'>
+                         <span className='timer__step-number'>1</span>
+                        </p>
                         <span className='timer__exercise'>Warming</span>
                         <span className='timer__exercise-duration'>00:07:00</span>
                     </li>
                     <li className='timer__step'>
-                        <span className='timer__step-number'>2</span>
+                    <p className='timer__step-number-cont'>
+                         <span className='timer__step-number'>2</span>
+                        </p>
+                        <span className='timer__exercise'>Prepare</span>
+                        <span className='timer__exercise-duration'>00:00:30</span>
+                    </li>
+                    <li className='timer__step'>
+                        <p className='timer__step-number-cont'>
+                         <span className='timer__step-number'>3</span>
+                        </p>
                         <span className='timer__exercise'>Prepare</span>
                         <span className='timer__exercise-duration'>00:00:30</span>
                     </li>
@@ -47,11 +58,19 @@ function Timer(){
                     </figure>
                 </li>
             </section>
-            <section>
-
+            <section className='timer__options'>
+                <p className='timer__laps'>
+                    <span className='timer__laps-label'>laps</span>
+                    <span className='timer__laps-number'>2</span>
+                </p>
+                <p className='timer__total'>
+                    <span className='timer__total-label'>Total time</span>
+                    <span className='timer__total-time'>02:30:45</span>
+                </p>
             </section>
-            <section>
-
+            <section className='timer__footer-buttons'>
+                <button className='timer__edit'>Edit</button>
+                <button className='timer__save'>Save</button>
             </section>
         </main>
     )
