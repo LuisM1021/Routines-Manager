@@ -1,13 +1,18 @@
-import { ClockIcon, PlusCircleIcon } from "@heroicons/react/24/outline"
+import { useContext } from 'react'
+import { GeneralContext } from '../../GeneralContext'
+import { ClockIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
 
 
 import './Timer.css'
 
 function Timer(){
+    const context = useContext(GeneralContext);
+
     return(
         <main className='timer'>
             <section className='timer__buttons'>
-                <button className='timer__button timer__autogenerate'>
+                <button className='timer__button timer__autogenerate'
+                 onClick={()=>context.autogenerateRoutineTimer()}>
                     autogenerate
                 </button>
                 <button className='timer__button timer__custom'>

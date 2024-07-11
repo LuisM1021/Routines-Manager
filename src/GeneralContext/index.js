@@ -1,6 +1,6 @@
 import { useState,useEffect,createContext } from 'react';
 import { useLocalStorage } from './useLocalStorage';
-import { loadAvailableCategories,loadEquipmentOptions,filterRoutinesByTimeRange } from '../Utils';
+import { loadAvailableCategories,loadEquipmentOptions,filterRoutinesByTimeRange, getNewRoutineTimer } from '../Utils';
 import Fuse from 'fuse.js';
 import moment from 'moment'
 
@@ -66,15 +66,6 @@ function GeneralProvider({children}){
     const [showBenefits, setShowBenefits] = useState(false)
     const [showEquipment, setShowEquipment] = useState(false)
 
-    //List of exercises when creating a routine
-    const [exercisesList, setExercisesList] = useState([])
-    const fuseOptions = {
-        includeScore: true,
-        keys: [
-            "name",
-        ]
-    }
-
     useEffect(()=>setSelectedRoutine(routines[0]),[routines])
 
     useEffect(()=>{
@@ -85,7 +76,12 @@ function GeneralProvider({children}){
         setAvailableCategories(loadAvailableCategories(routines))
         setEquipmentOptions(loadEquipmentOptions(routines))
     },[routines])
-
+    const fuseOptions = {
+        includeScore: true,
+        keys: [
+            "name",
+        ]
+    }
     //Logic to filter routines
     const filterRoutines = ()=>{
         let routinesToSet = routines
@@ -139,6 +135,32 @@ function GeneralProvider({children}){
         setExecuteFilters(true)
     }
     
+    //***********Create a routine**********
+    //List of exercises when creating a routine
+    const [exercisesList, setExercisesList] = useState([])
+    const [routineToCreate, setRoutineToCreate] = useState({})
+
+    const setNewRoutineName = (name) => {
+        setRoutineToCreate({
+            ...routineToCreate,
+            name: name
+        })
+    }
+    const setNewRoutineDescription = (description) => {
+        setRoutineToCreate({
+            ...routineToCreate,
+            description: description
+        })
+    }
+
+    const autogenerateRoutineTimer = () => {
+        const timer = getNewRoutineTimer(exercisesList)
+        setRoutineToCreate({
+            ...routineToCreate,
+            timer: timer
+        })
+    }
+console.log(routineToCreate)
     //Logic to filter exercises
     const [filteredExercises, setFilteredExercises] = useState([])
     const [searchExerciseByName, setSearchExerciseByName] = useState('')
@@ -161,6 +183,8 @@ function GeneralProvider({children}){
         setFilteredExercises(filterResult)
     },[searchExerciseByName, searchExerciseByCategory, exercises])
     
+    //*************************************
+
     //Random number function 
     const getRandom =(min,max)=>{
         return Math.floor(Math.random()*(max-min))+min
@@ -230,7 +254,10 @@ function GeneralProvider({children}){
             setExercisesList,
             filteredExercises,
             setSearchExerciseByName,
-            setSearchExerciseByCategory
+            setSearchExerciseByCategory,
+            setNewRoutineName,
+            setNewRoutineDescription,
+            autogenerateRoutineTimer
         }}>
             {children}
         </GeneralContext.Provider>

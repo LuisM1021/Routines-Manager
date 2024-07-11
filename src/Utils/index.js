@@ -48,6 +48,34 @@ function calculateTimer(routine){
     timer.totalTime = calculateTotalTime(timer.steps)
     return timer
 }
+
+export function getNewRoutineTimer(exercisesList){
+    // console.log(exercisesList)
+    let exerciseListWithTimer = []
+    const timer = {
+        totalTime: [],
+        laps: 1,
+        steps: [
+            {exercise: 'Warming', time: [0,7,0]},
+            {exercise: 'Prepare',time: [0,0,15]}
+        ]
+    }
+    exercisesList.forEach(exercise => {
+        for(let i=1; i<=exercise.suggestedSeries; i++){
+            console.log('it')
+            timer.steps.push({
+                exercise: exercise.name,
+                time: exercise.suggestedTime,
+                reps: exercise.suggestedReps
+            })
+            timer.steps.push({exercise: 'Rest', time: [0, 0, 45]})
+        }
+    })
+    timer.steps.pop()
+    timer.totalTime = calculateTotalTime(timer.steps)
+    return timer
+}
+
 /**
  * This function receives step by step the routine and 
  * calculate the total time to finish it
@@ -73,6 +101,8 @@ export function calculateTotalTime(steps){
     }
     return [hrs,min,sec]
 }
+
+
 /**
  * This function set the data of the localStorage the first time
  */

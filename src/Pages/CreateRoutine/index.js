@@ -89,11 +89,17 @@ function CreateRoutine(){
                     <section className='create-routine__detail'>
                         <p className='create-routine__name'>
                             <span className='create-routine__name-label'>Name :</span>
-                            <input className='create-routine__name-input' type='text' placeholder='New routine'/>
+                            <input className='create-routine__name-input'
+                             type='text' 
+                             placeholder='New routine'
+                             onChange={(event)=>context.setNewRoutineName(event.target.value)}/>
                         </p>
                         <p className='create-routine__description'>
                             <span className='create-routine__description-label'>Description :</span>
-                            <textarea className='create-routine__description-input' type='text' placeholder='Describe your routine'/>
+                            <textarea className='create-routine__description-input'
+                             type='text'
+                              placeholder='Describe your routine'
+                              onChange={(event)=>context.setNewRoutineDescription(event.target.value)}/>
                         </p>
                         <div className='create-routine__exercises-card'>
                             <h2 className='create_routine__exercises-title'>Exercises</h2>
