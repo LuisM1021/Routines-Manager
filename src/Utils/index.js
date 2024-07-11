@@ -50,8 +50,6 @@ function calculateTimer(routine){
 }
 
 export function getNewRoutineTimer(exercisesList){
-    // console.log(exercisesList)
-    let exerciseListWithTimer = []
     const timer = {
         totalTime: [],
         laps: 1,
@@ -71,7 +69,7 @@ export function getNewRoutineTimer(exercisesList){
             timer.steps.push({exercise: 'Rest', time: [0, 0, 45]})
         }
     })
-    timer.steps.pop()
+    if(timer.steps.length>2) {timer.steps.pop()}
     timer.totalTime = calculateTotalTime(timer.steps)
     return timer
 }

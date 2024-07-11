@@ -1,6 +1,6 @@
 .timer{
     width: 100%;
-    max-width: 550px;
+    max-width: 600px;
     align-self: center;
     background-color: var(--white);
     padding: 8px;
@@ -23,6 +23,7 @@
 }
 .timer__table{
     width: 100%;
+    max-height: 400px;
     margin-top: 8px;
     display: grid;
     grid-template: 32px 1fr 40px / 1fr;
@@ -44,17 +45,18 @@
     border-bottom: 2px solid var(--apple-green);
 }
 .timer__exercise-title{
-    width: 70%;
+    width: 60%;
     text-align: center;
     border-right: 1px solid var(--apple-green);
     color: var(--cerulean);
 }
 .timer__time-header{
     display: flex;
-    width: 30%;
+    width: 25%;
     justify-content: center;
     align-items: center;
     gap: 8px;
+    border-right: 1px solid var(--apple-green);
 }
 .timer__time-title{
     color: var(--cerulean);
@@ -64,6 +66,11 @@
     display: flex;
     cursor: pointer;
     color: var(--flame);
+}
+.timer__reps{
+    width: 15%;
+    text-align: center;
+    color: var(--cerulean);
 }
 .timer__steps{
     width: 100%;
@@ -99,14 +106,25 @@
     font-weight: bold;
 }
 .timer__exercise{
-    width: 62%;
+    width: 52%;
     height: 100%;
+    padding-top: 2px;
     text-align: center;
     border-right: 1px solid var(--apple-green);
     color: var(--dark-brown);
 }
 .timer__exercise-duration{
-    width: 30%;
+    width: 25%;
+    height: 100%;
+    padding-top: 2px;
+    text-align: center;
+    color: var(--dark-brown);
+    border-right: 1px solid var(--apple-green);
+}
+.timer__exercise-reps{
+    width: 15%;
+    height: 100%;
+    padding-top: 2px;
     text-align: center;
     color: var(--dark-brown);
 }

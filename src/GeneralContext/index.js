@@ -257,7 +257,8 @@ console.log(routineToCreate)
             setSearchExerciseByCategory,
             setNewRoutineName,
             setNewRoutineDescription,
-            autogenerateRoutineTimer
+            autogenerateRoutineTimer,
+            routineToCreate
         }}>
             {children}
         </GeneralContext.Provider>
