@@ -7,7 +7,6 @@ import './ExerciseDetail.css'
 function ExerciseDetail(){
     const context = useContext(GeneralContext)
     const exercise = context.displayExerciseDetail
-    console.log(exercise)
     const showTime= (exercise)=>{
         if(exercise.suggestedTime[0]>0 && exercise.suggestedTime[1]>0){
             return(

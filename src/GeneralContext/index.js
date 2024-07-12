@@ -139,7 +139,6 @@ function GeneralProvider({children}){
     //List of exercises when creating a routine
     const [exercisesList, setExercisesList] = useState([])
     const [routineToCreate, setRoutineToCreate] = useState({})
-
     const setNewRoutineName = (name) => {
         setRoutineToCreate({
             ...routineToCreate,
@@ -160,7 +159,6 @@ function GeneralProvider({children}){
             timer: timer
         })
     }
-console.log(routineToCreate)
     //Logic to filter exercises
     const [filteredExercises, setFilteredExercises] = useState([])
     const [searchExerciseByName, setSearchExerciseByName] = useState('')
@@ -258,7 +256,8 @@ console.log(routineToCreate)
             setNewRoutineName,
             setNewRoutineDescription,
             autogenerateRoutineTimer,
-            routineToCreate
+            routineToCreate,
+            setRoutineToCreate
         }}>
             {children}
         </GeneralContext.Provider>

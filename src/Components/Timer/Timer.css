@@ -1,3 +1,9 @@
+input{
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Poppins', 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
 .timer{
     width: 100%;
     max-width: 600px;
@@ -110,8 +116,10 @@
     height: 100%;
     padding-top: 2px;
     text-align: center;
+    border: none;
     border-right: 1px solid var(--apple-green);
     color: var(--dark-brown);
+    background: none;
 }
 .timer__exercise-duration{
     width: 25%;
@@ -120,6 +128,31 @@
     text-align: center;
     color: var(--dark-brown);
     border-right: 1px solid var(--apple-green);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
+.timer__exercise-hrs{
+    background: none;
+    border: none;
+    width: 24px;
+    text-align: center;
+}
+.timer__exercise-min{
+    background: none;
+    border: none;  
+    width: 24px;
+    text-align: center;
+}
+.timer__exercise-sec{
+    background: none;
+    border: none;
+    width: 24px;
+    text-align: center;
+}
+.timer__exercise-duration-points{
+
 }
 .timer__exercise-reps{
     width: 15%;
@@ -127,6 +160,8 @@
     padding-top: 2px;
     text-align: center;
     color: var(--dark-brown);
+    border: none;
+    background: none;
 }
 .timer__add-step{
     width: 100%;
@@ -162,7 +197,6 @@
 .timer__laps{
     display: flex;
     gap: 8px;
-    font-weight: bold;
 }
 .timer__laps-number{
     background-color: var(--burnt-orange);
@@ -170,6 +204,9 @@
     text-align: center;
     border-radius: 8px;
     padding: 0 8px;
+    border: none;
+    width: 28px;
+    font-weight: bold;
 }
 .timer__total{
     display: flex;

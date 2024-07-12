@@ -60,17 +60,22 @@ export function getNewRoutineTimer(exercisesList){
     }
     exercisesList.forEach(exercise => {
         for(let i=1; i<=exercise.suggestedSeries; i++){
-            console.log('it')
+            let time
+            if(exercise.suggestedTime[0] === 0 && exercise.suggestedTime[1] === 0 && exercise.suggestedTime[2] === 0){
+                time = [0,0,45]
+            }else{
+                time = exercise.suggestedTime
+            }
             timer.steps.push({
                 exercise: exercise.name,
-                time: exercise.suggestedTime,
+                time: time,
                 reps: exercise.suggestedReps
             })
             timer.steps.push({exercise: 'Rest', time: [0, 0, 45]})
         }
     })
     if(timer.steps.length>2) {timer.steps.pop()}
-    timer.totalTime = calculateTotalTime(timer.steps)
+    timer.totalTime = calculateTotalTime(timer.steps, timer.laps)
     return timer
 }
 
@@ -80,13 +85,16 @@ export function getNewRoutineTimer(exercisesList){
  * @param {Array} steps contain each step of the routine 
  * @returns total time
  */
-export function calculateTotalTime(steps){
+export function calculateTotalTime(steps, laps){
     let hrs= 0,min = 0,sec = 0
     steps.forEach(step => {
         hrs += step.time[0]
         min += step.time[1]
         sec += step.time[2]
     })
+    hrs = hrs*laps
+    min = min*laps
+    sec = sec*laps
     if(sec > 59){
         const addedMinutes = Math.floor(sec/60)
         min += addedMinutes

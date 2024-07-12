@@ -9,7 +9,6 @@ import './desktop.css'
 
 import { GeneralContext } from "../../GeneralContext";
 import { useContext, useState } from "react";
-import { render } from "@testing-library/react";
 
 function CreateRoutine(){
     const context = useContext(GeneralContext);
@@ -24,6 +23,8 @@ function CreateRoutine(){
         const index = context.exercisesList.length + 1
         const newExercise = {
             name: `New exercise ${index}`,
+            suggestedSeries: 1,
+            suggestedTime: [0,0,45]
         }
         context.setExercisesList((exercises)=>([...exercises, newExercise]))
     }
