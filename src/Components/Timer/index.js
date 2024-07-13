@@ -296,10 +296,10 @@ function Timer(){
                                     <p className='timer__time-title'>
                                         Time  
                                     </p>
-                                    <figure className='timer__format-time'>
+                                    {/* <figure className='timer__format-time'>
                                         <ClockIcon className='timer__format'
                                         onClick={()=>setTimeFormat((timeFormat==='clock' ? 'text':'clock'))}/>
-                                    </figure>
+                                    </figure> */}
                                 </div>
                                 <div className='timer__reps'>
                                     <p className='timer__reps-label'>
@@ -334,7 +334,7 @@ function Timer(){
                                             onFocus={(event)=>event.target.value = ''}
                                             onKeyDown={(event)=>focusNextStepTime(event, index)}/>
                                         </div> 
-                                        <input className='timer__exercise-reps' 
+                                        <input className='timer__exercise-reps-editable' 
                                         placeholder={step.reps || '-'}
                                         onBlur={(event)=>changeStepReps(index,event, event.target.value)}
                                         onClick={(event)=>event.target.value = ''}/>

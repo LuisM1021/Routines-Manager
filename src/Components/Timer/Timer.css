@@ -214,21 +214,37 @@ input{
     border: none;
     width: 24px;
     text-align: center;
+    color: var(--burnt-orange);
+    &::placeholder{
+        color: var(--burnt-orange);
+    }
+}
+.timer__exercise-hrs:-webkit-autofill{
+    border: 3px solid red;
+    background: var(--white);
 }
 .timer__exercise-min{
     background: none;
     border: none;  
     width: 24px;
     text-align: center;
+    color: var(--burnt-orange);
+    &::placeholder{
+        color: var(--burnt-orange);
+    }
 }
 .timer__exercise-sec{
     background: none;
     border: none;
     width: 24px;
     text-align: center;
+    color: var(--burnt-orange);
+    &::placeholder{
+        color: var(--burnt-orange);
+    }
 }
 .timer__exercise-duration-points{
-
+    color: var(--cerulean);
 }
 .timer__exercise-reps{
     width: 15%;
@@ -238,6 +254,19 @@ input{
     color: var(--dark-brown);
     border: none;
     background: none;
+}
+.timer__exercise-reps-editable{
+    width: 15%;
+    height: 100%;
+    padding-top: 2px;
+    text-align: center;
+    color: var(--burnt-orange);
+    border: none;
+    background: none;
+
+    &::placeholder{
+        color: var(--burnt-orange);
+    }
 }
 .timer__add-step{
     width: 100%;
