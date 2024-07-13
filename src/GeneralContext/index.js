@@ -1,6 +1,6 @@
 import { useState,useEffect,createContext } from 'react';
 import { useLocalStorage } from './useLocalStorage';
-import { loadAvailableCategories,loadEquipmentOptions,filterRoutinesByTimeRange, getNewRoutineTimer } from '../Utils';
+import { loadAvailableCategories,loadEquipmentOptions,filterRoutinesByTimeRange, getNewRoutineTimer, updateSteps } from '../Utils';
 import Fuse from 'fuse.js';
 import moment from 'moment'
 
@@ -151,7 +151,6 @@ function GeneralProvider({children}){
             description: description
         })
     }
-
     const autogenerateRoutineTimer = () => {
         const timer = getNewRoutineTimer(exercisesList)
         setRoutineToCreate({
@@ -159,6 +158,23 @@ function GeneralProvider({children}){
             timer: timer
         })
     }
+    const addStep = (newExercise) => {
+        const newTimer = updateSteps(routineToCreate.timer, newExercise)
+        setRoutineToCreate({
+            ...routineToCreate,
+            timer: newTimer
+        })
+    }
+    const initializeCustomTimer = () => {
+        const timer = getNewRoutineTimer([])
+        setRoutineToCreate({
+            ...routineToCreate,
+            timer: timer
+        })
+    }
+    //Test dragging
+    const [draggedItem, setDraggedItem] = useState(null)
+
     //Logic to filter exercises
     const [filteredExercises, setFilteredExercises] = useState([])
     const [searchExerciseByName, setSearchExerciseByName] = useState('')
@@ -192,6 +208,7 @@ function GeneralProvider({children}){
         const now = moment()
         const routineWithLastUsedTime = {
             ...routine,
+            id: userRoutines.length+1,
             lastUse: now.format('YYYY-MM-DD HH:mm:ss')
         }
         const addedUserRoutines = getItem('userRoutines')
@@ -257,7 +274,11 @@ function GeneralProvider({children}){
             setNewRoutineDescription,
             autogenerateRoutineTimer,
             routineToCreate,
-            setRoutineToCreate
+            setRoutineToCreate,
+            initializeCustomTimer,
+            addStep,
+            draggedItem,
+            setDraggedItem
         }}>
             {children}
         </GeneralContext.Provider>

@@ -56,9 +56,40 @@ function CreateRoutine(){
         setDraggedOverExercise(index)
         e.dataTransfer.dropEffect = 'move'
     }
-    const handleDragStart = (e, index) => {
+    const handleDragStart = (e, index, exercise) => {
         setDraggedExercise(index)
         e.dataTransfer.effectAllowed = 'move'
+        e.dataTransfer.setData('text/plain', JSON.stringify(exercise))
+    }
+    // const handleTouchStart = (e, index, exercise) => {
+    //     // setDraggedExercise(index)
+    //     // e.dataTransfer.effectAllowed = 'move'
+    //     // e.dataTransfer.setData('text/plain', JSON.stringify(exercise))
+    //     // console.log('gonna handle')
+    //     context.setDraggedItem(exercise)
+    // }
+    const handleTouchMove = (e, exercise) => {
+        // e.preventDefault()
+        // console.log(e)
+        const touch = e.touches[0]
+        const target = document.elementFromPoint(touch.clientX, touch.clientY)
+        if(target){
+            const closestDiv = target.closest('.timer__add-step')
+            if(closestDiv){
+                setDraggedExercise(exercise)
+            }
+            else{
+                setDraggedExercise(null)
+            }
+        }else{
+            setDraggedExercise(null)
+        }
+    }
+
+    const handleTouchEnd = () => {
+        if(draggedExercise){
+            context.addStep(draggedExercise)
+        }
     }
 
     const renderCategories = () => {
@@ -107,11 +138,13 @@ function CreateRoutine(){
                             <ul className='create_routine__exercises-list'>
                                 {(context.exercisesList.length>0) &&
                                     context.exercisesList.map((exercise, index) =>(
-                                        <li key={exercise.name} className='create_routine__item' draggable
-                                         onDragStart={(e)=>handleDragStart(e, index)}
+                                        <li key={exercise.name} className='create_routine__item' draggable effectAllowed
+                                         onDragStart={(e)=>handleDragStart(e, index, exercise)}
+                                        //  onTouchStart={(e)=>handleTouchStart(e, index, exercise)}
                                          onDragOver={(e)=>handleDragOver(e,index)}
+                                         onTouchMove={(e)=>handleTouchMove(e, exercise)}
                                          onDragEnd={(e)=>handleDragEnd(e, draggedExercise, draggedOverExercise)}
-                                         >
+                                         onTouchEnd={(e)=>handleTouchEnd()}>
                                             <Bars2Icon className='create_routine__bars'/>
                                             <input id={exercise.name} className='create-routine__item-name' type='text' placeholder={exercise.name} defaultValue={exercise.name}
                                              onBlur={(event)=>customizeExercise(event.target.value, event.target.placeholder, event.target.id)}

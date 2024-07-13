@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import { GeneralContext } from '../../GeneralContext'
-import { ClockIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
+import { ClockIcon, PlusCircleIcon, TrashIcon } from '@heroicons/react/24/outline'
 import { calculateTotalTime } from '../../Utils'
 
 import './Timer.css'
@@ -9,6 +9,8 @@ function Timer(){
     const context = useContext(GeneralContext);
     const [timeFormat, setTimeFormat] = useState('clock')
     const [canEdit, setCanEdit] = useState(false)
+    const [timerActiveButton, setTimerActiveButton] = useState(null)
+    const [chooseExercisePanel, setChooseExercisePanel] = useState(false)
     const renderTime = (time) => {
         if(timeFormat === 'clock'){
             if(time){
@@ -168,58 +170,104 @@ function Timer(){
             }
         }
     }
-    console.log(context.routineToCreate)
+    const handleAutogenerate = () => {
+        context.autogenerateRoutineTimer()
+        setTimerActiveButton('autogenerate')
+        setCanEdit(false)
+    }
+    const handleCustom = () => {
+        setCanEdit(true)
+        setTimerActiveButton('custom')
+        context.initializeCustomTimer()
+    }
+    const handleHideExercisePanel = (event) => {
+        if(event.target.className === 'timer__exercises-list-cont'){
+            setChooseExercisePanel(false)
+        }
+    }
+    const handleAddStep = (exercise) => {
+        context.addStep(exercise)
+        setChooseExercisePanel(false)
+    }
+    const handleDragOver = (e) => {
+        e.preventDefault()
+        e.dataTransfer.dropEffect = 'move'
+    }
+    const handleDrop = (e) => {
+        e.preventDefault()
+        const exercise = JSON.parse(e.dataTransfer.getData('text/plain'))
+        handleAddStep(exercise)
+    }
     return(
         <main className='timer'>
+            {chooseExercisePanel && 
+                <section className='timer__exercises-list-cont'
+                 onClick={(event)=>handleHideExercisePanel(event)}>
+                    <div className='timer__exercises-list'>
+                        <p className='timer__choose-exercise'>Choose an exercise</p>
+                        <ul className='timer__exercises-to-choose'>
+                            {context.exercisesList && context.exercisesList.map((exercise, index)=>(
+                                <p key={index} className='timer__exercise-to-add'
+                                 onClick={()=>handleAddStep(exercise)}>
+                                    {exercise.name}
+                                </p>
+                            ))}
+                        </ul>
+                    </div>
+                </section>
+            }
             <section className='timer__buttons'>
-                <button className='timer__button timer__autogenerate'
-                 onClick={()=>context.autogenerateRoutineTimer()}>
+                <button className={`timer__button timer__autogenerate ${timerActiveButton === 'autogenerate' && 'timer__button-active'}`}
+                 onClick={()=>handleAutogenerate()}>
                     autogenerate
                 </button>
-                <button className='timer__button timer__custom'>
+                <button className={`timer__button timer__custom ${timerActiveButton === 'custom' && 'timer__button-active'}`}
+                 onClick={()=>handleCustom()}>
                     custom
                 </button>
             </section>
-            {/* {canEdit ? 
+            {!canEdit ? 
                 <>
-                    <section className='timer__table'>
-                        <div className='timer__headers'>
-                            <p className='timer__exercise-title'>
-                                Exercise  
-                            </p>
-                            <div className='timer__time-header'>
-                                <p className='timer__time-title'>
-                                    Time  
+                    <section className='timer__table-cont'>
+                        <div className='timer__table timer__table-no-edit'>
+                            <div className='timer__headers'>
+                                <p className='timer__exercise-title'>
+                                    Exercise  
                                 </p>
-                                <figure className='timer__format-time'>
-                                    <ClockIcon className='timer__format'
-                                    onClick={()=>setTimeFormat((timeFormat==='clock' ? 'text':'clock'))}/>
-                                </figure>
-                            </div>
-                            <div className='timer__reps'>
-                                <p className='timer__reps-label'>
-                                    Reps
-                                </p>
-                            </div>
-                        </div>
-                        <ul className='timer__steps'>
-                            {context.routineToCreate.timer && context.routineToCreate.timer.steps.map((step, index) => (
-                                <li className='timer__step' key={index}>
-                                    <p className='timer__step-number-cont'>
-                                    <span className='timer__step-number'>{index+1}</span>
+                                <div className='timer__time-header'>
+                                    <p className='timer__time-title'>
+                                        Time  
                                     </p>
-                                    <span className='timer__exercise'>{step.exercise}</span>
-                                    <span className='timer__exercise-duration'>{renderTime(step.time)}</span>
-                                    <span className='timer__exercise-reps'>{step.reps || '-'}</span>
-                                </li>
-                            ))}
-                        </ul>
-                        <li className='timer__add-step'>
-                            <p className='timer__add-msg'>Drag an exercise here or click to add</p>
-                            <figure className='timer__add'>
-                                <PlusCircleIcon className='timer__add-icon'/>
-                            </figure>
-                        </li>
+                                    <figure className='timer__format-time'>
+                                        <ClockIcon className='timer__format'
+                                        onClick={()=>setTimeFormat((timeFormat==='clock' ? 'text':'clock'))}/>
+                                    </figure>
+                                </div>
+                                <div className='timer__reps'>
+                                    <p className='timer__reps-label'>
+                                        Reps
+                                    </p>
+                                </div>
+                            </div>
+                            <ul className='timer__steps'>
+                                {context.routineToCreate.timer && context.routineToCreate.timer.steps.map((step, index) => (
+                                    <li className='timer__step' key={index}>
+                                        <p className='timer__step-number-cont'>
+                                        <span className='timer__step-number'>{index+1}</span>
+                                        </p>
+                                        <span className='timer__exercise'>{step.exercise}</span>
+                                        <span className='timer__exercise-duration'>{renderTime(step.time)}</span>
+                                        <span className='timer__exercise-reps'>{step.reps || '-'}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                            {/* <li className='timer__add-step'>
+                                <p className='timer__add-msg'>Drag an exercise here or click to add</p>
+                                <figure className='timer__add'>
+                                    <PlusCircleIcon className='timer__add-icon'/>
+                                </figure>
+                            </li> */}
+                        </div>
                     </section>
                     <section className='timer__options'>
                         <p className='timer__laps'>
@@ -235,71 +283,76 @@ function Timer(){
                     </section>
                 </> : 
                 <>
-                    Editable */}
-                    <section className='timer__table'>
-                        <div className='timer__headers'>
-                            <p className='timer__exercise-title'>
-                                Exercise  
-                            </p>
-                            <div className='timer__time-header'>
-                                <p className='timer__time-title'>
-                                    Time  
+                    <section className='timer__table-cont'>
+                    Editable
+                        <div className='timer__table'>
+                            <div className='timer__headers'>
+                                <p className='timer__exercise-title'>
+                                    Exercise  
                                 </p>
-                                <figure className='timer__format-time'>
-                                    <ClockIcon className='timer__format'
-                                    onClick={()=>setTimeFormat((timeFormat==='clock' ? 'text':'clock'))}/>
-                                </figure>
-                            </div>
-                            <div className='timer__reps'>
-                                <p className='timer__reps-label'>
-                                    Reps
-                                </p>
-                            </div>
-                        </div>
-                        <ul className='timer__steps'>
-                            {context.routineToCreate.timer && context.routineToCreate.timer.steps.map((step, index) => (
-                                <li className='timer__step' key={index}>
-                                    <p className='timer__step-number-cont'>
-                                    <span className='timer__step-number'>{index+1}</span>
+                                <div className='timer__time-header'>
+                                    <p className='timer__time-title'>
+                                        Time  
                                     </p>
-                                    <span className='timer__exercise'>{step.exercise}</span>
-                                    <div className='timer__exercise-duration'>
-                                        <input id={'hr'+index} className='timer__exercise-hrs' type='text' placeholder={renderInputTime(step.time[0])}
-                                         onKeyDown={(event)=>event.key==='Enter' && document.getElementById('min'+index).focus()}
-                                         onBlur={(event)=>changeStepTime(index, event, 'hr')}
-                                         onFocus={(event)=>event.target.value = ''}/>
-                                        <span className='timer__exercise-duration-points'>:</span>
-                                        <input id={'min'+index} className='timer__exercise-min' type='text' placeholder={renderInputTime(step.time[1])}
-                                         onKeyDown={(event)=>event.key==='Enter' && document.getElementById('sec'+index).focus()}
-                                         onBlur={(event)=>changeStepTime(index, event, 'min')}
-                                         onFocus={(event)=>event.target.value = ''}/>
-                                        <span className='timer__exercise-duration-points'>:</span>
-                                        <input id={'sec'+index} className='timer__exercise-sec' type='text' placeholder={renderInputTime(step.time[2])}
-                                         onBlur={(event)=>changeStepTime(index, event, 'sec')}
-                                         onFocus={(event)=>event.target.value = ''}
-                                         onKeyDown={(event)=>focusNextStepTime(event, index)}/>
-                                    </div> 
-                                    <input className='timer__exercise-reps' 
-                                     placeholder={step.reps || '-'}
-                                     onBlur={(event)=>changeStepReps(index,event, event.target.value)}
-                                     onClick={(event)=>event.target.value = ''}/>
-                                </li>
-                            ))}
-                        </ul>
-                        <li className='timer__add-step'>
-                            <p className='timer__add-msg'>Drag an exercise here or click to add</p>
-                            <figure className='timer__add'>
-                                <PlusCircleIcon className='timer__add-icon'/>
-                            </figure>
-                        </li>
+                                    <figure className='timer__format-time'>
+                                        <ClockIcon className='timer__format'
+                                        onClick={()=>setTimeFormat((timeFormat==='clock' ? 'text':'clock'))}/>
+                                    </figure>
+                                </div>
+                                <div className='timer__reps'>
+                                    <p className='timer__reps-label'>
+                                        Reps
+                                    </p>
+                                </div>
+                            </div>
+                            <ul className='timer__steps'>
+                                {context.routineToCreate.timer && context.routineToCreate.timer.steps.map((step, index) => (
+                                    <li className='timer__step' key={index}>
+                                        <p className='timer__step-number-cont'>
+                                        <span className='timer__step-number'>{index+1}</span>
+                                        </p>
+                                        <span className='timer__exercise'>{step.exercise}</span>
+                                        <div className='timer__exercise-duration'>
+                                            <input id={'hr'+index} className='timer__exercise-hrs' type='text' placeholder={renderInputTime(step.time[0])}
+                                            onKeyDown={(event)=>event.key==='Enter' && document.getElementById('min'+index).focus()}
+                                            onBlur={(event)=>changeStepTime(index, event, 'hr')}
+                                            onFocus={(event)=>event.target.value = ''}/>
+                                            <span className='timer__exercise-duration-points'>:</span>
+                                            <input id={'min'+index} className='timer__exercise-min' type='text' placeholder={renderInputTime(step.time[1])}
+                                            onKeyDown={(event)=>event.key==='Enter' && document.getElementById('sec'+index).focus()}
+                                            onBlur={(event)=>changeStepTime(index, event, 'min')}
+                                            onFocus={(event)=>event.target.value = ''}/>
+                                            <span className='timer__exercise-duration-points'>:</span>
+                                            <input id={'sec'+index} className='timer__exercise-sec' type='text' placeholder={renderInputTime(step.time[2])}
+                                            onBlur={(event)=>changeStepTime(index, event, 'sec')}
+                                            onFocus={(event)=>event.target.value = ''}
+                                            onKeyDown={(event)=>focusNextStepTime(event, index)}/>
+                                        </div> 
+                                        <input className='timer__exercise-reps' 
+                                        placeholder={step.reps || '-'}
+                                        onBlur={(event)=>changeStepReps(index,event, event.target.value)}
+                                        onClick={(event)=>event.target.value = ''}/>
+                                    </li>
+                                ))}
+                            </ul>
+                            <li className='timer__add-step'
+                             onClick={()=>setChooseExercisePanel(true)}
+                             onDragOver={(e)=>handleDragOver(e)}
+                             onDrop={(e)=>handleDrop(e)}>
+                                <p className='timer__add-msg'>Drag an exercise here or click to add</p>
+                                <figure className='timer__add'>
+                                    <PlusCircleIcon className='timer__add-icon'/>
+                                </figure>
+                            </li>
+                        </div>
                     </section>
                     <section className='timer__options'>
                         <p className='timer__laps'>
                             <span className='timer__laps-label'>laps</span>
                             <input className='timer__laps-number' placeholder={context.routineToCreate.timer ? context.routineToCreate.timer.laps : '-'}
-                             onBlur={(event)=>changeRoutineLaps(event)}
-                             onClick={(event)=>event.target.value = ''}
-                             onKeyDown={(event)=>event.key === 'Enter' && event.target.blur()}/>
+                            onBlur={(event)=>changeRoutineLaps(event)}
+                            onClick={(event)=>event.target.value = ''}
+                            onKeyDown={(event)=>event.key === 'Enter' && event.target.blur()}/>
                         </p>
                         <p className='timer__total'>
                             <span className='timer__total-label'>Total time</span>
@@ -308,14 +361,16 @@ function Timer(){
                             </span>
                         </p>
                     </section>
-                {/* </>
-            } */}
+                </>
+            }
             
             <section className='timer__footer-buttons'>
-                <button className='timer__edit'
-                 onClick={()=>setCanEdit(canEdit ? false : true)}>
-                    Edit
-                </button>
+                {!canEdit && 
+                    <button className='timer__edit'
+                    onClick={()=>handleCustom()}>
+                        Edit
+                    </button>
+                }
                 <button className='timer__save'>Save</button>
             </section>
         </main>

@@ -12,6 +12,42 @@ input{
     padding: 8px;
     margin-bottom: 24px;
     border-radius: 12px;
+    position: relative;
+}
+.timer__exercises-list-cont{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: var(--black-opacity);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+}
+.timer__exercises-list{
+    width: 150px;
+    height: 200px;
+    background-color: var(--black);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 16px;
+}
+.timer__choose-exercise{
+    color: var(--flame);
+    height: 60px;
+}
+.timer__exercises-to-choose{
+    height: calc(100% - 60px);
+    overflow-y: auto;
+}
+.timer__exercise-to-add{
+    color: var(--cerulean);
+    &:hover{
+        background-color: var(--apple-green);
+    }
 }
 .timer__buttons{
     width: 100%;
@@ -27,16 +63,27 @@ input{
     font-weight: bold;
     color: var(--white);
 }
-.timer__table{
+.timer__button-active{
+    background-color: var(--apple-green);
+}
+.timer__table-cont{
     width: 100%;
     max-height: 400px;
     margin-top: 8px;
+    overflow-x: scroll;
+}
+.timer__table{
+    width: 100%;
+    min-width: 360px;
     display: grid;
     grid-template: 32px 1fr 40px / 1fr;
     overflow: auto;
     border: 2px solid var(--apple-green);
     margin-bottom: 8px;
     position: relative;
+}
+.timer__table-no-edit{
+    grid-template: 32px 1fr / 1fr;
 }
 .timer__headers{
     width: 100%;

@@ -45,7 +45,7 @@ function calculateTimer(routine){
         }
     })
     timer.steps.pop()
-    timer.totalTime = calculateTotalTime(timer.steps)
+    timer.totalTime = calculateTotalTime(timer.steps, timer.laps)
     return timer
 }
 
@@ -79,6 +79,28 @@ export function getNewRoutineTimer(exercisesList){
     return timer
 }
 
+export function updateSteps(oldTimer, newExercise){
+    const timer = {
+        totalTime: [],
+        laps: oldTimer.laps,
+        steps: oldTimer.steps
+    }
+    let time
+    if(newExercise.suggestedTime[0] === 0 && newExercise.suggestedTime[1] === 0 && newExercise.suggestedTime[2] === 0){
+        time = [0,0,45]
+    }else{
+        time = newExercise.suggestedTime
+    }
+    timer.steps.push({
+        exercise: newExercise.name,
+        time: time,
+        reps: newExercise.suggestedReps
+    })
+    timer.totalTime = calculateTotalTime(timer.steps, timer.laps)
+    return timer
+            // timer.steps.push({exercise: 'Rest', time: [0, 0, 45]})
+}
+
 /**
  * This function receives step by step the routine and 
  * calculate the total time to finish it
@@ -87,14 +109,32 @@ export function getNewRoutineTimer(exercisesList){
  */
 export function calculateTotalTime(steps, laps){
     let hrs= 0,min = 0,sec = 0
+
+    //calculating only the exercises
     steps.forEach(step => {
-        hrs += step.time[0]
-        min += step.time[1]
-        sec += step.time[2]
+        if(step.exercise !== 'Warming' && step.exercise !== 'Prepare'){
+            hrs += step.time[0]
+            min += step.time[1]
+            sec += step.time[2]  
+        }
     })
     hrs = hrs*laps
     min = min*laps
     sec = sec*laps
+
+    //adding the initial steps
+    steps.forEach(step => {
+        if(step.exercise === 'Warming'){
+            hrs += step.time[0]
+            min += step.time[1]
+            sec += step.time[2]
+        }else if(step.exercise === 'Prepare'){
+            hrs += step.time[0]
+            min += step.time[1]
+            sec += step.time[2]
+        }
+    })
+
     if(sec > 59){
         const addedMinutes = Math.floor(sec/60)
         min += addedMinutes
