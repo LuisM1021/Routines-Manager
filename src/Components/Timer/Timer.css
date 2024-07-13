@@ -77,8 +77,8 @@ input{
     min-width: 360px;
     display: grid;
     grid-template: 32px 1fr 40px / 1fr;
-    overflow: auto;
-    border: 2px solid var(--apple-green);
+    border-right: 2px solid var(--apple-green);
+    border-left: 2px solid var(--apple-green);
     margin-bottom: 8px;
     position: relative;
 }
@@ -96,6 +96,7 @@ input{
     left: 0;
     background-color: var(--white);
     border-bottom: 2px solid var(--apple-green);
+    border-top: 2px solid var(--apple-green);
 }
 .timer__exercise-title{
     width: 60%;
@@ -136,9 +137,19 @@ input{
     display: flex;
     align-items: center;
     border-bottom: 1px solid var(--apple-green);
+    &:last-child{
+        border-bottom: 2px solid var(--apple-green);
+    }
 }
-.timer__step:last-child{
-    border: none;
+.timer__step-editable{
+    width: 100%;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--apple-green);
+    &:last-child{
+        border: none;
+    }
 }
 .timer__step-number-cont{
     width: calc(8% - 4px);
@@ -157,6 +168,24 @@ input{
     color: var(--white);
     font-size: 12px;
     font-weight: bold;
+}.timer__step-delete{
+    width: 4%;
+    display: flex;
+    align-items: center;
+}
+.timer__trash-icon{
+    width: 20px;
+    color: var(--red);
+}
+.timer__exercise-edit{
+    width: 48%;
+    height: 100%;
+    padding-top: 2px;
+    text-align: center;
+    border: none;
+    border-right: 1px solid var(--apple-green);
+    color: var(--dark-brown);
+    background: none;
 }
 .timer__exercise{
     width: 52%;
@@ -223,6 +252,7 @@ input{
     left: 0;
     background-color: var(--white);
     border-top: 2px solid var(--apple-green);
+    border-bottom: 2px solid var(--apple-green);
 }
 .timer__add-msg{
     font-weight: bold;

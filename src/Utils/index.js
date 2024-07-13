@@ -100,7 +100,15 @@ export function updateSteps(oldTimer, newExercise){
     return timer
             // timer.steps.push({exercise: 'Rest', time: [0, 0, 45]})
 }
-
+export function removeExerciseFromSteps(timer, exercise){
+    const newSteps = timer.steps.filter(step => step.exercise !== exercise)
+    const newTotalTime = calculateTotalTime(newSteps, timer.laps)
+    return {
+        ...timer,
+        steps: newSteps,
+        totalTime: newTotalTime
+    }
+}
 /**
  * This function receives step by step the routine and 
  * calculate the total time to finish it

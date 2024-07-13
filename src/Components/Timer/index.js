@@ -15,7 +15,6 @@ function Timer(){
         if(timeFormat === 'clock'){
             if(time){
                 let render = ''
-                // const time = context.routineToCreate.timer.totalTime
                 if(time[0]< 10){
                     render+=`0${time[0]} : `
                 }else{
@@ -37,7 +36,6 @@ function Timer(){
         }
         if(time){
             let render = ''
-            // const time = context.routineToCreate.timer.totalTime
             if(time[0] === 1){
                 render+=`${time[0]}hr `
             }else if(time[0]>1){
@@ -180,6 +178,10 @@ function Timer(){
         setTimerActiveButton('custom')
         context.initializeCustomTimer()
     }
+    const handleEdit = () => {
+        setCanEdit(true)
+        setTimerActiveButton('custom')
+    }
     const handleHideExercisePanel = (event) => {
         if(event.target.className === 'timer__exercises-list-cont'){
             setChooseExercisePanel(false)
@@ -196,7 +198,7 @@ function Timer(){
     const handleDrop = (e) => {
         e.preventDefault()
         const exercise = JSON.parse(e.dataTransfer.getData('text/plain'))
-        handleAddStep(exercise)
+        context.addStep(exercise)
     }
     return(
         <main className='timer'>
@@ -284,7 +286,7 @@ function Timer(){
                 </> : 
                 <>
                     <section className='timer__table-cont'>
-                    Editable
+                    {/* Editable */}
                         <div className='timer__table'>
                             <div className='timer__headers'>
                                 <p className='timer__exercise-title'>
@@ -307,11 +309,15 @@ function Timer(){
                             </div>
                             <ul className='timer__steps'>
                                 {context.routineToCreate.timer && context.routineToCreate.timer.steps.map((step, index) => (
-                                    <li className='timer__step' key={index}>
+                                    <li className='timer__step-editable' key={index}>
                                         <p className='timer__step-number-cont'>
                                         <span className='timer__step-number'>{index+1}</span>
                                         </p>
-                                        <span className='timer__exercise'>{step.exercise}</span>
+                                        <span className='timer__step-delete'>
+                                            <TrashIcon className='timer__trash-icon'
+                                             onClick={()=>context.deleteStep(index)}/>
+                                        </span>
+                                        <span className='timer__exercise-edit'>{step.exercise}</span>
                                         <div className='timer__exercise-duration'>
                                             <input id={'hr'+index} className='timer__exercise-hrs' type='text' placeholder={renderInputTime(step.time[0])}
                                             onKeyDown={(event)=>event.key==='Enter' && document.getElementById('min'+index).focus()}
@@ -367,7 +373,7 @@ function Timer(){
             <section className='timer__footer-buttons'>
                 {!canEdit && 
                     <button className='timer__edit'
-                    onClick={()=>handleCustom()}>
+                    onClick={()=>handleEdit()}>
                         Edit
                     </button>
                 }

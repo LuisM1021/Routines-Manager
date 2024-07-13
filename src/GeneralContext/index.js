@@ -1,6 +1,6 @@
 import { useState,useEffect,createContext } from 'react';
 import { useLocalStorage } from './useLocalStorage';
-import { loadAvailableCategories,loadEquipmentOptions,filterRoutinesByTimeRange, getNewRoutineTimer, updateSteps } from '../Utils';
+import { loadAvailableCategories,loadEquipmentOptions,filterRoutinesByTimeRange, getNewRoutineTimer, updateSteps, removeExerciseFromSteps, calculateTotalTime } from '../Utils';
 import Fuse from 'fuse.js';
 import moment from 'moment'
 
@@ -158,6 +158,13 @@ function GeneralProvider({children}){
             timer: timer
         })
     }
+    const removeExerciseFromList = (exercise) => {
+        setExercisesList((exercises)=>(exercises.filter(item => item.name !== exercise)))
+        setRoutineToCreate(routineToCreate => ({
+            ...routineToCreate, 
+            timer: removeExerciseFromSteps(routineToCreate.timer, exercise)
+        }))
+    }
     const addStep = (newExercise) => {
         const newTimer = updateSteps(routineToCreate.timer, newExercise)
         setRoutineToCreate({
@@ -165,6 +172,34 @@ function GeneralProvider({children}){
             timer: newTimer
         })
     }
+    const changeStepName = (name, prename) => {
+        setRoutineToCreate(routineToCreate => ({
+            ...routineToCreate,
+            timer: {
+                ...routineToCreate.timer,
+                steps: routineToCreate.timer.steps.map(step => {
+                    if(step.exercise === prename){
+                        return {
+                            ...step,
+                            exercise: name
+                        }
+                    }
+                    return step
+                })
+            }
+        }))
+    }
+    const deleteStep = (stepIndex) => {
+        setRoutineToCreate(routineToCreate => ({
+            ...routineToCreate,
+            timer: {
+                ...routineToCreate.timer,
+                steps: routineToCreate.timer.steps.filter((step, index) => index !==stepIndex),
+                totalTime: calculateTotalTime(routineToCreate.timer.steps.filter((step, index) => index !==stepIndex),routineToCreate.timer.laps)
+            }
+        }))
+    }
+
     const initializeCustomTimer = () => {
         const timer = getNewRoutineTimer([])
         setRoutineToCreate({
@@ -278,7 +313,10 @@ function GeneralProvider({children}){
             initializeCustomTimer,
             addStep,
             draggedItem,
-            setDraggedItem
+            setDraggedItem,
+            removeExerciseFromList,
+            changeStepName,
+            deleteStep
         }}>
             {children}
         </GeneralContext.Provider>
