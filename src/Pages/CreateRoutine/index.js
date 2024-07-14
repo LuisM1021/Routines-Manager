@@ -45,14 +45,16 @@ function CreateRoutine(){
         }   
     }
     const handleDragEnd = (e, draggedExercise, draggedOverExercise) =>{
-        e.preventDefault()
-        const draggedItem = context.exercisesList[draggedExercise]
-        const draggedOverItem = context.exercisesList[draggedOverExercise]
-        const exercisesListClone = [...context.exercisesList]
-
-        exercisesListClone[draggedExercise] = draggedOverItem
-        exercisesListClone[draggedOverExercise] = draggedItem
-        context.setExercisesList(exercisesListClone)
+        if(draggedOverExercise !== -1){
+            e.preventDefault()
+            const draggedItem = context.exercisesList[draggedExercise]
+            const draggedOverItem = context.exercisesList[draggedOverExercise]
+            const exercisesListClone = [...context.exercisesList]
+    
+            exercisesListClone[draggedExercise] = draggedOverItem
+            exercisesListClone[draggedOverExercise] = draggedItem
+            context.setExercisesList(exercisesListClone)
+        }
     }
     const handleDragOver = (e, index) => {
         e.preventDefault()
@@ -141,6 +143,7 @@ function CreateRoutine(){
                                          onDragEnd={(e)=>handleDragEnd(e, draggedExercise, draggedOverExercise)}
                                          onTouchEnd={()=>handleTouchEnd()}>
                                             <Bars2Icon className='create_routine__bars'/>
+                                            {/* {console.log('exercise', exercise)} */}
                                             <input id={exercise.name} className='create-routine__item-name' type='text' placeholder={exercise.name} defaultValue={exercise.name}
                                              onBlur={(event)=>customizeExercise(event.target.value, event.target.placeholder, event.target.id)}
                                              onFocus={(event)=>event.target.value = exercise.name}

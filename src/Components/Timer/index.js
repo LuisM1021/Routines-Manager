@@ -142,6 +142,8 @@ function Timer(){
         }
         routineToCreateClone.timer.totalTime = calculateTotalTime(routineToCreateClone.timer.steps, routineToCreateClone.timer.laps)
         context.setRoutineToCreate(routineToCreateClone)
+        console.log(timeToRender)
+        if (timeToRender.length === 3) timeToRender = timeToRender.slice(1,3)
         event.target.value = timeToRender
     }
     const changeRoutineLaps = (event) => {
@@ -208,12 +210,16 @@ function Timer(){
                     <div className='timer__exercises-list'>
                         <p className='timer__choose-exercise'>Choose an exercise</p>
                         <ul className='timer__exercises-to-choose'>
-                            {context.exercisesList && context.exercisesList.map((exercise, index)=>(
-                                <p key={index} className='timer__exercise-to-add'
-                                 onClick={()=>handleAddStep(exercise)}>
-                                    {exercise.name}
-                                </p>
-                            ))}
+                            {context.exercisesList.length>0 ?
+                                context.exercisesList.map((exercise, index)=>(
+                                    <p key={index} className='timer__exercise-to-add'
+                                    onClick={()=>handleAddStep(exercise)}>
+                                        {exercise.name}
+                                    </p>
+                                ))
+                                :
+                                <p className='timer__missing-exercises'>You haven´t added exercises yet</p>
+                            }
                         </ul>
                     </div>
                 </section>
@@ -319,17 +325,17 @@ function Timer(){
                                         </span>
                                         <span className='timer__exercise-edit'>{step.exercise}</span>
                                         <div className='timer__exercise-duration'>
-                                            <input id={'hr'+index} className='timer__exercise-hrs' type='text' placeholder={renderInputTime(step.time[0])}
+                                            <input id={'hr'+index} className='timer__exercise-hrs' type='text' autoComplete='off' placeholder={renderInputTime(step.time[0])}
                                             onKeyDown={(event)=>event.key==='Enter' && document.getElementById('min'+index).focus()}
                                             onBlur={(event)=>changeStepTime(index, event, 'hr')}
                                             onFocus={(event)=>event.target.value = ''}/>
                                             <span className='timer__exercise-duration-points'>:</span>
-                                            <input id={'min'+index} className='timer__exercise-min' type='text' placeholder={renderInputTime(step.time[1])}
+                                            <input id={'min'+index} className='timer__exercise-min' type='text' autoComplete='off' placeholder={renderInputTime(step.time[1])}
                                             onKeyDown={(event)=>event.key==='Enter' && document.getElementById('sec'+index).focus()}
                                             onBlur={(event)=>changeStepTime(index, event, 'min')}
                                             onFocus={(event)=>event.target.value = ''}/>
                                             <span className='timer__exercise-duration-points'>:</span>
-                                            <input id={'sec'+index} className='timer__exercise-sec' type='text' placeholder={renderInputTime(step.time[2])}
+                                            <input id={'sec'+index} className='timer__exercise-sec' type='text' autoComplete='off' placeholder={renderInputTime(step.time[2])}
                                             onBlur={(event)=>changeStepTime(index, event, 'sec')}
                                             onFocus={(event)=>event.target.value = ''}
                                             onKeyDown={(event)=>focusNextStepTime(event, index)}/>

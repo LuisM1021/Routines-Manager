@@ -173,21 +173,23 @@ function GeneralProvider({children}){
         })
     }
     const changeStepName = (name, prename) => {
-        setRoutineToCreate(routineToCreate => ({
-            ...routineToCreate,
-            timer: {
-                ...routineToCreate.timer,
-                steps: routineToCreate.timer.steps.map(step => {
-                    if(step.exercise === prename){
-                        return {
-                            ...step,
-                            exercise: name
+        if(routineToCreate.timer){
+            setRoutineToCreate(routineToCreate => ({
+                ...routineToCreate,
+                timer: {
+                    ...routineToCreate.timer,
+                    steps: routineToCreate.timer.steps.map(step => {
+                        if(step.exercise === prename){
+                            return {
+                                ...step,
+                                exercise: name
+                            }
                         }
-                    }
-                    return step
-                })
-            }
-        }))
+                        return step
+                    })
+                }
+            }))
+        }
     }
     const deleteStep = (stepIndex) => {
         setRoutineToCreate(routineToCreate => ({
