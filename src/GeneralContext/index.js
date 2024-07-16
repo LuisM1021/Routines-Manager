@@ -1,8 +1,9 @@
 import { useState,useEffect,createContext } from 'react';
 import { useLocalStorage } from './useLocalStorage';
-import { loadAvailableCategories,loadEquipmentOptions,filterRoutinesByTimeRange, getNewRoutineTimer, updateSteps, removeExerciseFromSteps, calculateTotalTime } from '../Utils';
+import { loadAvailableCategories,loadEquipmentOptions,filterRoutinesByTimeRange } from '../Utils';
 import Fuse from 'fuse.js';
 import moment from 'moment'
+import { CreateRoutine } from '../Utils/createRoutine';
 
 const GeneralContext = createContext()
 
@@ -16,16 +17,35 @@ function GeneralProvider({children}){
         userRoutines,
         setUserRoutines
     } = useLocalStorage();
+    
+    // dragging
+    const [draggedItem, setDraggedItem] = useState(null)
 
+    //----------------------NAVBAR---------------------------
+
+    //Manage the navbar for short screens
+    const [displayNavbar, setDisplayNavbar] = useState(false)
+
+    //Manage the navbar for short screens
+    const [displayExerciseDetail, setDisplayExerciseDetail] = useState(false)
+
+    //-------------------------------------------------------
+
+    //----------------------HOME-----------------------------
+    
     //Selected routine in the featured routines panel
-    const [selectedRoutine,setSelectedRoutine] = useState(null)
+    const [ selectedRoutine, setSelectedRoutine ] = useState(null)
 
-    //Routines: Show routine details
+    //-------------------------------------------------------
+
+    //-------------ROUTINES-SEARCH_ROUTINE_PANEL-------------
+
+    //Show routine details
     const [showRoutineDetails,setShowRoutineDetails] = useState(false)
-    
-    //Routines: Save selected routine data
+
+    //Save selected routine data
     const [selectedRoutineDetails,setSelectedRoutineDetails] = useState({})
-    
+
     //Available categories according to the list of routines
     const [availableCategories,setAvailableCategories] = useState(null)
 
@@ -34,13 +54,19 @@ function GeneralProvider({children}){
 
     //Filtered routines 
     const [filteredRoutines,setFilteredRoutines] = useState([])
-
+    
     //filter by 
     const [filterBy,setFilterBy] = useState([null,null,null,null])
-
+    
     //Filter by name 
     const [searchByName,setSearchByName] = useState('')
-
+    
+    //Filter by category
+    const [searchByCategory,setSearchByCategory] = useState([])
+    
+    //Filter by equipment
+    const [searchByEquipment,setSearchByEquipment] = useState([])
+    
     //Values of the time filter
     const [minSec,setMinSec] = useState('00')
     const [minMinutes,setMinMinutes] = useState('00')
@@ -48,24 +74,8 @@ function GeneralProvider({children}){
     const [maxSec,setMaxSec] = useState('00')
     const [maxMin,setMaxMin] = useState('00')
     const [maxHrs,setMaxHrs] = useState('00')
-
-    //Filter by category
-    const [searchByCategory,setSearchByCategory] = useState([])
-
-    //Filter by equipment
-    const [searchByEquipment,setSearchByEquipment] = useState([])
-
     const [executeFilters,setExecuteFilters] = useState(false)
-
-    //Manage the navbar for short screens
-    const [displayNavbar, setDisplayNavbar] = useState(false)
-
-    //Manage the navbar for short screens
-    const [displayExerciseDetail, setDisplayExerciseDetail] = useState(false)
     
-    const [showBenefits, setShowBenefits] = useState(false)
-    const [showEquipment, setShowEquipment] = useState(false)
-
     useEffect(()=>setSelectedRoutine(routines[0]),[routines])
 
     useEffect(()=>{
@@ -134,100 +144,79 @@ function GeneralProvider({children}){
         setSearchByEquipment([])
         setExecuteFilters(true)
     }
+    //-------------------------------------------------------
+  
+    //--------------ROUTINES-USER_ROUTINES_PANEL-------------
+
+    const addToUserRoutines = (routine) => {
+        const now = moment()
+        const routineWithLastUsedTime = {
+            ...routine,
+            id: userRoutines.length+1,
+            lastUse: now.format('YYYY-MM-DD HH:mm:ss')
+        }
+        const addedUserRoutines = getItem('userRoutines')
+        addedUserRoutines.push(routineWithLastUsedTime)
+        saveItem('userRoutines',addedUserRoutines)
+        setUserRoutines(addedUserRoutines)
+    }
+
+    //-------------------------------------------------------
     
-    //***********Create a routine**********
+
+    //--------------------EXERCISE CARD----------------------
+
+    const [showBenefits, setShowBenefits] = useState(false)
+    const [showEquipment, setShowEquipment] = useState(false)
+
+    //-------------------------------------------------------
+
+    //-------------------CREATE_ROUTINE----------------------
     //List of exercises when creating a routine
     const [exercisesList, setExercisesList] = useState([])
+
+    //Routine that will be created
     const [routineToCreate, setRoutineToCreate] = useState({})
+
     const setNewRoutineName = (name) => {
-        setRoutineToCreate({
-            ...routineToCreate,
-            name: name
-        })
+        setRoutineToCreate(CreateRoutine.changeName(routineToCreate, name))
     }
+
     const setNewRoutineDescription = (description) => {
-        setRoutineToCreate({
-            ...routineToCreate,
-            description: description
-        })
+        setRoutineToCreate(CreateRoutine.changeDescription(routineToCreate, description))
     }
+
     const autogenerateRoutineTimer = () => {
-        const timer = getNewRoutineTimer(exercisesList)
-        setRoutineToCreate({
-            ...routineToCreate,
-            timer: timer
-        })
+        setRoutineToCreate(CreateRoutine.autogenerateTimer(routineToCreate, exercisesList))
     }
+
     const removeExerciseFromList = (exercise) => {
-        setExercisesList((exercises)=>(exercises.filter(item => item.name !== exercise)))
-        setRoutineToCreate(routineToCreate => ({
-            ...routineToCreate, 
-            timer: removeExerciseFromSteps(routineToCreate.timer, exercise)
-        }))
+        setExercisesList(CreateRoutine.removeExercise(exercisesList, exercise))
+        setRoutineToCreate(CreateRoutine.removeExerciseSteps(routineToCreate, exercise))
     }
+
     const addStep = (newExercise) => {
-        const newTimer = updateSteps(routineToCreate.timer, newExercise)
-        setRoutineToCreate({
-            ...routineToCreate,
-            timer: newTimer
-        })
+        setRoutineToCreate(CreateRoutine.addStep(routineToCreate, newExercise))
     }
+
     const changeStepName = (name, prename) => {
-        if(routineToCreate.timer){
-            setRoutineToCreate(routineToCreate => ({
-                ...routineToCreate,
-                timer: {
-                    ...routineToCreate.timer,
-                    steps: routineToCreate.timer.steps.map(step => {
-                        if(step.exercise === prename){
-                            return {
-                                ...step,
-                                exercise: name
-                            }
-                        }
-                        return step
-                    })
-                }
-            }))
-        }
+        CreateRoutine.changeStepName(routineToCreate, name, prename)
     }
     const deleteStep = (stepIndex) => {
-        setRoutineToCreate(routineToCreate => ({
-            ...routineToCreate,
-            timer: {
-                ...routineToCreate.timer,
-                steps: routineToCreate.timer.steps.filter((step, index) => index !==stepIndex),
-                totalTime: calculateTotalTime(routineToCreate.timer.steps.filter((step, index) => index !==stepIndex),routineToCreate.timer.laps)
-            }
-        }))
+        setRoutineToCreate(CreateRoutine.deleteStep(routineToCreate, stepIndex))
     }
 
     const initializeCustomTimer = () => {
-        const timer = getNewRoutineTimer([])
-        setRoutineToCreate({
-            ...routineToCreate,
-            timer: timer
-        })
+        setRoutineToCreate(CreateRoutine.generateCustomTimer(routineToCreate))
     }
     const saveNewRoutine = () => {
-        if(routineToCreate.timer){
-            const newRoutine = {
-                name: routineToCreate.name || null,
-                description: routineToCreate.description || null,
-                timer: routineToCreate.timer,
-                equipment: null,
-                category: 'Personalized routine',
-                exercises: exercisesList.map(exercise => exercise.name),
-                reps: exercisesList.map(exercise => exercise.suggestedReps || 1),
-                series: exercisesList.map(exercise => exercise.suggestedSeries),
-                time: exercisesList.map(exercise => exercise.suggestedTime)
-            }
-            addToUserRoutines(newRoutine)
-            console.log('added')
+        const newRoutine = CreateRoutine.verifyRoutine(routineToCreate, exercisesList)
+        if(!newRoutine.valid){
+            console.log('Invalid: ',newRoutine.error)
+        }else{
+            addToUserRoutines(newRoutine.routineInfo)
         }
     }
-    // dragging
-    const [draggedItem, setDraggedItem] = useState(null)
 
     //Logic to filter exercises
     const [filteredExercises, setFilteredExercises] = useState([])
@@ -250,25 +239,11 @@ function GeneralProvider({children}){
         }
         setFilteredExercises(filterResult)
     },[searchExerciseByName, searchExerciseByCategory, exercises])
-    
-    //*************************************
-
+    //-------------------------------------------------------
+   
     //Random number function 
     const getRandom =(min,max)=>{
         return Math.floor(Math.random()*(max-min))+min
-    }
-
-    const addToUserRoutines = (routine) => {
-        const now = moment()
-        const routineWithLastUsedTime = {
-            ...routine,
-            id: userRoutines.length+1,
-            lastUse: now.format('YYYY-MM-DD HH:mm:ss')
-        }
-        const addedUserRoutines = getItem('userRoutines')
-        addedUserRoutines.push(routineWithLastUsedTime)
-        saveItem('userRoutines',addedUserRoutines)
-        setUserRoutines(addedUserRoutines)
     }
 
     return (
