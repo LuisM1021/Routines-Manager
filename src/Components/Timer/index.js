@@ -383,7 +383,8 @@ function Timer(){
                         Edit
                     </button>
                 }
-                <button className='timer__save'>Save</button>
+                <button className='timer__save'
+                 onClick={()=>context.saveNewRoutine()}>Save</button>
             </section>
         </main>
     )

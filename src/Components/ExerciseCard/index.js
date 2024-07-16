@@ -7,7 +7,8 @@ function ExerciseCard({ exercise }){
     const context = useContext(GeneralContext);
 
     const showExerciseDetails = (event) => {
-        if(event.target.classList.value !== 'exercise-card__added' && event.target.classList.value !== 'exercise-card__add'){
+        console.log('class',event.target.classList.value)
+        if(event.target.classList.value !== 'exercise-card__added' && event.target.classList.value !== 'exercise-card__add' && event.target.classList.value !== 'class' ){
             context.setDisplayExerciseDetail(exercise)
             context.setShowEquipment(false)
             context.setShowBenefits(false)

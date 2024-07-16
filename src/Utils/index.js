@@ -82,8 +82,12 @@ export function getNewRoutineTimer(exercisesList){
 export function updateSteps(oldTimer, newExercise){
     const timer = {
         totalTime: [],
-        laps: oldTimer.laps,
-        steps: oldTimer.steps
+        laps: 1,
+        steps: []
+    }
+    if(oldTimer){
+        timer.laps = oldTimer.laps
+        timer.steps = oldTimer.steps
     }
     let time
     if(newExercise.suggestedTime[0] === 0 && newExercise.suggestedTime[1] === 0 && newExercise.suggestedTime[2] === 0){
@@ -101,12 +105,14 @@ export function updateSteps(oldTimer, newExercise){
             // timer.steps.push({exercise: 'Rest', time: [0, 0, 45]})
 }
 export function removeExerciseFromSteps(timer, exercise){
-    const newSteps = timer.steps.filter(step => step.exercise !== exercise)
-    const newTotalTime = calculateTotalTime(newSteps, timer.laps)
-    return {
-        ...timer,
-        steps: newSteps,
-        totalTime: newTotalTime
+    if(timer){
+        const newSteps = timer.steps.filter(step => step.exercise !== exercise)
+        const newTotalTime = calculateTotalTime(newSteps, timer.laps)
+        return {
+            ...timer,
+            steps: newSteps,
+            totalTime: newTotalTime
+        }
     }
 }
 /**

@@ -209,7 +209,24 @@ function GeneralProvider({children}){
             timer: timer
         })
     }
-    //Test dragging
+    const saveNewRoutine = () => {
+        if(routineToCreate.timer){
+            const newRoutine = {
+                name: routineToCreate.name || null,
+                description: routineToCreate.description || null,
+                timer: routineToCreate.timer,
+                equipment: null,
+                category: 'Personalized routine',
+                exercises: exercisesList.map(exercise => exercise.name),
+                reps: exercisesList.map(exercise => exercise.suggestedReps || 1),
+                series: exercisesList.map(exercise => exercise.suggestedSeries),
+                time: exercisesList.map(exercise => exercise.suggestedTime)
+            }
+            addToUserRoutines(newRoutine)
+            console.log('added')
+        }
+    }
+    // dragging
     const [draggedItem, setDraggedItem] = useState(null)
 
     //Logic to filter exercises
@@ -318,7 +335,8 @@ function GeneralProvider({children}){
             setDraggedItem,
             removeExerciseFromList,
             changeStepName,
-            deleteStep
+            deleteStep,
+            saveNewRoutine
         }}>
             {children}
         </GeneralContext.Provider>
