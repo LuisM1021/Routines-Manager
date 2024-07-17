@@ -69,6 +69,7 @@ input{
     height: 100px;
     background-color: var(--black);
     display: flex;
+    flex-direction: column;
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -77,6 +78,31 @@ input{
 }
 .timer__result{
     color: var(--apple-green);
+}
+.timer__save-options{
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.timer__save-button{
+    padding: 2px 4px;
+    border-radius: 8px;
+    border:2px solid var(--dark-brown);
+    color: var(--white);
+    cursor: pointer;
+}
+.timer__edit-button{
+    background-color: var(--burnt-orange);
+    box-shadow: 0 1px 6px 0 var(--burnt-orange);
+}
+.timer__create-new-button{
+    background-color: var(--burnt-orange);
+    box-shadow: 0 1px 6px 0 var(--burnt-orange);
+}
+.timer__do-routine-button{
+    background-color: var(--apple-green);
+    box-shadow: 0 1px 6px 0 var(--apple-green);
 }
 .timer__error-result{
     color: var(--red);

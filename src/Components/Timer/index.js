@@ -108,7 +108,6 @@ function Timer(){
                     routineToCreateClone.timer.steps.forEach((step, index) => {
                         if(index === i){
                             step.time[0] = parseInt(data)
-                            console.log('will change: ',step)
                         }
                     })
                     break
@@ -121,7 +120,6 @@ function Timer(){
                     routineToCreateClone.timer.steps.forEach((step, index) => {
                         if(index === i){
                             step.time[1] = parseInt(data)
-                            console.log('will change: ',step)
                         }
                     })
                     break
@@ -143,7 +141,6 @@ function Timer(){
         }
         routineToCreateClone.timer.totalTime = calculateTotalTime(routineToCreateClone.timer.steps, routineToCreateClone.timer.laps)
         context.setRoutineToCreate(routineToCreateClone)
-        console.log(timeToRender)
         if (timeToRender.length === 3) timeToRender = timeToRender.slice(1,3)
         event.target.value = timeToRender
     }
@@ -207,7 +204,22 @@ function Timer(){
     const handleSaveRoutine = () => {
         const res = context.saveNewRoutine()
         setResult(res)
+        if(res.valid){
+            context.resetCreateRoutine()
+        }
     }
+    const handleUpdateRoutine = () => {
+        const res = context.editRoutine()
+        setResult(res)
+        context.resetCreateRoutine()
+    }
+
+    const handleEditRoutine = () => {
+        context.loadRoutineToEdit()
+        setResult(null)
+        context.setIsBeingUpdated(true)
+    }
+
     const handleCloseResult = (className) => {
         if(className === 'timer__save-result'){
             setResult(null)
@@ -258,7 +270,20 @@ function Timer(){
                  onClick={(event)=>handleCloseResult(event.target.className)}>
                     <div className='timer__result-panel'>
                         {result.valid ?
-                            <p className='timer__result'>Routine Saved!!!</p>
+                            <>
+                                {context.isBeingUpdated ? 
+                                    <p className='timer__result'>Routine Updated!!!</p>
+                                    :
+                                    <p className='timer__result'>Routine Saved!!!</p>
+                                }
+                                <div className='timer__save-options'>
+                                    <button className='timer__save-button timer__edit-button'
+                                     onClick={()=>handleEditRoutine()}>
+                                        edit
+                                    </button>
+                                    <button className='timer__save-button timer__do-routine-button'>exercise now</button>
+                                </div>
+                            </>
                             : 
                             renderError(result.error)
                         }
@@ -424,8 +449,13 @@ function Timer(){
                         Edit
                     </button>
                 }
+                {context.isBeingUpdated ? 
                 <button className='timer__save'
-                 onClick={()=>handleSaveRoutine()}>Save</button>
+                 onClick={()=>handleUpdateRoutine()}>Update</button>
+                 :
+                 <button className='timer__save'
+                  onClick={()=>handleSaveRoutine()}>Save</button>
+                }
             </section>
         </main>
     )

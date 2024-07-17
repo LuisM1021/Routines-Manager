@@ -155,10 +155,33 @@ function GeneralProvider({children}){
             id: userRoutines.length+1,
             lastUse: now.format('YYYY-MM-DD HH:mm:ss')
         }
+        if(!routineWithLastUsedTime.name){
+            routineWithLastUsedTime.name = `My routine ${routineWithLastUsedTime.id}`
+        }
         const addedUserRoutines = getItem('userRoutines')
         addedUserRoutines.push(routineWithLastUsedTime)
         saveItem('userRoutines',addedUserRoutines)
         setUserRoutines(addedUserRoutines)
+    }
+
+    const editUserRoutine = (routine) => {
+        const now = moment()
+        const routineWithLastUsedTime = {
+            ...routine,
+            lastUse: now.format('YYYY-MM-DD HH:mm:ss')
+        }
+        if(!routineWithLastUsedTime.name){
+            routineWithLastUsedTime.name = `My routine ${routineWithLastUsedTime.id}`
+        }
+        const addedUserRoutines = getItem('userRoutines')
+        const updatedRoutines = addedUserRoutines.map(item => {
+            if(item.id === routine.id){
+                return routineWithLastUsedTime
+            }
+            return item
+        })
+        saveItem('userRoutines',updatedRoutines)
+        setUserRoutines(updatedRoutines)
     }
 
     //-------------------------------------------------------
@@ -178,6 +201,18 @@ function GeneralProvider({children}){
     //Routine that will be created
     const [routineToCreate, setRoutineToCreate] = useState({})
 
+    //To change between update functions and create functions
+    const [isBeingUpdated, setIsBeingUpdated] = useState(false)
+
+    const resetCreateRoutine = () => {
+        setExercisesList([])
+        setRoutineToCreate({})
+        setIsBeingUpdated(false)
+        const nameInput = document.getElementById('create-routine__name-input')
+        const descriptionInput = document.getElementById('create-routine__description-input')
+        nameInput.value = ''
+        descriptionInput.value = ''
+    }
     const setNewRoutineName = (name) => {
         setRoutineToCreate(CreateRoutine.changeName(routineToCreate, name))
     }
@@ -215,6 +250,40 @@ function GeneralProvider({children}){
             addToUserRoutines(newRoutine.routineInfo)
         }
         return newRoutine
+    }
+    const loadRoutineToEdit = (routineId) => {
+        let routineToEdit
+        if(routineId){
+            routineToEdit = userRoutines.find(routine => routine.id === routineId)
+        }else{
+            const lastIndex = userRoutines.length - 1
+            routineToEdit = userRoutines.find((routine, index) => index === lastIndex)
+        }
+        setRoutineToCreate({
+            ...routineToEdit,
+            timer: {
+                ...routineToEdit.timer
+            }
+        })
+        setExercisesList(routineToEdit.exercises.map(exercise => {
+            let searchExercise = exercises.find(item => item.name === exercise)
+            if(searchExercise){
+                return searchExercise
+            }
+            return {
+                name: exercise,
+                suggestedSeries: 1,
+                suggestedTime: [0,0,45]
+            }
+        }))
+    }
+    const editRoutine = () => {
+        const updatedRoutine = CreateRoutine.verifyRoutine(routineToCreate, exercisesList)
+        if(updatedRoutine.valid){
+            console.log(updatedRoutine.routineInfo)
+            editUserRoutine(updatedRoutine.routineInfo)
+        }
+        return updatedRoutine
     }
 
     //Logic to filter exercises
@@ -310,7 +379,12 @@ function GeneralProvider({children}){
             removeExerciseFromList,
             changeStepName,
             deleteStep,
-            saveNewRoutine
+            saveNewRoutine,
+            editRoutine,
+            loadRoutineToEdit,
+            isBeingUpdated,
+            setIsBeingUpdated,
+            resetCreateRoutine
         }}>
             {children}
         </GeneralContext.Provider>

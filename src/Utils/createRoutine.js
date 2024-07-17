@@ -89,6 +89,7 @@ class CreateRoutine{
         return {
             valid: true,
             routineInfo: {
+                id: routine.id || null,
                 name: routine.name || null,
                 description: routine.description || null,
                 timer: routine.timer,
@@ -101,6 +102,20 @@ class CreateRoutine{
             }
         }
     }
+    // static update(routineId, routine, exercisesList){
+    //     if(exercisesList.length === 0){
+    //         return {valid: false, error: 'EMPTY_EXERCISES_LIST'}
+    //     }
+    //     if(!routine.timer.steps.find(step => step.exercise !== 'Warming' && step.exercise !== 'Prepare')){
+    //         return {valid: false, error: 'INVALID_STEPS'}
+    //     }
+    //     return{
+    //         valid: true,
+    //         routineInfo: {
+
+    //         }
+    //     }
+    // }
 }
 
 export { CreateRoutine }

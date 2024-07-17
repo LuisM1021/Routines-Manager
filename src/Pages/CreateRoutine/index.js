@@ -114,21 +114,27 @@ function CreateRoutine(){
         <Layout>
             <main className='create-routine'>
                 {context.displayExerciseDetail && <ExerciseDetail/>}
-                <h1 className='create-routine__title'>Create Routine</h1>
+                {context.isBeingUpdated ? 
+                    <h1 className='create-routine__title'>Update Routine</h1>
+                    : 
+                    <h1 className='create-routine__title'>Create Routine</h1>
+                }
                 <div className='create-routine__routine'>
                     <section className='create-routine__detail'>
                         <p className='create-routine__name'>
                             <span className='create-routine__name-label'>Name :</span>
-                            <input className='create-routine__name-input'
+                            <input id='create-routine__name-input' className='create-routine__name-input'
                              type='text' 
-                             placeholder='New routine'
+                             placeholder={context.routineToCreate.name ? context.routineToCreate.name : 'New routine'}
+                            //  defaultValue={context.routineToCreate.name}
                              onChange={(event)=>context.setNewRoutineName(event.target.value)}/>
                         </p>
                         <p className='create-routine__description'>
                             <span className='create-routine__description-label'>Description :</span>
-                            <textarea className='create-routine__description-input'
+                            <textarea id='create-routine__description-input' className='create-routine__description-input'
                              type='text'
-                              placeholder='Describe your routine'
+                            placeholder={context.routineToCreate.description ? context.routineToCreate.description : 'Describe your routine'}
+                            //   defaultValue={context.routineToCreate.description}
                               onChange={(event)=>context.setNewRoutineDescription(event.target.value)}/>
                         </p>
                         <div className='create-routine__exercises-card'>
@@ -143,7 +149,6 @@ function CreateRoutine(){
                                          onDragEnd={(e)=>handleDragEnd(e, draggedExercise, draggedOverExercise)}
                                          onTouchEnd={()=>handleTouchEnd()}>
                                             <Bars2Icon className='create_routine__bars'/>
-                                            {/* {console.log('exercise', exercise)} */}
                                             <input id={exercise.name} className='create-routine__item-name' type='text' placeholder={exercise.name} defaultValue={exercise.name}
                                              onBlur={(event)=>customizeExercise(event.target.value, event.target.placeholder, event.target.id)}
                                              onFocus={(event)=>event.target.value = exercise.name}
