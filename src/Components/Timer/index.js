@@ -194,7 +194,17 @@ function Timer(){
     const handleDragOver = (e) => {
         e.preventDefault()
         e.dataTransfer.dropEffect = 'move'
+        const parentLi = e.target.closest('.timer__add-step')
+        if(!parentLi.className.includes('timer__add-step--hovered')){
+            parentLi.className = parentLi.className + ' timer__add-step--hovered'
+        }
     }
+    const handleDragLeave = (dragZone) => {
+        if(dragZone.className.includes('timer__add-step--hovered')){
+            dragZone.className = 'timer__add-step'
+        }
+    }
+
     const handleDrop = (e) => {
         e.preventDefault()
         const exercise = JSON.parse(e.dataTransfer.getData('text/plain'))
@@ -416,6 +426,7 @@ function Timer(){
                             <li className='timer__add-step'
                              onClick={()=>setChooseExercisePanel(true)}
                              onDragOver={(e)=>handleDragOver(e)}
+                             onDragLeave={(e)=>handleDragLeave(e.target)}
                              onDrop={(e)=>handleDrop(e)}>
                                 <p className='timer__add-msg'>Drag an exercise here or click to add</p>
                                 <figure className='timer__add'>
@@ -426,8 +437,8 @@ function Timer(){
                     </section>
                     <section className='timer__options'>
                         <p className='timer__laps'>
-                            <span className='timer__laps-label'>laps</span>
-                            <input className='timer__laps-number' placeholder={context.routineToCreate.timer ? context.routineToCreate.timer.laps : '-'}
+                            <label htmlFor='timer__laps-number' className='timer__laps-label timer__laps-label--editable'>laps</label>
+                            <input id='timer__laps-number' className='timer__laps-number' placeholder={context.routineToCreate.timer ? context.routineToCreate.timer.laps : '-'}
                             onBlur={(event)=>changeRoutineLaps(event)}
                             onClick={(event)=>event.target.value = ''}
                             onKeyDown={(event)=>event.key === 'Enter' && event.target.blur()}/>

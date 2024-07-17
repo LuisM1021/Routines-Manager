@@ -117,18 +117,39 @@ input{
     padding: 4px 8px;
     border-radius: 64px;
     border: 2px solid var(--burnt-orange);
-    background-color: var(--flame);
+    background-color: var(--burnt-orange);
     font-weight: bold;
+    cursor: pointer;
     color: var(--white);
+    &:hover{
+        transform: translateY(-1px);
+    }
 }
 .timer__button-active{
-    background-color: var(--apple-green);
+    box-shadow: 1px 1px 6px var(--flame);
+    border-color: var(--flame);
 }
 .timer__table-cont{
     width: 100%;
     max-height: 400px;
     margin-top: 8px;
-    overflow-x: scroll;
+    overflow: auto;
+    &::-webkit-scrollbar-track{
+        background-color: var(--white);
+    }
+    &::-webkit-scrollbar{
+        background-color: var(--white);
+        width: 8px;
+        height: 8px;
+    }
+    &::-webkit-scrollbar-thumb{
+        border-radius: 10px;
+        background-color: var(--white);
+    }
+    &::-webkit-scrollbar-corner{
+        background-color: transparent;
+    }
+
 }
 .timer__table{
     width: 100%;
@@ -234,6 +255,7 @@ input{
 .timer__trash-icon{
     width: 20px;
     color: var(--red);
+    cursor: pointer;
 }
 .timer__exercise-edit{
     width: 48%;
@@ -351,6 +373,10 @@ input{
     background-color: var(--white);
     border-top: 2px solid var(--apple-green);
     border-bottom: 2px solid var(--apple-green);
+    cursor: pointer;
+}
+.timer__add-step--hovered{
+    background-color: var(--black-opacity);
 }
 .timer__add-msg{
     font-weight: bold;
@@ -361,6 +387,9 @@ input{
     width: 24px;
     display: flex;
     color: var(--flame);
+    &:hover{
+        width: 28px;
+    }
 }
 .timer__options{
     width: 100%;
@@ -373,6 +402,9 @@ input{
     display: flex;
     gap: 8px;
 }
+.timer__laps-label--editable{
+    cursor: pointer;
+}
 .timer__laps-number{
     background-color: var(--burnt-orange);
     color: var(--white);
@@ -382,6 +414,7 @@ input{
     border: none;
     width: 28px;
     font-weight: bold;
+    outline-color: var(--flame);
 }
 .timer__total{
     display: flex;
@@ -408,6 +441,11 @@ input{
     font-weight: bold;
     background-color: var(--black);
     color: var(--white);
+    cursor: pointer;
+    box-shadow: 2px 2px 2px var(--black);
+    &:hover{
+        transform: translateY(-1px);
+    }
 }
 .timer__save{
     padding: 8px 16px;
@@ -415,6 +453,10 @@ input{
     font-weight: bold;
     background-color: var(--black);
     color: var(--white);
+    cursor: pointer;
+    &:hover{
+        transform: translateY(-1px);
+    }
 }
 @media (min-width: 1024px){
     .timer{

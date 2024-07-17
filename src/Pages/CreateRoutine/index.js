@@ -122,7 +122,7 @@ function CreateRoutine(){
                 <div className='create-routine__routine'>
                     <section className='create-routine__detail'>
                         <p className='create-routine__name'>
-                            <span className='create-routine__name-label'>Name :</span>
+                            <label htmlFor='create-routine__name-input' className='create-routine__name-label'>Name :</label>
                             <input id='create-routine__name-input' className='create-routine__name-input'
                              type='text' 
                              placeholder={context.routineToCreate.name ? context.routineToCreate.name : 'New routine'}
@@ -130,7 +130,7 @@ function CreateRoutine(){
                              onChange={(event)=>context.setNewRoutineName(event.target.value)}/>
                         </p>
                         <p className='create-routine__description'>
-                            <span className='create-routine__description-label'>Description :</span>
+                            <label htmlFor='create-routine__description-input' className='create-routine__description-label'>Description :</label>
                             <textarea id='create-routine__description-input' className='create-routine__description-input'
                              type='text'
                             placeholder={context.routineToCreate.description ? context.routineToCreate.description : 'Describe your routine'}
@@ -171,10 +171,10 @@ function CreateRoutine(){
                         <nav>
                             <ul className='create-routine__navigate'>
                                 <li 
-                                 className='create-routine__nav-item'
+                                 className={`create-routine__nav-item ${panelRendered === 'exercises' && 'create-routine__nav-item--active'}`}
                                  onClick={()=>setPanelRendered('exercises')}>Exercises</li>
                                 <li
-                                 className='create-routine__nav-item'
+                                 className={`create-routine__nav-item ${panelRendered === 'timer' && 'create-routine__nav-item--active'}`}
                                  onClick={()=>setPanelRendered('timer')}>timer</li>
                             </ul>
                         </nav>

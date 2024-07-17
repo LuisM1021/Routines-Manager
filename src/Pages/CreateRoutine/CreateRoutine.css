@@ -39,6 +39,7 @@
     margin-right: 8px;
     min-width: 120px;
     text-align: center;
+    cursor: pointer;
 }
 .create-routine__name-input{
     padding: 0 8px;
@@ -72,6 +73,7 @@
     font-size: large;
     margin-right: 8px;
     width: 120px;
+    cursor: pointer;
 }
 .create-routine__description-input{
     height: 128px;
@@ -117,15 +119,17 @@
     width: 100%;
     overflow: auto;
     margin-bottom: 8px;
-    &::-webkit-scrollbar{
-        width: 14px;
-    }
+
     &::-webkit-scrollbar-track{
-        background-color: var(--black-opacity);
+        background-color: var(--black);
         border-radius: 10px;
     }
+    &::-webkit-scrollbar{
+        width: 8px;
+        background-color: var(--black);
+    }
     &::-webkit-scrollbar-thumb{
-        background: linear-gradient(var(--cerulean),var(--burnt-orange));
+        background-color: var(--black-opacity);
         border-radius: 10px;    
     }
 }
@@ -136,7 +140,7 @@
     align-items: center;
     padding: 4px 0;
     padding-left: 16px;
-    cursor: move;
+    cursor: grab;
     &:hover{
         background-color: var(--black-opacity);
     }
@@ -205,13 +209,14 @@
     color: var(--white);
     font-weight: bold;
     cursor: pointer;
-    &:nth-child(odd){
-        background-color: var(--black);
+    background-color: var(--cerulean);
+    box-shadow: 5px 5px 3px var(--black);
+    &:hover{
+        transform: translateY(-2px);
     }
-    &:nth-child(even){
-        background-color: var(--white);
-        color: var(--black);
-    }
+}
+.create-routine__nav-item--active{
+    background-color: var(--flame);
 }
 .create-routine__filter-bar{
     display: flex;
