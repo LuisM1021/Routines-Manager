@@ -80,8 +80,11 @@ class CreateRoutine{
         if(exercisesList.length === 0){
             return {valid: false, error: 'EMPTY_EXERCISES_LIST'}
         }
-        if(!routine.timer){
+        if(!routine.timer || routine.timer.steps.length === 0){
             return {valid: false, error: 'NO_TIMER'}
+        }
+        if(!routine.timer.steps.find(step => step.exercise !== 'Warming' && step.exercise !== 'Prepare')){
+            return {valid: false, error: 'INVALID_STEPS'}
         }
         return {
             valid: true,

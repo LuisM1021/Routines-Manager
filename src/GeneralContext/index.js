@@ -211,11 +211,10 @@ function GeneralProvider({children}){
     }
     const saveNewRoutine = () => {
         const newRoutine = CreateRoutine.verifyRoutine(routineToCreate, exercisesList)
-        if(!newRoutine.valid){
-            console.log('Invalid: ',newRoutine.error)
-        }else{
+        if(newRoutine.valid){
             addToUserRoutines(newRoutine.routineInfo)
         }
+        return newRoutine
     }
 
     //Logic to filter exercises

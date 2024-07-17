@@ -9,6 +9,7 @@ function Timer(){
     const context = useContext(GeneralContext);
     const [timeFormat, setTimeFormat] = useState('clock')
     const [canEdit, setCanEdit] = useState(false)
+    const [result, setResult] = useState(null)
     const [timerActiveButton, setTimerActiveButton] = useState(null)
     const [chooseExercisePanel, setChooseExercisePanel] = useState(false)
     const renderTime = (time) => {
@@ -202,6 +203,34 @@ function Timer(){
         const exercise = JSON.parse(e.dataTransfer.getData('text/plain'))
         context.addStep(exercise)
     }
+
+    const handleSaveRoutine = () => {
+        const res = context.saveNewRoutine()
+        setResult(res)
+    }
+    const handleCloseResult = (className) => {
+        if(className === 'timer__save-result'){
+            setResult(null)
+        }
+
+    }
+    const renderError = (error) => {
+        switch(error){
+            case 'EMPTY_EXERCISES_LIST': 
+                return (
+                    <p className='timer__error-result'>You have to add exercises to the routine</p>
+                )
+            case 'NO_TIMER': 
+                return (
+                    <p className='timer__error-result'>You have to create a timer for your routine</p>
+                )
+            case 'INVALID_STEPS': 
+                return (
+                    <p className='timer__error-result'>You have to add exercises to the timer</p>
+                )
+            default: break
+        }
+    }
     return(
         <main className='timer'>
             {chooseExercisePanel && 
@@ -221,6 +250,18 @@ function Timer(){
                                 <p className='timer__missing-exercises'>You haven´t added exercises yet</p>
                             }
                         </ul>
+                    </div>
+                </section>
+            }
+            {result && 
+                <section className='timer__save-result'
+                 onClick={(event)=>handleCloseResult(event.target.className)}>
+                    <div className='timer__result-panel'>
+                        {result.valid ?
+                            <p className='timer__result'>Routine Saved!!!</p>
+                            : 
+                            renderError(result.error)
+                        }
                     </div>
                 </section>
             }
@@ -384,7 +425,7 @@ function Timer(){
                     </button>
                 }
                 <button className='timer__save'
-                 onClick={()=>context.saveNewRoutine()}>Save</button>
+                 onClick={()=>handleSaveRoutine()}>Save</button>
             </section>
         </main>
     )
