@@ -191,6 +191,10 @@ function Timer(){
         context.addStep(exercise)
         setChooseExercisePanel(false)
     }
+    const handleAddRest = () => {
+        context.addStep({name: 'Rest'})
+        setChooseExercisePanel(false)
+    }
     const handleDragOver = (e) => {
         e.preventDefault()
         e.dataTransfer.dropEffect = 'move'
@@ -199,8 +203,8 @@ function Timer(){
             parentLi.className = parentLi.className + ' timer__add-step--hovered'
         }
     }
-    const handleDragLeave = (dragZone) => {
-        if(dragZone.className.includes('timer__add-step--hovered')){
+    const cancelDragOver = (dragZone) => {
+        if(dragZone && dragZone.className.includes('timer__add-step--hovered')){
             dragZone.className = 'timer__add-step'
         }
     }
@@ -209,6 +213,8 @@ function Timer(){
         e.preventDefault()
         const exercise = JSON.parse(e.dataTransfer.getData('text/plain'))
         context.addStep(exercise)
+        const parentLi = e.target.closest('.timer__add-step')
+        cancelDragOver(parentLi)
     }
 
     const handleSaveRoutine = () => {
@@ -261,16 +267,16 @@ function Timer(){
                     <div className='timer__exercises-list'>
                         <p className='timer__choose-exercise'>Choose an exercise</p>
                         <ul className='timer__exercises-to-choose'>
-                            {context.exercisesList.length>0 ?
-                                context.exercisesList.map((exercise, index)=>(
-                                    <p key={index} className='timer__exercise-to-add'
-                                    onClick={()=>handleAddStep(exercise)}>
-                                        {exercise.name}
-                                    </p>
-                                ))
-                                :
-                                <p className='timer__missing-exercises'>You haven´t added exercises yet</p>
-                            }
+                            {context.exercisesList.map((exercise, index)=>(
+                                <p key={index} className='timer__exercise-to-add'
+                                onClick={()=>handleAddStep(exercise)}>
+                                    {exercise.name}
+                                </p>
+                            ))}
+                            <p className='timer__exercise-to-add'
+                                    onClick={()=>handleAddRest()}>
+                                        Rest
+                            </p>
                         </ul>
                     </div>
                 </section>
@@ -426,7 +432,7 @@ function Timer(){
                             <li className='timer__add-step'
                              onClick={()=>setChooseExercisePanel(true)}
                              onDragOver={(e)=>handleDragOver(e)}
-                             onDragLeave={(e)=>handleDragLeave(e.target)}
+                             onDragLeave={(e)=>cancelDragOver(e.target)}
                              onDrop={(e)=>handleDrop(e)}>
                                 <p className='timer__add-msg'>Drag an exercise here or click to add</p>
                                 <figure className='timer__add'>

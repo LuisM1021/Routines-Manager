@@ -90,10 +90,14 @@ export function updateSteps(oldTimer, newExercise){
         timer.steps = oldTimer.steps
     }
     let time
-    if(newExercise.suggestedTime[0] === 0 && newExercise.suggestedTime[1] === 0 && newExercise.suggestedTime[2] === 0){
+    if(newExercise.name === 'Rest'){
         time = [0,0,45]
     }else{
-        time = newExercise.suggestedTime
+        if(newExercise.suggestedTime[0] === 0 && newExercise.suggestedTime[1] === 0 && newExercise.suggestedTime[2] === 0){
+            time = [0,0,45]
+        }else{
+            time = newExercise.suggestedTime
+        }
     }
     timer.steps.push({
         exercise: newExercise.name,

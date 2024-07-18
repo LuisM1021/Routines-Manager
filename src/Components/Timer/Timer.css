@@ -49,9 +49,6 @@ input{
         background-color: var(--apple-green);
     }
 }
-.timer__missing-exercises{
-    color: var(--cerulean);
-}
 .timer__save-result{
     position: absolute;
     width: 100%;
