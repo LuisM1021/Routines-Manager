@@ -1,0 +1,67 @@
+.training__title{
+    text-align: center;
+    min-width: 320px;
+    font-size: 43px;
+    color: var(--apple-green);
+}
+.training__routines-card{
+    width: 100%;
+    max-width: 400px;
+    min-width: 320px;
+    height: 450px;
+    border-radius: 16px;
+    margin: 0 auto;
+}
+.training__select-routine{
+    text-align: center;
+    height: calc(60px - 12px);
+    color: var(--flame);
+}
+.training__routine-list{
+    height: calc(390px - 12px);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: auto;
+    padding-left: 4px;
+    padding-top: 4px;
+    &::-webkit-scrollbar{
+        border-radius: 10px;
+        background-color: transparent;
+        width: 12px;
+    }
+    &::-webkit-scrollbar-thumb{
+        background-color: var(--dark-brown);
+        border-radius: 10px;
+    }
+}
+.training__item{
+    width: calc(100% - 12px);
+    min-height: 64px;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    align-items: center;
+    border-radius: 12px;
+    color: var(--dark-brown);
+    cursor: pointer;
+    
+    &:hover{
+        transform: translate(-4px, -4px);
+        box-shadow: 4px 4px 3px var(--black);
+    }
+    
+    &:nth-child(3n + 1){
+        background-color: var(--cerulean);
+    }
+    &:nth-child(3n + 2){
+        background-color: var(--flame);
+    }
+    &:nth-child(3n){
+        background-color: var(--apple-green);
+    }
+}
+.training__routine{
+    font-weight: bold;
+    font-size: 20px;
+}

@@ -29,11 +29,6 @@ function Navbar(){
                         <p className='page'>Home</p>
                     </div> 
                 </NavLink>
-                <NavLink className='redirect' to='/'>
-                    <div className='page-container'>
-                        <p className='page'>Timer</p>
-                    </div> 
-                </NavLink>
                 <NavLink className='redirect' to='/routines'>
                     <div className='page-container'>
                         <p className='page'>Routines</p>
@@ -44,9 +39,14 @@ function Navbar(){
                         <p className='page'>Exercises</p>
                     </div> 
                 </NavLink>
-                <NavLink className='redirect' to='/'>
+                <NavLink className='redirect' to='/create-routine'>
                     <div className='page-container'>
-                        <p className='page'>Export routine</p>
+                        <p className='page'>Create</p>
+                    </div> 
+                </NavLink>
+                <NavLink className='redirect' to='/training'>
+                    <div className='page-container'>
+                        <p className='page'>Training</p>
                     </div> 
                 </NavLink>
             </div>

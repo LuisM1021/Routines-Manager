@@ -308,7 +308,15 @@ function GeneralProvider({children}){
         setFilteredExercises(filterResult)
     },[searchExerciseByName, searchExerciseByCategory, exercises])
     //-------------------------------------------------------
-   
+    
+    //-----------------------TrainRoutine------------------------
+        const [routineToTrain, setRoutineToTrain] = useState(null)
+    //-------------------------------------------------------
+
+
+
+
+
     //Random number function 
     const getRandom =(min,max)=>{
         return Math.floor(Math.random()*(max-min))+min
@@ -384,7 +392,9 @@ function GeneralProvider({children}){
             loadRoutineToEdit,
             isBeingUpdated,
             setIsBeingUpdated,
-            resetCreateRoutine
+            resetCreateRoutine,
+            routineToTrain,
+            setRoutineToTrain
         }}>
             {children}
         </GeneralContext.Provider>
