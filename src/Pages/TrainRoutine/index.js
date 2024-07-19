@@ -123,8 +123,8 @@ function TrainRoutine(){
         if(reps){
             return (
                 <>
-                    <span>Reps :</span>
-                    <span>{reps}</span>
+                    <span className='train__reps-label'>Reps :</span>
+                    <span className='train__reps'>{reps}</span>
                 </>
             )
         }else{
@@ -132,8 +132,8 @@ function TrainRoutine(){
             if(exerciseIndex !==-1){
                 return (
                     <>
-                        <span>Reps :</span>
-                        <span>{context.routineToTrain.reps[exerciseIndex]}</span>
+                        <span className='train__reps-label'>Reps :</span>
+                        <span className='train__reps'>{context.routineToTrain.reps[exerciseIndex]}</span>
                     </>
                 ) 
             }
@@ -164,7 +164,6 @@ function TrainRoutine(){
         setStepCountdown(null)
         setCurrentStep({step: context.routineToTrain.timer.steps[0], index: 0, lap: 1})
     }
-    console.log(context.routineToTrain)
     const renderCronometer = () => {
         let renderedTime
         if(countdown === null){
@@ -192,15 +191,15 @@ function TrainRoutine(){
             </section>
             <section className='train__players'>
                 <div className='train__player'>
-                    <figure>
+                    <figure className='train__icon-cont'>
                         <PauseIcon className='train__player-icon train-pause'
                         onClick={()=>setIsRunning(false)}/>
                     </figure>
-                    <figure>
+                    <figure className='train__icon-cont'>
                         <PlayIcon className='train__player-icon train-play' 
                          onClick={()=>handlePlay()}/>
                     </figure>
-                    <figure>
+                    <figure className='train__icon-cont'>
                         <StopIcon className='train__player-icon train-stop' 
                          onClick={()=>handleReset()}/>
                     </figure>
@@ -216,18 +215,20 @@ function TrainRoutine(){
                 </div>
             </section>
             <section className='train__steps-cont'>
-                <div className='train__steps-card'>
+                <div key={currentStep.index} className={`train__steps-card enter-animation`}>
                     <div className='train__step-details'>
-                        <span>{renderTime(currentStep.step.time)}</span>
-                        <p>
+                        <p className='train__reps-data'>
                             {renderReps(currentStep.step.reps, currentStep.step.exercise)}
                         </p>
-                        <span>Exercise countdown</span>
-                        <span>{renderExerciseCountdown()}</span>
+                        <p className='train__countdown-data'>
+                            <span className='train__countdown'>{renderExerciseCountdown()}</span>
+                        </p>
                     </div>
                     <div className='train__step'>
                         <p className='train__exercise'>{currentStep.step.exercise}</p>
-                        <img className='train__img' src="./pics/logo.jpg"></img>
+                        {currentStep.step.img && 
+                            <img className='train__img' src={currentStep.step.img}></img>
+                        }
                     </div>
                 </div>
             </section>
@@ -236,9 +237,9 @@ function TrainRoutine(){
                     <label className='train__laps-label'>lap</label>
                     <span className='train__laps-value'>{renderLaps()}</span>
                 </div>
-                <div className='train__time'>
+                <span className='train__time'>
                     {renderCronometer()}
-                </div>
+                </span>
             </section>
         </section>
     )

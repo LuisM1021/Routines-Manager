@@ -76,7 +76,7 @@ class CreateRoutine{
             }
         }
     }
-    static verifyRoutine(routine, exercisesList){
+    static verifyRoutine(routine, exercisesList, exercises){
         if(exercisesList.length === 0){
             return {valid: false, error: 'EMPTY_EXERCISES_LIST'}
         }
@@ -86,13 +86,14 @@ class CreateRoutine{
         if(!routine.timer.steps.find(step => step.exercise !== 'Warming' && step.exercise !== 'Prepare')){
             return {valid: false, error: 'INVALID_STEPS'}
         }
+        const timerWithImages = this.asignImages(routine.timer, exercises)
         return {
             valid: true,
             routineInfo: {
                 id: routine.id || null,
                 name: routine.name || null,
                 description: routine.description || null,
-                timer: routine.timer,
+                timer: timerWithImages,
                 equipment: null,
                 category: 'Personalized routine',
                 exercises: exercisesList.map(exercise => exercise.name),
@@ -102,20 +103,43 @@ class CreateRoutine{
             }
         }
     }
-    // static update(routineId, routine, exercisesList){
-    //     if(exercisesList.length === 0){
-    //         return {valid: false, error: 'EMPTY_EXERCISES_LIST'}
-    //     }
-    //     if(!routine.timer.steps.find(step => step.exercise !== 'Warming' && step.exercise !== 'Prepare')){
-    //         return {valid: false, error: 'INVALID_STEPS'}
-    //     }
-    //     return{
-    //         valid: true,
-    //         routineInfo: {
-
-    //         }
-    //     }
-    // }
+    static asignImages(timer, exercises){
+        const stepsWithImages = timer.steps.map(step => {
+            if(step.exercise === 'Rest'){
+                return {
+                    ...step,
+                    img: '/pics/exerciseImgs/rest.jpg'
+                }
+            }
+            if(step.exercise === 'Warming'){
+                return {
+                    ...step,
+                    img: '/pics/exerciseImgs/warming.jpg'
+                }
+            }
+            if(step.exercise === 'Prepare'){
+                return {
+                    ...step,
+                    img: '/pics/exerciseImgs/prepare.jpg'
+                }
+            }
+            const findExercise = exercises.find(exercise => exercise.name === step.exercise)
+            if(findExercise){
+                return {
+                    ...step,
+                    img: findExercise.imgPath
+                }
+            }
+            return {
+                ...step,
+                img: null
+            }
+        })
+        return {
+            ...timer,
+            steps: stepsWithImages
+        }
+    }
 }
 
 export { CreateRoutine }

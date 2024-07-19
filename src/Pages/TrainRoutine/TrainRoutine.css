@@ -3,6 +3,7 @@
     width: 100%;
     height: 100vh;
     padding: 12px;
+    overflow-x: hidden;
 }
 .train__layout::before {
     content: '';
@@ -24,8 +25,9 @@
     width: 100%;
     text-align: center;
     font-size: 30px;
-    color: var(--flame);
+    color: var(--apple-green);
     margin-bottom: 32px;
+    text-shadow: 2px 2px 1px var(--black);
 }
 .train__players{
     width: 100%;
@@ -45,11 +47,18 @@
     justify-content: center;
     gap: 8px;
 }
-.train__player-icon{
+.train__icon-cont{
     width: 50px;
+    :hover{
+        transform: translateY(-2px);
+    }
+}
+.train__player-icon{
+    width: 100%;
+    cursor: pointer;
 }
 .train-pause{
-    color: var(--black);
+    color: var(--flame);
 }
 .train-play{
     color: var(--apple-green);
@@ -65,32 +74,34 @@
     height: 300px;
     display: flex;
     gap: 8px;
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
     min-width: 330px;
     max-width: 600px;
     margin: 0 auto;
     margin-bottom: 12px;
-    &::-webkit-scrollbar{
-        height: 8px;
-    }
-    &::-webkit-scrollbar-thumb{
-        background-color: var(--black);
-        border-radius: 10px;
-    }
-    &::-webkit-scrollbar-track{
-        border-radius: 10px;
-        background-color: var(--black-opacity);
-    }
+    position: relative;
+    background-color: rgba(136, 149, 201, 0.4);/*Make it a variable*/
+    border-radius: 12px;
 }
 .train__steps-card{
     min-width: 100%;
     height: 100%;
     display: flex;
-    scroll-snap-align: start;
-    background-color: rgba(136, 149, 201, 0.4);/*Make it a variable*/
-    border-radius: 12px;
     padding: 8px;
+}
+/* ANIMATION */
+.enter-animation{
+    animation-name: enter;
+    animation-duration: 1000ms;
+}
+@keyframes enter{
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 .train__step-details{
     width: 40%;
@@ -98,6 +109,28 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+.train__reps-data{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+.train__reps-label{
+    color: var(--flame);
+    text-shadow: 3px 3px 3px var(--black);
+}
+.train__reps{
+    color: var(--flame);
+    text-shadow: 2px 2px 1px var(--black);
+}
+.train__countdown{
+    font-weight: bold;
+    font-size: 22px;
+    color: var(--flame);
+    text-shadow: 2px 2px 1px var(--black);
 }
 .train__step{
     width: 60%;
@@ -137,7 +170,7 @@
     font-weight: bold;
     font-size: 20px;
     margin-right: 8px;
-    color: var(--burnt-orange);
+    color: var(--flame);
     text-shadow: 2px 2px 2px var(--black);
 }
 .train__laps-value{
@@ -145,6 +178,12 @@
     padding: 4px 8px;
     border-radius: 8px;
     box-shadow: 2px 2px 2px var(--black);
+}
+.train__time{
+    font-weight: bold;
+    font-size: 30px;
+    color: var(--apple-green);
+    text-shadow: 3px 3px 1px var(--black);
 }
 @media (min-width: 750px){
     .train__layout{

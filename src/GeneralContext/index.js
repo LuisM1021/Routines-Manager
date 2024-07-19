@@ -245,11 +245,19 @@ function GeneralProvider({children}){
         setRoutineToCreate(CreateRoutine.generateCustomTimer(routineToCreate))
     }
     const saveNewRoutine = () => {
-        const newRoutine = CreateRoutine.verifyRoutine(routineToCreate, exercisesList)
+        const newRoutine = CreateRoutine.verifyRoutine(routineToCreate, exercisesList, exercises)
         if(newRoutine.valid){
             addToUserRoutines(newRoutine.routineInfo)
         }
         return newRoutine
+    }
+    const editRoutine = () => {
+        const updatedRoutine = CreateRoutine.verifyRoutine(routineToCreate, exercisesList, exercises)
+        if(updatedRoutine.valid){
+            console.log(updatedRoutine.routineInfo)
+            editUserRoutine(updatedRoutine.routineInfo)
+        }
+        return updatedRoutine
     }
     const loadRoutineToEdit = (routineId) => {
         let routineToEdit
@@ -276,14 +284,6 @@ function GeneralProvider({children}){
                 suggestedTime: [0,0,45]
             }
         }))
-    }
-    const editRoutine = () => {
-        const updatedRoutine = CreateRoutine.verifyRoutine(routineToCreate, exercisesList)
-        if(updatedRoutine.valid){
-            console.log(updatedRoutine.routineInfo)
-            editUserRoutine(updatedRoutine.routineInfo)
-        }
-        return updatedRoutine
     }
 
     //Logic to filter exercises
