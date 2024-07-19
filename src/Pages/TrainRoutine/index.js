@@ -9,7 +9,10 @@ function TrainRoutine(){
     const [token, setToken] = useState(0)
     const [isRunning, setIsRunning] = useState(false)
     const [countdown, setCountdown] = useState(null)
+    const [currentStep, setCurrentStep] = useState({step: context.routineToTrain.timer.steps[0], index: 0, lap: 1})
+    const [stepCountdown, setStepCountdown] = useState(null)
     const intervalRef = useRef(null)
+    const stepIntervalRef = useRef(null)
     //---------------------SPOTIFY TEST----------------------
     // const clientId = '3873799a7e8c4839932798061ac73923'
     // const authEndpoint = 'https://accounts.spotify.com/authorize?'
@@ -61,15 +64,41 @@ function TrainRoutine(){
 
     useEffect(() => {
         if(isRunning){
-            console.log('running')
             intervalRef.current = setInterval(() => {
-                setToken(token => token + 1)
+                setCountdown(countdown => countdown - 1)
+            },1000)
+            stepIntervalRef.current = setInterval(() => {
+                setStepCountdown(stepCountdown => stepCountdown - 1)
             },1000)
         }else{
+            clearInterval(stepIntervalRef.current)
             clearInterval(intervalRef.current)
         }
-        
     }, [isRunning])
+
+    useEffect(()=>{
+        if(stepCountdown !== null && stepCountdown <=0){
+            console.log('entro: ',stepCountdown)
+            clearInterval(stepIntervalRef.current)
+            const nextStep = TrainRoutineClass.getNextStep(context.routineToTrain.timer, currentStep)
+            if(nextStep){
+                loadNewStep(nextStep)
+                stepIntervalRef.current = setInterval(() => {
+                    setStepCountdown(stepCountdown => stepCountdown - 1)
+                },1000)
+            }else{
+                // setStepCountdown()
+                console.log('no more steps')
+            }
+        }
+    },[stepCountdown])
+
+    useEffect(()=>{
+        if(countdown <= 0 && stepCountdown <=0){
+            clearInterval(intervalRef.current)
+            setIsRunning(false)
+        }
+    },[countdown, stepCountdown])
     //------------------------------------------------------
     const renderTime = (time) => {
         let render = ''
@@ -110,14 +139,35 @@ function TrainRoutine(){
             }
         }
     }
-    const handlePlay = () => {
-        console.log(context.routineToTrain.timer.totalTime)
-        const totalSecs = TrainRoutineClass.getCountdown(context.routineToTrain.timer.totalTime)
-        console.log(totalSecs)
+    const renderLaps = () => {
+        const lap = TrainRoutineClass.getCurrentLap(context.routineToTrain.timer, countdown)
+        return `${lap.current} / ${lap.total}`
     }
+    const loadNewStep = (newStep) => {
+        const totalStepSecs = TrainRoutineClass.getCountdown(newStep.step.time)
+        setCurrentStep(newStep)
+        setStepCountdown(totalStepSecs)
+    }
+    const handlePlay = () => {
+        if(countdown === null){
+            const totalSecs = TrainRoutineClass.getCountdown(context.routineToTrain.timer.totalTime)
+            setCountdown(totalSecs)
+            setIsRunning(true)
+            loadNewStep(currentStep)
+        }else{
+            setIsRunning(true)
+        }
+    }
+    const handleReset = () => {
+        setIsRunning(false)
+        setCountdown(null)
+        setStepCountdown(null)
+        setCurrentStep({step: context.routineToTrain.timer.steps[0], index: 0, lap: 1})
+    }
+    console.log(context.routineToTrain)
     const renderCronometer = () => {
         let renderedTime
-        if(!countdown){
+        if(countdown === null){
             renderedTime = renderTime(context.routineToTrain.timer.totalTime)
         }else{
             const currentTime = TrainRoutineClass.getCurrentTime(countdown)
@@ -125,7 +175,16 @@ function TrainRoutine(){
         }
         return renderedTime
     }
-
+    const renderExerciseCountdown = () => {
+        let renderedTime
+        if(stepCountdown === null){
+            renderedTime = renderTime(currentStep.step.time)
+        }else{
+            const currentTime = TrainRoutineClass.getCurrentTime(stepCountdown)
+            renderedTime = renderTime(currentTime)
+        }
+        return renderedTime
+    }
     return(
         <section className='train__layout'>
             <section className='train__title'>
@@ -134,14 +193,16 @@ function TrainRoutine(){
             <section className='train__players'>
                 <div className='train__player'>
                     <figure>
-                        <PauseIcon className='train__player-icon train-pause'/>
+                        <PauseIcon className='train__player-icon train-pause'
+                        onClick={()=>setIsRunning(false)}/>
                     </figure>
                     <figure>
                         <PlayIcon className='train__player-icon train-play' 
                          onClick={()=>handlePlay()}/>
                     </figure>
                     <figure>
-                        <StopIcon className='train__player-icon train-stop' />
+                        <StopIcon className='train__player-icon train-stop' 
+                         onClick={()=>handleReset()}/>
                     </figure>
                 </div>
                 <div className='train__music-player'>
@@ -155,29 +216,28 @@ function TrainRoutine(){
                 </div>
             </section>
             <section className='train__steps-cont'>
-                {context.routineToTrain.timer.steps.map((step, index) => (
-                    <div key={index} className='train__steps-card'>
-                        <div className='train__step-details'>
-                            <span>{renderTime(step.time)}</span>
-                            <p>
-                                {renderReps(step.reps, step.exercise)}
-                            </p>
-                        </div>
-                        <div className='train__step'>
-                            <p className='train__exercise'>{step.exercise}</p>
-                            <img className='train__img' src="./pics/logo.jpg"></img>
-                        </div>
+                <div className='train__steps-card'>
+                    <div className='train__step-details'>
+                        <span>{renderTime(currentStep.step.time)}</span>
+                        <p>
+                            {renderReps(currentStep.step.reps, currentStep.step.exercise)}
+                        </p>
+                        <span>Exercise countdown</span>
+                        <span>{renderExerciseCountdown()}</span>
                     </div>
-                ))}
+                    <div className='train__step'>
+                        <p className='train__exercise'>{currentStep.step.exercise}</p>
+                        <img className='train__img' src="./pics/logo.jpg"></img>
+                    </div>
+                </div>
             </section>
             <section className='train__cronometer'>
                 <div className='train__laps'>
                     <label className='train__laps-label'>lap</label>
-                    <span className='train__laps-value'>1 / 3</span>
+                    <span className='train__laps-value'>{renderLaps()}</span>
                 </div>
                 <div className='train__time'>
                     {renderCronometer()}
-                    {/* <span>00 : 07 : 15</span> */}
                 </div>
             </section>
         </section>
