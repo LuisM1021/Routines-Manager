@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState, useRef } from "react"
 import { GeneralContext } from "../../GeneralContext"
-import { PauseIcon, PlayIcon, StopIcon, ArrowPathIcon, SpeakerXMarkIcon, SpeakerWaveIcon } from "@heroicons/react/16/solid"
+import { PauseIcon, PlayIcon, StopIcon, ArrowPathIcon, SpeakerXMarkIcon, SpeakerWaveIcon, Bars3Icon } from "@heroicons/react/16/solid"
 import './TrainRoutine.css'
 import { TrainRoutineClass } from "../../Utils/trainRoutine"
 function TrainRoutine(){
@@ -230,6 +230,11 @@ function TrainRoutine(){
     }
     return(
         <section className='train__layout'>
+            <div
+             className='open-menu-container'
+             onClick={()=>context.setDisplayNavbar(context.displayNavbar ? false : true)}>
+                <Bars3Icon className='open-menu'/>
+            </div>
             <section className='train__title'>
                 <h1 className='train__routine-name'>{context.routineToTrain.name}</h1>
             </section>
