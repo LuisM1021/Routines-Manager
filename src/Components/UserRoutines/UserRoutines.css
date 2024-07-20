@@ -1,34 +1,161 @@
 .user-routines-panel{
-    width: 300px;
-    height: calc(300px - 8px);
+    width: 100%;
+    min-width: 300px;
+    max-width: 450px;
+    height: 280px;
     background-color: var(--white);
-    display: flex;
-    flex-direction: column;
     border-radius: 32px;
     border: 4px solid var(--burnt-orange);
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
 }
-.user-routines-panel .title-2{
-    height: 20%;
+.user-routine-options-bg{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--white);
+    border-radius: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.user-routine-title{
+    color: var(--flame);
     text-align: center;
-    margin: 4px 0 8px 0;
+    font-weight: bold;
+    font-size: 24px;
+    height: 10%;
+    margin-bottom: 12px;
+}
+.user-routine-info{
+    width: 100%;
+    height: 80%;
+    display: flex;
+}
+.user-routine-exercises{
+    width: 60%;
+    padding-left: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.user-routine-exercise{
+    margin-bottom: 4px;
+    color: var(--cerulean);
+    font-size: 16px;
+}
+.user-routine-options{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    justify-content: center;
+}
+.user-routine-go{
+    font-weight: bold;
+    font-size: 16px;
+    width: 80px;
+    border-radius: 8px;
+    padding: 4px 0;
+    text-align: center;
+    text-decoration: none;
     color: var(--dark-brown);
+    background-color: var(--apple-green);
+    border: none;
+    box-shadow: 1px 1px 1px var(--black);
+}
+.user-routine-edit{
+    font-weight: bold;
+    font-size: 16px;
+    width: 80px;
+    border-radius: 8px;
+    padding: 4px 0;
+    text-align: center;
+    text-decoration: none;
+    color: var(--dark-brown);
+    background-color: var(--burnt-orange);
+    border: none;
+    box-shadow: 1px 1px 1px var(--black);
+}
+.user-routine-back{
+    font-weight: bold;
+    font-size: 16px;
+    width: 80px;
+    border-radius: 8px;
+    padding: 4px 0;
+    background-color: var(--red-inactive);
+    border: none;
+    box-shadow: 1px 1px 1px var(--black);
+    margin-bottom: 8px;
+    &:hover{
+        background-color: var(--red);
+    }
+
+}
+
+.user-routines-panel .title-2{
+    color: var(--dark-brown);  
+    height: 40px; 
+}
+.user-routines-data{
+    width: 100%;
+    height: calc(100% - 40px);
+    display: flex;
 }
 .user-routines-panel .user-routines-container{
     list-style: none;
-    margin: 0 0 6px 0;
-    padding: 0;
-    height: 60%;
+    width: 60%;
+    height: 100%;
     overflow: auto;
+    padding-left: 16px;
 }
 .user-routines-panel .user-routines-container .user-routine{
-    margin-left: 16px;
-    margin-bottom: 4px;
     color: var(--cerulean);
     cursor: pointer;
+    margin-bottom: 8px;
+    &:hover{
+        color: var(--dark-brown);
+    }
 }
-.user-routines-panel .user-routines-container .user-routine:hover{
+.user-routines-panel .add-routine-container{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.add-routine-container .add-routine{
+    color: var(--dark-brown);
+    font-weight: bold;
+    font-size: large;
+}
+.add-routine-container .plus-icon-container{
+    width: 30px;
+    height: 30px;
+    background-color: var(--apple-green-inactive);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    cursor: pointer;
+}
+.add-routine-container .plus-icon{
+    width: 20px;
+    height: 20px;
     color: var(--dark-brown);
 }
+.add-routine-container .plus-icon-container:hover{
+    background-color: var(--apple-green);
+}
+/*
+
 .user-routines-panel .add-routine-container{
     display: flex;
     align-items: center;
@@ -102,4 +229,4 @@
         flex-direction: column;
         justify-content: center;
     }
-}
+} */

@@ -210,8 +210,10 @@ function GeneralProvider({children}){
         setIsBeingUpdated(false)
         const nameInput = document.getElementById('create-routine__name-input')
         const descriptionInput = document.getElementById('create-routine__description-input')
-        nameInput.value = ''
-        descriptionInput.value = ''
+        if(nameInput && descriptionInput){
+            nameInput.value = ''
+            descriptionInput.value = ''
+        }
     }
     const setNewRoutineName = (name) => {
         setRoutineToCreate(CreateRoutine.changeName(routineToCreate, name))
@@ -254,7 +256,6 @@ function GeneralProvider({children}){
     const editRoutine = () => {
         const updatedRoutine = CreateRoutine.verifyRoutine(routineToCreate, exercisesList, exercises)
         if(updatedRoutine.valid){
-            console.log(updatedRoutine.routineInfo)
             editUserRoutine(updatedRoutine.routineInfo)
         }
         return updatedRoutine

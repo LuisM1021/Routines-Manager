@@ -12,7 +12,7 @@ function Home(){
                 <RoutinesPanel/>
                 <div className='user-content'>
                     <UserRoutines/>
-                    <UserActivity/>
+                    {/* <UserActivity/> */}
                 </div>
             </div>
         </Layout>

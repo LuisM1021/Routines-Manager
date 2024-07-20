@@ -148,7 +148,7 @@ function Timer(){
                     }else if(parseInt(match[0])<10 && parseInt(match[0])>=5){
                         timeToRender = `0${match[0]}`
                     }else{
-                        if(findStep.time[0] === 0 && findStep.time[1] === 0){
+                        if(findStep.time[0] === 0 && findStep.time[1] === 0 && parseInt(match[0])<5){
                             timeToRender = '05'
                         }else{
                             timeToRender = `0${match[0]}`
@@ -312,11 +312,7 @@ function Timer(){
                     <div className='timer__result-panel'>
                         {result.valid ?
                             <>
-                                {context.isBeingUpdated ? 
-                                    <p className='timer__result'>Routine Updated!!!</p>
-                                    :
-                                    <p className='timer__result'>Routine Saved!!!</p>
-                                }
+                                <p className='timer__result'>Routine Saved!!!</p>
                                 <div className='timer__save-options'>
                                     <button className='timer__save-button timer__edit-button'
                                      onClick={()=>handleEditRoutine()}>
