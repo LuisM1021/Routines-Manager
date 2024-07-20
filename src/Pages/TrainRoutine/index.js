@@ -1,22 +1,32 @@
 import { useContext, useEffect, useState, useRef } from "react"
 import { GeneralContext } from "../../GeneralContext"
-import { PauseIcon, PlayIcon, StopIcon } from "@heroicons/react/16/solid"
+import { PauseIcon, PlayIcon, StopIcon, ArrowPathIcon, SpeakerXMarkIcon, SpeakerWaveIcon } from "@heroicons/react/16/solid"
 import './TrainRoutine.css'
-import { NavLink } from "react-router-dom"
 import { TrainRoutineClass } from "../../Utils/trainRoutine"
 function TrainRoutine(){
     const context = useContext(GeneralContext)
-    const [token, setToken] = useState(0)
     const [isRunning, setIsRunning] = useState(false)
+    const [isOver, setIsOver] = useState(false)
     const [countdown, setCountdown] = useState(null)
     const [currentStep, setCurrentStep] = useState({step: context.routineToTrain.timer.steps[0], index: 0, lap: 1})
     const [stepCountdown, setStepCountdown] = useState(null)
     const [beepActive, setBeepActive] = useState(false)
+    const [isMuted, setIsMuted] = useState(false)
+    const [currentSongIndex, setCurrentSongIndex] = useState(0)
     const intervalRef = useRef(null)
     const stepIntervalRef = useRef(null)
     const audioRef = useRef(null)
     const beepAudioRef = useRef(null)
 
+    const playlist = [
+        '/audio/trainingSongs/the-beast-master.mp3',
+        '/audio/trainingSongs/gym-phonk.mp3',
+        '/audio/trainingSongs/gym-workout.mp3',
+        '/audio/trainingSongs/pure-motivation.mp3',
+        '/audio/trainingSongs/the-beast-master.mp3',
+        '/audio/trainingSongs/the-gym-sport-rock.mp3',
+        '/audio/trainingSongs/thrash-hard-x-phonk.mp3',
+    ]
     useEffect(() => {
         if(isRunning){
             intervalRef.current = setInterval(() => {
@@ -45,9 +55,15 @@ function TrainRoutine(){
     },[stepCountdown])
 
     useEffect(()=>{
-        if(countdown <= 0 && stepCountdown <=0){
+        if(countdown!== null && stepCountdown!==null && countdown <= 0 && stepCountdown <=0){
             clearInterval(intervalRef.current)
             setIsRunning(false)
+            setIsOver(true)
+            pauseAudio()
+            setTimeout(()=>{
+                restartBeep()
+                setBeepActive(false)
+            },1000)
         }
         if(stepCountdown === 3){
             playBeep()
@@ -104,6 +120,7 @@ function TrainRoutine(){
         setCurrentStep(newStep)
         setStepCountdown(totalStepSecs)
     }
+
     const handlePlay = () => {
         if(countdown === null){
             const totalSecs = TrainRoutineClass.getCountdown(context.routineToTrain.timer.totalTime)
@@ -124,8 +141,10 @@ function TrainRoutine(){
         setCountdown(null)
         setStepCountdown(null)
         setCurrentStep({step: context.routineToTrain.timer.steps[0], index: 0, lap: 1})
-        restartAudio()
+        pauseAudio()
         restartBeep()
+        setBeepActive(false)
+        setIsOver(false)
     }
     const handlePause = () => {
         setIsRunning(false)
@@ -181,8 +200,17 @@ function TrainRoutine(){
     }
     const restartBeep = () => {
         if(beepAudioRef.current){
-            beepAudioRef.current.pause()
             beepAudioRef.current.currentTime = 0
+            beepAudioRef.current.pause()
+        }
+    }
+    const changeSong = () => {
+        const nextIndex = (currentSongIndex + 1) % playlist.length
+        setCurrentSongIndex(nextIndex)
+    }
+    const handleLoadedSong = () => {
+        if(isRunning){
+            playAudio()
         }
     }
     return(
@@ -192,20 +220,40 @@ function TrainRoutine(){
             </section>
             <section className='train__players'>
                 <div className='train__player'>
-                    <audio ref={beepAudioRef} src='/audio/timerAudios/short-beep-countdown.mp3'/>
-                    <audio ref={audioRef} src='/audio/trainingSongs/the-beast-master.mp3' />
+                    <audio muted={isMuted} ref={beepAudioRef} src='/audio/timerAudios/short-beep-countdown.mp3'/>
+                    <audio muted={isMuted} ref={audioRef} src={playlist[currentSongIndex]} 
+                     onEnded={changeSong}
+                     onLoadedData={handleLoadedSong}/>
                     <figure className='train__icon-cont'>
                         <PauseIcon className='train__player-icon train-pause'
                         onClick={()=>handlePause()}/>
                     </figure>
-                    <figure className='train__icon-cont'>
-                        <PlayIcon className='train__player-icon train-play' 
-                         onClick={()=>handlePlay()}/>
-                    </figure>
+                    {isOver ? 
+                        <figure className='train__icon-cont'>
+                            <ArrowPathIcon className='train__player-icon train-restart' 
+                            onClick={()=>handleReset()}/>
+                        </figure>
+                        :
+                        <figure className='train__icon-cont'>
+                            <PlayIcon className='train__player-icon train-play' 
+                            onClick={()=>handlePlay()}/>
+                        </figure>
+                    }
                     <figure className='train__icon-cont'>
                         <StopIcon className='train__player-icon train-stop' 
                          onClick={()=>handleReset()}/>
                     </figure>
+                    {isMuted ? 
+                    <figure className='train__icon-cont'>
+                        <SpeakerXMarkIcon className='train__player-icon train-mute' 
+                         onClick={()=>setIsMuted(isMuted ? false : true)}/>
+                    </figure>
+                    :
+                    <figure className='train__icon-cont'>
+                        <SpeakerWaveIcon className='train__player-icon train-unmute' 
+                         onClick={()=>setIsMuted(isMuted ? false : true)}/>
+                    </figure>
+                    }
                 </div>
             </section>
             <section className='train__steps-cont'>

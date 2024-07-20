@@ -45,6 +45,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 8px;
 }
 .train__icon-cont{
@@ -60,11 +61,20 @@
 .train-pause{
     color: var(--flame);
 }
-.train-play{
+.train-play,
+.train-restart{
     color: var(--apple-green);
 }
 .train-stop{
     color: var(--red);
+}
+.train-mute{
+    width: 60%;
+    color: var(--flame);
+}
+.train-unmute{
+    width: 60%;
+    color: var(--apple-green);
 }
 .train__steps-cont{
     width: 100%;

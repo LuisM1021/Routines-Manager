@@ -112,7 +112,6 @@ function Timer(){
                         }
                     })
                     if(parseInt(timeToRender) === 0 && findStep.time[1] === 0 && findStep.time[2] <=4){
-                        console.log('enter hrs')
                         routineToCreateClone.timer.steps.forEach((step, index) => {
                             if(index === i){
                                 step.time[2] = 5
@@ -134,7 +133,6 @@ function Timer(){
                         }
                     })
                     if(findStep.time[1] === 0 && parseInt(timeToRender) === 0 && findStep.time[2] <=4){
-                        console.log('enter min')
                         routineToCreateClone.timer.steps.forEach((step, index) => {
                             if(index === i){
                                 step.time[2] = 5
@@ -151,7 +149,6 @@ function Timer(){
                         timeToRender = `0${match[0]}`
                     }else{
                         if(findStep.time[0] === 0 && findStep.time[1] === 0){
-                            console.log('enter sec')
                             timeToRender = '05'
                         }else{
                             timeToRender = `0${match[0]}`
