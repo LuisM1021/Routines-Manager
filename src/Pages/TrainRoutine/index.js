@@ -11,56 +11,11 @@ function TrainRoutine(){
     const [countdown, setCountdown] = useState(null)
     const [currentStep, setCurrentStep] = useState({step: context.routineToTrain.timer.steps[0], index: 0, lap: 1})
     const [stepCountdown, setStepCountdown] = useState(null)
+    const [beepActive, setBeepActive] = useState(false)
     const intervalRef = useRef(null)
     const stepIntervalRef = useRef(null)
-    //---------------------SPOTIFY TEST----------------------
-    // const clientId = '3873799a7e8c4839932798061ac73923'
-    // const authEndpoint = 'https://accounts.spotify.com/authorize?'
-    // const responseType = 'token'
-    // const redirectUri = 'http://localhost:3000/train-routine'
-    // // const state = generateRandomString(16)
-    // const scope = 'user-modify-playback-state'
-    // const showDialog = ''
-    // const authorizeEndpoint = `${authEndpoint}client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`
-    // useEffect(() => {
-    //     console.log('obtaining token...')
-    //     const hash = window.location.hash
-    //     const hashParams = hash.substring(1).split('&')
-    //     const params = hashParams.reduce((params, item) => {
-    //         const [key, value] = item.split('=')
-    //         return {
-    //             ...params,
-    //             [key]: value
-    //         }
-    //     },{})
-    //     console.log(params)
-    //     setToken(params.access_token)
-    // },[])
-    // const testSpotify = async () => {
-    //     if(token){
-    //         const skipEndpoint = 'https://api.spotify.com/v1/me/player/next'
-    //         const options = {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Authorization': `Bearer ${token}`,
-    //                 'Content-Type': 'application/json'
-    //             }
-    //         }
-    //         try {
-    //             const res = await fetch(`${skipEndpoint}`,options)
-    //             const data = await res.json()
-    //             console.log(data) 
-    //         } catch (error) {
-    //             console.log('error')
-    //         }
-    //     }else{
-    //         console.log('no token')
-    //     }
-    // }
-    //-------------------------------------------------------
-    const testTime = () =>{
-        setIsRunning((isRunning) => isRunning ? false : true)
-    }
+    const audioRef = useRef(null)
+    const beepAudioRef = useRef(null)
 
     useEffect(() => {
         if(isRunning){
@@ -78,7 +33,6 @@ function TrainRoutine(){
 
     useEffect(()=>{
         if(stepCountdown !== null && stepCountdown <=0){
-            console.log('entro: ',stepCountdown)
             clearInterval(stepIntervalRef.current)
             const nextStep = TrainRoutineClass.getNextStep(context.routineToTrain.timer, currentStep)
             if(nextStep){
@@ -86,9 +40,6 @@ function TrainRoutine(){
                 stepIntervalRef.current = setInterval(() => {
                     setStepCountdown(stepCountdown => stepCountdown - 1)
                 },1000)
-            }else{
-                // setStepCountdown()
-                console.log('no more steps')
             }
         }
     },[stepCountdown])
@@ -98,8 +49,11 @@ function TrainRoutine(){
             clearInterval(intervalRef.current)
             setIsRunning(false)
         }
+        if(stepCountdown === 3){
+            playBeep()
+        }
     },[countdown, stepCountdown])
-    //------------------------------------------------------
+
     const renderTime = (time) => {
         let render = ''
         if(time[0]< 10){
@@ -121,12 +75,14 @@ function TrainRoutine(){
     }
     const renderReps = (reps, name) => {
         if(reps){
-            return (
-                <>
-                    <span className='train__reps-label'>Reps :</span>
-                    <span className='train__reps'>{reps}</span>
-                </>
-            )
+            if(reps !== '-'){
+                return (
+                    <>
+                        <span className='train__reps-label'>Reps :</span>
+                        <span className='train__reps'>{reps}</span>
+                    </>
+                )
+            }
         }else{
             const exerciseIndex = context.routineToTrain.exercises.findIndex(exercise => exercise === name)
             if(exerciseIndex !==-1){
@@ -157,12 +113,24 @@ function TrainRoutine(){
         }else{
             setIsRunning(true)
         }
+        playAudio()
+        if(beepActive){
+            playBeep()
+            setBeepActive(false)
+        }
     }
     const handleReset = () => {
         setIsRunning(false)
         setCountdown(null)
         setStepCountdown(null)
         setCurrentStep({step: context.routineToTrain.timer.steps[0], index: 0, lap: 1})
+        restartAudio()
+        restartBeep()
+    }
+    const handlePause = () => {
+        setIsRunning(false)
+        pauseAudio()
+        pauseBeep()
     }
     const renderCronometer = () => {
         let renderedTime
@@ -184,6 +152,39 @@ function TrainRoutine(){
         }
         return renderedTime
     }
+    const playAudio = () => {
+        if(audioRef.current){
+            audioRef.current.play()
+        }
+    }
+    const pauseAudio = () => {
+        if(audioRef.current){
+            audioRef.current.pause()
+        }
+    }
+    const playBeep = () => {
+        if(beepAudioRef.current){
+            beepAudioRef.current.play()
+            setBeepActive(true)
+        }
+    }
+    const pauseBeep = () => {
+        if(beepAudioRef.current){
+            beepAudioRef.current.pause()
+        }
+    }
+    const restartAudio = () => {
+        if(audioRef.current){
+            audioRef.current.pause()
+            audioRef.current.currentTime = 0
+        }
+    }
+    const restartBeep = () => {
+        if(beepAudioRef.current){
+            beepAudioRef.current.pause()
+            beepAudioRef.current.currentTime = 0
+        }
+    }
     return(
         <section className='train__layout'>
             <section className='train__title'>
@@ -191,9 +192,11 @@ function TrainRoutine(){
             </section>
             <section className='train__players'>
                 <div className='train__player'>
+                    <audio ref={beepAudioRef} src='/audio/timerAudios/short-beep-countdown.mp3'/>
+                    <audio ref={audioRef} src='/audio/trainingSongs/the-beast-master.mp3' />
                     <figure className='train__icon-cont'>
                         <PauseIcon className='train__player-icon train-pause'
-                        onClick={()=>setIsRunning(false)}/>
+                        onClick={()=>handlePause()}/>
                     </figure>
                     <figure className='train__icon-cont'>
                         <PlayIcon className='train__player-icon train-play' 
@@ -203,15 +206,6 @@ function TrainRoutine(){
                         <StopIcon className='train__player-icon train-stop' 
                          onClick={()=>handleReset()}/>
                     </figure>
-                </div>
-                <div className='train__music-player'>
-                    {/* <NavLink to={authorizeEndpoint}> */}
-                        <button>
-                            Spotify
-                        </button>
-                    {/* </NavLink> */}
-                    <button onClick={()=> testTime()}>Test timer</button>
-                    <span>{token}</span>
                 </div>
             </section>
             <section className='train__steps-cont'>

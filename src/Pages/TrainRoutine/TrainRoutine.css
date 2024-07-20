@@ -42,7 +42,7 @@
     margin-bottom: 12px;
 }
 .train__player{
-    width: 70%;
+    width: 100%;
     display: flex;
     justify-content: center;
     gap: 8px;
@@ -65,9 +65,6 @@
 }
 .train-stop{
     color: var(--red);
-}
-.train__music-player{
-    width: 30%;
 }
 .train__steps-cont{
     width: 100%;
