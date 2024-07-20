@@ -107,7 +107,7 @@ function Timer(){
                     }
                     routineToCreateClone.timer.steps.forEach((step, index) => {
                         if(index === i){
-                            step.time[0] = parseInt(data)
+                            step.time[0] = parseInt(timeToRender)
                         }
                     })
                     break
@@ -119,19 +119,27 @@ function Timer(){
                     }
                     routineToCreateClone.timer.steps.forEach((step, index) => {
                         if(index === i){
-                            step.time[1] = parseInt(data)
+                            step.time[1] = parseInt(timeToRender)
                         }
                     })
                     break
                 case 'sec':
                     if(parseInt(match[0])>59){
                         timeToRender = '59'
-                    }else if(parseInt(match[0])<10){
+                    }else if(parseInt(match[0])<10 && parseInt(match[0])>=5){
                         timeToRender = `0${match[0]}`
+                    }else{
+                        const findStep = routineToCreateClone.timer.steps.find((step, index) => index === i)
+                        console.log(findStep)
+                        if(findStep.time[0] === 0 && findStep.time[1] === 0){
+                            timeToRender = '05'
+                        }else{
+                            timeToRender = `0${match[0]}`
+                        }
                     }
                     routineToCreateClone.timer.steps.forEach((step, index) => {
                         if(index === i){
-                            step.time[2] = parseInt(data)
+                            step.time[2] = parseInt(timeToRender)
                         }
                     })
                     break
@@ -408,19 +416,19 @@ function Timer(){
                                         <span className='timer__exercise-edit'>{step.exercise}</span>
                                         <div className='timer__exercise-duration'>
                                             <input id={'hr'+index} className='timer__exercise-hrs' type='text' autoComplete='off' placeholder={renderInputTime(step.time[0])}
-                                            onKeyDown={(event)=>event.key==='Enter' && document.getElementById('min'+index).focus()}
-                                            onBlur={(event)=>changeStepTime(index, event, 'hr')}
-                                            onFocus={(event)=>event.target.value = ''}/>
+                                             onKeyDown={(event)=>event.key==='Enter' && document.getElementById('min'+index).focus()}
+                                             onBlur={(event)=>changeStepTime(index, event, 'hr')}
+                                             onFocus={(event)=>event.target.value = ''}/>
                                             <span className='timer__exercise-duration-points'>:</span>
                                             <input id={'min'+index} className='timer__exercise-min' type='text' autoComplete='off' placeholder={renderInputTime(step.time[1])}
-                                            onKeyDown={(event)=>event.key==='Enter' && document.getElementById('sec'+index).focus()}
-                                            onBlur={(event)=>changeStepTime(index, event, 'min')}
-                                            onFocus={(event)=>event.target.value = ''}/>
+                                             onKeyDown={(event)=>event.key==='Enter' && document.getElementById('sec'+index).focus()}
+                                             onBlur={(event)=>changeStepTime(index, event, 'min')}
+                                             onFocus={(event)=>event.target.value = ''}/>
                                             <span className='timer__exercise-duration-points'>:</span>
                                             <input id={'sec'+index} className='timer__exercise-sec' type='text' autoComplete='off' placeholder={renderInputTime(step.time[2])}
-                                            onBlur={(event)=>changeStepTime(index, event, 'sec')}
-                                            onFocus={(event)=>event.target.value = ''}
-                                            onKeyDown={(event)=>focusNextStepTime(event, index)}/>
+                                             onBlur={(event)=>changeStepTime(index, event, 'sec')}
+                                             onFocus={(event)=>event.target.value = ''}
+                                             onKeyDown={(event)=>focusNextStepTime(event, index)}/>
                                         </div> 
                                         <input className='timer__exercise-reps-editable' 
                                         placeholder={step.reps || '-'}
