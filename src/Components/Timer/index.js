@@ -98,6 +98,7 @@ function Timer(){
 
         if(match){
             timeToRender = match[0]
+            const findStep = routineToCreateClone.timer.steps.find((step, index) => index === i)
             switch(time){
                 case 'hr': 
                     if(parseInt(match[0])>23){
@@ -110,6 +111,16 @@ function Timer(){
                             step.time[0] = parseInt(timeToRender)
                         }
                     })
+                    if(parseInt(timeToRender) === 0 && findStep.time[1] === 0 && findStep.time[2] <=4){
+                        console.log('enter hrs')
+                        routineToCreateClone.timer.steps.forEach((step, index) => {
+                            if(index === i){
+                                step.time[2] = 5
+                            }
+                        })
+                        const secInput = document.getElementById(`sec${i}`)
+                        secInput.value = '05'
+                    }
                     break
                 case 'min':   
                     if(parseInt(match[0])>59){
@@ -122,6 +133,16 @@ function Timer(){
                             step.time[1] = parseInt(timeToRender)
                         }
                     })
+                    if(findStep.time[1] === 0 && parseInt(timeToRender) === 0 && findStep.time[2] <=4){
+                        console.log('enter min')
+                        routineToCreateClone.timer.steps.forEach((step, index) => {
+                            if(index === i){
+                                step.time[2] = 5
+                            }
+                        })
+                        const secInput = document.getElementById(`sec${i}`)
+                        secInput.value = '05'
+                    }
                     break
                 case 'sec':
                     if(parseInt(match[0])>59){
@@ -129,9 +150,8 @@ function Timer(){
                     }else if(parseInt(match[0])<10 && parseInt(match[0])>=5){
                         timeToRender = `0${match[0]}`
                     }else{
-                        const findStep = routineToCreateClone.timer.steps.find((step, index) => index === i)
-                        console.log(findStep)
                         if(findStep.time[0] === 0 && findStep.time[1] === 0){
+                            console.log('enter sec')
                             timeToRender = '05'
                         }else{
                             timeToRender = `0${match[0]}`
