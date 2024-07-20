@@ -9,6 +9,7 @@ function TrainRoutine(){
     const [isOver, setIsOver] = useState(false)
     const [countdown, setCountdown] = useState(null)
     const [currentStep, setCurrentStep] = useState({step: context.routineToTrain.timer.steps[0], index: 0, lap: 1})
+    const [nextStep, setNextStep] = useState(null)
     const [stepCountdown, setStepCountdown] = useState(null)
     const [beepActive, setBeepActive] = useState(false)
     const [isMuted, setIsMuted] = useState(false)
@@ -44,9 +45,10 @@ function TrainRoutine(){
     useEffect(()=>{
         if(stepCountdown !== null && stepCountdown <=0){
             clearInterval(stepIntervalRef.current)
-            const nextStep = TrainRoutineClass.getNextStep(context.routineToTrain.timer, currentStep)
-            if(nextStep){
-                loadNewStep(nextStep)
+            const newStep = TrainRoutineClass.getNextStep(context.routineToTrain.timer, currentStep)
+            if(newStep){
+                loadNewStep(newStep)
+                loadNextStep(newStep)
                 stepIntervalRef.current = setInterval(() => {
                     setStepCountdown(stepCountdown => stepCountdown - 1)
                 },1000)
@@ -120,7 +122,18 @@ function TrainRoutine(){
         setCurrentStep(newStep)
         setStepCountdown(totalStepSecs)
     }
-
+    const loadNextStep = (newCurrentStep) => {
+        let step = TrainRoutineClass.getNextStep(context.routineToTrain.timer, newCurrentStep)
+        if(!step){
+            step = {
+                step: {
+                    exercise: 'Finish',
+                    img: '/pics/exerciseImgs/finish.jpg'
+                }
+            }
+        }
+        setNextStep(step)
+    }
     const handlePlay = () => {
         if(countdown === null){
             const totalSecs = TrainRoutineClass.getCountdown(context.routineToTrain.timer.totalTime)
@@ -131,6 +144,7 @@ function TrainRoutine(){
             setIsRunning(true)
         }
         playAudio()
+        loadNextStep(currentStep)
         if(beepActive){
             playBeep()
             setBeepActive(false)
@@ -145,6 +159,7 @@ function TrainRoutine(){
         restartBeep()
         setBeepActive(false)
         setIsOver(false)
+        setNextStep(null)
     }
     const handlePause = () => {
         setIsRunning(false)
@@ -265,6 +280,17 @@ function TrainRoutine(){
                         <p className='train__countdown-data'>
                             <span className='train__countdown'>{renderExerciseCountdown()}</span>
                         </p>
+                        {nextStep && 
+                            <div className='train__next-step enter-animation'>
+                                <p className='train__next-label'>Next :</p>
+                                <figure className='train__next-img-cont'>
+                                    <figcaption className='train__next-exercise'>{nextStep.step.exercise}</figcaption>
+                                    {nextStep.step.img && 
+                                        <img className='train__next-exercise-img' src={nextStep.step.img}/>  
+                                    }
+                                </figure>
+                            </div>
+                        }
                     </div>
                     <div className='train__step'>
                         <p className='train__exercise'>{currentStep.step.exercise}</p>
