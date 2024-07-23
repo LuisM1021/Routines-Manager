@@ -5,11 +5,11 @@ import './UserRoutines.css'
 import { NavLink } from 'react-router-dom'
 function UserRoutines(){
     const context = useContext(GeneralContext)
-    const [displayUserOptions, setDisplayUserOptions] = useState(false)
     const [routineSelected, setRoutineSelected] = useState(null)
     const handleEdit = () => {
         context.loadRoutineToEdit(routineSelected.id)
         context.setIsBeingUpdated(true)
+        context.setCurrentPage('create-routine')
     }
     return(
         <div className='user-routines-panel'>
@@ -41,17 +41,20 @@ function UserRoutines(){
             }
             <h2 className='title-2'>My routines</h2>
             <div className='user-routines-data'>
-                <ul className='user-routines-container'>
-                    {context.userRoutines.map(routine => (
-                        <li key={routine.id} className='user-routine' 
-                         onClick={()=>setRoutineSelected(routine)}>
-                            🏋️‍♂️ {routine.name}
-                        </li>
-                    ))}
-                </ul>
+                {context.userRoutines.length>0 &&
+                    <ul className='user-routines-container'>
+                        {context.userRoutines.map(routine => (
+                            <li key={routine.id} className='user-routine' 
+                            onClick={()=>setRoutineSelected(routine)}>
+                                🏋️‍♂️ {routine.name}
+                            </li>
+                        ))}
+                    </ul>
+                }
                 <div className='add-routine-container'>
                     <p className='add-routine'>Add routine</p>
-                        <NavLink to='/routines' className='plus-icon-container'>
+                        <NavLink to='/routines' className='plus-icon-container'
+                         onClick={()=>context.setCurrentPage('routines')}>
                             <PlusIcon className='plus-icon'/>
                         </NavLink>
                 </div>

@@ -29,6 +29,8 @@ function GeneralProvider({children}){
     //Manage the navbar for short screens
     const [displayExerciseDetail, setDisplayExerciseDetail] = useState(false)
 
+    const [currentPage, setCurrentPage] = useState(null)
+
     //-------------------------------------------------------
 
     //----------------------HOME-----------------------------
@@ -36,6 +38,13 @@ function GeneralProvider({children}){
     //Selected routine in the featured routines panel
     const [ selectedRoutine, setSelectedRoutine ] = useState(null)
 
+    //-------------------------------------------------------
+
+    //---------------------ROUTINES--------------------------
+    const [renderDetail, setRenderDetail] = useState(null)
+    const renderUserRoutineDetail = (routine) => {
+        setRenderDetail(routine)
+    }
     //-------------------------------------------------------
 
     //-------------ROUTINES-SEARCH_ROUTINE_PANEL-------------
@@ -158,6 +167,9 @@ function GeneralProvider({children}){
         if(!routineWithLastUsedTime.name){
             routineWithLastUsedTime.name = `My routine ${routineWithLastUsedTime.id}`
         }
+        //adding images
+        routineWithLastUsedTime.timer = CreateRoutine.asignImages(routineWithLastUsedTime.timer, exercises)
+
         const addedUserRoutines = getItem('userRoutines')
         addedUserRoutines.push(routineWithLastUsedTime)
         saveItem('userRoutines',addedUserRoutines)
@@ -183,7 +195,11 @@ function GeneralProvider({children}){
         saveItem('userRoutines',updatedRoutines)
         setUserRoutines(updatedRoutines)
     }
-
+    const removeUserRoutine = (routineId) => {
+        const newUserRoutines = userRoutines.filter(routine => routine.id !== routineId)
+        setUserRoutines(newUserRoutines)
+        saveItem('userRoutines', newUserRoutines)
+    }
     //-------------------------------------------------------
     
 
@@ -247,14 +263,16 @@ function GeneralProvider({children}){
         setRoutineToCreate(CreateRoutine.generateCustomTimer(routineToCreate))
     }
     const saveNewRoutine = () => {
-        const newRoutine = CreateRoutine.verifyRoutine(routineToCreate, exercisesList, exercises)
+        const allowRepeatedName = false
+        const newRoutine = CreateRoutine.verifyRoutine(routineToCreate, exercisesList, exercises, userRoutines, allowRepeatedName)
         if(newRoutine.valid){
             addToUserRoutines(newRoutine.routineInfo)
         }
         return newRoutine
     }
     const editRoutine = () => {
-        const updatedRoutine = CreateRoutine.verifyRoutine(routineToCreate, exercisesList, exercises)
+        const allowRepeatedName = true
+        const updatedRoutine = CreateRoutine.verifyRoutine(routineToCreate, exercisesList, exercises, userRoutines, allowRepeatedName)
         if(updatedRoutine.valid){
             editUserRoutine(updatedRoutine.routineInfo)
         }
@@ -392,6 +410,11 @@ function GeneralProvider({children}){
             resetCreateRoutine,
             routineToTrain,
             setRoutineToTrain,
+            currentPage,
+            setCurrentPage,
+            renderDetail,
+            renderUserRoutineDetail,
+            removeUserRoutine
         }}>
             {children}
         </GeneralContext.Provider>

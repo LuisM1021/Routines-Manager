@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import './Navbar.css'
 function Navbar(){
-    const {displayNavbar,setDisplayNavbar, resetCreateRoutine} = useContext(GeneralContext)
+    const {displayNavbar,setDisplayNavbar, resetCreateRoutine, currentPage, setCurrentPage} = useContext(GeneralContext)
 
     const hideNavbar = (className) => {
         if(typeof(className) === 'string' && className.includes('mobile-navbar')){
@@ -14,6 +14,11 @@ function Navbar(){
     const handleCreateRoutine = () => {
         resetCreateRoutine()
         setDisplayNavbar(false)
+        setCurrentPage('create-routine')
+    }
+    const handleChangePage = (newPage) => {
+        setDisplayNavbar(false)
+        setCurrentPage(newPage)
     }
     return (
         <aside 
@@ -26,37 +31,37 @@ function Navbar(){
             </div>
             <div
             className='Navbar-container'>
-                <NavLink className='redirect' to='/' 
-                 onClick={()=>setDisplayNavbar(false)}>
+                <NavLink className='logo-cont' to='/' 
+                 onClick={()=>handleChangePage('home')}>
                     <img className='logo' src='./pics/logo.jpg' alt='logo'></img>
                 </NavLink>
                 <NavLink className='redirect' to='/'
-                 onClick={()=>setDisplayNavbar(false)}>
-                    <div className='page-container'>
+                 onClick={()=>handleChangePage('home')}>
+                    <div className={`page-container ${currentPage === 'home' && 'page-container--active'}`}>
                         <p className='page'>Home</p>
                     </div> 
                 </NavLink>
                 <NavLink className='redirect' to='/routines'
-                 onClick={()=>setDisplayNavbar(false)}>
-                    <div className='page-container'>
+                 onClick={()=>handleChangePage('routines')}>
+                    <div className={`page-container ${currentPage === 'routines' && 'page-container--active'}`}>
                         <p className='page'>Routines</p>
                     </div> 
                 </NavLink>
-                <NavLink className='redirect' to='/'
-                onClick={()=>setDisplayNavbar(false)}>
-                    <div className='page-container'>
+                {/* <NavLink className='redirect' to='/'
+                onClick={()=>handleChangePage()}>
+                    <div className={`page-container ${currentPage === 'home' && 'page-container--active'}`}>
                         <p className='page'>Exercises</p>
                     </div> 
-                </NavLink>
+                </NavLink> */}
                 <NavLink className='redirect' to='/create-routine'
                  onClick={()=>handleCreateRoutine()}>
-                    <div className='page-container'>
+                    <div className={`page-container ${currentPage === 'create-routine' && 'page-container--active'}`}>
                         <p className='page'>Create</p>
                     </div> 
                 </NavLink>
                 <NavLink className='redirect' to='/training'
-                onClick={()=>setDisplayNavbar(false)}>
-                    <div className='page-container'>
+                onClick={()=>handleChangePage('training')}>
+                    <div className={`page-container ${currentPage === 'training' && 'page-container--active'}`}>
                         <p className='page'>Training</p>
                     </div> 
                 </NavLink>

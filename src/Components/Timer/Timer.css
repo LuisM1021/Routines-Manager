@@ -100,6 +100,7 @@ input{
 .timer__do-routine-button{
     background-color: var(--apple-green);
     box-shadow: 0 1px 6px 0 var(--apple-green);
+    text-decoration: none;
 }
 .timer__error-result{
     color: var(--red);

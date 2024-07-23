@@ -76,7 +76,7 @@ class CreateRoutine{
             }
         }
     }
-    static verifyRoutine(routine, exercisesList, exercises){
+    static verifyRoutine(routine, exercisesList, userRoutines, allowRepeatedName){
         if(exercisesList.length === 0){
             return {valid: false, error: 'EMPTY_EXERCISES_LIST'}
         }
@@ -86,14 +86,20 @@ class CreateRoutine{
         if(!routine.timer.steps.find(step => step.exercise !== 'Warming' && step.exercise !== 'Prepare')){
             return {valid: false, error: 'INVALID_STEPS'}
         }
-        const timerWithImages = this.asignImages(routine.timer, exercises)
+        if(!this.verifyUseOfAllExercises(routine.timer.steps, exercisesList)){
+            return {valid: false, error: 'MISSING_EXERCISES_IN_STEPS'}
+        }
+        console.log('is allowed', allowRepeatedName)
+        if(this.verifyDuplicatedRoutineName(routine, userRoutines) && !allowRepeatedName){
+            return {valid: false, error: 'DUPLICATE_NAME'}
+        }
         return {
             valid: true,
             routineInfo: {
                 id: routine.id || null,
                 name: routine.name || null,
                 description: routine.description || null,
-                timer: timerWithImages,
+                timer: routine.timer,
                 equipment: null,
                 category: 'Personalized routine',
                 exercises: exercisesList.map(exercise => exercise.name),
@@ -139,6 +145,21 @@ class CreateRoutine{
             ...timer,
             steps: stepsWithImages
         }
+    }
+    static verifyUseOfAllExercises(steps, exercisesList){
+        const areAllExercisesInSteps = exercisesList.reduce((areAll, item)=>{
+            if(!areAll){
+                return false
+            }else{
+                if(steps.find(step => step.exercise === item.name)){
+                    return true
+                }else return false
+            }
+        },true)
+        return areAllExercisesInSteps
+    }
+    static verifyDuplicatedRoutineName(routine, userRoutines){
+        return userRoutines.find(item => item.name === routine.name)
     }
 }
 

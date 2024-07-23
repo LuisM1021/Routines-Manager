@@ -22,7 +22,34 @@
     padding: 16px 24px;
     position: relative;
     margin-left: -200px;
-    }
+}
+.routine-details__duplicate-cont{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--black-opacity);
+    border-radius: 24px;
+    display: grid;
+    place-items: center;
+    z-index: 10;
+}
+.routine-details__duplicate-card{
+    width: 200px;
+    height: 150px;
+    background-color: var(--cerulean);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 2px 2px 5px var(--black);
+}
+.routine-details__duplicate-msg{
+    font-weight: bold;
+    color: var(--white);
+}
 .background .routine-details-container .routine-name{
     color: var(--apple-green);
     margin: 0 0 8px 0;
@@ -125,19 +152,19 @@
     margin: 4px 0;
 }
 .background .routine-details-container .exercises-panel .exercises-info p:nth-child(2),
-.background .routine-details-container .exercises-panel .exercises-info p:nth-child(3){
+.background .routine-details-container .exercises-panel .exercises-info p:nth-child(3),
+.background .routine-details-container .exercises-panel .exercises-info p:nth-child(4){
     display: flex;
     gap: 4px;
 }
 .background .routine-details-container .exercises-panel .exercises-info p:nth-child(2) span:nth-child(1),
-.background .routine-details-container .exercises-panel .exercises-info p:nth-child(3) span:nth-child(1){
+.background .routine-details-container .exercises-panel .exercises-info p:nth-child(3) span:nth-child(1),
+.background .routine-details-container .exercises-panel .exercises-info p:nth-child(4) span:nth-child(1){
     color: var(--dark-brown);
 }
 .background .routine-details-container .exercises-panel .exercises-info p:nth-child(2) span:nth-child(2),
-.background .routine-details-container .exercises-panel .exercises-info p:nth-child(3) span:nth-child(2){
-    color: var(--cerulean);
-}
-.background .routine-details-container .exercises-panel .exercises-info p:nth-child(4){
+.background .routine-details-container .exercises-panel .exercises-info p:nth-child(3) span:nth-child(2),
+.background .routine-details-container .exercises-panel .exercises-info p:nth-child(4) span:nth-child(2){
     color: var(--cerulean);
 }
 .background .routine-details-container .exercises-panel .exercise-image-container{
@@ -211,7 +238,7 @@
     }
     .background .routine-details-container{
         width: 275px;
-        height: 350px;
+        height: 360px;
         padding: 8px;
     }
     .background .routine-details-container .add-routine-container{
@@ -220,6 +247,7 @@
     }
     .background .routine-details-container .category-time .category-info{
         margin: 0;
+        margin-right: 8px;
     }
     .background .routine-details-container .category-time .time-info{
         margin: 0;

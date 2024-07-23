@@ -2,8 +2,8 @@ import { useContext, useState } from 'react'
 import { GeneralContext } from '../../GeneralContext'
 import { ClockIcon, PlusCircleIcon, TrashIcon } from '@heroicons/react/24/outline'
 import { calculateTotalTime } from '../../Utils'
-
 import './Timer.css'
+import { NavLink } from 'react-router-dom'
 
 function Timer(){
     const context = useContext(GeneralContext);
@@ -61,23 +61,30 @@ function Timer(){
         return time
     }
     const changeStepReps = (i, event, data) => {
+        console.log('entro', data)
         const regex = /^\s*(\d{1,2})\s*(-\s*(\d{1,2}))?\s*$/ //match $1 and $3
         const match = regex.exec(data)
         let repsToSet = ''
-        if(match){
-            if(match[3]){
-                if(parseInt(match[3])>parseInt(match[1])){
-                    repsToSet = `${match[1]}-${match[3]}`
-                }else if(parseInt(match[3]) === parseInt(match[1])){
-                    repsToSet = match[1]
+        if(data === ''){
+            console.log('herte')
+            console.log(context.routineToCreate)
+            repsToSet = context.routineToCreate.timer.steps[i].reps || '-'
+        }else{
+            if(match){
+                if(match[3]){
+                    if(parseInt(match[3])>parseInt(match[1])){
+                        repsToSet = `${match[1]}-${match[3]}`
+                    }else if(parseInt(match[3]) === parseInt(match[1])){
+                        repsToSet = match[1]
+                    }else{
+                        repsToSet = '-'
+                    }
                 }else{
-                    repsToSet = '-'
+                    repsToSet = match[1]
                 }
             }else{
-                repsToSet = match[1]
+                repsToSet = '-'
             }
-        }else{
-            repsToSet = '-'
         }
         const routineToCreateClone = {...context.routineToCreate}
         routineToCreateClone.timer.steps.forEach((step, index) => {
@@ -199,11 +206,13 @@ function Timer(){
         setCanEdit(false)
     }
     const handleCustom = () => {
+        setTimeFormat('clock')
         setCanEdit(true)
         setTimerActiveButton('custom')
         context.initializeCustomTimer()
     }
     const handleEdit = () => {
+        setTimeFormat('clock')
         setCanEdit(true)
         setTimerActiveButton('custom')
     }
@@ -267,6 +276,11 @@ function Timer(){
         }
 
     }
+    const handleExerciseNow = () => {
+        const lastIndex = context.userRoutines.length - 1
+        const routine = context.userRoutines.find((routine, index) => index === lastIndex)
+        context.setRoutineToTrain(routine)
+    }
     const renderError = (error) => {
         switch(error){
             case 'EMPTY_EXERCISES_LIST': 
@@ -280,6 +294,14 @@ function Timer(){
             case 'INVALID_STEPS': 
                 return (
                     <p className='timer__error-result'>You have to add exercises to the timer</p>
+                )
+            case 'MISSING_EXERCISES_IN_STEPS': 
+                return (
+                    <p className='timer__error-result'>You forgot to include all your exercises to the timer</p>
+                )
+            case 'DUPLICATE_NAME': 
+                return (
+                    <p className='timer__error-result'>Routine´s name already exists</p>
                 )
             default: break
         }
@@ -318,7 +340,8 @@ function Timer(){
                                      onClick={()=>handleEditRoutine()}>
                                         edit
                                     </button>
-                                    <button className='timer__save-button timer__do-routine-button'>exercise now</button>
+                                    <NavLink to='/train-routine' className='timer__save-button timer__do-routine-button'
+                                     onClick={()=>handleExerciseNow()}>exercise now</NavLink>
                                 </div>
                             </>
                             : 
@@ -372,12 +395,6 @@ function Timer(){
                                     </li>
                                 ))}
                             </ul>
-                            {/* <li className='timer__add-step'>
-                                <p className='timer__add-msg'>Drag an exercise here or click to add</p>
-                                <figure className='timer__add'>
-                                    <PlusCircleIcon className='timer__add-icon'/>
-                                </figure>
-                            </li> */}
                         </div>
                     </section>
                     <section className='timer__options'>
@@ -395,7 +412,6 @@ function Timer(){
                 </> : 
                 <>
                     <section className='timer__table-cont'>
-                    {/* Editable */}
                         <div className='timer__table'>
                             <div className='timer__headers'>
                                 <p className='timer__exercise-title'>
@@ -405,10 +421,6 @@ function Timer(){
                                     <p className='timer__time-title'>
                                         Time  
                                     </p>
-                                    {/* <figure className='timer__format-time'>
-                                        <ClockIcon className='timer__format'
-                                        onClick={()=>setTimeFormat((timeFormat==='clock' ? 'text':'clock'))}/>
-                                    </figure> */}
                                 </div>
                                 <div className='timer__reps'>
                                     <p className='timer__reps-label'>
@@ -446,7 +458,7 @@ function Timer(){
                                         <input className='timer__exercise-reps-editable' 
                                         placeholder={step.reps || '-'}
                                         onBlur={(event)=>changeStepReps(index,event, event.target.value)}
-                                        onClick={(event)=>event.target.value = ''}/>
+                                        onFocus={(event)=>event.target.value = ''}/>
                                     </li>
                                 ))}
                             </ul>

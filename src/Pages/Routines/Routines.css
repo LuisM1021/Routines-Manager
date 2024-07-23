@@ -2,12 +2,15 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    align-items: center;
-    gap: 32px;   
+    align-items: center;justify-content: space-evenly;
+    gap: 32px;  
+    height: 100%; 
 }
 .routines-container .search-routine{
     width: 80%;
-    height: calc(400px - 16px);
+    height: 100%;
+    max-height: 350px;
+    min-height: 300px;
     background-color: var(--white);
     display: flex;
     flex-direction: column;
@@ -51,13 +54,16 @@
     border-radius: 9999px;
     padding: 4px;
     cursor: pointer;
+    display: flex;
 }
 .routines-container .search-routine .scroll-up-container .scroll-up-icon{
     color: var(--apple-green);
 }
 .routines-container .user-routines{
     width: 80%;
-    height: calc(250px - 16px);
+    height: 100%;
+    min-height: 200px;
+    max-height: 250px;
     background-color: var(--white);
     display: flex;
     flex-direction: column;
@@ -67,7 +73,7 @@
     position: relative;
 }
 .routines-container .user-routines .title{
-    margin: 16px 0;
+    margin: 4px 0;
     color: var(--dark-brown);
 }
 .routines-container .user-routines .plus-circle-icon{
@@ -103,6 +109,19 @@
     background: linear-gradient(var(--apple-green),var(--cerulean));
     border-radius: 10px;
 }
+.user-routines-create-routine{
+    font-weight: bold;
+    color: var(--flame);
+}
+.plus-circle-icon-empty-routines{
+    width: 36px;
+    color: var(--black);
+    &:hover{
+        color: var(--apple-green);
+    }
+}
+
+
 
 @media all and (min-width: 1500px){
     .routines-container .user-routines .user-routines-container{
@@ -111,6 +130,9 @@
 }
 
 @media all and (max-width: 864px){
+    .routines-container .user-routines .user-routines-container{
+        padding: 0 8px;
+    }
     .routines-container .user-routines .user-routines-container{
         grid-template: 1fr / 1fr 1fr;
     }

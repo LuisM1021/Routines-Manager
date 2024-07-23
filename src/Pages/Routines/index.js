@@ -10,13 +10,14 @@ import { UserRoutineCard } from '../../Components/UserRoutineCard'
 import { FilterBar } from '../../Components/FilterBar'
 import { Layout } from '../../Components/Layout'
 import './Routines.css'
-
+import { UserRoutineCardDetail } from '../../Components/UserRoutineCardDetail'
 
 function Routines(){
     const {
         showRoutineDetails,
         filteredRoutines,
         userRoutines,
+        renderDetail
     } = useContext(GeneralContext)
 
     const scrollToTopRoutineCards=()=>{
@@ -42,6 +43,7 @@ function Routines(){
     return(
         <Layout>
             {showRoutineDetails && <RoutineDetails/>}
+            {renderDetail && <UserRoutineCardDetail routine={renderDetail}/>}
             <div className='routines-container'>
                 <div className='search-routine'>
                     <h1 className='title'>
@@ -61,17 +63,30 @@ function Routines(){
                     <h1 className='title'>
                         My Routines
                     </h1>
-                    <NavLink to='/create-routine'>
-                        <PlusCircleIcon className='plus-circle-icon'/>
-                    </NavLink>
-                    <div className='user-routines-container'>
-                        {userRoutines.map((routine =>(
-                            <UserRoutineCard
-                             key={routine.name}
-                             routine={routine}/>
-                            )
-                        ))}
-                    </div>
+                    {userRoutines.length > 0 ? 
+                    <>
+                        <NavLink to='/create-routine'>
+                            <PlusCircleIcon className='plus-circle-icon'/>
+                        </NavLink>
+                        <div className='user-routines-container'>
+                            {userRoutines.map((routine =>(
+                                <UserRoutineCard
+                                key={routine.id}
+                                routine={routine}/>
+                                )
+                            ))}
+                        </div>
+                    </>
+                    :
+                    <>  
+                        <p className='user-routines-create-routine'>
+                            Create a routine
+                        </p>
+                        <NavLink to='/create-routine'>
+                            <PlusCircleIcon className='plus-circle-icon-empty-routines'/>
+                        </NavLink>
+                    </> 
+                    }
                 </div>
             </div>
         </Layout>

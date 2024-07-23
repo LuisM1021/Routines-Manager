@@ -3,8 +3,12 @@ import './UserRoutineCard.css'
 
 import moment from "moment"
 import timediff from "timediff"
+import { NavLink } from "react-router-dom"
+import { useContext, useState } from "react"
+import { GeneralContext } from "../../GeneralContext"
 
 function UserRoutineCard({ routine }){
+    const context = useContext(GeneralContext)
     const showTime= ()=>{
         if(routine.timer.totalTime[0]>0 && routine.timer.totalTime[1]>0){
             return(
@@ -46,9 +50,19 @@ function UserRoutineCard({ routine }){
             return (<span>{`${minutes} ${minutes>1 ? 'minutes':'minute'} ago`}</span>)
         }
     }
-
+    const handleGo = () => {
+        context.setRoutineToTrain(routine)
+        context.setCurrentPage('training')
+    }
+    const handleOpenDetail = (e) => {
+        const parent = e.target.closest('div')
+        if(parent.className === 'user-card-container'){
+            context.renderUserRoutineDetail(routine)
+        }
+    }
     return(
-        <div className='user-card-container'>
+        <div className='user-card-container' 
+         onClick={(e)=>handleOpenDetail(e)}>
             <h3 className='routine-title'>
                 {routine.name}
             </h3>
@@ -62,7 +76,10 @@ function UserRoutineCard({ routine }){
             </p>
             <div className='do-routine-container'>
                 <p>Go</p>
-                <PlayIcon className='play-icon'/>
+                <NavLink to='/train-routine' className='play-icon-cont'
+                 onClick={()=>handleGo()}>
+                    <PlayIcon className='play-icon'/>
+                </NavLink>
             </div>
         </div>    
     )

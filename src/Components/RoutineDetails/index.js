@@ -2,17 +2,20 @@ import './RoutineDetails.css'
 import { GeneralContext } from '../../GeneralContext'
 import { useContext,useState } from 'react'
 import { ArrowRightCircleIcon,ArrowLeftCircleIcon,PlusCircleIcon } from '@heroicons/react/24/outline'
+import { CreateRoutine } from '../../Utils/createRoutine'
 
 function RoutineDetails(){
     const {
         setShowRoutineDetails,
         selectedRoutineDetails: routine,
         exercises,
-        addToUserRoutines
+        addToUserRoutines,
+        userRoutines
     } = useContext(GeneralContext)
 
     //Storing the index of the current exercise
     const [currentExercise,setCurrentExercise] = useState(0)
+    const [renderDuplicate, setRenderDuplicate] = useState(false)
 
     const hideRoutineDetails=(event)=>{
         if(event.target.className ==='background'){
@@ -65,21 +68,36 @@ function RoutineDetails(){
             )
         }
     }
+    const handleAddToUserRoutines = () => {
+        if(CreateRoutine.verifyDuplicatedRoutineName(routine, userRoutines)){
+            setRenderDuplicate(true)
+        }else{
+            addToUserRoutines(routine)
+            setShowRoutineDetails(false)
+        }
+    }
     return(
         <div className='background' onClick={(event)=>hideRoutineDetails(event)}>
             <div className='routine-details-container'>
+                {renderDuplicate && 
+                    <div className='routine-details__duplicate-cont' 
+                    onClick={(e)=>e.target.className === 'routine-details__duplicate-cont' && setRenderDuplicate(false)}>
+                        <div className='routine-details__duplicate-card'>
+                            <p className='routine-details__duplicate-msg'>
+                                This routine is already saved
+                            </p>
+                        </div>
+                    </div>
+                }
                 <h2 className='routine-name'>
                     {routine.name}
                 </h2>
                 <div className='add-routine-container'>
                     <figure 
                      className='plus-circle-icon'
-                     onClick={()=>addToUserRoutines(routine)}>
+                     onClick={()=>handleAddToUserRoutines()}>
                         <PlusCircleIcon/>
                     </figure>
-                    <p className='add-routine-label'>
-                        <span>Add to my routines</span>
-                    </p>
                 </div>
                 <p className='description'>
                     {routine.description}
@@ -130,6 +148,9 @@ function RoutineDetails(){
                             </span>
                         </p>
                         <p>
+                            {(routine.time[currentExercise][0] !== 0 || routine.time[currentExercise][1] !== 0 || routine.time[currentExercise][2] !== 0) &&
+                                <span>Time:</span>
+                            }
                             {showTime(routine.time[currentExercise])}
                         </p>
                     </div>

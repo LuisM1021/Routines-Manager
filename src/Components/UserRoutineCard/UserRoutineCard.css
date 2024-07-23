@@ -51,12 +51,15 @@
 .user-card-container .do-routine-container p{
     margin: 0;
 }
-.user-card-container .do-routine-container .play-icon{
+.user-card-container .do-routine-container .play-icon-cont{
     width: 32px;
     height: 32px;
+    cursor: pointer;
+}
+.user-card-container .do-routine-container .play-icon-cont .play-icon{
+    width: 100%;
     color: rgb(1, 95, 1);
     fill: var(--apple-green);
-    cursor: pointer;
 }
 .user-card-container .do-routine-container .play-icon:hover{
     width: 36px;
@@ -105,7 +108,7 @@
     }
 }
 
-@media all and (max-width: 430px){
+@media all and (max-width: 450px){
     .user-card-container .time{
         display: none;
     }

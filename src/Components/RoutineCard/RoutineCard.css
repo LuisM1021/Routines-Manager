@@ -6,27 +6,25 @@
     background-color: var(--cerulean);
     border: 2px solid var(--dark-brown);
     border-radius: 16px;
-    padding: 8px 16px;
+    padding: 4px;
     cursor: pointer;
     justify-content: space-between;
     overflow: hidden;
 }
 .card-container .card-title{
-    margin: 6px 0;
     text-align: center;
     color: var(--dark-brown);
-    height: 28%;
+    margin-bottom: 4px;
 }
 .card-container .routine-description{
     margin:0;
     font-size: 0.9rem;
     text-align: center;
-    height: 52%;
     overflow: auto;
     color: var(--apple-green);
 }
 .card-container .routine-description::-webkit-scrollbar{
-    width: 12px;
+    width: 8px;
 }
 .card-container .routine-description::-webkit-scrollbar-track{
     background-color:  var(--cerulean);
@@ -36,7 +34,6 @@
     border-radius: 10px;
 }
 .card-container .detail-container{
-    height: 20%;
 }
 .card-container .detail-container .time{
     margin:0;
@@ -69,7 +66,7 @@
 
 @media all and (max-width: 1024px){
     .card-container{
-        padding: 8px 4px;
+        padding: 4;
     }
     .card-container .card-title{
         margin: 0;
