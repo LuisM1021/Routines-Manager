@@ -261,7 +261,7 @@ function GeneralProvider({children}){
         setRoutineToCreate(updatedRoutine)
     }
     const changeStepName = (name, prename) => {
-        CreateRoutine.changeStepName(routineToCreate, name, prename)
+        setRoutineToCreate(CreateRoutine.changeStepName(routineToCreate, name, prename))
     }
     const deleteStep = (stepIndex) => {
         setRoutineToCreate(CreateRoutine.deleteStep(routineToCreate, stepIndex))
