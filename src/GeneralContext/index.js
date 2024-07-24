@@ -313,7 +313,7 @@ function GeneralProvider({children}){
         }))
     }
 
-    //Logic to filter exercises
+    //Logic to filter exercises 
     const [filteredExercises, setFilteredExercises] = useState([])
     const [searchExerciseByName, setSearchExerciseByName] = useState('')
     const [searchExerciseByCategory, setSearchExerciseByCategory] = useState('')
@@ -321,11 +321,10 @@ function GeneralProvider({children}){
     useEffect(()=>{
         setFilteredExercises([...exercises])
     },[exercises])
-
     useEffect(()=>{
         let filterResult = [...exercises]
+        const fuse = new Fuse(exercises, fuseOptions)
         if(searchExerciseByName !== ''){
-            const fuse = new Fuse(exercises, fuseOptions)
             const search = fuse.search(searchExerciseByName).map(res => res.item)
             filterResult = search
         }
@@ -333,6 +332,7 @@ function GeneralProvider({children}){
             filterResult = filterResult.filter(exercise => exercise.category === searchExerciseByCategory)
         }
         setFilteredExercises(filterResult)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[searchExerciseByName, searchExerciseByCategory, exercises])
     //-------------------------------------------------------
     

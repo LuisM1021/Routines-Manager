@@ -54,8 +54,8 @@ function TrainRoutine(){
                 },1000)
             }
         }
-    },[stepCountdown])
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[stepCountdown, currentStep, context.routineToTrain.timer])
     useEffect(()=>{
         if(countdown!== null && stepCountdown!==null && countdown <= 0 && stepCountdown <=0){
             clearInterval(intervalRef.current)

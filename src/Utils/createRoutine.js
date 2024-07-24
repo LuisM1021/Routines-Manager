@@ -161,13 +161,12 @@ class CreateRoutine{
         return userRoutines.find(item => item.name === routine.name)
     }
     static generateId(userRoutines){
-        let randomNumber = 0
-        let exists
-        do{
-            randomNumber = Math.floor(Math.random()*(999-0))+0
-            exists = userRoutines.find(routine => routine.id === randomNumber)
-        }while(exists)
-        return randomNumber
+        let randomNumber = Math.floor(Math.random()*(999-0))+0
+        if(userRoutines.find(routine => routine.id === randomNumber)){
+            return this.generateId(userRoutines)
+        }else{
+            return randomNumber
+        }
     }
     static interchangeSteps(steps, stepOneIndex, stepTwoIndex){
         const item1 = steps.find((step, index) => index === stepOneIndex)
