@@ -466,7 +466,7 @@ function Timer(){
                             </div>
                             <ul className='timer__steps'>
                                 {context.routineToCreate.timer && context.routineToCreate.timer.steps.map((step, index) => (
-                                    <li className='timer__step-editable' key={index} draggable 
+                                    <li className='timer__step-editable' key={index+step.exercise} draggable 
                                      data-step-index={index}
                                      onDragStart={(e)=>handleStepDrag(e,index)}
                                      onTouchMove={(e)=>handleStepTouch(e,index)}

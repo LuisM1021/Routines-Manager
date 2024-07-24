@@ -224,6 +224,7 @@ input{
     display: flex;
     align-items: center;
     border-bottom: 1px solid var(--apple-green);
+    touch-action: none;
     &:last-child{
         border: none;
     }
