@@ -161,7 +161,7 @@ class CreateRoutine{
         return userRoutines.find(item => item.name === routine.name)
     }
     static generateId(userRoutines){
-        let randomNumber
+        let randomNumber = 0
         let exists
         do{
             randomNumber = Math.floor(Math.random()*(999-0))+0
@@ -173,7 +173,7 @@ class CreateRoutine{
         const item1 = steps.find((step, index) => index === stepOneIndex)
         const item2 = steps.find((step, index) => index === stepTwoIndex)
 
-        if(item1.exercise == 'Warming' || item1.exercise === 'Prepare' || item2.exercise === 'Warming' || item2.exercise === 'Prepare'){
+        if(item1.exercise === 'Warming' || item1.exercise === 'Prepare' || item2.exercise === 'Warming' || item2.exercise === 'Prepare'){
             return steps
         }else{
             const updatedSteps = steps.map((step, index) => {

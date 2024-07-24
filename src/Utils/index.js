@@ -1,4 +1,3 @@
-import { CreateRoutine } from "./createRoutine"
 /**
  * This function receives the routines and call the timer
  * function to return the same routines with it´s timer added

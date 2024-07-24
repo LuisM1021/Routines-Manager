@@ -3,7 +3,6 @@ import {GeneralContext} from '../../GeneralContext'
 import './RoutinesPanel.css'
 
 function RoutinesPanel(){
-    //TODO: getRandom falta de usar
     const {
         routines,
         exercises,
@@ -29,16 +28,11 @@ function RoutinesPanel(){
 
     return(
         <div className='panel-container'>
-            {/* <div className='grid'>
-                <div className='a'>a</div>
-                <div className='b'>b</div>
-                <div className='c'>c</div>
-            </div> */}
             <div className='routines-list'>
                 <h3 className='title-2'>Featured Routines</h3>
                 <li className='featured-routines-container'>
                     {routines?.map((routine,index)=>{
-                        if(index<=4){ //TODO: SHOW RANDOM ROUTINES NOT THE FIRST FIVE
+                        if(index<=4){
                             return <ul
                                 className='featured-routine'
                                 key={routine.name}

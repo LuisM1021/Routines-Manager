@@ -207,12 +207,6 @@ function TrainRoutine(){
             beepAudioRef.current.pause()
         }
     }
-    const restartAudio = () => {
-        if(audioRef.current){
-            audioRef.current.pause()
-            audioRef.current.currentTime = 0
-        }
-    }
     const restartBeep = () => {
         if(beepAudioRef.current){
             beepAudioRef.current.currentTime = 0
@@ -291,7 +285,7 @@ function TrainRoutine(){
                                 <figure className='train__next-img-cont'>
                                     <figcaption className='train__next-exercise'>{nextStep.step.exercise}</figcaption>
                                     {nextStep.step.img && 
-                                        <img className='train__next-exercise-img' src={nextStep.step.img}/>  
+                                        <img className='train__next-exercise-img' src={nextStep.step.img} alt={nextStep.step.exercise}/>  
                                     }
                                 </figure>
                             </div>
@@ -300,7 +294,7 @@ function TrainRoutine(){
                     <div className='train__step'>
                         <p className='train__exercise'>{currentStep.step.exercise}</p>
                         {currentStep.step.img && 
-                            <img className='train__img' src={currentStep.step.img}></img>
+                            <img className='train__img' src={currentStep.step.img} alt={currentStep.step.exercise}></img>
                         }
                     </div>
                 </div>

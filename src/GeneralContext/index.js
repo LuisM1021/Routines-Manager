@@ -258,7 +258,6 @@ function GeneralProvider({children}){
                 steps: CreateRoutine.interchangeSteps(routineToCreate.timer.steps, stepOneIndex, stepTwoIndex)
             }
         }
-        console.log('gonna set',updatedRoutine)
         setRoutineToCreate(updatedRoutine)
     }
     const changeStepName = (name, prename) => {

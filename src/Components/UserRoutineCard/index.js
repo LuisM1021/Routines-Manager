@@ -4,7 +4,7 @@ import './UserRoutineCard.css'
 import moment from "moment"
 import timediff from "timediff"
 import { NavLink } from "react-router-dom"
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { GeneralContext } from "../../GeneralContext"
 
 function UserRoutineCard({ routine }){

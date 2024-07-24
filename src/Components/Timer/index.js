@@ -62,13 +62,10 @@ function Timer(){
         return time
     }
     const changeStepReps = (i, event, data) => {
-        console.log('entro', data)
         const regex = /^\s*(\d{1,2})\s*(-\s*(\d{1,2}))?\s*$/ //match $1 and $3
         const match = regex.exec(data)
         let repsToSet = ''
         if(data === ''){
-            console.log('herte')
-            console.log(context.routineToCreate)
             repsToSet = context.routineToCreate.timer.steps[i].reps || '-'
         }else{
             if(match){
