@@ -83,9 +83,11 @@ function UserRoutineCardDetail({routine}){
                                         <p className='user-routine__time'>{renderTime(step.time)}</p>
                                     </div>
                                 </div>
-                                <figure className='user-routine__step-figure'>
-                                    <img className='user-routine__step-img' src={step.img} alt={step.exercise}/>
-                                </figure>
+                                {step.img && 
+                                    <figure className='user-routine__step-figure'>
+                                        <img className='user-routine__step-img' src={step.img} alt={step.exercise}/>
+                                    </figure>
+                                }
                             </div>
                         </div>
                     ))}

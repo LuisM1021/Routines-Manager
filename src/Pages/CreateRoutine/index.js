@@ -18,7 +18,6 @@ function CreateRoutine(){
     const [draggedItem, setDraggedItem] = useState(null)
 
     const removeFromExercisesList = (exercise) => {
-        // context.setExercisesList((exercises)=>(exercises.filter(item => item.name !== exercise)))
         context.removeExerciseFromList(exercise)
     }
     const addNewExercise = () => {
@@ -126,7 +125,6 @@ function CreateRoutine(){
                             <input id='create-routine__name-input' className='create-routine__name-input'
                              type='text' 
                              placeholder={context.routineToCreate.name ? context.routineToCreate.name : 'New routine'}
-                            //  defaultValue={context.routineToCreate.name}
                              onChange={(event)=>context.setNewRoutineName(event.target.value)}/>
                         </p>
                         <p className='create-routine__description'>
@@ -134,7 +132,6 @@ function CreateRoutine(){
                             <textarea id='create-routine__description-input' className='create-routine__description-input'
                              type='text'
                             placeholder={context.routineToCreate.description ? context.routineToCreate.description : 'Describe your routine'}
-                            //   defaultValue={context.routineToCreate.description}
                               onChange={(event)=>context.setNewRoutineDescription(event.target.value)}/>
                         </p>
                         <div className='create-routine__exercises-card'>

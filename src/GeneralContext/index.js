@@ -161,7 +161,7 @@ function GeneralProvider({children}){
         const now = moment()
         const routineWithLastUsedTime = {
             ...routine,
-            id: userRoutines.length+1,
+            id: CreateRoutine.generateId(userRoutines),
             lastUse: now.format('YYYY-MM-DD HH:mm:ss')
         }
         if(!routineWithLastUsedTime.name){
@@ -169,7 +169,6 @@ function GeneralProvider({children}){
         }
         //adding images
         routineWithLastUsedTime.timer = CreateRoutine.asignImages(routineWithLastUsedTime.timer, exercises)
-
         const addedUserRoutines = getItem('userRoutines')
         addedUserRoutines.push(routineWithLastUsedTime)
         saveItem('userRoutines',addedUserRoutines)
@@ -251,7 +250,17 @@ function GeneralProvider({children}){
     const addStep = (newExercise) => {
         setRoutineToCreate(CreateRoutine.addStep(routineToCreate, newExercise))
     }
-
+    const changeStepOrder = (stepOneIndex, stepTwoIndex) => {
+        const updatedRoutine = {
+            ...routineToCreate,
+            timer: {
+                ...routineToCreate.timer,
+                steps: CreateRoutine.interchangeSteps(routineToCreate.timer.steps, stepOneIndex, stepTwoIndex)
+            }
+        }
+        console.log('gonna set',updatedRoutine)
+        setRoutineToCreate(updatedRoutine)
+    }
     const changeStepName = (name, prename) => {
         CreateRoutine.changeStepName(routineToCreate, name, prename)
     }
@@ -264,7 +273,7 @@ function GeneralProvider({children}){
     }
     const saveNewRoutine = () => {
         const allowRepeatedName = false
-        const newRoutine = CreateRoutine.verifyRoutine(routineToCreate, exercisesList, exercises, userRoutines, allowRepeatedName)
+        const newRoutine = CreateRoutine.verifyRoutine(routineToCreate, exercisesList, userRoutines, allowRepeatedName)
         if(newRoutine.valid){
             addToUserRoutines(newRoutine.routineInfo)
         }
@@ -272,7 +281,7 @@ function GeneralProvider({children}){
     }
     const editRoutine = () => {
         const allowRepeatedName = true
-        const updatedRoutine = CreateRoutine.verifyRoutine(routineToCreate, exercisesList, exercises, userRoutines, allowRepeatedName)
+        const updatedRoutine = CreateRoutine.verifyRoutine(routineToCreate, exercisesList, userRoutines, allowRepeatedName)
         if(updatedRoutine.valid){
             editUserRoutine(updatedRoutine.routineInfo)
         }
@@ -331,19 +340,12 @@ function GeneralProvider({children}){
     //-----------------------TrainRoutine------------------------
         const [routineToTrain, setRoutineToTrain] = useState(null)
     //-------------------------------------------------------
-
-    //Random number function 
-    const getRandom =(min,max)=>{
-        return Math.floor(Math.random()*(max-min))+min
-    }
-
     return (
         <GeneralContext.Provider value={{
             saveItem,
             getItem,
             routines,
             exercises,
-            getRandom,
             selectedRoutine,
             setSelectedRoutine,
             showRoutineDetails,
@@ -414,7 +416,8 @@ function GeneralProvider({children}){
             setCurrentPage,
             renderDetail,
             renderUserRoutineDetail,
-            removeUserRoutine
+            removeUserRoutine,
+            changeStepOrder
         }}>
             {children}
         </GeneralContext.Provider>

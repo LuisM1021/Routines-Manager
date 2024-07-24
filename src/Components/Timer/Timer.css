@@ -59,7 +59,7 @@ input{
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 20;
+    z-index: 1;
 }
 .timer__result-panel{
     width: 200px;

@@ -12,6 +12,7 @@ function Timer(){
     const [result, setResult] = useState(null)
     const [timerActiveButton, setTimerActiveButton] = useState(null)
     const [chooseExercisePanel, setChooseExercisePanel] = useState(false)
+    const [stepDraggedIndex, setStepDraggedIndex] = useState(null)
     const renderTime = (time) => {
         if(timeFormat === 'clock'){
             if(time){
@@ -261,7 +262,9 @@ function Timer(){
     const handleUpdateRoutine = () => {
         const res = context.editRoutine()
         setResult(res)
-        context.resetCreateRoutine()
+        if(res.valid){
+            context.resetCreateRoutine()
+        }
     }
 
     const handleEditRoutine = () => {
@@ -280,6 +283,7 @@ function Timer(){
         const lastIndex = context.userRoutines.length - 1
         const routine = context.userRoutines.find((routine, index) => index === lastIndex)
         context.setRoutineToTrain(routine)
+        context.setCurrentPage('training')
     }
     const renderError = (error) => {
         switch(error){
@@ -304,6 +308,41 @@ function Timer(){
                     <p className='timer__error-result'>Routine´s name already exists</p>
                 )
             default: break
+        }
+    }
+    const handleStepDrag = (e, index) => {
+        e.dataTransfer.effectAllowed = 'move'
+        e.dataTransfer.setData('text/plain', JSON.stringify(index))
+    }
+    const handleStepTouch = (e, index) => {
+        const touch = e.touches[0]
+        const target = document.elementFromPoint(touch.clientX, touch.clientY)
+        if(target){
+            const parent = target.closest('.timer__step-editable')
+            if(parent){
+                setStepDraggedIndex(index)
+            }else{
+                setStepDraggedIndex(null)
+            }
+        }else{
+            setStepDraggedIndex(null)
+        }
+    }
+    const handleStepDrop = (e, index) =>{
+        e.preventDefault()
+        const stepDroppedIndex = JSON.parse(e.dataTransfer.getData('text/plain'))
+        context.changeStepOrder(stepDroppedIndex, index)
+    }
+    const handleStepTouchEnd = (e) => {
+        const touch = e.changedTouches[0]
+        const target = document.elementFromPoint(touch.clientX, touch.clientY)
+        const parent = target.closest('.timer__step-editable')
+        if(parent){
+            if(stepDraggedIndex){
+                const stepIndex = parent.getAttribute('data-step-index')
+                context.changeStepOrder(stepDraggedIndex, parseInt(stepIndex))
+                setStepDraggedIndex(null)
+            }
         }
     }
     return(
@@ -385,7 +424,7 @@ function Timer(){
                             </div>
                             <ul className='timer__steps'>
                                 {context.routineToCreate.timer && context.routineToCreate.timer.steps.map((step, index) => (
-                                    <li className='timer__step' key={index}>
+                                    <li key={index} className='timer__step'>
                                         <p className='timer__step-number-cont'>
                                         <span className='timer__step-number'>{index+1}</span>
                                         </p>
@@ -430,7 +469,13 @@ function Timer(){
                             </div>
                             <ul className='timer__steps'>
                                 {context.routineToCreate.timer && context.routineToCreate.timer.steps.map((step, index) => (
-                                    <li className='timer__step-editable' key={index}>
+                                    <li className='timer__step-editable' key={index} draggable 
+                                     data-step-index={index}
+                                     onDragStart={(e)=>handleStepDrag(e,index)}
+                                     onTouchMove={(e)=>handleStepTouch(e,index)}
+                                     onDragOver={(e)=>e.preventDefault()}
+                                     onDrop={(e)=>handleStepDrop(e, index)}
+                                     onTouchEnd={(e)=>handleStepTouchEnd(e)}>
                                         <p className='timer__step-number-cont'>
                                         <span className='timer__step-number'>{index+1}</span>
                                         </p>

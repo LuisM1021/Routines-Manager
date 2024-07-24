@@ -89,7 +89,6 @@ class CreateRoutine{
         if(!this.verifyUseOfAllExercises(routine.timer.steps, exercisesList)){
             return {valid: false, error: 'MISSING_EXERCISES_IN_STEPS'}
         }
-        console.log('is allowed', allowRepeatedName)
         if(this.verifyDuplicatedRoutineName(routine, userRoutines) && !allowRepeatedName){
             return {valid: false, error: 'DUPLICATE_NAME'}
         }
@@ -160,6 +159,40 @@ class CreateRoutine{
     }
     static verifyDuplicatedRoutineName(routine, userRoutines){
         return userRoutines.find(item => item.name === routine.name)
+    }
+    static generateId(userRoutines){
+        let randomNumber
+        let exists
+        do{
+            randomNumber = Math.floor(Math.random()*(999-0))+0
+            exists = userRoutines.find(routine => routine.id === randomNumber)
+        }while(exists)
+        return randomNumber
+    }
+    static interchangeSteps(steps, stepOneIndex, stepTwoIndex){
+        const item1 = steps.find((step, index) => index === stepOneIndex)
+        const item2 = steps.find((step, index) => index === stepTwoIndex)
+
+        if(item1.exercise == 'Warming' || item1.exercise === 'Prepare' || item2.exercise === 'Warming' || item2.exercise === 'Prepare'){
+            return steps
+        }else{
+            const updatedSteps = steps.map((step, index) => {
+                if(index === stepOneIndex){
+                    return {
+                        ...steps[stepTwoIndex],
+                        time: [...steps[stepTwoIndex].time]
+                    }
+                }
+                if(index === stepTwoIndex){
+                    return {
+                        ...steps[stepOneIndex],
+                        time: [...steps[stepOneIndex].time]
+                    }
+                }
+                return step
+            })    
+            return updatedSteps
+        }
     }
 }
 
