@@ -265,6 +265,7 @@ input{
     border-right: 1px solid var(--apple-green);
     color: var(--dark-brown);
     background: none;
+    overflow: hidden;
 }
 .timer__exercise{
     width: 52%;
@@ -275,6 +276,7 @@ input{
     border-right: 1px solid var(--apple-green);
     color: var(--dark-brown);
     background: none;
+    overflow: hidden;
 }
 .timer__exercise-duration{
     width: 25%;

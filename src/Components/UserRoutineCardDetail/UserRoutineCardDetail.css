@@ -71,6 +71,16 @@
     color: var(--white);
     overflow: auto;
 }
+.user-routine__description::-webkit-scrollbar{
+    width: 6px;
+}
+.user-routine__description::-webkit-scrollbar-thumb{
+    background-color: var(--black-opacity);
+    border-radius: 8px;
+}
+.user-routine__description::-webkit-scrollbar-track{
+    background-color: var(--black);
+}
 .user-routine__right-detail{
     /* width: 60%; */
 }
@@ -103,6 +113,17 @@
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
     gap: 12px;
+}
+.user-routine__steps::-webkit-scrollbar{
+    height: 6px;
+    width: 0px;
+}
+.user-routine__steps::-webkit-scrollbar-thumb{
+    background-color: var(--black-opacity);
+    border-radius: 8px;
+}
+.user-routine__steps::-webkit-scrollbar-track{
+    background-color: var(--black);
 }
 .user-routine__step-card{
     min-width: 275px;

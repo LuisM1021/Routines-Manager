@@ -1,6 +1,7 @@
 .exercise-card{
     max-width: 240px;
     min-width: 120px;
+    height: 175px;
     border-radius: 12px;
     overflow: hidden;
     background-color: var(--apple-green);
