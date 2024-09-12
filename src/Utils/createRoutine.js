@@ -46,7 +46,7 @@ class CreateRoutine{
     }
 
     static changeStepName(routine, newName, oldName){
-        if(routine.timer){
+        if(routine?.timer){
             return {
                 ...routine,
                 timer: {

@@ -234,7 +234,8 @@ function TrainRoutine(){
             </section>
             <section className='train__players'>
                 <div className='train__player'>
-                    <audio muted={isMuted} ref={beepAudioRef} src='/audio/timerAudios/short-beep-countdown.mp3'/>
+                    <audio muted={isMuted} ref={beepAudioRef} src='/audio/timerAudios/short-beep-countdown.mp3'
+                     onEnded={()=>setBeepActive(false)}/>
                     <audio muted={isMuted} ref={audioRef} src={playlist[currentSongIndex]} 
                      onEnded={changeSong}
                      onLoadedData={handleLoadedSong}/>

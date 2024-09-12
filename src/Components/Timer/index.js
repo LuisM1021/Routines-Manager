@@ -420,7 +420,7 @@ function Timer(){
                                 </div>
                             </div>
                             <ul className='timer__steps'>
-                                {context.routineToCreate.timer && context.routineToCreate.timer.steps.map((step, index) => (
+                                {context.routineToCreate?.timer && context.routineToCreate?.timer?.steps.map((step, index) => (
                                     <li key={index} className='timer__step'>
                                         <p className='timer__step-number-cont'>
                                         <span className='timer__step-number'>{index+1}</span>
@@ -436,12 +436,12 @@ function Timer(){
                     <section className='timer__options'>
                         <p className='timer__laps'>
                             <span className='timer__laps-label'>laps</span>
-                            <span className='timer__laps-number'>{context.routineToCreate.timer ? context.routineToCreate.timer.laps : '-'}</span>
+                            <span className='timer__laps-number'>{context.routineToCreate?.timer ? context.routineToCreate?.timer?.laps : '-'}</span>
                         </p>
                         <p className='timer__total'>
                             <span className='timer__total-label'>Total time</span>
                             <span className='timer__total-time'>
-                                {context.routineToCreate.timer ? renderTime(context.routineToCreate.timer.totalTime): renderTime(null)}
+                                {context.routineToCreate?.timer ? renderTime(context.routineToCreate?.timer?.totalTime): renderTime(null)}
                             </span>
                         </p>
                     </section>
@@ -465,7 +465,7 @@ function Timer(){
                                 </div>
                             </div>
                             <ul className='timer__steps'>
-                                {context.routineToCreate.timer && context.routineToCreate.timer.steps.map((step, index) => (
+                                {context.routineToCreate?.timer && context.routineToCreate?.timer?.steps.map((step, index) => (
                                     <li className='timer__step-editable' key={index+step.exercise} draggable 
                                      data-step-index={index}
                                      onDragStart={(e)=>handleStepDrag(e,index)}
@@ -519,7 +519,7 @@ function Timer(){
                     <section className='timer__options'>
                         <p className='timer__laps'>
                             <label htmlFor='timer__laps-number' className='timer__laps-label timer__laps-label--editable'>laps</label>
-                            <input id='timer__laps-number' className='timer__laps-number' placeholder={context.routineToCreate.timer ? context.routineToCreate.timer.laps : '-'}
+                            <input id='timer__laps-number' className='timer__laps-number' placeholder={context.routineToCreate?.timer ? context.routineToCreate?.timer?.laps : '-'}
                             onBlur={(event)=>changeRoutineLaps(event)}
                             onClick={(event)=>event.target.value = ''}
                             onKeyDown={(event)=>event.key === 'Enter' && event.target.blur()}/>
@@ -527,7 +527,7 @@ function Timer(){
                         <p className='timer__total'>
                             <span className='timer__total-label'>Total time</span>
                             <span className='timer__total-time'>
-                                {context.routineToCreate.timer ? renderTime(context.routineToCreate.timer.totalTime): renderTime(null)}
+                                {context.routineToCreate?.timer ? renderTime(context.routineToCreate.timer.totalTime): renderTime(null)}
                             </span>
                         </p>
                     </section>

@@ -1,7 +1,7 @@
 class TrainRoutineClass{
     static getCountdown(totalTime){
         let totalSecs = 0
-        totalSecs = totalTime[0] * 60 + totalTime[1] * 60 + totalTime[2]
+        totalSecs = totalTime[0] * 3600 + totalTime[1] * 60 + totalTime[2]
         return totalSecs
     }
     static getCurrentTime(countdown){

@@ -124,14 +124,14 @@ function CreateRoutine(){
                             <label htmlFor='create-routine__name-input' className='create-routine__name-label'>Name :</label>
                             <input id='create-routine__name-input' className='create-routine__name-input'
                              type='text' 
-                             placeholder={context.routineToCreate.name ? context.routineToCreate.name : 'New routine'}
+                             placeholder={context.routineToCreate?.name ? context.routineToCreate.name : 'New routine'}
                              onChange={(event)=>context.setNewRoutineName(event.target.value)}/>
                         </p>
                         <p className='create-routine__description'>
                             <label htmlFor='create-routine__description-input' className='create-routine__description-label'>Description :</label>
                             <textarea id='create-routine__description-input' className='create-routine__description-input'
                              type='text'
-                            placeholder={context.routineToCreate.description ? context.routineToCreate.description : 'Describe your routine'}
+                            placeholder={context.routineToCreate?.description ? context.routineToCreate.description : 'Describe your routine'}
                               onChange={(event)=>context.setNewRoutineDescription(event.target.value)}/>
                         </p>
                         <div className='create-routine__exercises-card'>
