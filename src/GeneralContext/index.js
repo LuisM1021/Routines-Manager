@@ -18,6 +18,8 @@ function GeneralProvider({children}){
         setUserRoutines
     } = useLocalStorage();
     
+    const [isDarkMode, setIsDarkMode] = useState(false)
+
     // dragging
     const [draggedItem, setDraggedItem] = useState(null)
 
@@ -341,6 +343,8 @@ function GeneralProvider({children}){
     //-------------------------------------------------------
     return (
         <GeneralContext.Provider value={{
+            isDarkMode,
+            setIsDarkMode,
             saveItem,
             getItem,
             routines,

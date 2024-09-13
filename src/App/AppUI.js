@@ -1,4 +1,4 @@
-import {useContext} from 'react'
+import {useContext, useEffect} from 'react'
 import {useRoutes,BrowserRouter} from 'react-router-dom'
 import { Home } from '../Pages/Home'
 import { Routines } from '../Pages/Routines'
@@ -8,6 +8,7 @@ import { Training } from '../Pages/Training'
 import { TrainRoutine } from '../Pages/TrainRoutine'
 
 import { GeneralContext } from '../GeneralContext'
+
 
 const AppRoutes = () => {
     const context = useContext(GeneralContext)
@@ -24,6 +25,16 @@ const AppRoutes = () => {
 
 
 function AppUI(){
+    const context = useContext(GeneralContext)
+
+    useEffect(()=>{
+        const body = document.querySelector('body')
+        if(context.isDarkMode){
+            body.classList.add('dark-mode')
+        }else{
+            body.classList.remove('dark-mode')
+        }
+    },[context.isDarkMode])
     return(
         <BrowserRouter>
             <AppRoutes/>

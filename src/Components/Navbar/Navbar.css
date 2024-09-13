@@ -70,6 +70,18 @@
     border-top: 2px solid var(--background);
     border-bottom: 2px solid var(--background);
 }
+.Navbar-container .mode-cont{
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 30px;
+}
+.mode-cont p{
+    color: var(--background);
+}
+.mode-cont input{
+    width: 40px;
+}
 @media all and (max-width: 749px){
     .mobile-navbar-container{
         display: none;

@@ -15,7 +15,7 @@ function Layout({children}){
     }
 
     return(
-        <div className="layout">
+        <div className="layout light-mode">
             <div
              className='open-menu-container'
              onClick={()=>toggleNavbar()}>

@@ -1,16 +1,3 @@
-:root{
-  --background: #E0E0E0;
-  --text: #333333;
-  --primary: #2980B9;
-  --secondary: #66BB66;
-  --highlight: #FFD700;
-  --success: #4CAF50;
-  --error: #B22222;
-  --error-inactive: #FFB6C1;
-  --black-opacity: #33333380;
-  --secondary-opacity: #66BB66c5;
-
-}
 /* html{
   font-size: 62.5%;
 } */
@@ -18,9 +5,31 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Poppins', 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --background: #E0E0E0;
+  --text: #333333;
+  --primary: #236d9e;
+  --secondary: #5aa45a;
+  --highlight: #ccae03;
+  --success: #41c845;
+  --error: #B22222;
+  --error-inactive: #FFB6C1;
+  --black-opacity: #33333380;
+  --secondary-opacity: #66BB66c5;
+  
   background-color: var(--background);
+
+  &.dark-mode{
+    --background: #181818;
+    --text: #FFFFFF;
+    --primary: #af894c;
+    --secondary: #a66d1d;
+    --highlight: #b6c600;
+    --success: #008000;
+    --error: #D9534F;
+    --error-inactive: #FFB6C1;
+    --black-opacity: #33333380;
+    --secondary-opacity: #a66d1d80;
+  }
 }
 
 code {
