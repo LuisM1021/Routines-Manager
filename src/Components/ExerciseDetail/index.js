@@ -10,17 +10,17 @@ function ExerciseDetail(){
     const showTime= (exercise)=>{
         if(exercise.suggestedTime[0]>0 && exercise.suggestedTime[1]>0){
             return(
-                <span>{exercise.suggestedTime[0]}h {exercise.suggestedTime[1]}m</span>
+                <span className="exercise-aside__suggested-time-name">{exercise.suggestedTime[0]}h {exercise.suggestedTime[1]}m</span>
             )
         }
         else if(exercise.suggestedTime[0]===0 && exercise.suggestedTime[1]>0){
             return(
-                <span>{exercise.suggestedTime[1]}m</span>
+                <span className="exercise-aside__suggested-time-name">{exercise.suggestedTime[1]}m</span>
             )
         }
         else if(exercise.suggestedTime[0]===0 && exercise.suggestedTime[1]===0){
             return(
-                <span>{exercise.suggestedTime[2]}s</span>
+                <span className="exercise-aside__suggested-time-name">{exercise.suggestedTime[2]}s</span>
             )
         }
     }

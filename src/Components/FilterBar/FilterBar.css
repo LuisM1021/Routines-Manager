@@ -10,25 +10,25 @@
     position: relative;
 }
 .filter-bar .filters-container .filter-title{
-    color: var(--dark-brown);
+    color: var(--background);
     font-weight: bold;
     cursor: pointer;
     margin: 0;
 }
 .filter-bar .filters-container .filter-title:hover{
-    color: var(--flame);
+    color: var(--secondary);
 }
 .filter-bar .filters-container .filters{
     margin-left: 32px;
     display: flex;
     gap: 4px;
-    }
+}
 .filter-bar .filters-container .filters .filter-button{
-    background-color: var(--flame);
-    color: var(--dark-brown);
+    background-color: var(--secondary);
+    color: var(--background);
     border-radius: 12px;
     padding: 2px 8px;
-    border: 2px solid var(--dark-brown);
+    border: 2px solid var(--background);
     font-weight: 600;
     cursor: pointer;
 }
@@ -45,7 +45,7 @@
     cursor: pointer;
 }
 .filter-bar .filters-container .filters .active{
-    background-color: var(--apple-green);
+    background-color: var(--highlight);
 }
 .filter-bar .filter-options-container .filter-container{
     width: 300px;
@@ -53,14 +53,14 @@
     margin-left: 52px;
 }
 .filter-bar .filter-options-container .filter-container .name-filter{
-    background-color: var(--apple-green);
+    background-color: var(--secondary);
     border: none;
     margin-left: 20px;
     border-radius: 4px;
-    padding: 2px;
-    color: var(--dark-brown);
+    padding: 2px 6px;
+    color: var(--background);
     &::placeholder{
-    color: var(--dark-brown);
+    color: var(--background);
     }
 }
 /* TIME FILTERS */
@@ -85,8 +85,8 @@
     margin: 0;
 }
 .filter-bar .filter-options-container .filter-container .times-container .min-times-container .time-value-container .time-value{
-    background-color: var(--white);
-    color: var(--cerulean);
+    background-color: var(--primary);
+    color: var(--background);
     width: 20px;
     border: none;
 }
@@ -107,8 +107,8 @@
     margin: 0;
 }
 .filter-bar .filter-options-container .filter-container .times-container .max-times-container .time-value-container .time-value{
-    background-color: var(--white);
-    color: var(--cerulean);
+    background-color: var(--primary);
+    color: var(--background);
     width: 20px;
     border: none;
 }
@@ -130,14 +130,14 @@
 .filter-bar .filter-options-container .filter-container .categories-filter .category-item .category-checkbox{
     width: 12px;
     height: 12px;
-    background-color: var(--burnt-orange);
+    background-color: var(--secondary);
     cursor: pointer;
 }
 .filter-bar .filter-options-container .filter-container .categories-filter .category-item .active-category{
-    background-color: var(--apple-green);
+    background-color: var(--success);
 }
 .filter-bar .filter-options-container .filter-container .categories-filter .category-item .category-name{
-    color: var(--dark-brown);
+    color: var(--background);
 }
 .filter-bar .filter-options-container .filter-container .equipment-filter{
     display: grid;
@@ -157,13 +157,13 @@
 .filter-bar .filter-options-container .filter-container .equipment-filter .equipment-item .equipment-checkbox{
     width: 12px;
     height: 12px;
-    background-color: var(--burnt-orange);
+    background-color: var(--secondary);
 }
 .filter-bar .filter-options-container .filter-container .equipment-filter .equipment-item .active-equipment{
-    background-color: var(--apple-green);
+    background-color: var(--success);
 }
 .filter-bar .filter-options-container .filter-container .equipment-filter .equipment-item .equipment-name{
-    color: var(--dark-brown);
+    color: var(--background);
 }
 /* FILTER BUTTON ANIMATION  */
 .slide-animation{

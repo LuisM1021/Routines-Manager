@@ -4,7 +4,7 @@
     height: 175px;
     border-radius: 12px;
     overflow: hidden;
-    background-color: var(--apple-green);
+    background-color: var(--primary);
     flex: 1 1 140px;
     position: relative;
 }
@@ -20,7 +20,7 @@
     right: 8px;
     top: 4px;
     width: 24px;
-    color: green;
+    color: var(--highlight);
 }
 .exercise-card__img{
     height: 100%;
@@ -31,7 +31,7 @@
     width: 100%;
     font-weight: bold;
     font-size:small;
-    color: var(--dark-brown);
+    color: var(--background);
     display: flex;
     align-items: center;
     justify-content: center;

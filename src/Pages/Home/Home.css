@@ -8,7 +8,7 @@
 .content .title{
     margin-top: 4px;
     font-size: 2.7rem;
-    color: var(--apple-green);
+    color: var(--text);
 }
 .content .user-content{
     display: flex;

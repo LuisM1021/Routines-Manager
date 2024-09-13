@@ -2,7 +2,7 @@
     text-align: center;
     min-width: 320px;
     font-size: 43px;
-    color: var(--apple-green);
+    color: var(--text);
 }
 .training__routines-card{
     width: 100%;
@@ -15,7 +15,7 @@
 .training__select-routine{
     text-align: center;
     height: calc(60px - 12px);
-    color: var(--flame);
+    color: var(--primary);
 }
 .training__routine-list{
     height: calc(390px - 12px);
@@ -31,7 +31,7 @@
         width: 12px;
     }
     &::-webkit-scrollbar-thumb{
-        background-color: var(--dark-brown);
+        background-color: var(--highlight);
         border-radius: 10px;
     }
 }
@@ -43,22 +43,22 @@
     text-decoration: none;
     align-items: center;
     border-radius: 12px;
-    color: var(--dark-brown);
+    color: var(--background);
     cursor: pointer;
     
     &:hover{
         transform: translate(-4px, -4px);
-        box-shadow: 4px 4px 3px var(--black);
+        box-shadow: 4px 4px 3px var(--background);
     }
     
     &:nth-child(3n + 1){
-        background-color: var(--cerulean);
+        background-color: var(--secondary);
     }
     &:nth-child(3n + 2){
-        background-color: var(--flame);
+        background-color: var(--text);
     }
     &:nth-child(3n){
-        background-color: var(--apple-green);
+        background-color: var(--primary);
     }
 }
 .training__routine{

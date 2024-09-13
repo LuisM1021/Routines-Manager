@@ -3,16 +3,16 @@
     min-width: 176px;
     max-width: 286px;
     height: 144px;
-    background-color: var(--cerulean);
+    background-color: var(--background);
     border-radius: 16px;
-    border: 2px solid var(--dark-brown);
+    border: 2px solid var(--secondary);
     display: flex;
     flex-direction: column;
     align-items: center;
     cursor: pointer;
 }
 .user-card-container .routine-title{
-    color: var(--dark-brown);
+    color: var(--text);
     margin: 8px 0 4px 0;
 }
 .user-card-container .last-use{
@@ -24,10 +24,10 @@
 }
 .user-card-container .last-use span:nth-child(1){
     font-weight: bold;
-    color: var(--burnt-orange);
+    color: var(--primary);
 }
 .user-card-container .last-use span:nth-child(2){
-    color: var(--black);
+    color: var(--secondary);
 }
 .user-card-container .time{
     display: flex;
@@ -38,10 +38,10 @@
 }
 .user-card-container .time span:nth-child(1){
     font-weight: bold;
-    color: var(--burnt-orange);
+    color: var(--primary);
 }
 .user-card-container .time span:nth-child(2){
-    color: var(--black);
+    color: var(--secondary);
 }
 .user-card-container .do-routine-container{
     display: flex;
@@ -50,6 +50,7 @@
 }
 .user-card-container .do-routine-container p{
     margin: 0;
+    color: var(--text);
 }
 .user-card-container .do-routine-container .play-icon-cont{
     width: 32px;
@@ -58,8 +59,8 @@
 }
 .user-card-container .do-routine-container .play-icon-cont .play-icon{
     width: 100%;
-    color: rgb(1, 95, 1);
-    fill: var(--apple-green);
+    color: var(--highlight);
+    fill: var(--highlight);
 }
 .user-card-container .do-routine-container .play-icon:hover{
     width: 36px;

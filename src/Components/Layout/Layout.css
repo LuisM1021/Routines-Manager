@@ -17,14 +17,14 @@
     width: 44px;
     height: 44px;
     border-radius: 9999px;
-    background-color: var(--black-opacity);
+    background-color: var(--secondary);
     z-index: 10;
     cursor: pointer;
 }
 .layout .open-menu{
     width: 32px;
     height: 32px;
-    color: var(--dark-brown);
+    color: var(--background);
 }
 @media all and (min-width: 500px){
     .layout::-webkit-scrollbar{
@@ -34,7 +34,7 @@
         background-color:  var(--black-opacity);
     }
     .layout::-webkit-scrollbar-thumb{
-        background: linear-gradient(var(--apple-green),var(--cerulean));
+        background-color: var(--highlight);
         border-radius: 10px;
     }
 }

@@ -12,9 +12,9 @@
 .user-routine__card{
     width: 325px;
     height: 400px;
-    background-color: var(--black);
+    background-color: var(--secondary);
     border-radius: 12px;
-    border: 2px solid var(--cerulean);
+    border: 2px solid var(--primary);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,7 +28,7 @@
 .user-routine__name{
     font-size: 24px;
     font-weight: bold;
-    color: var(--burnt-orange);
+    color: var(--text);
     text-align: center;
     padding: 0 48px;
 }
@@ -41,13 +41,13 @@
     width: 20px;
 }
 .user-routine__edit-cont{
-    color: var(--black);
+    color: var(--background);
 }
 .user-routine__edit{
-    fill: var(--white);
+    fill: var(--text);
 }
 .user-routine__delete{
-    fill: var(--red);
+    fill: var(--error);
 }
 .user-routine__detail{
     width: 100%;
@@ -64,22 +64,22 @@
     flex-direction: column;
 }
 .user-routine__description-label{
-    color: var(--cerulean);
+    color: var(--text);
     font-weight: bold;
 }
 .user-routine__description{
-    color: var(--white);
+    color: var(--background);
     overflow: auto;
 }
 .user-routine__description::-webkit-scrollbar{
     width: 6px;
 }
 .user-routine__description::-webkit-scrollbar-thumb{
-    background-color: var(--black-opacity);
+    background-color: var(--highlight);
     border-radius: 8px;
 }
 .user-routine__description::-webkit-scrollbar-track{
-    background-color: var(--black);
+    background-color: var(--secondary);
 }
 .user-routine__right-detail{
     /* width: 60%; */
@@ -89,22 +89,22 @@
     flex-direction: column;
 }
 .user-routine__category-label{
-    color: var(--cerulean);
+    color: var(--text);
     font-weight: bold;
 }
 .user-routine__category{
-    color: var(--white);
+    color: var(--background);
 }
 .user-routine__total-time-cont{
     display: flex;
     flex-direction: column;
 }
 .user-routine__total-time-label{
-    color: var(--cerulean);
+    color: var(--text);
     font-weight: bold;
 }
 .user-routine__total-time{
-    color: var(--white);
+    color: var(--background);
 }
 .user-routine__steps{
     width: 275px;
@@ -119,11 +119,11 @@
     width: 0px;
 }
 .user-routine__steps::-webkit-scrollbar-thumb{
-    background-color: var(--black-opacity);
+    background-color: var(--highlight);
     border-radius: 8px;
 }
 .user-routine__steps::-webkit-scrollbar-track{
-    background-color: var(--black);
+    background-color: var(--secondary);
 }
 .user-routine__step-card{
     min-width: 275px;
@@ -136,7 +136,7 @@
 .user-routine__step-title{
     font-weight: bold;
     font-size: 20px;
-    color: var(--white);
+    color: var(--text);
 }
 .user-routine__step-data{
     width: 100%;
@@ -156,20 +156,20 @@
     gap: 8px;
 }
 .user-routine__reps-label{
-    color: var(--white);
+    color: var(--text);
 }
 .user-routine__reps{
-    color: var(--cerulean);
+    color: var(--background);
 }
 .user-routine__time-cont{
     display: flex;
     gap: 8px;
 }
 .user-routine__time-label{
-    color: var(--white);
+    color: var(--text);
 }
 .user-routine__time{
-    color: var(--cerulean);
+    color: var(--background);
 }
 .user-routine__step-figure{
     width: 55%;

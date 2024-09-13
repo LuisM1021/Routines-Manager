@@ -3,9 +3,9 @@
     min-width: 300px;
     max-width: 450px;
     height: 280px;
-    background-color: var(--white);
+    background-color: var(--primary);
     border-radius: 32px;
-    border: 4px solid var(--burnt-orange);
+    border: 4px solid var(--secondary);
     align-self: center;
     display: flex;
     flex-direction: column;
@@ -18,14 +18,14 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--white);
+    background-color: var(--primary);
     border-radius: 32px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .user-routine-title{
-    color: var(--flame);
+    color: var(--text);
     text-align: center;
     font-weight: bold;
     font-size: 24px;
@@ -47,7 +47,7 @@
 }
 .user-routine-exercise{
     margin-bottom: 4px;
-    color: var(--cerulean);
+    color: var(--background);
     font-size: 16px;
 }
 .user-routine-options{
@@ -66,10 +66,10 @@
     padding: 4px 0;
     text-align: center;
     text-decoration: none;
-    color: var(--dark-brown);
-    background-color: var(--apple-green);
+    color: var(--text);
+    background-color: var(--success);
     border: none;
-    box-shadow: 1px 1px 1px var(--black);
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
 }
 .user-routine-edit{
     font-weight: bold;
@@ -79,10 +79,10 @@
     padding: 4px 0;
     text-align: center;
     text-decoration: none;
-    color: var(--dark-brown);
-    background-color: var(--burnt-orange);
+    color: var(--text);
+    background-color: var(--secondary);
     border: none;
-    box-shadow: 1px 1px 1px var(--black);
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
 }
 .user-routine-back{
     font-weight: bold;
@@ -90,18 +90,19 @@
     width: 80px;
     border-radius: 8px;
     padding: 4px 0;
-    background-color: var(--red-inactive);
+    color: var(--text);
+    background-color: var(--error-inactive);
     border: none;
-    box-shadow: 1px 1px 1px var(--black);
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
     margin-bottom: 8px;
     &:hover{
-        background-color: var(--red);
+        background-color: var(--error);
     }
 
 }
 
 .user-routines-panel .title-2{
-    color: var(--dark-brown);  
+    color: var(--text);  
     height: 40px; 
 }
 .user-routines-data{
@@ -124,18 +125,18 @@
     width: 12px;
 }
 .user-routines-panel .user-routines-container::-webkit-scrollbar-track{
-    background-color:  var(--white);
+    background-color:  var(--primary);
 }
 .user-routines-panel .user-routines-container::-webkit-scrollbar-thumb{
-    background: linear-gradient(var(--apple-green),var(--cerulean));
     border-radius: 10px;
+    background-color: var(--highlight);
 }
 .user-routines-panel .user-routines-container .user-routine{
-    color: var(--cerulean);
+    color: var(--background);
     cursor: pointer;
     margin-bottom: 8px;
     &:hover{
-        color: var(--dark-brown);
+        color: var(--text);
     }
 }
 .user-routines-panel .add-routine-container{
@@ -146,14 +147,14 @@
     align-items: center;
 }
 .add-routine-container .add-routine{
-    color: var(--dark-brown);
+    color: var(--text);
     font-weight: bold;
     font-size: large;
 }
 .add-routine-container .plus-icon-container{
     width: 30px;
     height: 30px;
-    background-color: var(--apple-green-inactive);
+    background-color: var(--success);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -163,8 +164,8 @@
 .add-routine-container .plus-icon{
     width: 20px;
     height: 20px;
-    color: var(--dark-brown);
+    color: var(--background);
 }
 .add-routine-container .plus-icon-container:hover{
-    background-color: var(--apple-green);
+    background-color: var(--highlight);
 }

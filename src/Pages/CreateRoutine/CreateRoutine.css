@@ -8,7 +8,7 @@
 }
 .create-routine__title{
     margin-bottom: 16px;
-    color: var(--flame);
+    color: var(--text);
     font-size: 2.3rem;
     text-align: center;
 }
@@ -33,7 +33,7 @@
     justify-content: center;
 }
 .create-routine__name-label{
-    color: var(--apple-green);
+    color: var(--text);
     font-weight: bold;
     font-size: large;
     margin-right: 8px;
@@ -44,8 +44,8 @@
 .create-routine__name-input{
     padding: 0 8px;
     width: 100%;
-    background-color: var(--dark-brown);
-    color: var(--white);
+    background-color: var(--primary);
+    color: var(--text);
     font-weight: bold;
     outline: none;
     border-radius: 4px;
@@ -53,11 +53,11 @@
     max-width: 350px;
     
     &::placeholder{
-        color: var(--white);
+        color: var(--text);
         opacity: 0.8;
     }
     &:focus{
-        border: 1px solid var(--apple-green);
+        border: 1px solid var(--highlight);
     }
 }
 .create-routine__description{
@@ -68,7 +68,7 @@
     justify-content: center;
 }
 .create-routine__description-label{
-    color: var(--apple-green);
+    color: var(--text);
     font-weight: bold;
     font-size: large;
     margin-right: 8px;
@@ -80,8 +80,8 @@
     resize: none;
     outline: none;
     padding: 8px;
-    background-color: var(--dark-brown);
-    color: var(--white);
+    background-color: var(--primary);
+    color: var(--text);
     font-weight: bold;
     outline: none;
     border-radius: 4px;
@@ -90,18 +90,18 @@
     max-width: 350px;
 
     &::placeholder{
-        color: var(--white);
+        color: var(--text);
         opacity: 0.8;
     }
     &:focus{
-        border: 1px solid var(--apple-green);
+        border: 1px solid var(--highlight);
     }
 }
 .create-routine__exercises-card{
     width: 100%;
     min-height: 120px;
     max-height: 275px;
-    background-color: var(--black);
+    background-color: var(--primary);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -111,7 +111,7 @@
     max-width: 478px;
 }
 .create_routine__exercises-title{
-    color: var(--flame);
+    color: var(--text);
     font-size: 1.8rem;
 }
 .create_routine__exercises-list{
@@ -121,15 +121,15 @@
     margin-bottom: 8px;
 
     &::-webkit-scrollbar-track{
-        background-color: var(--black);
+        background-color: var(--primary);
         border-radius: 10px;
     }
     &::-webkit-scrollbar{
         width: 8px;
-        background-color: var(--black);
+        background-color: var(--primary);
     }
     &::-webkit-scrollbar-thumb{
-        background-color: var(--black-opacity);
+        background-color: var(--highlight);
         border-radius: 10px;    
     }
 }
@@ -148,17 +148,17 @@
 .create_routine__bars{
     width: 24px;
     height: 24px;
-    color: var(--white);
+    color: var(--text);
 }
 .create-routine__item-name{
     padding: 0 8px;
-    color: var(--white);
+    color: var(--background);
     background: none;
     border: none;
     outline: none;
     font-size: 16px;
     /* &::placeholder{
-        color: var(--white);
+        color: var(--text);
     } */
 
 }
@@ -172,10 +172,10 @@
 .create-routine__delete{
     width: 16px;
     height: 16px;
-    color: var(--red-inactive);
+    color: var(--error-inactive);
     cursor: pointer;
     &:hover{
-        color: var(--red);
+        color: var(--error);
     }
 }
 .create-routine__new-routine{
@@ -185,10 +185,10 @@
 .create-routine__add{
     width: 36px;
     height: 36px;
-    color: var(--apple-green-inactive);
+    color: var(--background);
     cursor: pointer;
     &:hover{
-        color: var(--apple-green);
+        color: var(--highlight);
     }
 }
 .create-routine__right-panel{
@@ -206,17 +206,17 @@
 .create-routine__nav-item{
     padding: 6px 16px;
     border-radius: 16px;
-    color: var(--white);
+    color: var(--text);
     font-weight: bold;
     cursor: pointer;
-    background-color: var(--cerulean);
+    background-color: var(--secondary);
     box-shadow: 5px 5px 3px var(--black);
     &:hover{
         transform: translateY(-2px);
     }
 }
 .create-routine__nav-item--active{
-    background-color: var(--flame);
+    background-color: var(--highlight);
 }
 .create-routine__filter-bar{
     display: flex;
@@ -231,24 +231,27 @@
     padding: 8px;
     outline: none;
     width: 100%;
-    background-color: var(--white);
+    background-color: var(--secondary);
     border: none;
     border-radius: 4px;
-    color: var(--cerulean);
+    color: var(--background);
     font-weight: bold;
     max-width: 400px;
+    &::placeholder{
+        color: var(--black-opacity);
+    }
 }
 .create_routine__category-label{
     font-weight: bold;
-    color: var(--white);
+    color: var(--text);
 }
 .create_routine__category-input{
     padding: 8px;
     outline: none;
-    background-color: var(--white);
+    background-color: var(--secondary);
     border: none;
     border-radius: 4px;
-    color: var(--cerulean);
+    color: var(--background);
     font-weight: bold;
     flex-grow: 1;
     max-width: 312px;
@@ -265,11 +268,11 @@
         width: 8px;
     }
     &::-webkit-scrollbar-track{
-        background-color: var(--black-opacity);
+        background-color: var(--background);
         border-radius: 10px;
     }
     &::-webkit-scrollbar-thumb{
-        background: linear-gradient(var(--cerulean),var(--burnt-orange));
+        background-color: var(--secondary);
         border-radius: 10px;    
     }
 } 

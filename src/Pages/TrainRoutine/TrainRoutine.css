@@ -12,10 +12,10 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../../../public/pics/lion-wallpaper.jpg');
+    /* background-image: url('../../../public/pics/lion-wallpaper.jpg');
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover; */
     opacity: 0.6; 
 }
 .train__layout * { 
@@ -32,29 +32,29 @@
     width: 44px;
     height: 44px;
     border-radius: 9999px;
-    background-color: var(--black-opacity);
+    background-color: var(--primary);
     z-index: 10;
     cursor: pointer;
 }
 .open-menu{
     width: 32px;
     height: 32px;
-    color: var(--dark-brown);
+    color: var(--background);
 }
 .train__title{
     width: 100%;
     text-align: center;
     font-size: 30px;
-    color: var(--apple-green);
+    color: var(--text);
     margin-bottom: 32px;
-    text-shadow: 2px 2px 1px var(--black);
+    text-shadow: 2px 2px 1px var(--secondary);
 }
 .train__players{
     width: 100%;
     height: 80px;
     display: flex;
     align-items: center;
-    background-color: rgba(136, 149, 201, 0.4);/*Make it a variable*/
+    background-color: rgba(136, 149, 201, 0.4);
     border-radius: 12px;
     min-width: 330px;
     max-width: 600px;
@@ -79,22 +79,22 @@
     cursor: pointer;
 }
 .train-pause{
-    color: var(--flame);
+    color: var(--highlight);
 }
 .train-play,
 .train-restart{
-    color: var(--apple-green);
+    color: var(--secondary);
 }
 .train-stop{
-    color: var(--red);
+    color: var(--error);
 }
 .train-mute{
     width: 60%;
-    color: var(--flame);
+    color: var(--primary);
 }
 .train-unmute{
     width: 60%;
-    color: var(--apple-green);
+    color: var(--highlight);
 }
 .train__steps-cont{
     width: 100%;
@@ -106,7 +106,7 @@
     margin: 0 auto;
     margin-bottom: 12px;
     position: relative;
-    background-color: rgba(136, 149, 201, 0.4);/*Make it a variable*/
+    background-color: rgba(136, 149, 201, 0.4);
     border-radius: 12px;
 }
 .train__steps-card{
@@ -146,18 +146,18 @@
     margin-bottom: 12px;
 }
 .train__reps-label{
-    color: var(--flame);
-    text-shadow: 3px 3px 3px var(--black);
+    color: var(--primary);
+    text-shadow: 3px 3px 3px var(--background);
 }
 .train__reps{
-    color: var(--flame);
-    text-shadow: 2px 2px 1px var(--black);
+    color: var(--primary);
+    text-shadow: 2px 2px 1px var(--background);
 }
 .train__countdown{
     font-weight: bold;
     font-size: 22px;
-    color: var(--flame);
-    text-shadow: 2px 2px 1px var(--black);
+    color: var(--primary);
+    text-shadow: 2px 2px 1px var(--background);
 }
 .train__next-step{
     width: 100%;
@@ -168,8 +168,8 @@
 }
 .train__next-label{
     font-weight: bold;
-    color: var(--flame);
-    text-shadow: 1px 1px 1px var(--black);
+    color: var(--highlight);
+    text-shadow: 1px 1px 1px var(--background);
 }
 .train__next-img-cont{
     display: flex;
@@ -178,8 +178,8 @@
 }
 .train__next-exercise{
     font-weight: bold;
-    color: var(--cerulean);
-    text-shadow: 1px 1px 1px var(--black);
+    color: var(--secondary);
+    text-shadow: 1px 1px 1px var(--background);
 }
 .train__next-exercise-img{
     width: 80%;
@@ -198,8 +198,8 @@
 .train__exercise{
     font-weight: bold;
     font-size: 28px;
-    color: var(--cerulean);
-    text-shadow: 1px 1px 1px var(--black);
+    color: var(--secondary);
+    text-shadow: 1px 1px 1px var(--background);
 }
 .train__img{
     width: 100%;
@@ -214,7 +214,7 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    background-color: rgba(136, 149, 201, 0.4);/*Make it a variable*/
+    background-color: rgba(136, 149, 201, 0.4);
     border-radius: 12px;
     min-width: 330px;
     max-width: 600px;
@@ -224,20 +224,21 @@
     font-weight: bold;
     font-size: 20px;
     margin-right: 8px;
-    color: var(--flame);
-    text-shadow: 2px 2px 2px var(--black);
+    color: var(--highlight);
+    text-shadow: 2px 2px 2px var(--background);
 }
 .train__laps-value{
-    background-color: var(--cerulean);
+    color: var(--background);
+    background-color: var(--secondary);
     padding: 4px 8px;
     border-radius: 8px;
-    box-shadow: 2px 2px 2px var(--black);
+    box-shadow: 2px 2px 2px var(--background);
 }
 .train__time{
     font-weight: bold;
     font-size: 30px;
-    color: var(--apple-green);
-    text-shadow: 3px 3px 1px var(--black);
+    color: var(--primary);
+    text-shadow: 3px 3px 1px var(--background);
 }
 @media (min-width: 750px){
     .train__layout{
