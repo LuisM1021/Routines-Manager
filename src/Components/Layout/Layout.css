@@ -17,14 +17,14 @@
     width: 44px;
     height: 44px;
     border-radius: 9999px;
-    background-color: var(--secondary);
+    background-color: var(--primary);
     z-index: 10;
     cursor: pointer;
 }
 .layout .open-menu{
     width: 32px;
     height: 32px;
-    color: var(--background);
+    color: var(--text);
 }
 @media all and (min-width: 500px){
     .layout::-webkit-scrollbar{

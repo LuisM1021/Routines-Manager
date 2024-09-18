@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import './Navbar.css'
 function Navbar(){
-    const {displayNavbar,setDisplayNavbar, resetCreateRoutine, currentPage, setCurrentPage, setIsDarkMode} = useContext(GeneralContext)
+    const {displayNavbar,setDisplayNavbar, resetCreateRoutine, currentPage, setCurrentPage, setIsDarkMode, isDarkMode} = useContext(GeneralContext)
 
     const hideNavbar = (className) => {
         if(typeof(className) === 'string' && className.includes('mobile-navbar')){
@@ -20,12 +20,8 @@ function Navbar(){
         setDisplayNavbar(false)
         setCurrentPage(newPage)
     }
-    const handleChangeMode = (target) => {
-        if(parseInt(target.value) === 0){
-            setIsDarkMode(false)
-        }else{
-            setIsDarkMode(true)
-        }
+    const handleChangeMode = () => {
+        setIsDarkMode(prev => !prev)
     }
     return (
         <aside 
@@ -74,8 +70,10 @@ function Navbar(){
                 </NavLink>
                 <div className='mode-cont'>
                     <p>Dark mode</p>
-                    <input type='range' min={0} max={1} defaultValue={0}
-                    onChange={(e)=>handleChangeMode(e.target)}/>
+                    <div className='track'>
+                        <div className={`thumb ${isDarkMode && 'on'}`} 
+                         onClick={()=>handleChangeMode()}></div>
+                    </div>
                 </div>
             </div>
         </aside>

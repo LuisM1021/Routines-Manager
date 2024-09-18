@@ -4,31 +4,21 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Poppins', 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  --background: #E0E0E0;
-  --text: #333333;
-  --primary: #236d9e;
-  --secondary: #5aa45a;
-  --highlight: #ccae03;
-  --success: #41c845;
-  --error: #B22222;
-  --error-inactive: #FFB6C1;
-  --black-opacity: #33333380;
-  --secondary-opacity: #66BB66c5;
-  
-  background-color: var(--background);
+    sans-serif;  
 
   &.dark-mode{
-    --background: #181818;
-    --text: #FFFFFF;
-    --primary: #af894c;
-    --secondary: #a66d1d;
-    --highlight: #b6c600;
+    --background: #141414;
+    --text: #EEF0F2;
+    --primary-text: #f6d465;
+    --primary: #0D21A1;
+    --secondary: #011638;
+    --highlight: #EEC643;
     --success: #008000;
     --error: #D9534F;
-    --error-inactive: #FFB6C1;
-    --black-opacity: #33333380;
-    --secondary-opacity: #a66d1d80;
+    --error-inactive: #f38696;
+    --black-opacity: #14141480;
+    --secondary-opacity: #01163880;
+    background: #141414;
   }
 }
 

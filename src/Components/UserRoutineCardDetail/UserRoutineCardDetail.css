@@ -12,7 +12,7 @@
 .user-routine__card{
     width: 325px;
     height: 400px;
-    background-color: var(--secondary);
+    background-color: var(--primary);
     border-radius: 12px;
     border: 2px solid var(--primary);
     display: flex;
@@ -28,7 +28,7 @@
 .user-routine__name{
     font-size: 24px;
     font-weight: bold;
-    color: var(--text);
+    color: var(--primary-text);
     text-align: center;
     padding: 0 48px;
 }
@@ -44,7 +44,7 @@
     color: var(--background);
 }
 .user-routine__edit{
-    fill: var(--text);
+    fill: var(--highlight);
 }
 .user-routine__delete{
     fill: var(--error);
@@ -64,22 +64,22 @@
     flex-direction: column;
 }
 .user-routine__description-label{
-    color: var(--text);
+    color: var(--primary-text);
     font-weight: bold;
 }
 .user-routine__description{
-    color: var(--background);
+    color: var(--text);
     overflow: auto;
 }
 .user-routine__description::-webkit-scrollbar{
     width: 6px;
 }
 .user-routine__description::-webkit-scrollbar-thumb{
-    background-color: var(--highlight);
+    background-color: var(--secondary);
     border-radius: 8px;
 }
 .user-routine__description::-webkit-scrollbar-track{
-    background-color: var(--secondary);
+    background-color: var(--primary);
 }
 .user-routine__right-detail{
     /* width: 60%; */
@@ -89,22 +89,22 @@
     flex-direction: column;
 }
 .user-routine__category-label{
-    color: var(--text);
+    color: var(--primary-text);
     font-weight: bold;
 }
 .user-routine__category{
-    color: var(--background);
+    color: var(--text);
 }
 .user-routine__total-time-cont{
     display: flex;
     flex-direction: column;
 }
 .user-routine__total-time-label{
-    color: var(--text);
+    color: var(--primary-text);
     font-weight: bold;
 }
 .user-routine__total-time{
-    color: var(--background);
+    color: var(--text);
 }
 .user-routine__steps{
     width: 275px;
@@ -119,11 +119,11 @@
     width: 0px;
 }
 .user-routine__steps::-webkit-scrollbar-thumb{
-    background-color: var(--highlight);
+    background-color: var(--secondary);
     border-radius: 8px;
 }
 .user-routine__steps::-webkit-scrollbar-track{
-    background-color: var(--secondary);
+    background-color: var(--primary);
 }
 .user-routine__step-card{
     min-width: 275px;
@@ -136,7 +136,7 @@
 .user-routine__step-title{
     font-weight: bold;
     font-size: 20px;
-    color: var(--text);
+    color: var(--primary-text);
 }
 .user-routine__step-data{
     width: 100%;
@@ -159,7 +159,7 @@
     color: var(--text);
 }
 .user-routine__reps{
-    color: var(--background);
+    color: var(--text);
 }
 .user-routine__time-cont{
     display: flex;
@@ -169,7 +169,7 @@
     color: var(--text);
 }
 .user-routine__time{
-    color: var(--background);
+    color: var(--text);
 }
 .user-routine__step-figure{
     width: 55%;

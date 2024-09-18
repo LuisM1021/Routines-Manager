@@ -13,7 +13,7 @@
     right: 8px;
     top: 4px;
     width: 24px;
-    
+    color: var(--highlight);
 }
 .exercise-card__added{
     position: absolute;
@@ -31,7 +31,7 @@
     width: 100%;
     font-weight: bold;
     font-size:small;
-    color: var(--background);
+    color: var(--text);
     display: flex;
     align-items: center;
     justify-content: center;

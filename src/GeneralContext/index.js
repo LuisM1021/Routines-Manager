@@ -18,7 +18,7 @@ function GeneralProvider({children}){
         setUserRoutines
     } = useLocalStorage();
     
-    const [isDarkMode, setIsDarkMode] = useState(false)
+    const [isDarkMode, setIsDarkMode] = useState(true)
 
     // dragging
     const [draggedItem, setDraggedItem] = useState(null)

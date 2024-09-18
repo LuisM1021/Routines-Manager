@@ -2,7 +2,7 @@
     text-align: center;
     min-width: 320px;
     font-size: 43px;
-    color: var(--text);
+    color: var(--primary-text);
 }
 .training__routines-card{
     width: 100%;
@@ -15,7 +15,7 @@
 .training__select-routine{
     text-align: center;
     height: calc(60px - 12px);
-    color: var(--primary);
+    color: var(--text);
 }
 .training__routine-list{
     height: calc(390px - 12px);
@@ -43,7 +43,7 @@
     text-decoration: none;
     align-items: center;
     border-radius: 12px;
-    color: var(--background);
+    color: var(--text);
     cursor: pointer;
     
     &:hover{
@@ -52,13 +52,13 @@
     }
     
     &:nth-child(3n + 1){
-        background-color: var(--secondary);
+        background-color: var(--primary);
     }
     &:nth-child(3n + 2){
-        background-color: var(--text);
+        background-color: var(--secondary);
     }
     &:nth-child(3n){
-        background-color: var(--primary);
+        background-color: var(--highlight);
     }
 }
 .training__routine{

@@ -12,7 +12,7 @@
 .background .routine-details-container{
     width: 475px;
     height: 500px;
-    background-color: var(--secondary);
+    background-color: var(--primary);
     border-radius: 24px;
     z-index: 2;
     display: flex;
@@ -51,7 +51,7 @@
     color: var(--text);
 }
 .background .routine-details-container .routine-name{
-    color: var(--text);
+    color: var(--primary-text);
     margin: 0 0 8px 0;
 }
 .background .routine-details-container .add-routine-container{
@@ -63,7 +63,7 @@
 .background .routine-details-container .add-routine-container .plus-circle-icon{
     width: 28px;
     height: 28px;
-    color: var(--background);
+    color: var(--highlight);
     margin: 0;
 }
 .background .routine-details-container .add-routine-container .plus-circle-icon:hover{
@@ -91,7 +91,7 @@
 }
 .background .routine-details-container .description{
     font-weight: 300;
-    color: var(--background);
+    color: var(--text);
 }
 .background .routine-details-container .category-time{
     width: 100%;
@@ -103,30 +103,30 @@
     gap: 4px;
 }
 .background .routine-details-container .category-time .category-info span:nth-child(1){
-    color: var(--black);
+    color: var(--text);
 }
 .background .routine-details-container .category-time .category-info span:nth-child(2){
-    color: var(--text);
+    color: var(--primary-text);
 }
 .background .routine-details-container .category-time .time-info{
     display: flex;
     gap: 4px;
 }
 .background .routine-details-container .category-time .time-info span:nth-child(1){
-    color: var(--black);
+    color: var(--text);
 }
 .background .routine-details-container .category-time .time-info span:nth-child(2){
-    color: var(--text);
+    color: var(--primary-text);
 }
 .background .routine-details-container .require-equipment{
     display: flex;
     gap: 4px;
 }
 .background .routine-details-container .require-equipment span:nth-child(1){
-    color: var(--black);
+    color: var(--text);
 }
 .background .routine-details-container .require-equipment span:nth-child(2){
-    color: var(--text);
+    color: var(--primary-text);
 }
 .background .routine-details-container .exercises-panel{
     width: 100%;
@@ -145,7 +145,7 @@
 }
 .background .routine-details-container .exercises-panel .exercises-info h2:nth-child(1){
     text-align: center;
-    color: var(--text);
+    color: var(--primary-text);
     margin-top: 4px;
 }
 .background .routine-details-container .exercises-panel .exercises-info p{
@@ -160,7 +160,7 @@
 .background .routine-details-container .exercises-panel .exercises-info p:nth-child(2) span:nth-child(1),
 .background .routine-details-container .exercises-panel .exercises-info p:nth-child(3) span:nth-child(1),
 .background .routine-details-container .exercises-panel .exercises-info p:nth-child(4) span:nth-child(1){
-    color: var(--background);
+    color: var(--text);
 }
 .background .routine-details-container .exercises-panel .exercises-info p:nth-child(2) span:nth-child(2),
 .background .routine-details-container .exercises-panel .exercises-info p:nth-child(3) span:nth-child(2),
@@ -184,7 +184,7 @@
     width: 25px;
     height: 25px;
     cursor: pointer;
-    color: var(--background);
+    color: var(--highlight);
 }
 .background .routine-details-container .exercises-panel .exercise-image-container .right-arrow{
     position: absolute;
@@ -194,12 +194,12 @@
     width: 25px;
     height: 25px;
     cursor: pointer;
-    color: var(--background);
+    color: var(--highlight);
 }
 .background .routine-details-container .exercises-panel .exercise-image-container .exercise-image{
     width: 80%;
     height: 80%;
-    border: 3px solid var(--primary);
+    border: 3px solid var(--secondary);
     border-radius: 16px;
     object-fit: cover;
 }
