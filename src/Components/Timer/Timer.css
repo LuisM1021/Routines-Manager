@@ -8,7 +8,7 @@ input{
     width: 100%;
     max-width: 600px;
     align-self: center;
-    background-color: var(--primary);
+    background-color: var(--secondary);
     padding: 8px;
     margin-bottom: 24px;
     border-radius: 12px;
@@ -29,7 +29,7 @@ input{
 .timer__exercises-list{
     width: 150px;
     height: 200px;
-    background-color: var(--secondary);
+    background-color: var(--primary);
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -37,7 +37,7 @@ input{
     overflow: hidden ;
 }
 .timer__choose-exercise{
-    color: var(--text);
+    color: var(--primary-text);
     height: 60px;
 }
 .timer__exercises-to-choose{
@@ -45,16 +45,16 @@ input{
     overflow-y: auto;
     &::-webkit-scrollbar{
         width: 4px;
-        background-color: var(--secondary);
+        background-color: var(--primary);
     }
     &::-webkit-scrollbar-thumb{
-        background-color: var(--highlight);
+        background-color: var(--secondary);
     }
 }
 .timer__exercise-to-add{
-    color: var(--background);
+    color: var(--text);
     &:hover{
-        background-color: var(--primary);
+        background-color: var(--secondary);
     }
 }
 .timer__save-result{
@@ -72,7 +72,7 @@ input{
 .timer__result-panel{
     width: 200px;
     height: 100px;
-    background-color: var(--secondary);
+    background-color: var(--primary);
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -82,7 +82,7 @@ input{
     padding: 8px;
 }
 .timer__result{
-    color: var(--text);
+    color: var(--primary-text);
 }
 .timer__save-options{
     display: flex;
@@ -94,21 +94,21 @@ input{
     padding: 2px 4px;
     margin-top: 4px;
     border-radius: 8px;
-    border:2px solid var(--background);
+    border:2px solid var(--secondary);
     color: var(--text);
     cursor: pointer;
 }
 .timer__edit-button{
     width: 48px;
-    background-color: var(--highlight);
-    box-shadow: 0 1px 6px 0 var(--background);
+    background-color: var(--secondary);
+    box-shadow: 0 1px 6px 0 var(--secondary);
 }
 .timer__create-new-button{
     background-color: var(--highlight);
     box-shadow: 0 1px 6px 0 var(--background);
 }
 .timer__do-routine-button{
-    background-color: var(--primary);
+    background-color: var(--secondary);
     box-shadow: 0 1px 6px 0 var(--background);
     text-decoration: none;
 }
@@ -124,8 +124,8 @@ input{
 .timer__button{
     padding: 4px 8px;
     border-radius: 64px;
-    border: 2px solid var(--background);
-    background-color: var(--secondary);
+    border: 2px solid var(--primary);
+    background-color: var(--primary);
     font-weight: bold;
     cursor: pointer;
     color: var(--text);
@@ -143,16 +143,16 @@ input{
     margin-top: 8px;
     overflow: auto;
     &::-webkit-scrollbar-track{
-        background-color: var(--primary);
+        background-color: var(--secondary);
     }
     &::-webkit-scrollbar{
-        background-color: var(--primary);
+        background-color: var(--secondary);
         width: 8px;
         height: 8px;
     }
     &::-webkit-scrollbar-thumb{
         border-radius: 10px;
-        background-color: var(--highlight);
+        background-color: var(--primary);
     }
     &::-webkit-scrollbar-corner{
         background-color: transparent;
@@ -181,7 +181,7 @@ input{
     position: sticky;
     top: 0;
     left: 0;
-    background-color: var(--background);
+    background-color: var(--primary);
     border-bottom: 2px solid var(--secondary);
     border-top: 2px solid var(--secondary);
 }
@@ -189,7 +189,7 @@ input{
     width: 60%;
     text-align: center;
     border-right: 1px solid var(--secondary);
-    color: var(--secondary);
+    color: var(--primary-text);
 }
 .timer__time-header{
     display: flex;
@@ -200,7 +200,7 @@ input{
     border-right: 1px solid var(--secondary);
 }
 .timer__time-title{
-    color: var(--secondary);
+    color: var(--primary-text);
 }
 .timer__format-time{
     width: 24px;
@@ -211,7 +211,7 @@ input{
 .timer__reps{
     width: 15%;
     text-align: center;
-    color: var(--secondary);
+    color: var(--primary-text);
 }
 .timer__steps{
     width: 100%;
@@ -223,7 +223,7 @@ input{
     height: 32px;
     display: flex;
     align-items: center;
-    background-color: var(--background);
+    background-color: var(--primary);
     border-bottom: 1px solid var(--secondary);
     &:last-child{
         border-bottom: 2px solid var(--secondary);
@@ -234,7 +234,7 @@ input{
     height: 32px;
     display: flex;
     align-items: center;
-    background-color: var(--background);
+    background-color: var(--primary);
     border-bottom: 1px solid var(--secondary);
     touch-action: none;
     &:last-child{
@@ -254,7 +254,7 @@ input{
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background-color: var(--primary);
+    background-color: var(--secondary);
     color: var(--text);
     font-size: 12px;
     font-weight: bold;
@@ -275,7 +275,7 @@ input{
     text-align: center;
     border: none;
     border-right: 1px solid var(--secondary);
-    color: var(--primary);
+    color: var(--text);
     background: none;
     overflow: hidden;
 }
@@ -286,7 +286,7 @@ input{
     text-align: center;
     border: none;
     border-right: 1px solid var(--secondary);
-    color: var(--primary);
+    color: var(--text);
     background: none;
     overflow: hidden;
 }
@@ -295,7 +295,7 @@ input{
     height: 100%;
     padding-top: 2px;
     text-align: center;
-    color: var(--primary);
+    color: var(--text);
     border-right: 1px solid var(--secondary);
     display: flex;
     justify-content: center;
@@ -307,9 +307,9 @@ input{
     border: none;
     width: 24px;
     text-align: center;
-    color: var(--primary);
+    color: var(--text);
     &::placeholder{
-        color: var(--primary);
+        color: #939292;
     }
     &:focus{
         outline: 1px solid var(--highlight);
@@ -321,9 +321,9 @@ input{
     border: none;  
     width: 24px;
     text-align: center;
-    color: var(--primary);
+    color: var(--text);
     &::placeholder{
-        color: var(--primary);
+        color: #939292;
     }
     &:focus{
         outline: 1px solid var(--highlight);
@@ -335,9 +335,9 @@ input{
     border: none;
     width: 24px;
     text-align: center;
-    color: var(--primary);
+    color: var(--text);
     &::placeholder{
-        color: var(--primary);
+        color: #939292;
     }
     &:focus{
         outline: 1px solid var(--highlight);
@@ -345,14 +345,14 @@ input{
     }
 }
 .timer__exercise-duration-points{
-    color: var(--secondary);
+    color: var(--primary-text);
 }
 .timer__exercise-reps{
     width: 15%;
     height: 100%;
     padding-top: 2px;
     text-align: center;
-    color: var(--primary);
+    color: var(--text);
     border: none;
     background: none;
 }
@@ -361,12 +361,12 @@ input{
     height: 100%;
     padding-top: 2px;
     text-align: center;
-    color: var(--primary);
+    color: var(--text);
     border: none;
     background: none;
 
     &::placeholder{
-        color: var(--primary);
+        color: #939292;
     }
     &:focus{
         outline: none;
@@ -383,7 +383,7 @@ input{
     position: sticky;
     bottom: 0;
     left: 0;
-    background-color: var(--background);
+    background-color: var(--primary);
     border-top: 2px solid var(--secondary);
     border-bottom: 2px solid var(--secondary);
     cursor: pointer;
@@ -393,7 +393,7 @@ input{
 }
 .timer__add-msg{
     font-weight: bold;
-    color: var(--secondary);
+    color: var(--primary-text);
     text-align: center;
 }
 .timer__add{
@@ -420,7 +420,7 @@ input{
 }
 .timer__laps-number{
     background-color: var(--highlight);
-    color: var(--text);
+    color: var(--secondary);
     text-align: center;
     border-radius: 8px;
     padding: 0 8px;
@@ -436,7 +436,7 @@ input{
 }
 .timer__total-time{
     background-color: var(--highlight);
-    color: var(--text);
+    color: var(--secondary);
     text-align: center;
     border-radius: 8px;
     padding: 0 8px;
@@ -452,9 +452,10 @@ input{
     padding: 8px 16px;
     border-radius: 8px;
     font-weight: bold;
-    background-color: var(--secondary);
+    background-color: var(--primary);
     color: var(--text);
     cursor: pointer;
+    border: none;
     box-shadow: 2px 2px 2px var(--background);
     &:hover{
         transform: translateY(-1px);
@@ -464,9 +465,10 @@ input{
     padding: 8px 16px;
     border-radius: 8px;
     font-weight: bold;
-    background-color: var(--secondary);
+    background-color: var(--primary);
     color: var(--text);
     cursor: pointer;
+    border: none;
     box-shadow: 2px 2px 2px var(--background);
     &:hover{
         transform: translateY(-1px);

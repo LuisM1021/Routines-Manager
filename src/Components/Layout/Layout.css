@@ -28,13 +28,13 @@
 }
 @media all and (min-width: 500px){
     .layout::-webkit-scrollbar{
-        width: 12px;
+        width: 8px;
     }
     .layout::-webkit-scrollbar-track{
         background-color:  var(--black-opacity);
     }
     .layout::-webkit-scrollbar-thumb{
-        background-color: var(--highlight);
+        background-color: var(--primary);
         border-radius: 10px;
     }
 }
